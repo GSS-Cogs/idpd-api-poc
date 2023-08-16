@@ -1,6 +1,4 @@
 #this script set up the basic flask app
-
-import re
 from flask import Flask, request
 
 
@@ -10,9 +8,17 @@ app = Flask(__name__)
 def main():
     if request.method == 'GET':
         if request.url.endswith('json') or request.headers['Accept'] == "application/ld+json":
-            return '200'
+            return get_json(request)
         else:
-            return '406'            
+            return not_recognised(request)
+    else: 
+        return"Not GET request"
+
+def get_json(request):
+    return "200"
+
+def not_recognised(request):
+    return "406"
 
 
 if __name__ == "__main__":
