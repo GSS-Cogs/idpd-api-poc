@@ -1,4 +1,3 @@
-#this script set up the basic flask app
 from flask import Flask, request
 
 
@@ -9,7 +8,7 @@ def datasets():
     if request.headers['Accept'] == "application/ld+json":
         return get_json(request)
     else:
-        return not_recognised(request)
+        return "", 406
 
 def get_json(request):
     return "", 200
