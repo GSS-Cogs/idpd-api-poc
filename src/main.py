@@ -13,9 +13,5 @@ def datasets():
 def get_json(request):
     return "", 200
 
-def not_recognised(request):
-    return "", 406
-
-
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
