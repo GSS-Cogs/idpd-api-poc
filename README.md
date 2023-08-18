@@ -26,4 +26,4 @@ Note: This is slightly different than how the Dockerfile accomplishes the same t
 
 ### Testing
 
-The unit tests are made with pytest and to run the tests use command: `pipenv run pytest` thiss will run the `test_dataset.py` file and run all tests in it.
+The unit tests are made with pytest and to run the tests use command: `pipenv run pytest`.
