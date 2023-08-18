@@ -22,3 +22,8 @@ To run via this mechanism locally (for example, if you want to trial some [gunic
 - `gunicorn --bind 0.0.0.0:5000 wsgi:app`
 
 Note: This is slightly different than how the Dockerfile accomplishes the same thing, but its purely to avoid people installing this apps dependencies directly into their base interpreter locally which might interfere with running other things (a consideration an image does not have).
+
+
+### Testing
+
+The unit tests are made with pytest and to run the tests use command: `pipenv run pytest` thiss will run the `test_dataset.py` file and run all tests in it.
