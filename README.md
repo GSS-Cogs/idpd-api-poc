@@ -7,7 +7,7 @@ This application uses [pipenv](https://pypi.org/project/pipenv/) to manage depen
 
 ### development
 
-Run `pipenv run python3 ./app/hello_app.py`. This wil run the app with browser based exceptions and _hot reloading_ enabled.
+Run `pipenv run python3 ./app/main.py`. This wil run the app with browser based exceptions and _hot reloading_ enabled.
 
 ### production
 
