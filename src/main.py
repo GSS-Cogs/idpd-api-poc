@@ -1,5 +1,4 @@
 from flask import Flask, request
-from abc import ABC, abstractmethod
 
 
 app = Flask(__name__)

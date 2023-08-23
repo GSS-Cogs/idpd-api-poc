@@ -1,6 +1,6 @@
 import pytest
 
-from store.base import SparqlStore
+from store.sparql import SparqlStore
 from SPARQLWrapper import QueryResult
 
 
