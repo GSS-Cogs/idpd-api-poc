@@ -13,7 +13,7 @@ class SparqlStore(BaseStore):
         #to make sure self.url is not none providin a default url
         assert self.url is not None, "Then SPARQL_ENDPOINT_URL is a None value."
 
-    def run_sparql(self, query):
+    def run_sparql(self, query) -> QueryResult:
         """ Runs and returns the results from a sparql query"""
         sparql = SPARQLWrapper(self.url)
 
@@ -21,7 +21,7 @@ class SparqlStore(BaseStore):
         sparql.setReturnFormat(JSON)
         return sparql.query()
     
-    def get_datasets(self):
+    def get_datasets(self) -> QueryResult:
         """
         Get many datasets
         """
@@ -38,3 +38,5 @@ class SparqlStore(BaseStore):
         
         LIMIT 10"""
         result =  self.run_sparql(query)
+
+        return result
