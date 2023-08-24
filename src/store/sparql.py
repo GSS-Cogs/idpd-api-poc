@@ -7,13 +7,8 @@ class SparqlStore(BaseStore):
 
     #seting up the self.url
     def setup(self):
-        # set the url for sparql
-        self.url = SPARQLWrapper(os.environ.get("SPARQL_ENDPOINT_URL", "https://beta.gss-data.org.uk/sparql"))
-
-        #to make sure self.url is not none providin a default url
-        assert self.url is not None, "Then SPARQL_ENDPOINT_URL is a None value."
-
-        self.sparql = SPARQLWrapper(self.url)
+        url = os.environ.get("SPARQL_ENDPOINT_URL", "https://beta.gss-data.org.uk/sparql")
+        self.sparql = SPARQLWrapper(url)
 
     def run_sparql(self, query) -> QueryResult:
         """ Runs and returns the results from a sparql query"""
@@ -33,7 +28,7 @@ class SparqlStore(BaseStore):
                 PREFIX gss: <http://gss-data.org.uk/catalog/>
                 PREFIX pmd: <http://publishmydata.com/pmdcat#>
 
-                ELECT DISTINCT * 
+                SELECT DISTINCT * 
                 WHERE { gss:datasets dcat:record ?record .
                     ?record foaf:primaryTopic ?dataset .
                     ?dataset    dcterms:issued ?issued ;
@@ -51,7 +46,6 @@ class SparqlStore(BaseStore):
                 ORDER BY ASC (?name) 
                 LIMIT 500"""
 
-        result =  self.run_sparql(query)
         result = self.run_sparql(query).convert()
 
         return result
