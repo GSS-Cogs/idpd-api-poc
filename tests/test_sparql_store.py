@@ -4,7 +4,7 @@ from store.sparql import SparqlStore
 from SPARQLWrapper import QueryResult
 
 
-def test_get_datasets():
+def test_run_sparql():
     """testing that the get_dataset will return access
     the url provided and run the SPRQL query, returns a QueryResult object"""
 

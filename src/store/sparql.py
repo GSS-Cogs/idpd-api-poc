@@ -13,13 +13,19 @@ class SparqlStore(BaseStore):
         #to make sure self.url is not none providin a default url
         assert self.url is not None, "Then SPARQL_ENDPOINT_URL is a None value."
 
-
-    def get_datasets(self) -> QueryResult:
-
-        #this is where the url to get the data will be passed in
+    def run_sparql(self, query):
+        """ Runs and returns the results from a sparql query"""
         sparql = SPARQLWrapper(self.url)
 
-        sparql.setQuery("""
+        sparql.setQuery(query)
+        sparql.setReturnFormat(JSON)
+        return sparql.query()
+    
+    def get_datasets(self):
+        """
+        Get many datasets
+        """
+        query = """
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
         PREFIX dcterms: <http://purl.org/dc/terms/>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -30,11 +36,5 @@ class SparqlStore(BaseStore):
         SELECT * 
         WHERE { ?s ?p ?o . }
         
-        LIMIT 10""")
-
-        #formating the return value
-        sparql.setReturnFormat(JSON)
-
-        results = sparql.query()
-
-        return results 
+        LIMIT 10"""
+        result =  self.run_sparql(query)
