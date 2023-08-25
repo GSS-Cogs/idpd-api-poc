@@ -43,11 +43,20 @@ def test_sparql_store_setup_custom():
     testing the setup function having the correct 
     url when provided a custom env variable
     """
-
-    os.environ["SPARQL_ENDPOINT_URL"] = "https://beta.gss-data.org.uk/custom_endpoint"
+    temporary_storage= None
+    #checking if user has already a SPARQL_ENDPOINT_URL 
+    if os.environ.get("SPARQL_ENDPOINT_URL") is not None:
+        #temporeraly saving the value
+        temporary_storage = os.environ.get("SPARQL_ENDPOINT_URL")
+        os.environ["SPARQL_ENDPOINT_URL"] = "https://beta.gss-data.org.uk/custom_endpoint"
+    else:
+        os.environ["SPARQL_ENDPOINT_URL"] = "https://beta.gss-data.org.uk/custom_endpoint"
 
     test_instance = SparqlStore()
 
     assert test_instance.sparql.endpoint == "https://beta.gss-data.org.uk/custom_endpoint"
 
-    del os.environ["SPARQL_ENDPOINT_URL"]
+    #re-setting the value back to what it was
+    if temporary_storage is not None:
+        os.environ["SPARQL_ENDPOINT_URL"] = temporary_storage
+    
