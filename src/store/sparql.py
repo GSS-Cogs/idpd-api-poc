@@ -1,7 +1,8 @@
 
 from store.base import BaseStore
+from typing import Dict
 import os
-from SPARQLWrapper import SPARQLWrapper, JSON, QueryResult
+from SPARQLWrapper import SPARQLWrapper, QueryResult
 
 class SparqlStore(BaseStore):
 
@@ -13,10 +14,30 @@ class SparqlStore(BaseStore):
     def run_sparql(self, query) -> QueryResult:
         """ Runs and returns the results from a sparql query"""
         self.sparql.setQuery(query)
-        self.sparql.setReturnFormat(JSON)
+        self.sparql.setReturnFormat("json")
         return self.sparql.query()
     
-    def get_datasets(self):
+    def map_query_response_to_json(self, list_of_data):
+        nicer_list = []
+        for item in list_of_data:
+            n = {
+                "title": item["name"]["value"],
+                "description": item["description"]["value"],
+                "record": item["record"]["value"],
+                "dataset": item["dataset"]["value"],
+                "issued": item["issued"]["value"],
+                "modified": item["modified"]["value"],
+                "comment": item["comment"]["value"],
+                "creator": item["creator"]["value"],
+                "creatorName": item["creatorName"]["value"],
+                "theme": item["theme"]["value"],
+                "themeName": item["themeName"]["value"],
+            }
+            nicer_list.append(n)
+
+        return nicer_list
+
+    def get_datasets(self) -> Dict:
         """
         Get many datasets
         """
@@ -44,8 +65,16 @@ class SparqlStore(BaseStore):
                                 ?theme      rdfs:label      ?themeName} 
                     }
                 ORDER BY ASC (?name) 
-                LIMIT 500"""
+                LIMIT 2"""
 
         result = self.run_sparql(query).convert()
 
-        return result
+        # directly after the result = query.convert() business 
+        list_of_results = self.map_query_response_to_json(result['results']['bindings'])
+        response = {
+                    "items": list_of_results,
+                    "offset": 0,
+                    "count": len(list_of_results)
+                    }
+
+        return response

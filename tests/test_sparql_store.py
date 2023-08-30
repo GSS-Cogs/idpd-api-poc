@@ -1,3 +1,4 @@
+
 from typing import Dict
 import os
 from SPARQLWrapper import QueryResult
@@ -64,3 +65,11 @@ def test_sparql_store_setup_custom(configure_environment):
     test_instance = SparqlStore()
     assert test_instance.sparql.endpoint == "https://beta.gss-data.org.uk/custom_endpoint"
     
+def test_dataset_return_values():
+    """to test how to conver stuff with rdflib"""
+
+    test_instance = SparqlStore()
+    result = test_instance.get_datasets()
+
+    assert isinstance(result, Dict)
+
