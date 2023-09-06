@@ -23,16 +23,16 @@ class SparqlStore(BaseStore):
             n = {
                 "title": item["name"]["value"],
                 "description": item["description"]["value"],
-                "summary": item["record"]["value"],
-                "last_updated": item["issued"]["value"],
-                "links": {"self": {"url": item["creator"]["value"]},
-                "publisher": {"url":item["issued"]["value"],
+                "summary": item["comment"]["value"],
+                "last_updated": item["modified"]["value"],
+                "links": {"self": {"url": "<Not Sure About this>"},
+                "publisher": {"url":item["creator"]["value"],
                               "id": item["creatorName"]["value"]},
                 "topic": {"url": item["theme"]["value"],
-                          "id": item["description"]["value"]},
+                          "id": item["themeName"]["value"]},
                 "releases":{"url": item["comment"]["value"]},
                 "latest_version": {"url": item["theme"]["value"],
-                                "id": item["modified"]["value"]},}
+                                "id": item["themeName"]["value"]},}
             }
             nicer_list.append(n)
 
