@@ -4,6 +4,9 @@ from typing import Dict
 import os
 from SPARQLWrapper import SPARQLWrapper, QueryResult
 
+def get_value_from_dict(item, name: str):
+
+    return item[name]["value"]
 class SparqlStore(BaseStore):
 
     #seting up the self.url
@@ -21,18 +24,18 @@ class SparqlStore(BaseStore):
         nicer_list = []
         for item in list_of_data:
             n = {
-                "title": item["name"]["value"],
-                "description": item["description"]["value"],
-                "summary": item["comment"]["value"],
-                "last_updated": item["modified"]["value"],
-                "links": {"self": {"url": "<Not Sure About this>"},
-                "publisher": {"url":item["creator"]["value"],
-                              "id": item["creatorName"]["value"]},
-                "topic": {"url": item["theme"]["value"],
-                          "id": item["themeName"]["value"]},
-                "releases":{"url": item["comment"]["value"]},
-                "latest_version": {"url": item["theme"]["value"],
-                                "id": item["themeName"]["value"]},}
+                "title": get_value_from_dict(item, "name"),
+                "description": get_value_from_dict(item, "description"),
+                "summary": get_value_from_dict(item, "comment"),
+                "last_updated": get_value_from_dict(item, "modified"),
+                "links": {"self": {"url": "Mike will get the value from Flask"},
+                "publisher": {"url": get_value_from_dict(item, "creator"),
+                              "id": get_value_from_dict(item, "creatorName")},
+                "topic": {"url": get_value_from_dict(item, "theme"),
+                          "id": get_value_from_dict(item, "themeName")},
+                "releases":{"url": get_value_from_dict(item, "comment")},
+                "latest_version": {"url": get_value_from_dict(item, "theme"),
+                                "id": get_value_from_dict(item, "themeName")},}
             }
             nicer_list.append(n)
 
@@ -79,3 +82,4 @@ class SparqlStore(BaseStore):
                     }
 
         return response
+
