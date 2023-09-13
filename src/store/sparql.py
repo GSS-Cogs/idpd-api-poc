@@ -1,10 +1,12 @@
+import os
+from typing import Dict
+
+from SPARQLWrapper import SPARQLWrapper, QueryResult, JSON
 
 from store.base import BaseStore
-from typing import Dict
-import os
-from SPARQLWrapper import SPARQLWrapper, QueryResult
 
 def get_value_from_dict(item, name: str):
+    """this function will aquire a value from a given list of dictionaries"""
 
     return item[name]["value"]
 class SparqlStore(BaseStore):
@@ -12,12 +14,13 @@ class SparqlStore(BaseStore):
     #seting up the self.url
     def setup(self):
         url = os.environ.get("SPARQL_ENDPOINT_URL", "https://beta.gss-data.org.uk/sparql")
+        self.host = os.environ.get("HOST", "some url for the host")
         self.sparql = SPARQLWrapper(url)
 
     def run_sparql(self, query) -> QueryResult:
         """ Runs and returns the results from a sparql query"""
         self.sparql.setQuery(query)
-        self.sparql.setReturnFormat("json")
+        self.sparql.setReturnFormat(JSON)
         return self.sparql.query()
     
     def map_query_response_to_json(self, list_of_data):
@@ -28,14 +31,12 @@ class SparqlStore(BaseStore):
                 "description": get_value_from_dict(item, "description"),
                 "summary": get_value_from_dict(item, "comment"),
                 "last_updated": get_value_from_dict(item, "modified"),
-                "links": {"self": {"url": "Mike will get the value from Flask"},
+                "links": {"self": {"url": self.host + "/datasets/" + "ID of Dataset"},
                 "publisher": {"url": get_value_from_dict(item, "creator"),
                               "id": get_value_from_dict(item, "creatorName")},
                 "topic": {"url": get_value_from_dict(item, "theme"),
                           "id": get_value_from_dict(item, "themeName")},
-                "releases":{"url": get_value_from_dict(item, "comment")},
-                "latest_version": {"url": get_value_from_dict(item, "theme"),
-                                "id": get_value_from_dict(item, "themeName")},}
+                "latest_version": {"url": self.host + "/datasets/" + "ID of Dataset"},}
             }
             nicer_list.append(n)
 
@@ -81,5 +82,6 @@ class SparqlStore(BaseStore):
                     "count": len(list_of_results)
                     }
 
+        
         return response
 

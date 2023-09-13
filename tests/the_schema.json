@@ -1,0 +1,196 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "items": {
+        "type": "array",
+        "items": [
+          {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "last_updated": {
+                "type": "string"
+              },
+              "links": {
+                "type": "object",
+                "properties": {
+                  "self": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url"
+                    ]
+                  },
+                  "publisher": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url",
+                      "id"
+                    ]
+                  },
+                  "topic": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url",
+                      "id"
+                    ]
+                  },
+                  "latest_version": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url"
+                    ]
+                  }
+                },
+                "required": [
+                  "self",
+                  "publisher",
+                  "topic",
+                  "latest_version"
+                ]
+              }
+            },
+            "required": [
+              "title",
+              "description",
+              "summary",
+              "last_updated",
+              "links"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "last_updated": {
+                "type": "string"
+              },
+              "links": {
+                "type": "object",
+                "properties": {
+                  "self": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url"
+                    ]
+                  },
+                  "publisher": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url",
+                      "id"
+                    ]
+                  },
+                  "topic": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url",
+                      "id"
+                    ]
+                  },
+                  "latest_version": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url"
+                    ]
+                  }
+                },
+                "required": [
+                  "self",
+                  "publisher",
+                  "topic",
+                  "latest_version"
+                ]
+              }
+            },
+            "required": [
+              "title",
+              "description",
+              "summary",
+              "last_updated",
+              "links"
+            ]
+          }
+        ]
+      },
+      "offset": {
+        "type": "integer"
+      },
+      "count": {
+        "type": "integer"
+      }
+    },
+    "required": [
+      "items",
+      "offset",
+      "count"
+    ]
+  }
