@@ -7,12 +7,16 @@ jsonld = "application/ld+json"
 
 @app.route("/datasets", methods =["GET"])
 def datasets():
+    status_code = 200
     if request.headers['Accept'] == jsonld: 
         result = storage.get_datasets()
-
+        
+        if len(result["items"]) == 0:
+            status_Code  = 404
+        
         resp = Response(json.dumps(result))
         resp.headers['Content-Type'] = jsonld
-        return resp , 200
+        return resp , status_code
     
     else:
         return "", 406
