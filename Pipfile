@@ -6,8 +6,9 @@ name = "pypi"
 [packages]
 flask = "*"
 gunicorn = "*"
-SPARQLWrapper = "*"
 jsonschema = "*"
+sparqlwrapper = "*"
+pytest = "*"
 
 [dev-packages]
 pytest = "*"
