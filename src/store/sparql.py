@@ -2,6 +2,7 @@
 from store.base import BaseStore
 import os
 from SPARQLWrapper import SPARQLWrapper, JSON, QueryResult
+from typing import Dict
 
 class SparqlStore(BaseStore):
 
