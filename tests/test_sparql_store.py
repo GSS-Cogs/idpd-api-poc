@@ -72,4 +72,3 @@ def test_dataset_return_values():
     result = test_instance.get_datasets()
 
     assert isinstance(result, Dict)
-

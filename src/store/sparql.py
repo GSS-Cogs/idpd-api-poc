@@ -1,9 +1,12 @@
+import os
+from typing import Dict
+
+from SPARQLWrapper import SPARQLWrapper, QueryResult, JSON
 
 from store.base import BaseStore
 from typing import Dict
 import os
 from SPARQLWrapper import SPARQLWrapper, QueryResult
-
 class SparqlStore(BaseStore):
 
     #seting up the self.url
@@ -16,6 +19,7 @@ class SparqlStore(BaseStore):
         self.sparql.setQuery(query)
         self.sparql.setReturnFormat("json")
         return self.sparql.query()
+
     
     def map_query_response_to_json(self, list_of_data):
         nicer_list = []
