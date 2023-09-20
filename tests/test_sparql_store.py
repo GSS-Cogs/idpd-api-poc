@@ -1,6 +1,9 @@
 
 from typing import Dict
 import os
+from pathlib import Path
+import json
+from jsonschema import validate
 from SPARQLWrapper import QueryResult
 import pytest
 
@@ -72,3 +75,23 @@ def test_dataset_return_values():
     result = test_instance.get_datasets()
 
     assert isinstance(result, Dict)
+
+#potentioally have a test to check specific return value from map_query_response if possible 
+@pytest.mark.vcr
+def test_structure_of_json():
+    """
+    this test will valide if the return value has the correct json structure
+    """
+
+    curr = os.getcwd()
+    to_file = Path(curr +"/tests/the_schema.json")
+    
+    with open(to_file) as json_file:
+        schema = json.load(json_file)
+
+    test_instance = SparqlStore()
+
+    result = test_instance.get_datasets()
+
+    validate(instance=result, schema=schema)
+

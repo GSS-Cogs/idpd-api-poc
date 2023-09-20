@@ -1,18 +1,35 @@
 import os
+import re
 from typing import Dict
 
 from SPARQLWrapper import SPARQLWrapper, QueryResult, JSON
 
 from store.base import BaseStore
-from typing import Dict
-import os
-from SPARQLWrapper import SPARQLWrapper, QueryResult
+
+def get_value_from_dict(item, name: str):
+    """this function will aquire a value from a given list of dictionaries"""
+
+    return item[name]["value"]
+
+def get_dataset_ID(item, name: str):
+    """This funciton will return the dataset ID"""
+
+    full_id = get_value_from_dict(item, name)
+
+    for s in re.finditer('/', full_id):
+        index = s.start()
+
+    id = full_id[(index + 1):len(full_id)]
+
+    return id
+
 class SparqlStore(BaseStore):
 
     #seting up the self.url
     def setup(self):
         url = os.environ.get("SPARQL_ENDPOINT_URL", "https://beta.gss-data.org.uk/sparql")
         self.sparql = SPARQLWrapper(url)
+        self.host = "this will be the host adress"
 
     def run_sparql(self, query) -> QueryResult:
         """ Runs and returns the results from a sparql query"""
@@ -25,17 +42,16 @@ class SparqlStore(BaseStore):
         nicer_list = []
         for item in list_of_data:
             n = {
-                "title": item["name"]["value"],
-                "description": item["description"]["value"],
-                "record": item["record"]["value"],
-                "dataset": item["dataset"]["value"],
-                "issued": item["issued"]["value"],
-                "modified": item["modified"]["value"],
-                "comment": item["comment"]["value"],
-                "creator": item["creator"]["value"],
-                "creatorName": item["creatorName"]["value"],
-                "theme": item["theme"]["value"],
-                "themeName": item["themeName"]["value"],
+                "title": get_value_from_dict(item, "name"),
+                "description": get_value_from_dict(item, "description"),
+                "summary": get_value_from_dict(item, "comment"),
+                "last_updated": get_value_from_dict(item, "modified"),
+                "links": {"self": {"url": self.host + "/datasets/" + get_dataset_ID(item, "dataset")},
+                "publisher": {"url": get_value_from_dict(item, "creator"),
+                              "id": get_value_from_dict(item, "creatorName")},
+                "topic": {"url": get_value_from_dict(item, "theme"),
+                          "id": get_value_from_dict(item, "themeName")},
+                "latest_version": {"url": self.host + "/datasets/" + "ID of Dataset"},}
             }
             nicer_list.append(n)
 
