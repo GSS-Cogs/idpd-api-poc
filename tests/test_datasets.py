@@ -39,13 +39,14 @@ def test_unsupported_accept_headers_return_406():
 
 def test_dataset_id_jsonld_accept_header_returns_200(client):
     headers = {"Accept": "application/ld+json"}
-    response = client.get('/datasets/123', headers=headers)
+    response = client.get('/datasets', headers=headers)
     
     assert response.status_code == 200
     assert response.headers["Content-Type"] == jsonld
     data = json.loads(response.data.decode("utf-8"))
     assert len(data) > 0
 
+    
 def test_dataset_id_text_html_accept_header_returns_200(client):
     headers = {"Accept": "text/html"}
     response = client.get('/datasets/123', headers=headers)

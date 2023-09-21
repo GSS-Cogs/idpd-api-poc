@@ -50,3 +50,45 @@ class SparqlStore(BaseStore):
         result = self.run_sparql(query).convert()
 
         return result
+    
+    
+    def get_dataset_by_id(self, id: str) -> Dict:
+            """
+            Get a dataset by its ID
+            """
+            query = """
+                    PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                    PREFIX dcterms: <http://purl.org/dc/terms/>
+                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                    PREFIX gss: <http://gss-data.org.uk/catalog/>
+                    PREFIX pmd: <http://publishmydata.com/pmdcat#>
+
+                    SELECT DISTINCT * 
+                    WHERE {{
+                        gss:datasets dcat:record ?record .
+                        ?record foaf:primaryTopic ?dataset .
+                        ?dataset    dcterms:issued ?issued ;
+                                    dcterms:modified ?modified .
+                        optional {{  ?dataset    rdfs:label      ?name}} 
+                        optional {{  ?dataset    pmd:markdownDescription      ?description}} 
+                        optional {{  ?dataset    rdfs:comment      ?comment}} 
+                        optional {{  ?dataset    dcterms:license ?license .
+                                ?license    rdfs:label      ?licenseName}} 
+                        optional {{  ?dataset    dcterms:creator ?creator .
+                                    ?creator    rdfs:label      ?creatorName}} 
+                        optional {{  ?dataset    dcat:theme      ?theme .
+                                    ?theme      rdfs:label      ?themeName}} 
+                        FILTER(?dataset = gss:datasets/{id})
+                    }}
+                    """
+
+            result = self.run_sparql(query).convert()
+            list_of_results = self.map_query_response_to_json(result['results']['bindings'])
+
+            if len(list_of_results) == 0:
+                return None
+            else:
+                return list_of_results[0]
+
+            

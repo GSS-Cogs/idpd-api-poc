@@ -32,17 +32,7 @@ def dataset_id(id):
         return resp , status_code
     
     elif request.headers.get('Accept') == "text/html":
-        html_response = """
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Data Catalog</title>
-        </head>
-        <body>
-            <p>See <a href="https://ids.framer.website/datasets">https://ids.framer.website/datasets</a></p>
-        </body>
-        </html>
-        """
+        html_response = ""
         return html_response, 200
 
     elif request.headers.get('Accept') == "text/csv":
@@ -57,7 +47,8 @@ def dataset_id(id):
 
     else:
         return "", 406
-
+    
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
+
