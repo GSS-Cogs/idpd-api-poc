@@ -84,7 +84,7 @@ def test_dataset_return_values():
     assert isinstance(result, Dict)
 
 #potentioally have a test to check specific return value from map_query_response if possible 
-@pytest.mark.vcr
+@pytest.mark.vcr_config
 def test_structure_of_json():
     """
     this test will valide if the return value has the correct json structure

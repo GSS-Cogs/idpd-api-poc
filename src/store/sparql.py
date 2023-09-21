@@ -25,6 +25,7 @@ class SparqlStore(BaseStore):
         return self.sparql.query()
     
     def map_query_response_to_json(self, list_of_data):
+        """maps the responses to a json format"""
         mapped_list = []
         for item in list_of_data:
             n = {
@@ -71,7 +72,7 @@ class SparqlStore(BaseStore):
                                 ?theme      rdfs:label      ?themeName} 
                     }
                 ORDER BY ASC (?name) 
-                LIMIT 2"""
+                LIMIT 500"""
 
         result = self.run_sparql(query).convert()
 
