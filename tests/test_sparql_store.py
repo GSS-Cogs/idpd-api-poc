@@ -1,12 +1,12 @@
 
-from typing import Dict
 import os
+import json
+import pytest
+
 from SPARQLWrapper import QueryResult
+from typing import Dict
 from jsonschema import validate
 from pathlib import Path
-import json
-
-import pytest
 
 from store.sparql import SparqlStore
 
@@ -76,7 +76,7 @@ def test_sparql_store_setup_custom(configure_environment):
     assert test_instance.sparql.endpoint == "https://beta.gss-data.org.uk/custom_endpoint"
     
 def test_dataset_return_values():
-    """to test how to conver stuff with rdflib"""
+    """to test how to convert stuff with rdflib"""
 
     test_instance = SparqlStore()
     result = test_instance.get_datasets()

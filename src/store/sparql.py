@@ -1,20 +1,21 @@
 import os
-from typing import Dict
 
+from typing import Dict
 from SPARQLWrapper import SPARQLWrapper, QueryResult, JSON
 
 from store.base import BaseStore
 
 def get_value_from_dict(item, name: str):
     """this function will aquire a value from a given list of dictionaries"""
-
+    
     return item[name]["value"]
+
 class SparqlStore(BaseStore):
 
     #seting up the self.url
     def setup(self):
         url = os.environ.get("SPARQL_ENDPOINT_URL", "https://beta.gss-data.org.uk/sparql")
-        self.host = os.environ.get("HOST", "some url for the host")
+        self.host = os.environ.get("HOST", "local host and the port it is running on")
         self.sparql = SPARQLWrapper(url)
 
     def run_sparql(self, query) -> QueryResult:
@@ -24,7 +25,7 @@ class SparqlStore(BaseStore):
         return self.sparql.query()
     
     def map_query_response_to_json(self, list_of_data):
-        nicer_list = []
+        mapped_list = []
         for item in list_of_data:
             n = {
                 "title": get_value_from_dict(item, "name"),
@@ -38,9 +39,9 @@ class SparqlStore(BaseStore):
                           "id": get_value_from_dict(item, "themeName")},
                 "latest_version": {"url": self.host + "/datasets/" + "ID of Dataset"},}
             }
-            nicer_list.append(n)
+            mapped_list.append(n)
 
-        return nicer_list
+        return mapped_list
 
     def get_datasets(self) -> Dict:
         """
@@ -74,7 +75,6 @@ class SparqlStore(BaseStore):
 
         result = self.run_sparql(query).convert()
 
-        # directly after the result = query.convert() business 
         list_of_results = self.map_query_response_to_json(result['results']['bindings'])
         response = {
                     "items": list_of_results,
