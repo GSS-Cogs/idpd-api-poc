@@ -38,8 +38,17 @@ def dataset_id(id):
     elif request.headers.get('Accept') == "text/csv":
         # Return a CSV file download
         csv_content = "CSV file content"
-        return Response(csv_content, mimetype="text/csv"), 200
-
+        # return Response(csv_content, mimetype="text/csv"), 200
+        # Check for the "Content-Disposition" header
+        disposition = request.headers.get('Content-Disposition')
+        if disposition and 'attachment' in disposition.lower():
+            # If "attachment" is specified in Content-Disposition, treat it as a download
+            response = Response(csv_content, mimetype="text/csv")
+            response.headers['Content-Disposition'] = 'attachment; filename="dataset.csv"'
+            return response, 200
+        else:
+            return csv_content, 200
+        
     elif request.headers.get('Accept') == "application/csvm+json":
         # Return a .csv-metadata.json file
         metadata_json_content = "CSV Metadata JSON content"
