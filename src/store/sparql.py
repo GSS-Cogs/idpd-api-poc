@@ -8,7 +8,7 @@ from store.base import BaseStore
 def get_value_from_dict(item, name: str):
     """this function will aquire a value from a given list of dictionaries"""
     
-    return item[name]["value"]
+    return item.get(name, {}).get("value")
 
 class SparqlStore(BaseStore):
 
@@ -62,7 +62,8 @@ class SparqlStore(BaseStore):
                     ?dataset    dcterms:issued ?issued ;
                                 dcterms:modified ?modified .
                     optional {  ?dataset    rdfs:label      ?name} 
-	                optional {  ?dataset    pmd:markdownDescription      ?description} 
+	                optional { ?dataset pmd:markdownDescription ?description .
+                                FILTER (BOUND(?description))}
 	                optional {  ?dataset    rdfs:comment      ?comment} 
 	                optional {  ?dataset    dcterms:license ?license .
 				                ?license    rdfs:label      ?licenseName} 

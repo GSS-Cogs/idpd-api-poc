@@ -48,6 +48,7 @@ def test_get_datasets(configure_environment):
     result = test_instance.get_datasets()
     assert isinstance(result, Dict)
 
+    
 def test_run_sparql(configure_environment):
     """testing that the run_sparql will return a QueryResult object"""
     
@@ -71,9 +72,9 @@ def test_sparql_store_setup_custom(configure_environment):
     url when provided a custom env variable
     """
 
-    os.environ["SPARQL_ENDPOINT_URL"] = "https://beta.gss-data.org.uk/custom_endpoint"
+    os.environ["SPARQL_ENDPOINT_URL"] = "https://beta.gss-data.org.uk/sparql"
     test_instance = SparqlStore()
-    assert test_instance.sparql.endpoint == "https://beta.gss-data.org.uk/custom_endpoint"
+    assert test_instance.sparql.endpoint == "https://beta.gss-data.org.uk/sparql"
     
 def test_dataset_return_values():
     """to test how to convert stuff with rdflib"""
