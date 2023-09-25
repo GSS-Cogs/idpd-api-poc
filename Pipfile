@@ -6,12 +6,11 @@ name = "pypi"
 [packages]
 flask = "*"
 gunicorn = "*"
-jsonschema = "*"
 sparqlwrapper = "*"
-pytest = "*"
 
 [dev-packages]
 pytest = "*"
+jsonschema = "*"
 
 [requires]
 python_version = "3.9"
