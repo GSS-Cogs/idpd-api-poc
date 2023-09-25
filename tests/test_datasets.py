@@ -7,13 +7,11 @@ def client():
     return app.test_client()
 
 
-def test_jsonld_accept_header_returns_200():
+def test_jsonld_accept_header_returns_200(client):
     """
     Confirm that a 200 status code is returned where a
     "accept: application/json+ld" header is provided.
     """
-
-    client = app.test_client()
 
     headers = {"Accept":"application/ld+json"}
 
@@ -22,13 +20,11 @@ def test_jsonld_accept_header_returns_200():
     assert response.status_code == 200
 
 
-def test_unsupported_accept_headers_return_406():
+def test_unsupported_accept_headers_return_406(client):
     """
     Confirm that a 406 status code is returned where
     an unsupported accept header is provided.
     """
-
-    client = app.test_client()
 
     headers = {"Accept":"something"}
 
@@ -38,6 +34,11 @@ def test_unsupported_accept_headers_return_406():
 
 
 def test_dataset_id_jsonld_accept_header_returns_200(client):
+    """
+    Confirm that a 200  status code is returned where a
+    "accept: application/json+ld" header is provided and the reponse is JSONLD
+    """
+    
     headers = {"Accept": "application/ld+json"}
     response = client.get('/datasets', headers=headers)
     
@@ -48,6 +49,10 @@ def test_dataset_id_jsonld_accept_header_returns_200(client):
 
     
 def test_dataset_id_text_html_accept_header_returns_200(client):
+    """
+    Confirm that a 200 status code is returned where a
+    "accept: text/html" header is provided.
+    """
     headers = {"Accept": "text/html"}
     response = client.get('/datasets/123', headers=headers)
     
@@ -56,6 +61,10 @@ def test_dataset_id_text_html_accept_header_returns_200(client):
 
 
 def test_dataset_id_text_csv_accept_header_returns_200(client):
+    """
+    Confirm that a 200 status code is returned where a
+    "accept: text/csv" header is provided.
+    """
     headers = {"Accept": "text/csv"}
     response = client.get('/datasets/123', headers=headers)
     
@@ -64,6 +73,10 @@ def test_dataset_id_text_csv_accept_header_returns_200(client):
 
 
 def test_dataset_id_application_csvmjson_accept_header_returns_200(client):
+    """
+    Confirm that a 200 status code is returned where a
+    "accept: application/csvm+json" header is provided.
+    """
     headers = {"Accept": "application/csvm+json"}
     response = client.get('/datasets/123', headers=headers)
     
@@ -72,6 +85,10 @@ def test_dataset_id_application_csvmjson_accept_header_returns_200(client):
 
 
 def test_dataset_id_other_accept_headers_return_406(client):
+    """
+    Confirm that a 406 status code is returned where
+    an unsupported accept header is provided.
+    """
     headers = {"Accept": "Something"}  # Unsupported Accept header
     response = client.get('/datasets/123', headers=headers)
     
