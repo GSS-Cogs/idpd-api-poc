@@ -17,12 +17,12 @@ from constants import JSONLD
 
 def test_dataset_by_id_200():
     """
-    Confirm that the store.get_datasets() method is
+    Confirm that the store.get_datasets_by_id() method is
     called where an "accept: application/json+ld"
     header is provided and status code 200 is returned.
     """
 
-    # Create a mock store with a callable mocked get_datasets() method
+    # Create a mock store with a callable mocked get_datasets_by_id() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_dataset_by_id = MagicMock(return_value=["foo"])
@@ -40,13 +40,13 @@ def test_dataset_by_id_200():
 
 def test_dataset_by_id_404():
     """
-    Confirm that the store.get_datasets() method is not
+    Confirm that the store.get_datasets_by_id() method is not
     called where an "accept: application/json+ld"
     header is not provided. Status code 406 should be
     returned.
     """
 
-    # Create a mock store with a callable mocked get_datasets() method
+    # Create a mock store with a callable mocked get_datasets_by_id() method
     mock_metadata_store = MagicMock()
     # Note: returning an empty list to simulate "id is not found"
     mock_metadata_store.get_dataset_by_id = MagicMock(return_value=[])
@@ -63,13 +63,13 @@ def test_dataset_by_id_404():
 
 def test_dataset_by_id_406():
     """
-    Confirm that the store.get_datasets() method is not
+    Confirm that the store.get_datasets_by_id() method is not
     called where an "accept: application/json+ld"
     header is not provided. Status code 406 should be
     returned.
     """
 
-    # Create a mock store with a callable mocked get_datasets() method
+    # Create a mock store with a callable mocked get_datasets_by_id() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_dataset_by_id = MagicMock(return_value=["foo"])
