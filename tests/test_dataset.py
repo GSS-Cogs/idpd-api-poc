@@ -25,7 +25,7 @@ def test_dataset_by_id_200():
     # Create a mock store with a callable mocked get_datasets() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
-    mock_metadata_store.get_dataset_by_id = lambda _: ["foo"]
+    mock_metadata_store.get_dataset_by_id = MagicMock(return_value=["foo"])
     
     # Override the stub_store dependency with the mock_metadata_store
     stores["dataset_metadata"] = mock_metadata_store

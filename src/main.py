@@ -30,7 +30,7 @@ def datasets(request: Request, response: Response):
         return
 
 @app.get("/datasets/<id>")
-def datasets(request: Request, response: Response, id: str):
+def dataset_by_id(request: Request, response: Response, id: str):
     metadata_store = stores["dataset_metadata"]
     if request.headers['Accept'] == JSONLD:
         datasets = metadata_store.get_dataset_by_id(id)
@@ -44,7 +44,7 @@ def datasets(request: Request, response: Response, id: str):
         return
     
 @app.get("/publishers")
-def datasets(request: Request, response: Response):
+def publishers(request: Request, response: Response):
     metadata_store = stores["publishers_metadata"]
     if request.headers['Accept'] == JSONLD:
         response.status_code = status.HTTP_200_OK
@@ -54,7 +54,7 @@ def datasets(request: Request, response: Response):
         return
 
 @app.get("/publishers/<id>")
-def datasets(request: Request, response: Response, id: str):
+def publisher_by_id(request: Request, response: Response, id: str):
     metadata_store = stores["publisher_metadata"]
     if request.headers['Accept'] == JSONLD:
         publishers = metadata_store.get_publisher_by_id(id)
@@ -68,7 +68,7 @@ def datasets(request: Request, response: Response, id: str):
         return
     
 @app.get("/topics")
-def datasets(request: Request, response: Response):
+def topics(request: Request, response: Response):
     metadata_store = stores["topics_metadata"]
     if request.headers['Accept'] == JSONLD:
         response.status_code = status.HTTP_200_OK
@@ -78,7 +78,7 @@ def datasets(request: Request, response: Response):
         return
 
 @app.get("/topics/<id>")
-def datasets(request: Request, response: Response, id: str):
+def topic_by_id(request: Request, response: Response, id: str):
     metadata_store = stores["topic_metadata"]
     if request.headers['Accept'] == JSONLD:
         themes = metadata_store.get_topic_by_id(id)
