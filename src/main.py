@@ -46,7 +46,6 @@ def dataset_by_id(request: Request, response: Response, id: str):
     
 @app.get("/publishers")
 def publishers(request: Request, response: Response):
-    raise NotImplementedError("publishers")
     metadata_store = app.state.stores["publishers_metadata"]
     if request.headers['Accept'] == JSONLD:
         response.status_code = status.HTTP_200_OK
@@ -57,7 +56,6 @@ def publishers(request: Request, response: Response):
 
 @app.get("/publishers/{id}")
 def publisher_by_id(request: Request, response: Response, id: str):
-    raise NotImplementedError("publisher_metadata")
     metadata_store = app.state.stores["publisher_metadata"]
     if request.headers['Accept'] == JSONLD:
         publishers = metadata_store.get_publisher_by_id(id)
@@ -72,7 +70,6 @@ def publisher_by_id(request: Request, response: Response, id: str):
     
 @app.get("/topics")
 def topics(request: Request, response: Response):
-    raise NotImplementedError("topics_metadata")
     metadata_store = app.state.stores["topics_metadata"]
     if request.headers['Accept'] == JSONLD:
         response.status_code = status.HTTP_200_OK
@@ -83,7 +80,6 @@ def topics(request: Request, response: Response):
 
 @app.get("/topics/{id}")
 def topic_by_id(request: Request, response: Response, id: str):
-    raise NotImplementedError("topic_metadata")
     metadata_store = app.state.stores["topic_metadata"]
     if request.headers['Accept'] == JSONLD:
         themes = metadata_store.get_topic_by_id(id)
