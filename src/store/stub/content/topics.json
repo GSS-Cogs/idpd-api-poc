@@ -1,0 +1,22 @@
+{
+    "items": [
+        {
+            "id": "theme1",
+            "foo": "foo",
+            "bar": "bar",
+            "baz": "baz"
+        },
+        {
+            "id": "theme2",
+            "foo": "foo",
+            "bar": "bar",
+            "baz": "baz"
+        },
+        {
+            "id": "theme3",
+            "foo": "foo",
+            "bar": "bar",
+            "baz": "baz"
+        }
+    ]
+}

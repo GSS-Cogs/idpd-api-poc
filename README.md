@@ -7,22 +7,9 @@ This application uses [pipenv](https://pypi.org/project/pipenv/) to manage depen
 
 ### development
 
-Run `pipenv run python3 ./app/main.py`. This wil run the app with browser based exceptions and _hot reloading_ enabled.
+Install dependencies via `pipenv sync --dev`
 
-### production
-
-Running the app in production is handled via the Dockerfile which installs all dependent packages (outlined in the pipfile.lock) into its base python version and runs the app via [gunicorn](https://gunicorn.org/).
-
-### via gunicorn locally
-
-To run via this mechanism locally (for example, if you want to trial some [gunicorn](https://gunicorn.org/) settings) do the following:
-
-- `pipenv shell` to activate the virtual environment
-- `cd app`
-- `gunicorn --bind 0.0.0.0:5000 wsgi:app`
-
-Note: This is slightly different than how the Dockerfile accomplishes the same thing, but its purely to avoid people installing this apps dependencies directly into their base interpreter locally which might interfere with running other things (a consideration an image does not have).
-
+Run the server via `pipenv run uvicorn src.main:app --reload`
 
 ### Testing
 

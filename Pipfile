@@ -4,12 +4,14 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
-gunicorn = "*"
 SPARQLWrapper = "*"
+fastapi = "*"
+uvicorn = "*"
+httpx = "*"
 
 [dev-packages]
 pytest = "*"
+pytest-vcr = "*"
 
 [requires]
 python_version = "3.9"

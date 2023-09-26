@@ -1,33 +1,62 @@
-import pytest
+from unittest.mock import MagicMock
 
-from main import app
+from fastapi import status
+from fastapi.testclient import TestClient
+
+from main import app, stores
+from constants import JSONLD
 
 
-def test_jsonld_accept_header_returns_200():
+# Devnotes:
+
+# In this code we just want to test that certain mimetypes
+# result in certains store methods being called and certain
+# status codes being returned.
+# We should NOT care what the stores actually do - that's
+# what the /store tests are for, so we mock a store.
+
+def test_datasets_200():
     """
-    Confirm that a 200 status code is returned where a
-    "accept: application/json+ld" header is provided.
+    Confirm that the store.get_datasets() method is
+    called where an "accept: application/json+ld"
+    header is provided and status code 200 is returned.
     """
 
-    client = app.test_client()
-
-    headers = {"Accept":"application/ld+json"}
-
-    response = client.get('/datasets', headers=headers)
+    # Create a mock store with a callable mocked get_datasets() method
+    mock_metadata_store = MagicMock()
+    mock_metadata_store.get_datasets = MagicMock(return_value={})
     
-    assert response.status_code == 200
+    # Override the stub_store dependency with the mock_metadata_store
+    stores["datasets_metadata"] = mock_metadata_store
+
+    # Create a TestClient for your FastAPI app
+    client = TestClient(app)
+    response = client.get("/datasets", headers={"Accept": JSONLD})
+
+    # Assertions
+    assert response.status_code == status.HTTP_200_OK
+    mock_metadata_store.get_datasets.assert_called_once()
 
 
-def test_unsupported_accept_headers_return_406():
+def test_datasets_406():
     """
-    Confirm that a 406 status code is returned where
-    an unsupported accept header is provided.
+    Confirm that the store.get_datasets() method is not
+    called where an "accept: application/json+ld"
+    header is not provided. Status code 406 should be
+    returned.
     """
 
-    client = app.test_client()
+    # Create a mock store with a callable mocked get_datasets() method
+    mock_metadata_store = MagicMock()
+    mock_metadata_store.get_datasets = MagicMock(return_value={})
+    
+    # Override the stub_store dependency with the mock_metadata_store
+    stores["datasets_metadata"] = mock_metadata_store
 
-    headers = {"Accept":"something"}
+    # Create a TestClient for your FastAPI app
+    client = TestClient(app)
+    response = client.get("/datasets", headers={"Accept": "foo"})
 
-    response = client.get('/datasets', headers=headers)
-
-    assert response.status_code == 406
+    # Assertions
+    assert response.status_code == status.HTTP_406_NOT_ACCEPTABLE
+    mock_metadata_store.get_datasets.assert_not_called()

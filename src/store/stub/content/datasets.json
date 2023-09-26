@@ -1,0 +1,22 @@
+{
+    "items": [
+        {
+            "id": "dataset1",
+            "foo": "foo",
+            "bar": "bar",
+            "baz": "baz"
+        },
+        {
+            "id": "dataset2",
+            "foo": "foo",
+            "bar": "bar",
+            "baz": "baz"
+        },
+        {
+            "id": "dataset3",
+            "foo": "foo",
+            "bar": "bar",
+            "baz": "baz"
+        }
+    ]
+}
