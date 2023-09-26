@@ -80,7 +80,7 @@ def topics(request: Request, response: Response):
         response.status_code = status.HTTP_200_OK
         return metadata_store.get_topics()
     else:
-        response.status_code = status.HTTP_404_NOT_FOUND
+        response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
 
 @app.get("/topics/{id}")
