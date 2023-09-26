@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 from fastapi import status
 from fastapi.testclient import TestClient
 
-from main import app, stores
+from main import app
 from constants import JSONLD
 
 
@@ -26,16 +26,14 @@ def test_dataset_by_id_200():
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_dataset_by_id = MagicMock(return_value=["foo"])
-    
-    # Override the stub_store dependency with the mock_metadata_store
-    stores["dataset_metadata"] = mock_metadata_store
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
+    app.state.stores["dataset_metadata"] = mock_metadata_store
     response = client.get("/datasets/some-id", headers={"Accept": JSONLD})
 
     # Assertions
-    assert response.json() == ["foo"]
+    assert response.json() == "foo"
     assert response.status_code == status.HTTP_200_OK
     mock_metadata_store.get_dataset_by_id.assert_called_once()
 
@@ -53,11 +51,9 @@ def test_dataset_by_id_404():
     # Note: returning an empty list to simulate "id is not found"
     mock_metadata_store.get_dataset_by_id = MagicMock(return_value=[])
     
-    # Override the stub_store dependency with the mock_metadata_store
-    stores["dataset_metadata"] = mock_metadata_store
-
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
+    app.state.stores["dataset_metadata"] = mock_metadata_store
     response = client.get("/datasets/some-id", headers={"Accept": JSONLD})
 
     # Assertions
@@ -78,11 +74,9 @@ def test_dataset_by_id_406():
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_dataset_by_id = MagicMock(return_value=["foo"])
     
-    # Override the stub_store dependency with the mock_metadata_store
-    stores["dataset_metadata"] = mock_metadata_store
-
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
+    app.state.stores["dataset_metadata"] = mock_metadata_store
     response = client.get("/datasets/some-id", headers={"Accept": "foo"})
 
     # Assertions

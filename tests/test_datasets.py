@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 from fastapi import status
 from fastapi.testclient import TestClient
 
-from main import app, stores
+from main import app
 from constants import JSONLD
 
 
@@ -26,11 +26,9 @@ def test_datasets_200():
     mock_metadata_store = MagicMock()
     mock_metadata_store.get_datasets = MagicMock(return_value={})
     
-    # Override the stub_store dependency with the mock_metadata_store
-    stores["datasets_metadata"] = mock_metadata_store
-
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
+    app.state.stores["datasets_metadata"] = mock_metadata_store
     response = client.get("/datasets", headers={"Accept": JSONLD})
 
     # Assertions
@@ -51,10 +49,9 @@ def test_datasets_406():
     mock_metadata_store.get_datasets = MagicMock(return_value={})
     
     # Override the stub_store dependency with the mock_metadata_store
-    stores["datasets_metadata"] = mock_metadata_store
-
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
+    app.state.stores["datasets_metadata"] = mock_metadata_store
     response = client.get("/datasets", headers={"Accept": "foo"})
 
     # Assertions
