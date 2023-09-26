@@ -1,8 +1,13 @@
+import os
+
 from fastapi import FastAPI, Request, Response, status
 
 from constants import JSONLD
 from store import StubStore
 
+# Simple env var flag to allow local browsing of api responses
+# while developing.
+BROWSABLE = os.environ.get("LOCAL_BROWSE_API")
 
 # Mapping specific store implementations to specific endpoints.
 # This is an interim measure to allow us to stub out endpoints
@@ -22,7 +27,7 @@ app.state.stores = {
 @app.get("/datasets")
 def datasets(request: Request, response: Response):
     metadata_store = app.state.stores["datasets_metadata"]
-    if request.headers['Accept'] == JSONLD:
+    if request.headers['Accept'] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
         return metadata_store.get_datasets()
     else:
@@ -32,7 +37,7 @@ def datasets(request: Request, response: Response):
 @app.get("/datasets/{id}")
 def dataset_by_id(request: Request, response: Response, id: str):
     metadata_store = app.state.stores["dataset_metadata"]
-    if request.headers['Accept'] == JSONLD:
+    if request.headers['Accept'] == JSONLD or BROWSABLE:
         datasets = metadata_store.get_dataset_by_id(id)
         if len(datasets) == 1:
             response.status_code = status.HTTP_200_OK
@@ -47,7 +52,7 @@ def dataset_by_id(request: Request, response: Response, id: str):
 @app.get("/publishers")
 def publishers(request: Request, response: Response):
     metadata_store = app.state.stores["publishers_metadata"]
-    if request.headers['Accept'] == JSONLD:
+    if request.headers['Accept'] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
         return metadata_store.get_publishers()
     else:
@@ -57,7 +62,7 @@ def publishers(request: Request, response: Response):
 @app.get("/publishers/{id}")
 def publisher_by_id(request: Request, response: Response, id: str):
     metadata_store = app.state.stores["publisher_metadata"]
-    if request.headers['Accept'] == JSONLD:
+    if request.headers['Accept'] == JSONLD or BROWSABLE:
         publishers = metadata_store.get_publisher_by_id(id)
         if len(publishers) == 1:
             response.status_code = status.HTTP_200_OK
@@ -71,7 +76,7 @@ def publisher_by_id(request: Request, response: Response, id: str):
 @app.get("/topics")
 def topics(request: Request, response: Response):
     metadata_store = app.state.stores["topics_metadata"]
-    if request.headers['Accept'] == JSONLD:
+    if request.headers['Accept'] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
         return metadata_store.get_topics()
     else:
@@ -81,7 +86,7 @@ def topics(request: Request, response: Response):
 @app.get("/topics/{id}")
 def topic_by_id(request: Request, response: Response, id: str):
     metadata_store = app.state.stores["topic_metadata"]
-    if request.headers['Accept'] == JSONLD:
+    if request.headers['Accept'] == JSONLD or BROWSABLE:
         themes = metadata_store.get_topic_by_id(id)
         if len(themes) == 1:
             response.status_code = status.HTTP_200_OK
