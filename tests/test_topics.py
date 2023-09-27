@@ -15,45 +15,45 @@ from constants import JSONLD
 # We should NOT care what the stores actually do - that's
 # what the /store tests are for, so we mock a store.
 
-def test_datasets_200():
+def test_topics_200():
     """
-    Confirm that the store.get_datasets() method is
+    Confirm that the store.get_topics() method is
     called where an "accept: application/json+ld"
     header is provided and status code 200 is returned.
     """
 
-    # Create a mock store with a callable mocked get_datasets() method
+    # Create a mock store with a callable mocked get_topics() method
     mock_metadata_store = MagicMock()
-    mock_metadata_store.get_datasets = MagicMock(return_value={})
+    mock_metadata_store.get_topics = MagicMock(return_value={})
     
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
-    app.state.stores["datasets_metadata"] = mock_metadata_store
-    response = client.get("/datasets", headers={"Accept": JSONLD})
+    app.state.stores["topics_metadata"] = mock_metadata_store
+    response = client.get("/topics", headers={"Accept": JSONLD})
 
     # Assertions
     assert response.status_code == status.HTTP_200_OK
-    mock_metadata_store.get_datasets.assert_called_once()
+    mock_metadata_store.get_topics.assert_called_once()
 
 
-def test_datasets_406():
+def test_topics_406():
     """
-    Confirm that the store.get_datasets() method is not
+    Confirm that the store.get_topics() method is not
     called where an "accept: application/json+ld"
     header is not provided. Status code 406 should be
     returned.
     """
 
-    # Create a mock store with a callable mocked get_datasets() method
+    # Create a mock store with a callable mocked get_topics() method
     mock_metadata_store = MagicMock()
-    mock_metadata_store.get_datasets = MagicMock(return_value={})
+    mock_metadata_store.get_topics = MagicMock(return_value={})
     
     # Override the stub_store dependency with the mock_metadata_store
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
-    app.state.stores["datasets_metadata"] = mock_metadata_store
-    response = client.get("/datasets", headers={"Accept": "foo"})
+    app.state.stores["topics_metadata"] = mock_metadata_store
+    response = client.get("/topics", headers={"Accept": "foo"})
 
     # Assertions
     assert response.status_code == status.HTTP_406_NOT_ACCEPTABLE
-    mock_metadata_store.get_datasets.assert_not_called()
+    mock_metadata_store.get_topics.assert_not_called()
