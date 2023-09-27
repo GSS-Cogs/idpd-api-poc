@@ -1,0 +1,22 @@
+{
+    "items": [
+        {
+            "id": "publisher1",
+            "foo": "foo",
+            "bar": "bar",
+            "baz": "baz"
+        },
+        {
+            "id": "publisher2",
+            "foo": "foo",
+            "bar": "bar",
+            "baz": "baz"
+        },
+        {
+            "id": "publisher3",
+            "foo": "foo",
+            "bar": "bar",
+            "baz": "baz"
+        }
+    ]
+}
