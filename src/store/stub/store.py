@@ -46,7 +46,7 @@ class StubStore(BaseStore):
         return self.themes
 
 
-class StubCsvStore(BaseCsvStore):
+class StubMetadataStore(BaseCsvStore):
     """
     A stub of a store that returns representative csv from
     files stored on disk.
@@ -65,5 +65,6 @@ class StubCsvStore(BaseCsvStore):
         with open(Path(content_dir / "dummy3.csv").absolute()) as f:
             self.datasets["dummy3"] = csv.reader(f)
 
-    def get_csv(self, id: str):
-        return self.datasets[id]
+    def get_csv(self, dataset_id: str, edition_id: str, version_id: str):
+        adress = f"{dataset_id}/{edition_id}/{version_id}"
+        return self.datasets[adress]

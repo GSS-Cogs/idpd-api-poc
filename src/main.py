@@ -6,7 +6,7 @@ from fastapi import FastAPI, Request, Response, status
 from fastapi.responses import FileResponse
 
 from constants import JSONLD
-from store import StubStore, StubCsvStore
+from store import StubStore, StubMetadataStore
 
 # Simple env var flag to allow local browsing of api responses
 # while developing.
@@ -16,7 +16,7 @@ BROWSABLE = os.environ.get("LOCAL_BROWSE_API")
 # This is an interim measure to allow us to stub out endpoints
 # and target implement them one at a time.
 stub_metadata_store = StubStore()
-stub_csv_store = StubCsvStore()
+stub_csv_store = StubMetadataStore()
 app = FastAPI()
 app.state.stores = {
     "datasets_metadata": stub_metadata_store,
@@ -104,10 +104,8 @@ def topic_by_id(request: Request, response: Response, id: str):
 
 
 """not for included in pr, but to include in prdescrition"""
-@app.get("/csv/{id}", response_class=FileResponse)
-def get_csv(id: str):
-    #data = csv_store.get_csv(id)
-    #csv_store = app.state.stores["dataset_csv"]
-    the_id =os.getcwd() + "/src//store/stub/csv/" + id
+@app.get("/csv/{dataset_id}/{edition_id}/{version_id}", response_class=FileResponse)
+def get_csv(dataset_id: str, edition_id: str, version_id: str):
+    the_id =os.getcwd() + "/src//store/stub/csv/" + dataset_id + "/" + edition_id + "/" + version_id 
     the_file_path = Path(the_id + ".csv")
     return FileResponse(the_file_path)
