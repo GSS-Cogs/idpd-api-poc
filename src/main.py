@@ -1,10 +1,11 @@
 import os
 
-from fastapi import FastAPI, Request, Response, status
+from fastapi import FastAPI, Request, Response, status 
 
 from constants import JSONLD
 from store import StubStore
 
+from src import schemas
 # Simple env var flag to allow local browsing of api responses
 # while developing.
 BROWSABLE = os.environ.get("LOCAL_BROWSE_API")
@@ -24,7 +25,7 @@ app.state.stores = {
 }
 
 
-@app.get("/datasets")
+@app.get("/datasets", response_model=schemas.Datasets)
 def datasets(request: Request, response: Response):
     metadata_store = app.state.stores["datasets_metadata"]
     if request.headers['Accept'] == JSONLD or BROWSABLE:
@@ -34,14 +35,16 @@ def datasets(request: Request, response: Response):
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
 
-@app.get("/datasets/{id}")
+@app.get("/datasets/{id}", response_model=schemas.Dataset)
 def dataset_by_id(request: Request, response: Response, id: str):
     metadata_store = app.state.stores["dataset_metadata"]
     if request.headers['Accept'] == JSONLD or BROWSABLE:
         datasets = metadata_store.get_dataset_by_id(id)
         if len(datasets) == 1:
             response.status_code = status.HTTP_200_OK
+            
             return datasets[0]
+        
         else:
             response.status_code = status.HTTP_404_NOT_FOUND
             return
