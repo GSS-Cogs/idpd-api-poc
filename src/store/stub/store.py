@@ -6,6 +6,11 @@ from typing import List
 from fastapi.responses import FileResponse
 from store.base import BaseStore, BaseCsvStore
 
+from pathlib import Path
+from typing import List
+
+from store.base import BaseStore
+
 class StubStore(BaseStore):
     """
     A stub of a store that returns representative metadata from
@@ -69,3 +74,4 @@ class StubMetadataStore(BaseCsvStore):
     def get_version(self, dataset_id: str, edition_id: str, version_id: str):
         adress = f"{dataset_id}/{edition_id}/{version_id}"
         return FileResponse(self.datasets[adress])
+
