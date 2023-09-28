@@ -6,7 +6,7 @@ from pathlib import Path
 from fastapi import FastAPI, Request, Response, status
 
 from constants import JSONLD
-from store import StubStore, StubMetadataStore
+from store import StubMetadataStore, StubCsvStore
 
 # Simple env var flag to allow local browsing of api responses
 # while developing.
@@ -15,15 +15,15 @@ BROWSABLE = os.environ.get("LOCAL_BROWSE_API")
 # Mapping specific store implementations to specific endpoints.
 # This is an interim measure to allow us to stub out endpoints
 # and target implement them one at a time.
-stub_metadata_store = StubStore()
-stub_csv_store = StubMetadataStore()
+stub_metadata_store = StubMetadataStore()
+stub_csv_store = StubCsvStore()
 
 app = FastAPI()
 app.state.stores = {
     "datasets_metadata": stub_metadata_store,
     "dataset_metadata": stub_metadata_store,
-    "themes_metadata": stub_metadata_store,
-    "theme_metadata": stub_metadata_store,
+    "topics_metadata": stub_metadata_store,
+    "topic_metadata": stub_metadata_store,
     "publishers_metadata": stub_metadata_store,
     "publisher_metadata": stub_metadata_store,
     "version_csv": stub_csv_store
@@ -108,3 +108,11 @@ def topic(request: Request, response: Response, id: str):
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
+
+
+"""not for included in pr, but to include in prdescrition"""
+@app.get("/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}")
+def get_verion(dataset_id: str, edition_id: str, version_id: str, request: Request, response: Response):
+    csv_store = app.state.stores["version_csv"]
+    data = csv_store.get_version(dataset_id, edition_id, version_id)
+    return data

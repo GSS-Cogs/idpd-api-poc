@@ -4,14 +4,9 @@ from pathlib import Path
 from typing import List
 
 from fastapi.responses import FileResponse
+
 from store.base import BaseStore, BaseCsvStore
-
-from pathlib import Path
-from typing import List
-
-from store.base import BaseStore
-
-class StubStore(BaseStore):
+class StubMetadataStore(BaseStore):
     """
     A stub of a store that returns representative metadata from
     files stored on disk.
@@ -31,7 +26,7 @@ class StubStore(BaseStore):
             self.publishers = json.load(f)
 
         with open(Path(content_dir / "topics.json").absolute()) as f:
-            self.themes = json.load(f)
+            self.topics = json.load(f)
 
     def get_dataset_by_id(self, id: str) -> List[dict]:
         return [x for x in self.datasets["items"] if x["id"] == id]
@@ -40,7 +35,7 @@ class StubStore(BaseStore):
         return [x for x in self.publishers["items"] if x["id"] == id]
     
     def get_topic_by_id(self, id: str) -> List[dict]:
-        return [x for x in self.themes["items"] if x["id"] == id]
+        return [x for x in self.topics["items"] if x["id"] == id]
     
     def get_datasets(self) -> dict:
         return self.datasets
@@ -49,10 +44,10 @@ class StubStore(BaseStore):
         return self.publishers
     
     def get_topics(self) -> dict:
-        return self.themes
+        return self.topics
 
 
-class StubMetadataStore(BaseCsvStore):
+class StubCsvStore(BaseCsvStore):
     """
     A stub of a store that returns representative csv from
     files stored on disk.
@@ -62,14 +57,14 @@ class StubMetadataStore(BaseCsvStore):
 
         content_dir = Path(Path(__file__).parent / "csv/cipd/2022-3")
 
-        with open(Path(content_dir / "dataset.csv").absolute()) as f:
-            self.datasets["dataset"] = csv.reader(f)
+        with open(Path(content_dir / "1.csv").absolute()) as f:
+            self.datasets["cipd/2022-3/1"] = csv.reader(f)
         
-        with open(Path(content_dir / "dummy2.csv").absolute()) as f:
-            self.datasets["dummy2"] = csv.reader(f)
+        with open(Path(content_dir / "2.csv").absolute()) as f:
+            self.datasets["cipd/2022-3/2"] = csv.reader(f)
 
-        with open(Path(content_dir / "dummy3.csv").absolute()) as f:
-            self.datasets["dummy3"] = csv.reader(f)
+        with open(Path(content_dir / "3.csv").absolute()) as f:
+            self.datasets["cipd/2022-3/3"] = csv.reader(f)
 
     def get_version(self, dataset_id: str, edition_id: str, version_id: str):
         adress = f"{dataset_id}/{edition_id}/{version_id}"
