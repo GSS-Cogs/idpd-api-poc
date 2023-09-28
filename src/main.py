@@ -38,7 +38,7 @@ def datasets(request: Request, response: Response):
 def dataset_by_id(request: Request, response: Response, id: str):
     metadata_store = app.state.stores["dataset_metadata"]
     if request.headers['Accept'] == JSONLD or BROWSABLE:
-        datasets = metadata_store.get_dataset_by_id(id)
+        datasets = metadata_store.get_dataset(id)
         if len(datasets) == 1:
             response.status_code = status.HTTP_200_OK
             return datasets[0]
@@ -63,7 +63,7 @@ def publishers(request: Request, response: Response):
 def publisher_by_id(request: Request, response: Response, id: str):
     metadata_store = app.state.stores["publisher_metadata"]
     if request.headers['Accept'] == JSONLD or BROWSABLE:
-        publishers = metadata_store.get_publisher_by_id(id)
+        publishers = metadata_store.get_publisher(id)
         if len(publishers) == 1:
             response.status_code = status.HTTP_200_OK
             return publishers[0]
@@ -87,7 +87,7 @@ def topics(request: Request, response: Response):
 def topic_by_id(request: Request, response: Response, id: str):
     metadata_store = app.state.stores["topic_metadata"]
     if request.headers['Accept'] == JSONLD or BROWSABLE:
-        themes = metadata_store.get_topic_by_id(id)
+        themes = metadata_store.get_topic(id)
         if len(themes) == 1:
             response.status_code = status.HTTP_200_OK
             return themes[0]

@@ -24,16 +24,16 @@ class StubStore(BaseStore):
             self.publishers = json.load(f)
 
         with open(Path(content_dir / "topics.json").absolute()) as f:
-            self.themes = json.load(f)
+            self.topics = json.load(f)
 
-    def get_dataset_by_id(self, id: str) -> List[dict]:
-        return [x for x in self.datasets["items"] if x["id"] == id]
+    def get_dataset(self, id: str) -> List[dict]:
+        return [x for x in self.datasets["items"] if x["identifier"] == id]
 
-    def get_publisher_by_id(self, id: str) -> List[dict]:
-        return [x for x in self.publishers["items"] if x["id"] == id]
+    def get_publisher(self, id: str) -> List[dict]:
+        return [x for x in self.publishers["items"] if x["identifier"] == id]
     
-    def get_topic_by_id(self, id: str) -> List[dict]:
-        return [x for x in self.themes["items"] if x["id"] == id]
+    def get_topic(self, id: str) -> List[dict]:
+        return [x for x in self.topics["items"] if x["identifier"] == id]
     
     def get_datasets(self) -> dict:
         return self.datasets
@@ -42,4 +42,4 @@ class StubStore(BaseStore):
         return self.publishers
     
     def get_topics(self) -> dict:
-        return self.themes
+        return self.topics
