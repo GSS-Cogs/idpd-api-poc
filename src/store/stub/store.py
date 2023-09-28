@@ -3,6 +3,7 @@ import csv
 from pathlib import Path
 from typing import List
 
+from fastapi.responses import FileResponse
 from store.base import BaseStore, BaseCsvStore
 
 class StubStore(BaseStore):
@@ -54,7 +55,7 @@ class StubMetadataStore(BaseCsvStore):
     def setup(self):
         self.datasets = {}
 
-        content_dir = Path(Path(__file__).parent / "csv")
+        content_dir = Path(Path(__file__).parent / "csv/cipd/2022-3")
 
         with open(Path(content_dir / "dataset.csv").absolute()) as f:
             self.datasets["dataset"] = csv.reader(f)
@@ -65,6 +66,6 @@ class StubMetadataStore(BaseCsvStore):
         with open(Path(content_dir / "dummy3.csv").absolute()) as f:
             self.datasets["dummy3"] = csv.reader(f)
 
-    def get_csv(self, dataset_id: str, edition_id: str, version_id: str):
+    def get_version(self, dataset_id: str, edition_id: str, version_id: str):
         adress = f"{dataset_id}/{edition_id}/{version_id}"
-        return self.datasets[adress]
+        return FileResponse(self.datasets[adress])

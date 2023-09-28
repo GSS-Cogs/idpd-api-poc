@@ -3,7 +3,6 @@ import os
 
 from pathlib import Path
 from fastapi import FastAPI, Request, Response, status
-from fastapi.responses import FileResponse
 
 from constants import JSONLD
 from store import StubStore, StubMetadataStore
@@ -25,7 +24,7 @@ app.state.stores = {
     "theme_metadata": stub_metadata_store,
     "publishers_metadata": stub_metadata_store,
     "publisher_metadata": stub_metadata_store,
-    "dataset_csv": stub_csv_store
+    "version_csv": stub_csv_store
 }
 
 
@@ -104,8 +103,8 @@ def topic_by_id(request: Request, response: Response, id: str):
 
 
 """not for included in pr, but to include in prdescrition"""
-@app.get("/csv/{dataset_id}/{edition_id}/{version_id}", response_class=FileResponse)
+@app.get("/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}")
 def get_csv(dataset_id: str, edition_id: str, version_id: str):
-    the_id =os.getcwd() + "/src//store/stub/csv/" + dataset_id + "/" + edition_id + "/" + version_id 
-    the_file_path = Path(the_id + ".csv")
-    return FileResponse(the_file_path)
+    csv_store = app.state.stores["version_csv"]
+    data = csv_store.get_version(dataset_id, edition_id, version_id)
+    return data

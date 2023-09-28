@@ -24,5 +24,5 @@ class BaseCsvStore(ABC):
         ...
     
     @abstractmethod
-    def get_csv(self, id: str):
+    def get_version(self, dataset_id: str, edition_id: str, version_id: str):
         ...
