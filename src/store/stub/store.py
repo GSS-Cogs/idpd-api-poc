@@ -1,8 +1,9 @@
 import json
+import csv
 from pathlib import Path
 from typing import List
 
-from store.base import BaseStore
+from store.base import BaseStore, BaseCsvStore
 
 class StubStore(BaseStore):
     """
@@ -43,3 +44,26 @@ class StubStore(BaseStore):
     
     def get_topics(self) -> dict:
         return self.themes
+
+
+class StubCsvStore(BaseCsvStore):
+    """
+    A stub of a store that returns representative csv from
+    files stored on disk.
+    """
+    def setup(self):
+        self.datasets = {}
+
+        content_dir = Path(Path(__file__).parent / "csv")
+
+        with open(Path(content_dir / "dataset.csv").absolute()) as f:
+            self.datasets["dataset"] = csv.reader(f)
+        
+        with open(Path(content_dir / "dummy2.csv").absolute()) as f:
+            self.datasets["dummy2"] = csv.reader(f)
+
+        with open(Path(content_dir / "dummy3.csv").absolute()) as f:
+            self.datasets["dummy3"] = csv.reader(f)
+
+    def get_csv(self, id: str):
+        return self.datasets[id]
