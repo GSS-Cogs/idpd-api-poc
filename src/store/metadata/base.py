@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-class BaseStore(ABC):
+
+class BaseMetadataStore(ABC):
 
     # Every client runs the setup method
     def __init__(self):

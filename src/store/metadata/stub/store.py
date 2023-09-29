@@ -2,9 +2,9 @@ import json
 from pathlib import Path
 from typing import List
 
-from store.base import BaseStore
+from ..base import BaseMetadataStore
 
-class StubStore(BaseStore):
+class StubMetadataStore(BaseMetadataStore):
     """
     A stub of a store that returns representative metadata from
     files stored on disk.
