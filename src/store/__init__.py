@@ -1,2 +1,3 @@
-from .stub.store import StubStore
-from .sparql.store import SparqlStore
+from .csv.stub.store import StubCsvStore
+from .metadata.stub.store import StubMetadataStore
+from .metadata.sparql.store import SparqlStore

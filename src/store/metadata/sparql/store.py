@@ -1,8 +1,10 @@
-from store.base import BaseStore
 import os
+
 from SPARQLWrapper import SPARQLWrapper, JSON, QueryResult
 
-class SparqlStore(BaseStore):
+from ..base import BaseMetadataStore
+
+class SparqlStore(BaseMetadataStore):
 
     #seting up the self.url
     def setup(self):
