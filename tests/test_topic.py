@@ -40,14 +40,10 @@ def test_topic_200():
 
 def test_topic_404():
     """
-    <<<<<<< HEAD
-        Confirm that the store.get_topics_by_id() method is not
-    =======
-        Confirm that the store.get_topic() method is not
-    >>>>>>> main
-        called where an "accept: application/json+ld"
-        header is not provided. Status code 406 should be
-        returned.
+    Confirm that the store.get_topic() method is not
+    called where an "accept: application/json+ld"
+    header is not provided. Status code 406 should be
+    returned.
     """
 
     # Create a mock store with a callable mocked get_topics_by_id() method
@@ -67,14 +63,10 @@ def test_topic_404():
 
 def test_topic_406():
     """
-    <<<<<<< HEAD
-        Confirm that the store.get_topics_by_id() method is not
-    =======
-        Confirm that the store.get_topic() method is not
-    >>>>>>> main
-        called where an "accept: application/json+ld"
-        header is not provided. Status code 406 should be
-        returned.
+    Confirm that the store.get_topic() method is not
+    called where an "accept: application/json+ld"
+    header is not provided. Status code 406 should be
+    returned.
     """
 
     # Create a mock store with a callable mocked get_topics_by_id() method
