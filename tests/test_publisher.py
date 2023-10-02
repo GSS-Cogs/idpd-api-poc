@@ -3,9 +3,8 @@ from unittest.mock import MagicMock
 from fastapi import status
 from fastapi.testclient import TestClient
 
-from main import app
 from constants import JSONLD
-
+from main import app
 
 # Devnotes:
 
@@ -15,9 +14,10 @@ from constants import JSONLD
 # We should NOT care what the stores actually do - that's
 # what the /store tests are for, so we mock a store.
 
-def test_publisher_by_id_200():
+
+def test_publisher_200():
     """
-    Confirm that the store.get_publishers_by_id() method is
+    Confirm that the store.get_publisher() method is
     called where an "accept: application/json+ld"
     header is provided and status code 200 is returned.
     """
@@ -25,7 +25,7 @@ def test_publisher_by_id_200():
     # Create a mock store with a callable mocked get_publishers_by_id() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
-    mock_metadata_store.get_publisher_by_id = MagicMock(return_value=["foo"])
+    mock_metadata_store.get_publisher = MagicMock(return_value=["foo"])
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
@@ -35,12 +35,12 @@ def test_publisher_by_id_200():
     # Assertions
     assert response.json() == "foo"
     assert response.status_code == status.HTTP_200_OK
-    mock_metadata_store.get_publisher_by_id.assert_called_once()
+    mock_metadata_store.get_publisher.assert_called_once()
 
 
-def test_publisher_by_id_404():
+def test_publisher_404():
     """
-    Confirm that the store.get_publishers_by_id() method is not
+    Confirm that the store.get_publisher() method is not
     called where an "accept: application/json+ld"
     header is not provided. Status code 406 should be
     returned.
@@ -49,8 +49,8 @@ def test_publisher_by_id_404():
     # Create a mock store with a callable mocked get_publishers_by_id() method
     mock_metadata_store = MagicMock()
     # Note: returning an empty list to simulate "id is not found"
-    mock_metadata_store.get_publisher_by_id = MagicMock(return_value=[])
-    
+    mock_metadata_store.get_publisher = MagicMock(return_value=[])
+
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     app.state.stores["publisher_metadata"] = mock_metadata_store
@@ -58,12 +58,12 @@ def test_publisher_by_id_404():
 
     # Assertions
     assert response.status_code == status.HTTP_404_NOT_FOUND
-    mock_metadata_store.get_publisher_by_id.assert_called_once()
+    mock_metadata_store.get_publisher.assert_called_once()
 
 
 def test_publisher_by_id_406():
     """
-    Confirm that the store.get_publishers_by_id() method is not
+    Confirm that the store.get_publisher() method is not
     called where an "accept: application/json+ld"
     header is not provided. Status code 406 should be
     returned.
@@ -72,8 +72,8 @@ def test_publisher_by_id_406():
     # Create a mock store with a callable mocked get_publishers_by_id() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
-    mock_metadata_store.get_publisher_by_id = MagicMock(return_value=["foo"])
-    
+    mock_metadata_store.get_publisher = MagicMock(return_value=["foo"])
+
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     app.state.stores["publisher_metadata"] = mock_metadata_store
@@ -81,4 +81,4 @@ def test_publisher_by_id_406():
 
     # Assertions
     assert response.status_code == status.HTTP_406_NOT_ACCEPTABLE
-    mock_metadata_store.get_publisher_by_id.assert_not_called()
+    mock_metadata_store.get_publisher.assert_not_called()
