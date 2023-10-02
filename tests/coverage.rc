@@ -1,0 +1,4 @@
+[run]
+omit =
+    src/store/csv/stub/*
+    src/store/metadata/stub/*

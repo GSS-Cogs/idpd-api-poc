@@ -8,10 +8,14 @@ SPARQLWrapper = "*"
 fastapi = "*"
 uvicorn = "*"
 httpx = "*"
+ruff = "*"
 
 [dev-packages]
 pytest = "*"
 pytest-vcr = "*"
+black = "*"
+isort = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.9"

@@ -3,9 +3,8 @@ from unittest.mock import MagicMock
 from fastapi import status
 from fastapi.testclient import TestClient
 
-from main import app
 from constants import JSONLD
-
+from main import app
 
 # Devnotes:
 
@@ -15,6 +14,7 @@ from constants import JSONLD
 # We should NOT care what the stores actually do - that's
 # what the /store tests are for, so we mock a store.
 
+
 def test_dataset_200():
     """
     Confirm that the store.get_dataset() method is
@@ -22,7 +22,7 @@ def test_dataset_200():
     header is provided and status code 200 is returned.
     """
 
-    # Create a mock store with a callable mocked get_datasets_by_id() method
+    # Create a mock store with a callable mocked get_dataset() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_dataset = MagicMock(return_value=["foo"])
@@ -38,7 +38,7 @@ def test_dataset_200():
     mock_metadata_store.get_dataset.assert_called_once()
 
 
-def test_dataset_by_id_404():
+def test_dataset_404():
     """
     Confirm that the store.get_dataset() method is not
     called where an "accept: application/json+ld"
@@ -46,11 +46,11 @@ def test_dataset_by_id_404():
     returned.
     """
 
-    # Create a mock store with a callable mocked get_datasets_by_id() method
+    # Create a mock store with a callable mocked get_dataset() method
     mock_metadata_store = MagicMock()
     # Note: returning an empty list to simulate "id is not found"
     mock_metadata_store.get_dataset = MagicMock(return_value=[])
-    
+
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     app.state.stores["dataset_metadata"] = mock_metadata_store
@@ -61,7 +61,7 @@ def test_dataset_by_id_404():
     mock_metadata_store.get_dataset.assert_called_once()
 
 
-def test_dataset_by_id_406():
+def test_dataset_406():
     """
     Confirm that the store.get_dataset() method is not
     called where an "accept: application/json+ld"
@@ -69,11 +69,11 @@ def test_dataset_by_id_406():
     returned.
     """
 
-    # Create a mock store with a callable mocked get_datasets_by_id() method
+    # Create a mock store with a callable mocked get_dataset() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_dataset = MagicMock(return_value=["foo"])
-    
+
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     app.state.stores["dataset_metadata"] = mock_metadata_store
