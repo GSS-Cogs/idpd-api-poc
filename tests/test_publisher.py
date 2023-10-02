@@ -3,9 +3,8 @@ from unittest.mock import MagicMock
 from fastapi import status
 from fastapi.testclient import TestClient
 
-from main import app
 from constants import JSONLD
-
+from main import app
 
 # Devnotes:
 
@@ -14,6 +13,7 @@ from constants import JSONLD
 # status codes being returned.
 # We should NOT care what the stores actually do - that's
 # what the /store tests are for, so we mock a store.
+
 
 def test_publisher_200():
     """
@@ -50,7 +50,7 @@ def test_publisher_404():
     mock_metadata_store = MagicMock()
     # Note: returning an empty list to simulate "id is not found"
     mock_metadata_store.get_publisher = MagicMock(return_value=[])
-    
+
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     app.state.stores["publisher_metadata"] = mock_metadata_store
@@ -73,7 +73,7 @@ def test_publisher_by_id_406():
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_publisher = MagicMock(return_value=["foo"])
-    
+
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     app.state.stores["publisher_metadata"] = mock_metadata_store

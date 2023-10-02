@@ -4,8 +4,6 @@ from fastapi import status
 from fastapi.testclient import TestClient
 
 from main import app
-from constants import JSONLD
-
 
 # Devnotes:
 
@@ -15,10 +13,11 @@ from constants import JSONLD
 # We should NOT care what the stores actually do - that's
 # what the /store tests are for, so we mock a store.
 
+
 def test_version_csv_200():
     """
     Confirm that the csv_store.get_version() method is
-    called exactly once and we get a 200 status code 
+    called exactly once and we get a 200 status code
     where it does not return None.
     """
 
@@ -40,7 +39,7 @@ def test_version_csv_200():
 def test_version_csv_404():
     """
     Confirm that the csv_store.get_version() method is
-    called exactly once and we get a 404 status code 
+    called exactly once and we get a 404 status code
     where it returns None.
     """
 

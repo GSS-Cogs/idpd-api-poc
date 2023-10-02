@@ -4,6 +4,7 @@ from typing import List
 
 from ..base import BaseMetadataStore
 
+
 class StubMetadataStore(BaseMetadataStore):
     """
     A stub of a store that returns representative metadata from
@@ -31,15 +32,15 @@ class StubMetadataStore(BaseMetadataStore):
 
     def get_publisher(self, id: str) -> List[dict]:
         return [x for x in self.publishers["items"] if x["identifier"] == id]
-    
+
     def get_topic(self, id: str) -> List[dict]:
         return [x for x in self.topics["items"] if x["identifier"] == id]
-    
+
     def get_datasets(self) -> dict:
         return self.datasets
 
     def get_publishers(self) -> dict:
         return self.publishers
-    
+
     def get_topics(self) -> dict:
         return self.topics
