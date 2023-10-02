@@ -1,7 +1,7 @@
 import os
 from typing import List, Optional
 
-from fastapi import FastAPI, Request, Response, status 
+from fastapi import FastAPI, Request, Response, status
 
 from constants import JSONLD
 from store import StubCsvStore, StubMetadataStore
@@ -42,7 +42,12 @@ def datasets(request: Request, response: Response):
 
 
 @app.get("/datasets/{id}")
-def dataset(request: Request, response: Response, id: str, response_model=Optional[schemas.Dataset]):
+def dataset(
+    request: Request,
+    response: Response,
+    id: str,
+    response_model=Optional[schemas.Dataset],
+):
     metadata_store = app.state.stores["dataset_metadata"]
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         datasets = metadata_store.get_dataset(id)

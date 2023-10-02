@@ -1,11 +1,6 @@
 """
 This module defines the pydantic models for the API. The schemas are used to
-validate the data sent to the API and to define the structure of the data
-returned by the API.
-
-For each model there is typically a response model and a "Create" model, e.g.
-`Dataset` and `Dataset`. The create models define the structure of data
-we expect the user to pass to the API.
+validate the structure of the data returned by the API.
 """
 
 from enum import Enum
@@ -36,7 +31,7 @@ class Frequency(Enum):
 class ContactPoint(BaseModel):
     name: str
     email: str = Field(pattern=r"^mailto:[\w\.-]+@[\w\.-]+\.\w{2,}$")
-    telephone: Union[str,None] = Field(default=None)
+    telephone: Union[str, None] = Field(default=None)
 
 
 class PeriodOfTime(BaseModel):
@@ -46,9 +41,6 @@ class PeriodOfTime(BaseModel):
     end: str = Field(
         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",
     )
-
-
-
 
 
 # If we wanted to provide the ability to attach arbitrary RDF we might want to
@@ -70,7 +62,7 @@ class Dataset(BaseModel):
     publisher: str
     creator: str
     contact_point: ContactPoint
-    theme: Union[str,List[str]]
+    theme: Union[str, List[str]]
     frequency: Frequency
     keywords: list[str]
     licence: str
@@ -80,7 +72,6 @@ class Dataset(BaseModel):
 
 
 class Datasets(BaseModel):
-
     items: List[Dataset]
     offset: int
     count: int

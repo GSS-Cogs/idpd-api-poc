@@ -22,24 +22,28 @@ from fixtures.data import get_datasets_json
 
 ENDPOINT_URL = "/datasets"
 
+
 # Mock data representing the expected response structure for /datasets
 @pytest.fixture
-def expected_datasets_response_data(): 
+def expected_datasets_response_data():
     return get_datasets_json()
+
 
 def test_datasets_jsonld_valid_structure_200(expected_datasets_response_data):
     """
     Confirm that where an "accept: application/json+ld"
     is provided and the response from the store is of
     the correct structure:
-    
+
     - status code 200 is returned
     - the metadata store is called once.
     """
 
     # Create a mock store with a callable mocked get_datasets() method
     mock_metadata_store = MagicMock()
-    mock_metadata_store.get_datasets = MagicMock(return_value=expected_datasets_response_data)
+    mock_metadata_store.get_datasets = MagicMock(
+        return_value=expected_datasets_response_data
+    )
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
@@ -56,7 +60,7 @@ def test_datasets_invalid_structure_raises_returns_500():
     Confirm that where an "accept: application/json+ld"
     is provided but the response from the store is of
     the incorrect structure then:
-    
+
     - status code 500 is returned
     - the metadata store is called once
     - an appropriate server side error is raised
