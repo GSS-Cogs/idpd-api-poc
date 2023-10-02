@@ -5,7 +5,7 @@ from fastapi import FastAPI, Request, Response, status
 from constants import JSONLD
 from store import StubStore
 
-from src import schemas
+import schemas
 # Simple env var flag to allow local browsing of api responses
 # while developing.
 BROWSABLE = os.environ.get("LOCAL_BROWSE_API")
