@@ -28,13 +28,18 @@ class StubMetadataStore(BaseMetadataStore):
             self.topics = json.load(f)
 
     def get_dataset(self, id: str) -> List[dict]:
-        return [x for x in self.datasets["items"] if x["identifier"] == id]
+        datasets = [x for x in self.datasets["items"] if x["identifier"] == id]
+        if len(datasets) == 1:
+            return datasets[0]
+        return None
 
     def get_publisher(self, id: str) -> List[dict]:
-        return [x for x in self.publishers["items"] if x["identifier"] == id]
+        publishers = [x for x in self.publishers["items"] if x["identifier"] == id]
+        return publishers[0] if len(publishers) == 1 else None
 
     def get_topic(self, id: str) -> List[dict]:
-        return [x for x in self.topics["items"] if x["identifier"] == id]
+        topics = [x for x in self.topics["items"] if x["identifier"] == id]
+        return topics[0] if len(topics) == 1 else None 
 
     def get_datasets(self) -> dict:
         return self.datasets

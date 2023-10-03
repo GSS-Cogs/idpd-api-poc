@@ -25,7 +25,7 @@ def test_topic_200():
     # Create a mock store with a callable mocked get_topics_by_id() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
-    mock_metadata_store.get_topic = MagicMock(return_value=["foo"])
+    mock_metadata_store.get_topic = MagicMock(return_value="foo")
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
@@ -42,14 +42,15 @@ def test_topic_404():
     """
     Confirm that the store.get_topic() method is not
     called where an "accept: application/json+ld"
-    header is not provided. Status code 406 should be
+    header is provided but no topic exists for the
+    id in question. Status code 404 should be
     returned.
     """
 
     # Create a mock store with a callable mocked get_topics_by_id() method
     mock_metadata_store = MagicMock()
-    # Note: returning an empty list to simulate "id is not found"
-    mock_metadata_store.get_topic = MagicMock(return_value=[])
+    # Note: returning None to simulate "id is not found"
+    mock_metadata_store.get_topic = MagicMock(return_value=None)
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)

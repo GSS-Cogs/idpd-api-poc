@@ -50,10 +50,10 @@ def dataset(
 ):
     metadata_store = app.state.stores["dataset_metadata"]
     if request.headers["Accept"] == JSONLD or BROWSABLE:
-        datasets = metadata_store.get_dataset(id)
-        if len(datasets) == 1:
+        dataset = metadata_store.get_dataset(id)
+        if dataset is not None:
             response.status_code = status.HTTP_200_OK
-            return datasets[0]
+            return dataset
         else:
             response.status_code = status.HTTP_404_NOT_FOUND
             return
@@ -77,10 +77,10 @@ def publishers(request: Request, response: Response):
 def publisher(request: Request, response: Response, id: str):
     metadata_store = app.state.stores["publisher_metadata"]
     if request.headers["Accept"] == JSONLD or BROWSABLE:
-        publishers = metadata_store.get_publisher(id)
-        if len(publishers) == 1:
+        publisher = metadata_store.get_publisher(id)
+        if publisher is not None:
             response.status_code = status.HTTP_200_OK
-            return publishers[0]
+            return publisher
         response.status_code = status.HTTP_404_NOT_FOUND
         return
     else:
@@ -103,10 +103,10 @@ def topics(request: Request, response: Response):
 def topic(request: Request, response: Response, id: str):
     metadata_store = app.state.stores["topic_metadata"]
     if request.headers["Accept"] == JSONLD or BROWSABLE:
-        topics = metadata_store.get_topic(id)
-        if len(topics) == 1:
+        topic = metadata_store.get_topic(id)
+        if topic is not None:
             response.status_code = status.HTTP_200_OK
-            return topics[0]
+            return topic
         response.status_code = status.HTTP_404_NOT_FOUND
         return
     else:
