@@ -41,12 +41,11 @@ def datasets(request: Request, response: Response):
         return
 
 
-@app.get("/datasets/{id}")
+@app.get("/datasets/{id}",response_model=Optional[schemas.Dataset])
 def dataset(
     request: Request,
     response: Response,
     id: str,
-    response_model=Optional[schemas.Dataset],
 ):
     metadata_store = app.state.stores["dataset_metadata"]
     if request.headers["Accept"] == JSONLD or BROWSABLE:
