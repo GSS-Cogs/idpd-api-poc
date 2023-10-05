@@ -39,11 +39,8 @@ class StubMetadataStore(BaseMetadataStore):
     def get_topic(self, id: str) -> List[dict]:
         return [x for x in self.topics["items"] if x["identifier"] == id]
 
-    def get_edition(self, id: str):
-        if self.details["in_series"].endswith(id) :
-            return self.details["in_series"]
-        else:
-            return None
+    def get_edition(self, id: str)-> List[dict]:
+        return [x for x in self.details["items"] if x["items"]["in_series"].endswith(id)]
         
     def get_datasets(self) -> dict:
         return self.datasets

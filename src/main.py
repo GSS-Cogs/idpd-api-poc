@@ -125,14 +125,13 @@ def version(
         response.status_code = status.HTTP_404_NOT_FOUND
         return
 
-@app.get("/datasets/{edition_id}editions")
+@app.get("/datasets/{edition_id}/editions")
 def edition(
     request: Request,
     response: Response,
-    edition_id: str 
+    edition_id: str,
 ):
-    #so call dataset and look for the item containing the "https://data.ons.gov.uk/datasets/{id}"
-    csv_store = app.state.stores["get_data"]
+    csv_store = app.state.stores["edition_metadata"]
     data = csv_store.get_edition(edition_id)
 
     if data is not None:
@@ -140,3 +139,4 @@ def edition(
         return data
     else:
         response.status_code = status.HTTP_404_NOT_FOUND
+        return
