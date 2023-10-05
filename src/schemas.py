@@ -31,14 +31,12 @@ class Frequency(Enum):
 class ContactPoint(BaseModel):
     name: str
     email: str = Field(pattern=r"^mailto:[\w\.-]+@[\w\.-]+\.\w{2,}$")
-    telephone: Union[str, None] = Field(default=None)
-
 
 class PeriodOfTime(BaseModel):
-    start: str = Field(
+    start : str = Field(
         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",
     )
-    end: str = Field(
+    end : str = Field(
         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",
     )
 
@@ -50,13 +48,14 @@ class Dataset(BaseModel):
     id: str = Field(alias="@id")
     type: Literal["dcat:DatasetSeries"] = Field(alias="@type")
     identifier: str
-    title: str = Field(max_length=90)
+    # title: str = Field(max_length=90)
+    title: str = Field(..., max_length=90, min_length=1, error_message="Title is required")
     summary: str = Field(max_length=200)
     description: str = Field(max_length=250)
-    issued_date: str = Field(
+    release_date: str = Field(
         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
     )
-    next_release_date: str = Field(
+    next_release: str = Field(
         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",
     )
     publisher: str
@@ -68,7 +67,6 @@ class Dataset(BaseModel):
     licence: str
     spatial_coverage: str = Field(pattern=r"^[EJKLMNSW]{1}\d{8}$")
     temporal_coverage: PeriodOfTime
-    temporal_resolution: str = Field(pattern=r"^P(\d{1,2}Y)?(\d{1,2}M)?(\d{1,2}D)?$")
 
 
 class Datasets(BaseModel):
