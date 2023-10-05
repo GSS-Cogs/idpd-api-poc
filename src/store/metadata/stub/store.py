@@ -20,7 +20,8 @@ class StubMetadataStore(BaseMetadataStore):
 
         with open(Path(content_dir / "datasets.json").absolute()) as f:
             self.datasets = json.load(f)
-
+        with open(Path(content_dir / "editions.json").absolute()) as f:
+            self.edition = json.load(f)        
         with open(Path(content_dir / "publishers.json").absolute()) as f:
             self.publishers = json.load(f)
 
@@ -38,6 +39,10 @@ class StubMetadataStore(BaseMetadataStore):
     def get_topic(self, id: str) -> Optional[Dict]:
         topic = next((x for x in self.topics["items"] if x["identifier"] == id), None)
         return topic
+    
+    def get_edition(self, id: str) -> Optional[Dict]:
+        edition = next((x for x in self.editions["items"] if x["identifier"] == id), None)
+        return edition
 
     def get_datasets(self) -> Dict:
         return self.datasets
@@ -47,3 +52,6 @@ class StubMetadataStore(BaseMetadataStore):
 
     def get_topics(self) -> Dict:
         return self.topics
+    
+    def get_editions(self) -> Dict:
+        return self.editions

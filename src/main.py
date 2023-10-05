@@ -41,7 +41,7 @@ def datasets(request: Request, response: Response):
         return
 
 
-@app.get("/datasets/{id}",response_model=Optional[schemas.Dataset])
+@app.get("/datasets/{id}",response_model=Optional[schemas.Datasets])
 def dataset(
     request: Request,
     response: Response,
@@ -53,6 +53,37 @@ def dataset(
         if dataset is not None:
             response.status_code = status.HTTP_200_OK
             return dataset
+        else:
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return
+    else:
+        response.status_code = status.HTTP_406_NOT_ACCEPTABLE
+        return
+
+
+@app.get("/editions", response_model=list[schemas.Editions])
+def editions(request: Request, response: Response):
+    metadata_store = app.state.stores["editions_metadata"]
+    if request.headers["Accept"] == JSONLD or BROWSABLE:
+        response.status_code = status.HTTP_200_OK
+        return metadata_store.get_editions()
+    else:
+        response.status_code = status.HTTP_406_NOT_ACCEPTABLE
+        return
+
+
+@app.get("/editions/{id}", response_model=Optional[schemas.Editions])
+def edition(
+    request: Request,
+    response: Response,
+    id: str,
+):
+    metadata_store = app.state.stores["edition_metadata"]
+    if request.headers["Accept"] == JSONLD or BROWSABLE:
+        edition = metadata_store.get_edition(id)
+        if edition is not None:
+            response.status_code = status.HTTP_200_OK
+            return edition
         else:
             response.status_code = status.HTTP_404_NOT_FOUND
             return
