@@ -6,7 +6,7 @@ import pathlib
 from unittest.mock import MagicMock
 from fastapi import HTTPException, status
 from fastapi.testclient import TestClient
-from constants import JSONLD
+from constants import JSONLD 
 from main import app
 
 # Devnotes:
@@ -51,7 +51,7 @@ def test_dataset_valid_structure_200(expected_dataset_by_id_response_data):
 
 
 
-def test_dataset_invalid_structure_raises(expected_dataset_by_id_response_data):
+def test_dataset_invalid_structure_raises():
     """
     Confirm that the store.get_dataset(id) method is
     called where an "accept: application/json+ld"

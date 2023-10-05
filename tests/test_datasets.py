@@ -20,11 +20,9 @@ from constants import JSONLD
 # We should NOT care what the stores actually do - that's
 # what the /store tests are for, so we mock a store.
 
-
-# Mock data representing the expected response structure for /datasets
-
 endpoint_url = "/datasets"
 
+# Fixture to load expected dataset data from a JSON file
 @pytest.fixture
 def expected_datasets_response_data(): 
     file_path = pathlib.Path("src/store/metadata/stub/content/datasets.json")
