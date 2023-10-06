@@ -22,6 +22,8 @@ app = FastAPI()
 app.state.stores = {
     "datasets_metadata": stub_metadata_store,
     "dataset_metadata": stub_metadata_store,
+    "editions_metadata": stub_metadata_store,
+    "edition_metadata": stub_metadata_store,
     "topics_metadata": stub_metadata_store,
     "topic_metadata": stub_metadata_store,
     "publishers_metadata": stub_metadata_store,
@@ -61,7 +63,7 @@ def dataset(
         return
 
 
-@app.get("/editions", response_model=list[schemas.Editions])
+@app.get("/editions", response_model=Optional[schemas.Editions])
 def editions(request: Request, response: Response):
     metadata_store = app.state.stores["editions_metadata"]
     if request.headers["Accept"] == JSONLD or BROWSABLE:
@@ -76,7 +78,7 @@ def editions(request: Request, response: Response):
 def edition(
     request: Request,
     response: Response,
-    id: str,
+    id: str
 ):
     metadata_store = app.state.stores["edition_metadata"]
     if request.headers["Accept"] == JSONLD or BROWSABLE:

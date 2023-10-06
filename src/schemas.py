@@ -42,26 +42,19 @@ class PeriodOfTime(BaseModel):
 
 class Column(BaseModel):
     name: str
-    title: str
     datatype: str
+    titles: str
     description: str
 
 class TableSchema(BaseModel):
     columns: list[Column]
 
-class DistributionCreate(BaseModel):
+class Distribution(BaseModel):
     id: str = Field(alias="@id")
-    type: Literal["dcat:DatasetSeries"] = Field(alias="@type")
-    identifier: str
-    media_type: str
-    download_url: str
-
-
-class Distribution(DistributionCreate):
-    id: str = Field(alias="@id")
-    type: Literal["dcat:DatasetSeries"] = Field(alias="@type")
+    type: List[str] = Field(alias="@type")
     media_type: str
     table_schema: TableSchema
+
 
 # If we wanted to provide the ability to attach arbitrary RDF we might want to
 # look at https://github.com/pydantic/pydantic/discussions/5853
@@ -107,13 +100,13 @@ class Edition(BaseModel):
     publisher: str
     creator: str
     contact_point: ContactPoint
-    theme: Union[str, List[str]]
+    theme: str
     frequency: Frequency
     keywords: list[str]
     licence: str
     release_date: str = Field(pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$")
     spatial_coverage: str = Field(pattern=r"^[EJKLMNSW]{1}\d{8}$")
-    temporal_coverage: PeriodOfTime
+    temporal_coverage: str
     next_release: str = Field(pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",)
     distribution: Distribution
 

@@ -21,7 +21,7 @@ class StubMetadataStore(BaseMetadataStore):
         with open(Path(content_dir / "datasets.json").absolute()) as f:
             self.datasets = json.load(f)
         with open(Path(content_dir / "editions.json").absolute()) as f:
-            self.edition = json.load(f)        
+            self.editions = json.load(f)        
         with open(Path(content_dir / "publishers.json").absolute()) as f:
             self.publishers = json.load(f)
 

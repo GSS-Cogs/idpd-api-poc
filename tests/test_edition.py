@@ -25,7 +25,7 @@ endpoint_url = "/editions/some-id"
 def expected_edition_by_id_response_data():
     file_path = pathlib.Path("src/store/metadata/stub/content/editions.json")
     with open(file_path, 'r') as json_file:
-        return json.load(json_file)["items"][0]
+        return json.load(json_file)
 
 
 def test_edition_valid_structure_200(expected_edition_by_id_response_data):
