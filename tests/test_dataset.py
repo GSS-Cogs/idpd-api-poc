@@ -19,7 +19,7 @@ from main import app
 # what the /store tests are for, so we mock a store.
 # Mock data representing the expected response structure for /datasets/{id}
 
-ENDPOINT_URL = "/datasets/some-id"
+ENDPOINT = "/datasets/some-id"
 
 
 # Fixture to load expected dataset data from a JSON file
@@ -46,7 +46,7 @@ def test_dataset_valid_structure_200(expected_dataset_response_data):
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     app.state.stores["dataset_metadata"] = mock_metadata_store
-    response = client.get(ENDPOINT_URL, headers={"Accept": JSONLD})
+    response = client.get(ENDPOINT, headers={"Accept": JSONLD})
 
     assert response.status_code == status.HTTP_200_OK
     mock_metadata_store.get_dataset.assert_called_once()
@@ -72,7 +72,7 @@ def test_dataset_invalid_structure_raises():
     app.state.stores["dataset_metadata"] = mock_metadata_store
 
     with pytest.raises(ResponseValidationError):
-        client.get(ENDPOINT_URL, headers={"Accept": JSONLD})
+        client.get(ENDPOINT, headers={"Accept": JSONLD})
 
 
 def test_dataset_404():
@@ -91,7 +91,7 @@ def test_dataset_404():
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     app.state.stores["dataset_metadata"] = mock_metadata_store
-    response = client.get(ENDPOINT_URL, headers={"Accept": JSONLD})
+    response = client.get(ENDPOINT, headers={"Accept": JSONLD})
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
     mock_metadata_store.get_dataset.assert_called_once()
@@ -112,7 +112,7 @@ def test_dataset_406():
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     app.state.stores["dataset_metadata"] = mock_metadata_store
-    response = client.get(ENDPOINT_URL, headers={"Accept": "foo"})
+    response = client.get(ENDPOINT, headers={"Accept": "foo"})
 
     # Assertions
     assert response.status_code == status.HTTP_406_NOT_ACCEPTABLE

@@ -17,7 +17,7 @@ from fixtures.datasets import datasets_data
 # We should NOT care what the stores actually do - that's
 # what the /store tests are for, so we mock a store.
 
-ENDPOINT_URL = "/datasets"
+ENDPOINT = "/datasets"
 
 
 # Fixture to load expected dataset data from a JSON file
@@ -43,7 +43,7 @@ def test_datasets_valid_structure_200(expected_datasets_response_data):
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     app.state.stores["datasets_metadata"] = mock_metadata_store
-    response = client.get(ENDPOINT_URL, headers={"Accept": JSONLD})
+    response = client.get(ENDPOINT, headers={"Accept": JSONLD})
 
     assert response.status_code == status.HTTP_200_OK
     mock_metadata_store.get_datasets.assert_called_once()
@@ -69,7 +69,7 @@ def test_datasets_invalid_structure_raises():
     app.state.stores["datasets_metadata"] = mock_metadata_store
 
     with pytest.raises(ResponseValidationError):
-        client.get(ENDPOINT_URL, headers={"Accept": JSONLD})
+        client.get(ENDPOINT, headers={"Accept": JSONLD})
 
 
 def test_datasets_406():
@@ -88,7 +88,7 @@ def test_datasets_406():
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     app.state.stores["datasets_metadata"] = mock_metadata_store
-    response = client.get(ENDPOINT_URL, headers={"Accept": "foo"})
+    response = client.get(ENDPOINT, headers={"Accept": "foo"})
 
     # Assertions
     assert response.status_code == status.HTTP_406_NOT_ACCEPTABLE
