@@ -16,10 +16,11 @@ from main import app, StubMetadataStore
 
 ENDPOINT = "/topics"
 
+
 def test_topics_200():
     """
     Confirms that:
-     
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_topics() is called exactly once.
     - And if store.get_topics() returns not None

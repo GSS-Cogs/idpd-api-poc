@@ -16,10 +16,11 @@ from main import app, StubMetadataStore
 
 ENDPOINT = "/datasets/some-dataset-id/editions"
 
+
 def test_editions_200():
     """
     Confirms that:
-     
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_editions() is called exactly once.
     - And if store.get_editions() returns not None
@@ -68,7 +69,7 @@ def test_dataset_404():
 def test_editions_406():
     """
     Confirms that:
-    
+
     - Where we do not have an "accept: application/json+ld" header.
     - Then store.get_editions() is not called.
     - Status code 406 is returned.

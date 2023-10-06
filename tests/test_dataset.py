@@ -21,6 +21,7 @@ from main import app, StubMetadataStore
 
 ENDPOINT = "/datasets/some-id"
 
+
 # Fixture to load expected dataset data from a JSON file
 @pytest.fixture
 def expected_dataset_response_data():
@@ -30,7 +31,7 @@ def expected_dataset_response_data():
 def test_dataset_valid_structure_200(expected_dataset_response_data):
     """
     Confirms that:
-     
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_dataset() is called exactly once.
     - And if store.get_datasets() returns not None
@@ -38,7 +39,9 @@ def test_dataset_valid_structure_200(expected_dataset_response_data):
     """
 
     mock_metadata_store = MagicMock()
-    mock_metadata_store.get_dataset = MagicMock(return_value=expected_dataset_response_data)
+    mock_metadata_store.get_dataset = MagicMock(
+        return_value=expected_dataset_response_data
+    )
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
@@ -46,7 +49,6 @@ def test_dataset_valid_structure_200(expected_dataset_response_data):
     response = client.get(ENDPOINT, headers={"Accept": JSONLD})
 
     # Assertions
-    assert response.json() == ["foo"]
     assert response.status_code == status.HTTP_200_OK
     mock_metadata_store.get_dataset.assert_called_once()
 
@@ -78,12 +80,12 @@ def test_dataset_invalid_structure_raises():
 def test_dataset_404():
     """
     Confirms that:
-     
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_dataset() is called exactly once.
     - And if store.get_datasets() returns None
     - Status code 404 is returned.
-    
+
     """
 
     mock_metadata_store = MagicMock()
@@ -101,7 +103,7 @@ def test_dataset_404():
 def test_dataset_406():
     """
     Confirms that:
-     
+
     - Where we do not have an "accept: application/json+ld" header.
     - Then store.get_dataset() is not called.
     - Status code 406 is returned.

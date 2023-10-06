@@ -16,10 +16,11 @@ from main import app, StubMetadataStore
 
 ENDPOINT = "/topics/some-topic-id"
 
+
 def test_topic_200():
     """
     Confirms that:
-     
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_topic() is called exactly once.
     - And if store.get_topic() returns not None
@@ -45,7 +46,7 @@ def test_topic_200():
 def test_topic_404():
     """
     Confirms that:
-     
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_topic() is called exactly once.
     - And if store.get_topic() returns not None
@@ -70,7 +71,7 @@ def test_topic_404():
 def test_topic_406():
     """
     Confirms that:
-     
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_topic() is called exactly once.
     - And if store.get_topic() returns not None

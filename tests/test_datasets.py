@@ -29,7 +29,7 @@ def expected_datasets_response_data():
 def test_datasets_valid_structure_200(expected_datasets_response_data):
     """
     Confirms that:
-     
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_datasets() is called exactly once.
     - And if store.get_datasets() returns not None
@@ -37,7 +37,9 @@ def test_datasets_valid_structure_200(expected_datasets_response_data):
     """
 
     mock_metadata_store = MagicMock()
-    mock_metadata_store.get_datasets = MagicMock(return_value=expected_datasets_response_data)
+    mock_metadata_store.get_datasets = MagicMock(
+        return_value=expected_datasets_response_data
+    )
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
@@ -50,13 +52,13 @@ def test_datasets_valid_structure_200(expected_datasets_response_data):
 
 def test_datasets_invalid_structure_raises():
     """
-   Confirms that:
+    Confirms that:
 
-    - Where we have an "accept: application/json+ld" header.
-    - Then store.get_datasets() is called exactly once.
-    - And if store.get_datasets() returns data that does not
-      match the response schema.
-    - A ResponseValidationError is raised.
+     - Where we have an "accept: application/json+ld" header.
+     - Then store.get_datasets() is called exactly once.
+     - And if store.get_datasets() returns data that does not
+       match the response schema.
+     - A ResponseValidationError is raised.
     """
 
     # Create a mock store with a callable mocked
@@ -75,7 +77,7 @@ def test_datasets_invalid_structure_raises():
 def test_datasets_404():
     """
     Confirms that:
-     
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_datasets() is called exactly once.
     - And if store.get_datasets() method returns None
@@ -99,7 +101,7 @@ def test_datasets_404():
 def test_datasets_406():
     """
     Confirms that:
-     
+
     - Where we do not have an "accept: application/json+ld" header.
     - Then store.get_datasets() is not called.
     - Status code 406 is returned.

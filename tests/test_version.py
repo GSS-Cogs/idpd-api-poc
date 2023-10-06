@@ -15,10 +15,11 @@ from main import app, StubCsvStore
 
 ENDPOINT = "/datasets/some-dataset-id/editions/some-edition-id/versions/some-version-id"
 
+
 def test_version_csv_200():
     """
     Confirms that:
-     
+
     - Then store.get_version() is called exactly once.
     - And if store.get_version() returns not None
     - Status code 200 is returned.
@@ -42,7 +43,7 @@ def test_version_csv_200():
 def test_version_csv_404():
     """
     Confirms that:
-     
+
     - Then store.get_version() is called exactly once.
     - And if store.get_version() returns None
     - Status code 404 is returned.

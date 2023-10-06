@@ -16,10 +16,11 @@ from main import app, StubMetadataStore
 
 ENDPOINT = "/datasets/some-dataset-id/editions/some-edition-id"
 
+
 def test_edition_200():
     """
     Confirms that:
-     
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_edition() is called exactly once.
     - And if store.get_edition() returns not None
@@ -32,9 +33,7 @@ def test_edition_200():
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
-    response = client.get(
-        ENDPOINT, headers={"Accept": JSONLD}
-    )
+    response = client.get(ENDPOINT, headers={"Accept": JSONLD})
 
     # Assertions
     assert response.json() == ["foo"]
@@ -45,7 +44,7 @@ def test_edition_200():
 def test_edition_404():
     """
     Confirms that:
-     
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_edition() is called exactly once.
     - And if store.get_edition() returns None
@@ -60,9 +59,7 @@ def test_edition_404():
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
-    response = client.get(
-        ENDPOINT, headers={"Accept": JSONLD}
-    )
+    response = client.get(ENDPOINT, headers={"Accept": JSONLD})
 
     # Assertions
     assert response.status_code == status.HTTP_404_NOT_FOUND
@@ -72,7 +69,7 @@ def test_edition_404():
 def test_edition_406():
     """
     Confirms that:
-     
+
     - Where we do not have an "accept: application/json+ld" header.
     - Then store.get_edition() is not called.
     - Status code 406 is returned.
@@ -86,9 +83,7 @@ def test_edition_406():
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
-    response = client.get(
-        ENDPOINT, headers={"Accept": "foo"}
-    )
+    response = client.get(ENDPOINT, headers={"Accept": "foo"})
 
     # Assertions
     assert response.status_code == status.HTTP_406_NOT_ACCEPTABLE

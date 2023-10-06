@@ -1,10 +1,6 @@
 import json
 from pathlib import Path
-<<<<<<< HEAD
 from typing import Dict
-=======
-from typing import Optional, Dict
->>>>>>> origin/13-dataset-and_datasets-schemas
 
 from ..base import BaseMetadataStore
 
@@ -56,7 +52,7 @@ class StubMetadataStore(BaseMetadataStore):
             None,
         )
         return edition
-    
+
     def get_versions(self, dataset_id: str, edition_id: str) -> Dict:
         raise NotImplementedError
 

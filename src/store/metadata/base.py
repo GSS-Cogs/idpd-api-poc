@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Dict
 
+
 class BaseMetadataStore(ABC):
     def __init__(self):
         self.setup()
@@ -71,7 +72,7 @@ class BaseMetadataStore(ABC):
         """
         Get a specific topic
         """
-        
+
     @abstractmethod
     def get_sub_topics(self, topic_id: str) -> Dict:
         """

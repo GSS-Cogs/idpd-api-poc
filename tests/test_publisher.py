@@ -16,10 +16,11 @@ from main import app, StubMetadataStore
 
 ENDPOINT = "/publishers/some-publisher-id"
 
+
 def test_publisher_200():
     """
     Confirms that:
-     
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_publisher() is called exactly once.
     - And if store.get_publisher() returns not None
@@ -45,7 +46,7 @@ def test_publisher_200():
 def test_publisher_404():
     """
     Confirms that:
-     
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_publisher() is called exactly once.
     - And if store.get_publisher() returns None
@@ -70,7 +71,7 @@ def test_publisher_404():
 def test_publisher_by_id_406():
     """
     Confirms that:
-     
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_publisher() is not called.
     - Status code 406 is returned.

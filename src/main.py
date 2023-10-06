@@ -22,7 +22,7 @@ def datasets(
 ):
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
-        datasets =  metadata_store.get_datasets()
+        datasets = metadata_store.get_datasets()
         if datasets is not None:
             response.status_code = status.HTTP_200_OK
             return datasets
@@ -31,7 +31,7 @@ def datasets(
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
-    
+
 
 @app.get("/datasets/{dataset_id}", response_model=Optional[schemas.Dataset])
 def dataset(
@@ -99,7 +99,7 @@ def publishers(
 ):
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
-        publishers =  metadata_store.get_publishers()
+        publishers = metadata_store.get_publishers()
         if publishers is not None:
             response.status_code = status.HTTP_200_OK
             return publishers

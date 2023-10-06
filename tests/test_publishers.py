@@ -16,10 +16,11 @@ from main import app, StubMetadataStore
 
 ENDPOINT = "/publishers"
 
+
 def test_publishers_200():
     """
     Confirms that:
-     
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_publishers() is called exactly once.
     - And if store.get_publishers() returns not None
