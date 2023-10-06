@@ -10,7 +10,7 @@ from fastapi.testclient import TestClient
 
 from main import app
 from constants import JSONLD
-
+from fixtures import expected_editions_response_data
 
 # Devnotes:
 
@@ -20,14 +20,7 @@ from constants import JSONLD
 # We should NOT care what the stores actually do - that's
 # what the /store tests are for, so we mock a store.
 
-endpoint_url = "/editions"
-
-# Fixture to load expected edition data from a JSON file
-@pytest.fixture
-def expected_editions_response_data(): 
-    file_path = pathlib.Path("src/store/metadata/stub/content/editions.json")
-    with open(file_path, 'r') as json_file:
-        return json.load(json_file)
+ENDPOINT_URL = "/editions"
 
 
 def test_editions_valid_structure_200(expected_editions_response_data):
@@ -45,7 +38,7 @@ def test_editions_valid_structure_200(expected_editions_response_data):
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     app.state.stores["editions_metadata"] = mock_metadata_store
-    response = client.get(endpoint_url, headers={"Accept": JSONLD})
+    response = client.get(ENDPOINT_URL, headers={"Accept": JSONLD})
 
     assert response.status_code == status.HTTP_200_OK
     mock_metadata_store.get_editions.assert_called_once()
@@ -71,7 +64,7 @@ def test_editions_invalid_structure_raises():
     app.state.stores["editions_metadata"] = mock_metadata_store
 
     with pytest.raises(ResponseValidationError):
-        client.get(endpoint_url, headers={"Accept": JSONLD})
+        client.get(ENDPOINT_URL, headers={"Accept": JSONLD})
 
 
 def test_editions_406():
@@ -90,7 +83,7 @@ def test_editions_406():
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     app.state.stores["editions_metadata"] = mock_metadata_store
-    response = client.get(endpoint_url, headers={"Accept": "foo"})
+    response = client.get(ENDPOINT_URL, headers={"Accept": "foo"})
 
     # Assertions
     assert response.status_code == status.HTTP_406_NOT_ACCEPTABLE

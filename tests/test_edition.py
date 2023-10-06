@@ -1,13 +1,12 @@
-import json
 from fastapi.exceptions import ResponseValidationError
 from pydantic.error_wrappers import ValidationError
 import pytest
-import pathlib
 from unittest.mock import MagicMock
 from fastapi import HTTPException, status
 from fastapi.testclient import TestClient
 from constants import JSONLD 
 from main import app
+from fixtures import expected_edition_response_data
 
 # Devnotes:
 
@@ -18,17 +17,10 @@ from main import app
 # what the /store tests are for, so we mock a store.
 # Mock data representing the expected response structure for /editions/{id}
 
-endpoint_url = "/editions/some-id"
-
-# Fixture to load expected edition data from a JSON file
-@pytest.fixture
-def expected_edition_by_id_response_data():
-    file_path = pathlib.Path("src/store/metadata/stub/content/editions.json")
-    with open(file_path, 'r') as json_file:
-        return json.load(json_file)
+ENDPOINT_URL = "/editions/some-id"
 
 
-def test_edition_valid_structure_200(expected_edition_by_id_response_data):
+def test_edition_valid_structure_200(expected_edition_response_data):
     """
     Confirm that the store.get_editions() method is
     called where an "accept: application/json+ld"
@@ -36,15 +28,15 @@ def test_edition_valid_structure_200(expected_edition_by_id_response_data):
     data then status code 200 is returned.
     """
 
-    # Create a mock store with a callable mocked get_edition_by_id() method
+    # Create a mock store with a callable mocked get_edition() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate ID is found
-    mock_metadata_store.get_edition = MagicMock(return_value=expected_edition_by_id_response_data)
+    mock_metadata_store.get_edition = MagicMock(return_value=expected_edition_response_data)
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     app.state.stores["edition_metadata"] = mock_metadata_store
-    response = client.get(endpoint_url, headers={"Accept": JSONLD})
+    response = client.get(ENDPOINT_URL, headers={"Accept": JSONLD})
 
     assert response.status_code == status.HTTP_200_OK
     mock_metadata_store.get_edition.assert_called_once()
@@ -59,7 +51,7 @@ def test_edition_invalid_structure_raises():
     invalid data then a server-side exception is
     raised.
     """
-    # Create a mock store with a callable mocked get_edition_by_id() method
+    # Create a mock store with a callable mocked get_edition() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate ID is found
     mock_metadata_store.get_edition = MagicMock(return_value={"items": [{"invalid_field": "Invalid edition"}], "offset": 0})
@@ -69,7 +61,7 @@ def test_edition_invalid_structure_raises():
     app.state.stores["edition_metadata"] = mock_metadata_store
     
     with pytest.raises(ResponseValidationError):
-        response = client.get(endpoint_url, headers={"Accept": JSONLD})
+        response = client.get(ENDPOINT_URL, headers={"Accept": JSONLD})
 
 
 def test_edition_404():
@@ -80,7 +72,7 @@ def test_edition_404():
     where the id in question is not in the store.
     """
     
-    # Create a mock store with a callable mocked get_edition_by_id() method
+    # Create a mock store with a callable mocked get_edition() method
     mock_metadata_store = MagicMock()
     # Note: returning None to simulate the id not being found in the store
     mock_metadata_store.get_edition = MagicMock(return_value=None)
@@ -88,7 +80,7 @@ def test_edition_404():
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     app.state.stores["edition_metadata"] = mock_metadata_store
-    response = client.get(endpoint_url, headers={"Accept": JSONLD})
+    response = client.get(ENDPOINT_URL, headers={"Accept": JSONLD})
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
     mock_metadata_store.get_edition.assert_called_once()
@@ -109,7 +101,7 @@ def test_edition_406():
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     app.state.stores["edition_metadata"] = mock_metadata_store
-    response = client.get(endpoint_url, headers={"Accept": "foo"})
+    response = client.get(ENDPOINT_URL, headers={"Accept": "foo"})
 
     # Assertions
     assert response.status_code == status.HTTP_406_NOT_ACCEPTABLE
