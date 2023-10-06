@@ -1,6 +1,6 @@
 import os
 
-from fastapi import FastAPI, Request, Response, status
+from fastapi import Depends, FastAPI, Request, Response, status
 
 from constants import JSONLD
 from store import StubCsvStore, StubMetadataStore
@@ -9,48 +9,42 @@ from store import StubCsvStore, StubMetadataStore
 # while developing.
 BROWSABLE = os.environ.get("LOCAL_BROWSE_API")
 
-# Mapping specific store implementations to specific endpoints.
-# This is an interim measure to allow us to stub out endpoints
-# and target implement them one at a time.
-stub_metadata_store = StubMetadataStore()
-stub_csv_store = StubCsvStore()
-
 app = FastAPI()
-app.state.stores = {
-    "datasets_metadata": stub_metadata_store,
-    "dataset_metadata": stub_metadata_store,
-    "editions_metadata": stub_metadata_store,
-    "edition_metadata": stub_metadata_store,
-    "topics_metadata": stub_metadata_store,
-    "topic_metadata": stub_metadata_store,
-    "publishers_metadata": stub_metadata_store,
-    "publisher_metadata": stub_metadata_store,
-    "version_csv": stub_csv_store,
-}
 
 
 @app.get("/datasets")
-def datasets(request: Request, response: Response):
-    metadata_store = app.state.stores["datasets_metadata"]
+def datasets(
+    request: Request,
+    response: Response,
+    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+):
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
-        return metadata_store.get_datasets()
+        datasets =  metadata_store.get_datasets()
+        if datasets is not None:
+            response.status_code = status.HTTP_200_OK
+            return datasets
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
+    
 
-
-@app.get("/datasets/{id}")
-def dataset(request: Request, response: Response, id: str):
-    metadata_store = app.state.stores["dataset_metadata"]
+@app.get("/datasets/{dataset_id}")
+def dataset(
+    request: Request,
+    response: Response,
+    dataset_id: str,
+    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+):
     if request.headers["Accept"] == JSONLD or BROWSABLE:
-        datasets = metadata_store.get_dataset(id)
-        if len(datasets) == 1:
+        dataset = metadata_store.get_dataset(dataset_id)
+        if dataset is not None:
             response.status_code = status.HTTP_200_OK
-            return datasets[0]
-        else:
-            response.status_code = status.HTTP_404_NOT_FOUND
-            return
+            return dataset
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
@@ -61,55 +55,71 @@ def editions(
     request: Request,
     response: Response,
     dataset_id: str,
+    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-    csv_store = app.state.stores["editions_metadata"]
-    data = csv_store.get_editions(dataset_id)
-
-    if data is not None:
-        response.status_code = status.HTTP_200_OK
-        return data
-    else:
+    if request.headers["Accept"] == JSONLD or BROWSABLE:
+        editions = metadata_store.get_editions(dataset_id)
+        if editions is not None:
+            response.status_code = status.HTTP_200_OK
+            return editions
         response.status_code = status.HTTP_404_NOT_FOUND
+        return
+    else:
+        response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
 
 
 @app.get("/datasets/{dataset_id}/editions/{edition_id}")
-def editions(
+def edition(
     request: Request,
     response: Response,
     dataset_id: str,
-    edition_id: str
+    edition_id: str,
+    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-    csv_store = app.state.stores["edition_metadata"]
-    data = csv_store.get_edition(dataset_id)
-
-    if data is not None:
-        response.status_code = status.HTTP_200_OK
-        return data
-    else:
+    if request.headers["Accept"] == JSONLD or BROWSABLE:
+        edition = metadata_store.get_edition(dataset_id, edition_id)
+        if edition is not None:
+            response.status_code = status.HTTP_200_OK
+            return edition
         response.status_code = status.HTTP_404_NOT_FOUND
         return
-    
+    else:
+        response.status_code = status.HTTP_406_NOT_ACCEPTABLE
+        return
+
 
 @app.get("/publishers")
-def publishers(request: Request, response: Response):
-    metadata_store = app.state.stores["publishers_metadata"]
+def publishers(
+    request: Request,
+    response: Response,
+    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+):
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
-        return metadata_store.get_publishers()
+        publishers =  metadata_store.get_publishers()
+        if publishers is not None:
+            response.status_code = status.HTTP_200_OK
+            return publishers
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
 
 
 @app.get("/publishers/{publisher_id}")
-def publisher(request: Request, response: Response, publisher_id: str):
-    metadata_store = app.state.stores["publisher_metadata"]
+def publisher(
+    request: Request,
+    response: Response,
+    publisher_id: str,
+    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+):
     if request.headers["Accept"] == JSONLD or BROWSABLE:
-        publishers = metadata_store.get_publisher(publisher_id)
-        if len(publishers) == 1:
+        publisher = metadata_store.get_publisher(publisher_id)
+        if publisher is not None:
             response.status_code = status.HTTP_200_OK
-            return publishers[0]
+            return publisher
         response.status_code = status.HTTP_404_NOT_FOUND
         return
     else:
@@ -118,48 +128,41 @@ def publisher(request: Request, response: Response, publisher_id: str):
 
 
 @app.get("/topics")
-def topics(request: Request, response: Response):
-    metadata_store = app.state.stores["topics_metadata"]
+def topics(
+    request: Request,
+    response: Response,
+    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+):
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
-        return metadata_store.get_topics()
+        topics = metadata_store.get_topics()
+        if topics is not None:
+            response.status_code = status.HTTP_200_OK
+            return topics
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
 
 
 @app.get("/topics/{topic_id}")
-def topic(request: Request, response: Response, topic_id: str):
-    metadata_store = app.state.stores["topic_metadata"]
+def topic(
+    request: Request,
+    response: Response,
+    topic_id: str,
+    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+):
     if request.headers["Accept"] == JSONLD or BROWSABLE:
-        topics = metadata_store.get_topic(topic_id)
-        if len(topics) == 1:
+        topic = metadata_store.get_topic(topic_id)
+        if topic is not None:
             response.status_code = status.HTTP_200_OK
-            return topics[0]
+            return topic
         response.status_code = status.HTTP_404_NOT_FOUND
         return
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
-
-
-@app.get("/datasets/{dataset_id}/editions")
-def editions(
-    request: Request,
-    response: Response,
-    dataset_id: str,
-):
-    csv_store = app.state.stores["editions_metadata"]
-    data = csv_store.get_editions(dataset_id)
-
-    if data is not None:
-        response.status_code = status.HTTP_200_OK
-        return data
-    else:
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return
-    
-
 
 
 # note: download only for now, needs expanding
@@ -170,8 +173,8 @@ def version(
     dataset_id: str,
     edition_id: str,
     version_id: str,
+    csv_store: StubCsvStore = Depends(StubCsvStore),
 ):
-    csv_store = app.state.stores["version_csv"]
     data = csv_store.get_version(dataset_id, edition_id, version_id)
     if data is not None:
         response.status_code = status.HTTP_200_OK
