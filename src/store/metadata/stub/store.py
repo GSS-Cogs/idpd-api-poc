@@ -33,6 +33,9 @@ class StubMetadataStore(BaseMetadataStore):
     def get_dataset(self, id: str) -> List[dict]:
         return [x for x in self.datasets["items"] if x["identifier"] == id]
 
+    def get_datasets(self) -> dict:
+        return self.datasets
+    
     def get_publisher(self, id: str) -> List[dict]:
         return [x for x in self.publishers["items"] if x["identifier"] == id]
 

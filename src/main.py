@@ -19,12 +19,13 @@ app = FastAPI()
 app.state.stores = {
     "datasets_metadata": stub_metadata_store,
     "dataset_metadata": stub_metadata_store,
+    "editions_metadata": stub_metadata_store,
+    "edition_metadata": stub_metadata_store,
     "topics_metadata": stub_metadata_store,
     "topic_metadata": stub_metadata_store,
     "publishers_metadata": stub_metadata_store,
     "publisher_metadata": stub_metadata_store,
     "version_csv": stub_csv_store,
-    "edition_metadata": stub_metadata_store
 }
 
 
@@ -55,6 +56,41 @@ def dataset(request: Request, response: Response, id: str):
         return
 
 
+@app.get("/datasets/{dataset_id}/editions")
+def editions(
+    request: Request,
+    response: Response,
+    dataset_id: str,
+):
+    csv_store = app.state.stores["editions_metadata"]
+    data = csv_store.get_editions(dataset_id)
+
+    if data is not None:
+        response.status_code = status.HTTP_200_OK
+        return data
+    else:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return
+
+
+@app.get("/datasets/{dataset_id}/editions/{edition_id}")
+def editions(
+    request: Request,
+    response: Response,
+    dataset_id: str,
+    edition_id: str
+):
+    csv_store = app.state.stores["edition_metadata"]
+    data = csv_store.get_edition(dataset_id)
+
+    if data is not None:
+        response.status_code = status.HTTP_200_OK
+        return data
+    else:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return
+    
+
 @app.get("/publishers")
 def publishers(request: Request, response: Response):
     metadata_store = app.state.stores["publishers_metadata"]
@@ -66,11 +102,11 @@ def publishers(request: Request, response: Response):
         return
 
 
-@app.get("/publishers/{id}")
-def publisher(request: Request, response: Response, id: str):
+@app.get("/publishers/{publisher_id}")
+def publisher(request: Request, response: Response, publisher_id: str):
     metadata_store = app.state.stores["publisher_metadata"]
     if request.headers["Accept"] == JSONLD or BROWSABLE:
-        publishers = metadata_store.get_publisher(id)
+        publishers = metadata_store.get_publisher(publisher_id)
         if len(publishers) == 1:
             response.status_code = status.HTTP_200_OK
             return publishers[0]
@@ -92,11 +128,11 @@ def topics(request: Request, response: Response):
         return
 
 
-@app.get("/topics/{id}")
-def topic(request: Request, response: Response, id: str):
+@app.get("/topics/{topic_id}")
+def topic(request: Request, response: Response, topic_id: str):
     metadata_store = app.state.stores["topic_metadata"]
     if request.headers["Accept"] == JSONLD or BROWSABLE:
-        topics = metadata_store.get_topic(id)
+        topics = metadata_store.get_topic(topic_id)
         if len(topics) == 1:
             response.status_code = status.HTTP_200_OK
             return topics[0]
@@ -105,6 +141,25 @@ def topic(request: Request, response: Response, id: str):
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
+
+
+@app.get("/datasets/{dataset_id}/editions")
+def editions(
+    request: Request,
+    response: Response,
+    dataset_id: str,
+):
+    csv_store = app.state.stores["editions_metadata"]
+    data = csv_store.get_editions(dataset_id)
+
+    if data is not None:
+        response.status_code = status.HTTP_200_OK
+        return data
+    else:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return
+    
+
 
 
 # note: download only for now, needs expanding
@@ -118,22 +173,6 @@ def version(
 ):
     csv_store = app.state.stores["version_csv"]
     data = csv_store.get_version(dataset_id, edition_id, version_id)
-    if data is not None:
-        response.status_code = status.HTTP_200_OK
-        return data
-    else:
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return
-
-@app.get("/datasets/{edition_id}/editions")
-def edition(
-    request: Request,
-    response: Response,
-    edition_id: str,
-):
-    csv_store = app.state.stores["edition_metadata"]
-    data = csv_store.get_edition(edition_id)
-
     if data is not None:
         response.status_code = status.HTTP_200_OK
         return data
