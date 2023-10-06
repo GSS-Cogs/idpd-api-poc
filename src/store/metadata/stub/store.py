@@ -1,6 +1,10 @@
 import json
 from pathlib import Path
+<<<<<<< HEAD
 from typing import Dict
+=======
+from typing import Optional, Dict
+>>>>>>> origin/13-dataset-and_datasets-schemas
 
 from ..base import BaseMetadataStore
 
@@ -13,7 +17,7 @@ class StubMetadataStore(BaseMetadataStore):
 
     def setup(self):
         """
-        Populates our in memory stubbed responses
+        Populates our in-memory stubbed responses
         using the contents of ./content
         """
         content_dir = Path(Path(__file__).parent / "content")

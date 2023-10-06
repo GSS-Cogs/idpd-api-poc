@@ -26,7 +26,7 @@ def test_publisher_200():
     - Status code 200 is returned.
     """
 
-    # Create a mock store with a callable mocked get_publishers() method
+    # Create a mock store with a callable mocked get_publisher() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_publisher = MagicMock(return_value=["foo"])
@@ -52,7 +52,7 @@ def test_publisher_404():
     - Status code 404 is returned.
     """
 
-    # Create a mock store with a callable mocked get_publishers() method
+    # Create a mock store with a callable mocked get_publisher() method
     mock_metadata_store = MagicMock()
     # Note: returning an empty list to simulate "id is not found"
     mock_metadata_store.get_publisher = MagicMock(return_value=None)
@@ -76,7 +76,7 @@ def test_publisher_by_id_406():
     - Status code 406 is returned.
     """
 
-    # Create a mock store with a callable mocked get_publishers() method
+    # Create a mock store with a callable mocked get_publisher() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_publisher = MagicMock(return_value="irrelevant")

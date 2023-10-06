@@ -1,8 +1,10 @@
 import os
+from typing import Optional
 
 from fastapi import Depends, FastAPI, Request, Response, status
 
 from constants import JSONLD
+import schemas
 from store import StubCsvStore, StubMetadataStore
 
 # Simple env var flag to allow local browsing of api responses
@@ -12,7 +14,7 @@ BROWSABLE = os.environ.get("LOCAL_BROWSE_API")
 app = FastAPI()
 
 
-@app.get("/datasets")
+@app.get("/datasets", response_model=Optional[schemas.Datasets])
 def datasets(
     request: Request,
     response: Response,
@@ -31,7 +33,7 @@ def datasets(
         return
     
 
-@app.get("/datasets/{dataset_id}")
+@app.get("/datasets/{dataset_id}", response_model=Optional[schemas.Dataset])
 def dataset(
     request: Request,
     response: Response,
@@ -175,10 +177,10 @@ def version(
     version_id: str,
     csv_store: StubCsvStore = Depends(StubCsvStore),
 ):
-    data = csv_store.get_version(dataset_id, edition_id, version_id)
-    if data is not None:
+    csv_data = csv_store.get_version(dataset_id, edition_id, version_id)
+    if csv_data is not None:
         response.status_code = status.HTTP_200_OK
-        return data
+        return csv_data
     else:
         response.status_code = status.HTTP_404_NOT_FOUND
         return

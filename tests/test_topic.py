@@ -18,12 +18,15 @@ ENDPOINT = "/topics/some-topic-id"
 
 def test_topic_200():
     """
-    Confirm that the store.get_topic() method is
-    called where an "accept: application/json+ld"
-    header is provided and status code 200 is returned.
+    Confirms that:
+     
+    - Where we have an "accept: application/json+ld" header.
+    - Then store.get_topic() is called exactly once.
+    - And if store.get_topic() returns not None
+    - Status code 200 is returned.
     """
 
-    # Create a mock store with a callable mocked get_topics() method
+    # Create a mock store with a callable mocked get_topic() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_topic = MagicMock(return_value=["foo"])
@@ -41,13 +44,15 @@ def test_topic_200():
 
 def test_topic_404():
     """
-    Confirm that the store.get_topic() method is not
-    called where an "accept: application/json+ld"
-    header is not provided. Status code 406 should be
-    returned.
+    Confirms that:
+     
+    - Where we have an "accept: application/json+ld" header.
+    - Then store.get_topic() is called exactly once.
+    - And if store.get_topic() returns not None
+    - Status code 200 is returned.
     """
 
-    # Create a mock store with a callable mocked get_topics() method
+    # Create a mock store with a callable mocked get_topic() method
     mock_metadata_store = MagicMock()
     # Note: returning an empty list to simulate "id is not found"
     mock_metadata_store.get_topic = MagicMock(return_value=None)
@@ -64,13 +69,15 @@ def test_topic_404():
 
 def test_topic_406():
     """
-    Confirm that the store.get_topic() method is not
-    called where an "accept: application/json+ld"
-    header is not provided. Status code 406 should be
-    returned.
+    Confirms that:
+     
+    - Where we have an "accept: application/json+ld" header.
+    - Then store.get_topic() is called exactly once.
+    - And if store.get_topic() returns not None
+    - Status code 200 is returned.
     """
 
-    # Create a mock store with a callable mocked get_topics() method
+    # Create a mock store with a callable mocked get_topic() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_topic = MagicMock(return_value="irrelevant")
