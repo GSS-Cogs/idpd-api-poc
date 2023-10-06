@@ -29,8 +29,8 @@
             "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
             "spatial_coverage": "K02000001",
             "temporal_coverage": {
-              "from": "2005-01-01T00:00:00Z",
-              "to": "2019-03-01T00:00:00Z"
+              "start": "2005-01-01T00:00:00Z",
+              "end": "2019-03-01T00:00:00Z"
             }
           }
     ],
