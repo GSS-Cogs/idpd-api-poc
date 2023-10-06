@@ -7,7 +7,6 @@ from enum import Enum
 from pydantic import BaseModel, Field
 from typing import Literal, Union, List
 
-
 class Frequency(Enum):
     triennial = "triennial"
     biennial = "biennial"
@@ -33,10 +32,10 @@ class ContactPoint(BaseModel):
     email: str = Field(pattern=r"^mailto:[\w\.-]+@[\w\.-]+\.\w{2,}$")
 
 class PeriodOfTime(BaseModel):
-    start : str = Field(
+    start: str = Field(
         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",
     )
-    end : str = Field(
+    end: str = Field(
         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",
     )
 
@@ -48,8 +47,7 @@ class Dataset(BaseModel):
     id: str = Field(alias="@id")
     type: Literal["dcat:DatasetSeries"] = Field(alias="@type")
     identifier: str
-    # title: str = Field(max_length=90)
-    title: str = Field(..., max_length=90, min_length=1, error_message="Title is required")
+    title: str = Field(max_length=90)
     summary: str = Field(max_length=200)
     description: str = Field(max_length=250)
     release_date: str = Field(

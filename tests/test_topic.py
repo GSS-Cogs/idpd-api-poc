@@ -22,7 +22,7 @@ def test_topic_200():
     header is provided and status code 200 is returned.
     """
 
-    # Create a mock store with a callable mocked get_topics_by_id() method
+    # Create a mock store with a callable mocked get_topic() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_topic = MagicMock(return_value="foo")
@@ -47,7 +47,7 @@ def test_topic_404():
     returned.
     """
 
-    # Create a mock store with a callable mocked get_topics_by_id() method
+    # Create a mock store with a callable mocked get_topic() method
     mock_metadata_store = MagicMock()
     # Note: returning None to simulate "id is not found"
     mock_metadata_store.get_topic = MagicMock(return_value=None)
@@ -70,7 +70,7 @@ def test_topic_406():
     returned.
     """
 
-    # Create a mock store with a callable mocked get_topics_by_id() method
+    # Create a mock store with a callable mocked get_topic() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_topic = MagicMock(return_value=["foo"])
