@@ -39,15 +39,26 @@ class StubMetadataStore(BaseMetadataStore):
         )
         return dataset
 
-    def get_editions(self) -> Dict:
-        return self.editions
+    def get_editions(self, dataset_id: str) -> Dict:
+        editions_for_dataset = [
+            x for x in self.editions["items"] if x["in_series"].endswith(dataset_id)]
+        if editions_for_dataset is not None:
+            return {
+            "items": editions_for_dataset,
+            "count": len(editions_for_dataset),
+            "offset": 0
+        }
+        return None
 
-    def get_edition(self, id: str) -> Dict:
+    def get_edition(self, dataset_id: str, edition_id: str) -> Dict:
+        editions_for_dataset = self.get_editions(dataset_id)
+        if editions_for_dataset is None:
+            return None
         edition = next(
             (
                 x
-                for x in self.editions["items"]
-                if x["items"]["in_series"].endswith(id) == id
+                for x in editions_for_dataset["items"]
+                if x["identifier"] == edition_id
             ),
             None,
         )
