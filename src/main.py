@@ -52,7 +52,7 @@ def dataset(
         return
 
 
-@app.get("/datasets/{dataset_id}/editions")
+@app.get("/datasets/{dataset_id}/editions", response_model=Optional[schemas.Editions])
 def editions(
     request: Request,
     response: Response,
@@ -71,7 +71,7 @@ def editions(
         return
 
 
-@app.get("/datasets/{dataset_id}/editions/{edition_id}")
+@app.get("/datasets/{dataset_id}/editions/{edition_id}", response_model=Optional[schemas.Edition])
 def edition(
     request: Request,
     response: Response,
