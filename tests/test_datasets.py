@@ -5,8 +5,8 @@ from fastapi import status
 from fastapi.testclient import TestClient
 import pytest
 
-from main import app
 from constants import JSONLD
+from main import app, StubMetadataStore
 from fixtures.datasets import datasets_data
 
 # Devnotes:
@@ -28,21 +28,22 @@ def expected_datasets_response_data():
 
 def test_datasets_valid_structure_200(expected_datasets_response_data):
     """
-    Confirm that the store.get_datasets() method is
-    called where an "accept: application/json+ld"
-    header is provided and the store provides valid
-    data then status code 200 is returned.
+    Confirms that:
+
+    - Where we have an "accept: application/json+ld" header.
+    - Then store.get_datasets() is called exactly once.
+    - And if store.get_datasets() returns not None
+    - Status code 200 is returned.
     """
 
-    # Create a mock store with a callable mocked get_datasets() method
     mock_metadata_store = MagicMock()
     mock_metadata_store.get_datasets = MagicMock(
         return_value=expected_datasets_response_data
     )
+    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
-    app.state.stores["datasets_metadata"] = mock_metadata_store
     response = client.get(ENDPOINT, headers={"Accept": JSONLD})
 
     assert response.status_code == status.HTTP_200_OK
@@ -51,43 +52,68 @@ def test_datasets_valid_structure_200(expected_datasets_response_data):
 
 def test_datasets_invalid_structure_raises():
     """
-    Confirm that the store.get_datasets() method is
-    called where an "accept: application/json+ld"
-    header is provided ....but... the store provides
-    invalid data then a server side exception is
-    raised.
+    Confirms that:
+
+     - Where we have an "accept: application/json+ld" header.
+     - Then store.get_datasets() is called exactly once.
+     - And if store.get_datasets() returns data that does not
+       match the response schema.
+     - A ResponseValidationError is raised.
     """
 
     # Create a mock store with a callable mocked
     mock_metadata_store = MagicMock()
     invalid_response_data = {"items": [{"title": "Invalid Dataset"}], "offset": 0}
     mock_metadata_store.get_datasets = MagicMock(return_value=invalid_response_data)
+    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
-    # Override the stub_store dependency with the mock_metadata_store
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
-    app.state.stores["datasets_metadata"] = mock_metadata_store
 
     with pytest.raises(ResponseValidationError):
         client.get(ENDPOINT, headers={"Accept": JSONLD})
 
 
-def test_datasets_406():
+def test_datasets_404():
     """
-    Confirm that the store.get_datasets() method is not
-    called where an "accept: application/json+ld"
-    header is not provided. Status code 406 should be
-    returned.
+    Confirms that:
+
+    - Where we have an "accept: application/json+ld" header.
+    - Then store.get_datasets() is called exactly once.
+    - And if store.get_datasets() method returns None
+    - Status code 404 is returned.
     """
 
     # Create a mock store with a callable mocked get_datasets() method
     mock_metadata_store = MagicMock()
-    mock_metadata_store.get_datasets = MagicMock(return_value={})
+    mock_metadata_store.get_datasets = MagicMock(return_value=None)
+    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
-    # Override the stub_store dependency with the mock_metadata_store
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
-    app.state.stores["datasets_metadata"] = mock_metadata_store
+    response = client.get(ENDPOINT, headers={"Accept": JSONLD})
+
+    # Assertions
+    assert response.status_code == status.HTTP_404_NOT_FOUND
+    mock_metadata_store.get_datasets.assert_called_once()
+
+
+def test_datasets_406():
+    """
+    Confirms that:
+
+    - Where we do not have an "accept: application/json+ld" header.
+    - Then store.get_datasets() is not called.
+    - Status code 406 is returned.
+    """
+
+    # Create a mock store with a callable mocked get_datasets() method
+    mock_metadata_store = MagicMock()
+    mock_metadata_store.get_datasets = MagicMock(return_value="irrelevant")
+    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
+
+    # Create a TestClient for your FastAPI app
+    client = TestClient(app)
     response = client.get(ENDPOINT, headers={"Accept": "foo"})
 
     # Assertions
