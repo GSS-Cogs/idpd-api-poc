@@ -63,3 +63,5 @@ Where the _named graph_ is `https://data.ons.gov.uk/datasets/cpih/record` - you 
 ### Testing
 
 The unit tests are made with pytest and to run the tests use command: `pipenv run pytest`.
+
+**Note:** - you'll need to first shut down any local oxigraph container you have running first as the tests need to spin one up using that same port.
