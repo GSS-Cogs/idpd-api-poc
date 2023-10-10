@@ -35,14 +35,13 @@ def setup_before_all_tests():
     except:
         pass
 
-    # Frontend service
     docker_client.containers.run(
         name="oxigraph_test",
         image="ghcr.io/oxigraph/oxigraph:latest",
         ports={"7878": "7878"},
         publish_all_ports=True,
         network_mode="bridge",
-        detach=True
+        detach=True,
     )
     time.sleep(10)
 

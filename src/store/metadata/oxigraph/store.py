@@ -27,11 +27,9 @@ class OxigraphMetadataStore(BaseMetadataStore):
         )
 
         configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
-        self.db = Dataset(
-            store=SPARQLUpdateStore(*configuration)
-        )
+        self.db = Dataset(store=SPARQLUpdateStore(*configuration))
 
-    def get_datasets(self) -> Optional[Dict]: # pragma: no cover
+    def get_datasets(self) -> Optional[Dict]:  # pragma: no cover
         """
         Gets all datasets
         """
@@ -76,83 +74,92 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # The user doesnt need to know about blank RDF nodes so we need
         # to flatten and embed the latter two graphs in the dataset graph.
         dataset_graph = next((x for x in data["@graph"] if "@type" in x.keys()), None)
-        contact_point_graph = next((x for x in data["@graph"] if "vcard:fn" in x.keys()), None)
-        temporal_coverage_graph = next((x for x in data["@graph"] if "dcat:endDate" in x.keys()), None)
-        
+        contact_point_graph = next(
+            (x for x in data["@graph"] if "vcard:fn" in x.keys()), None
+        )
+        temporal_coverage_graph = next(
+            (x for x in data["@graph"] if "dcat:endDate" in x.keys()), None
+        )
+
         # Compact and embed anonymous nodes
         # TODO - we'll want to make sure these fields exist
         # to avoid key errors.
         dataset_graph["contact_point"] = {
             "name": contact_point_graph["vcard:fn"]["@value"],
-            "email": contact_point_graph["vcard:hasEmail"]["@id"]
+            "email": contact_point_graph["vcard:hasEmail"]["@id"],
         }
         dataset_graph["temporal_coverage"] = {
-             "start": temporal_coverage_graph["dcat:endDate"]["@value"],
-             "end": temporal_coverage_graph["dcat:startDate"]["@value"]
+            "start": temporal_coverage_graph["dcat:endDate"]["@value"],
+            "end": temporal_coverage_graph["dcat:startDate"]["@value"],
         }
-        
+
         # Use a remote context
         dataset_graph["@context"] = "https://data.ons.gov.uk/ns#"
 
         return dataset_graph
 
-
-    def get_editions(self, dataset_id: str) -> Optional[Dict]: # pragma: no cover
+    def get_editions(self, dataset_id: str) -> Optional[Dict]:  # pragma: no cover
         """
         Gets all editions of a specific dataset
         """
         raise NotImplementedError
 
-    def get_edition(self, dataset_id: str, edition_id: str) -> Optional[Dict]: # pragma: no cover
+    def get_edition(
+        self, dataset_id: str, edition_id: str
+    ) -> Optional[Dict]:  # pragma: no cover
         """
         Gets a specific edition of a specific dataset
         """
         raise NotImplementedError
 
-    def get_versions(self, dataset_id: str, edition_id: str) -> Optional[Dict]: # pragma: no cover
+    def get_versions(
+        self, dataset_id: str, edition_id: str
+    ) -> Optional[Dict]:  # pragma: no cover
         """
         Gets all versions of a specific edition of a specific dataset
         """
 
     def get_version(
         self, dataset_id: str, edition_id: str, version_id: str
-    ) -> Optional[Dict]: # pragma: no cover
+    ) -> Optional[Dict]:  # pragma: no cover
         """
         Gets a specific version of a specific edition of a specific dataset
         """
         raise NotImplementedError
 
-    def get_publishers(self) -> Optional[Dict]: # pragma: no cover
+    def get_publishers(self) -> Optional[Dict]:  # pragma: no cover
         """
         Gets all publishers
         """
         raise NotImplementedError
 
-    def get_publisher(self, publisher_id: str) -> Optional[Dict]: # pragma: no cover
+    def get_publisher(self, publisher_id: str) -> Optional[Dict]:  # pragma: no cover
         """
         Get a specific publisher
         """
         raise NotImplementedError
 
-    def get_topics(self) -> Optional[Dict]: # pragma: no cover
+    def get_topics(self) -> Optional[Dict]:  # pragma: no cover
         """
         Get all topics
         """
         raise NotImplementedError
 
-    def get_topic(self) -> Optional[Dict]: # pragma: no cover
+    def get_topic(self) -> Optional[Dict]:  # pragma: no cover
         """
         Get a specific topic
         """
         raise NotImplementedError
 
-    def get_sub_topics(self, topic_id: str) -> Optional[Dict]: # pragma: no cover
+    def get_sub_topics(self, topic_id: str) -> Optional[Dict]:  # pragma: no cover
         """
         Get all sub-topics for a specific topic
         """
         raise NotImplementedError
 
-    def get_sub_topic(self, topic_id: str, sub_topic_id: str) -> Optional[Dict]: # pragma: no cover
+    def get_sub_topic(
+        self, topic_id: str, sub_topic_id: str
+    ) -> Optional[Dict]:  # pragma: no cover
         """
         Get a specific sub-topic for a specific topic
         """

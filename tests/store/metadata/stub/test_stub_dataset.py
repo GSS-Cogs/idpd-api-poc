@@ -14,9 +14,9 @@ def test_stub_get_dataset_returns_valid_structure():
     """
 
     store = StubMetadataStore()
-    
+
     dataset = store.get_dataset("cpih")
-    
+
     # Sanity check that the schema validation is working as intended
     # i.e raises with wrong structure
     with pytest.raises(ValidationError):

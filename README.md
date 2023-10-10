@@ -41,7 +41,7 @@ you `docker-compose down` and start again.
 This will populate `./devdata/out` with ttl files created from the jsonld samples
 used to power the stubbed metadata store.
 
-Each "item" in each stubbed store will have its own file RDF (.ttl) file but **the critical file** is "seed.trig" which will be all the RDF representing all the other ttl files combined and organised into **distinct named graphs**.
+Each "item" in each stubbed store will have its own file RDF (.ttl) file but **the critical file** is "seed.trig" which will be all the RDF representing all the other ttl files combined and organised into **distinct named graphs** - this file will be what's loaded into the oxigraph.
 
 To sanity check go to [http://localhost:7878/](http://localhost:7878/) and query against one of the named graphs, example:
 

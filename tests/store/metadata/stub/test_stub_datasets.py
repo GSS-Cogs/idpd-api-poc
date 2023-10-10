@@ -14,9 +14,9 @@ def test_stub_get_datasets_returns_valid_structure():
     """
 
     store = StubMetadataStore()
-    
+
     datasets = store.get_datasets()
-    
+
     # Sanity check that the schema validation is working as intended
     # i.e raises with wrong structure
     with pytest.raises(ValidationError):

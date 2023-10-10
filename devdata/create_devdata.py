@@ -134,7 +134,7 @@ def populate(oxigraph_url=None):
 
     # etc etc...
 
-    seed = Path(repo_root / f"devdata/out/seed.trig")
+    seed = Path(repo_root / "devdata/out/seed.trig")
     with open(seed, "w") as f:
         for prefix in prefixes:
             f.write(prefix)
@@ -156,6 +156,7 @@ def populate(oxigraph_url=None):
     configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
     db = Dataset(store=SPARQLUpdateStore(*configuration, node_to_sparql=skolemise))
     db.parse(seed)
+
 
 if __name__ == "__main__":
     oxigraph_url = os.getenv("GRAPH_DB_URL", None)
