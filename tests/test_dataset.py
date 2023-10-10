@@ -1,3 +1,8 @@
+import json
+from fastapi.exceptions import ResponseValidationError
+from pydantic.error_wrappers import ValidationError
+import pytest
+import pathlib
 from unittest.mock import MagicMock
 
 import pytest
@@ -8,7 +13,7 @@ from fastapi.exceptions import ResponseValidationError
 
 from constants import JSONLD
 from fixtures.datasets import dataset_data
-from main import app, StubMetadataStore
+from main import app, OxigraphMetadataStore
 
 # Devnotes:
 
@@ -42,7 +47,7 @@ def test_dataset_valid_structure_200(expected_dataset_response_data):
     mock_metadata_store.get_dataset = MagicMock(
         return_value=expected_dataset_response_data
     )
-    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
+    app.dependency_overrides[OxigraphMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
@@ -68,7 +73,7 @@ def test_dataset_invalid_structure_raises():
     mock_metadata_store.get_dataset = MagicMock(
         return_value={"items": [{"invalid_field": "Invalid Dataset"}], "offset": 0}
     )
-    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
+    app.dependency_overrides[OxigraphMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
@@ -90,7 +95,7 @@ def test_dataset_404():
 
     mock_metadata_store = MagicMock()
     mock_metadata_store.get_dataset = MagicMock(return_value=None)
-    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
+    app.dependency_overrides[OxigraphMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
@@ -112,7 +117,7 @@ def test_dataset_406():
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_dataset = MagicMock(return_value=["foo"])
-    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
+    app.dependency_overrides[OxigraphMetadataStore] = lambda: mock_metadata_store
 
     # Override the stub_store dependency with the mock_metadata_store
     # Create a TestClient for your FastAPI app

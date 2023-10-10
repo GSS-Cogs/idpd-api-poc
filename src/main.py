@@ -5,7 +5,7 @@ from fastapi import Depends, FastAPI, Request, Response, status
 
 from constants import JSONLD
 import schemas
-from store import StubCsvStore, StubMetadataStore
+from store import OxigraphMetadataStore, StubCsvStore, StubMetadataStore
 
 # Simple env var flag to allow local browsing of api responses
 # while developing.
@@ -38,7 +38,7 @@ def dataset(
     request: Request,
     response: Response,
     dataset_id: str,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: StubMetadataStore = Depends(OxigraphMetadataStore),
 ):
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         dataset = metadata_store.get_dataset(dataset_id)

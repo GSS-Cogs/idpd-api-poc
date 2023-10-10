@@ -1,0 +1,36 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ns1: <http://www.w3.org/2006/vcard/ns#> .
+@prefix ns2: <https://data.ons.gov.uk/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://data.ons.gov.uk/datasets/cpih/record> a dcat:CatalogRecord ;
+    dcterms:created "2023-10-10T11:52:03+00:00"^^xsd:dateTime ;
+    foaf:primaryTopic <https://data.ons.gov.uk/datasets/cpih> .
+
+<https://data.ons.gov.uk/datasets/cpih> a dcat:DatasetSeries ;
+    dcterms:abstract "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with..."@en ;
+    dcterms:accrualPeriodicity <http://purl.org/cld/freq/monthly> ;
+    dcterms:creator <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
+    dcterms:description "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with..."@en ;
+    dcterms:identifier "cpih" ;
+    dcterms:issued "2017-01-01T00:00:00"^^xsd:dateTime ;
+    dcterms:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
+    dcterms:publisher <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
+    dcterms:spatial <http://statistics.data.gov.uk/id/statistical-geography/K02000001> ;
+    dcterms:temporal [ dcat:endDate "2019-03-01T00:00:00+00:00"^^xsd:dateTime ;
+            dcat:startDate "2005-01-01T00:00:00+00:00"^^xsd:dateTime ] ;
+    dcterms:title "Consumer Price Inflation including owner occupiers' housing costs (CPIH)"@en ;
+    dcat:contactPoint [ ns1:fn "Consumer Price Inflation Enquiries"@en ;
+            ns1:hasEmail <mailto:cpih@ons.gov.uk> ] ;
+    dcat:keyword "consumer price index"@en,
+        "consumer price index including owner occupiers' housing costs"@en,
+        "consumer price inflation"@en,
+        "cpi"@en,
+        "cpih"@en,
+        "inflation"@en ;
+    dcat:theme <https://data.ons.gov.uk/theme/economy>,
+        <https://data.ons.gov.uk/theme/prices> ;
+    ns2:nextRelease "2019-04-19T09:30:00+00:00"^^xsd:dateTime .
+
