@@ -73,3 +73,12 @@ class Datasets(BaseModel):
     items: List[Dataset]
     offset: int
     count: int
+
+class Version(BaseModel):
+    identifier: int
+    foo: str
+
+class Versions(BaseModel):
+    items: List[Version]
+    offset: int
+    count: int

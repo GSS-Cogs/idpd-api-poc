@@ -65,7 +65,17 @@ class StubMetadataStore(BaseMetadataStore):
         return edition
 
     def get_versions(self, dataset_id: str, edition_id: str) -> Dict:
-        raise NotImplementedError
+        versions_for_edition = [
+            x
+            for x in self.versions["items"]
+            if x["in_edition"].endswith(edition_id) and x["in_dataset"] == dataset_id
+        ]
+
+        return {
+            "items": versions_for_edition,
+            "count": len(versions_for_edition),
+            "offset": 0,
+        }
 
     def get_version(self, dataset_id: str, edition_id: str, version_id: str) -> Dict:
         raise NotImplementedError
