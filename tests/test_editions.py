@@ -7,7 +7,7 @@ import pytest
 
 from constants import JSONLD
 from main import app, StubMetadataStore
-from fixtures import expected_editions_response_data
+from fixtures.editions import editions_data
 
 # Devnotes:
 
@@ -19,6 +19,10 @@ from fixtures import expected_editions_response_data
 
 ENDPOINT = "/datasets/some-dataset-id/editions"
 
+# Fixture to load expected dataset data from a JSON file
+@pytest.fixture
+def expected_editions_response_data():
+    return editions_data()
 
 def test_editions_valid_structure_200(expected_editions_response_data):
     """
