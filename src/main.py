@@ -38,7 +38,7 @@ def dataset(
     request: Request,
     response: Response,
     dataset_id: str,
-    metadata_store: StubMetadataStore = Depends(OxigraphMetadataStore),
+    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         dataset = metadata_store.get_dataset(dataset_id)
