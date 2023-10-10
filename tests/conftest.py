@@ -19,7 +19,21 @@ def setup_before_all_tests():
     Spins up oxigraph for testing and populates
     it via the default script in /devdata
     """
+
     docker_client: DockerClient = docker.from_env()
+
+    # Run shutdown first, as this can quite easily get tangled
+    # try catch as otherwise it'll error if there's no
+    # container to shut down and delete.
+    try:
+        docker_client.containers.get("oxigraph_test").stop()
+    except:
+        pass
+
+    try:
+        docker_client.containers.get("oxigraph_test").remove()
+    except:
+        pass
 
     # Frontend service
     docker_client.containers.run(
