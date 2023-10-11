@@ -24,6 +24,8 @@ There is a `Makefile` with some useful development helpers:
 - `make test` to run the unit tests.
 - `make fmt` to format and lint your code.
 
+**Note:** - with `make test` you'll need to first shut down any local oxigraph container you have running first as the tests currently spin one up using that same port.
+
 ### Oxigraph
 
 #### Running Oxigraph Locally
@@ -36,6 +38,7 @@ you `docker-compose down` and start again.
 #### Populating Oxigraph
 
 - Make sure you've installed dev dependencies via `pipenv sync --dev`
+- Set an env var to sepcify the graph you're using `export GRAPH_DB_URL=http://localhost:7878`
 - run `pipenv run python3 ./devdata/create_devdata.py`
 
 This will populate `./devdata/out` with ttl files created from the jsonld samples
@@ -59,9 +62,3 @@ SELECT * FROM <https://data.ons.gov.uk/datasets/cpih/record> WHERE {
 ```
 
 Where the _named graph_ is `https://data.ons.gov.uk/datasets/cpih/record` - you can get examples of others from your "seed.trig" file.
-
-### Testing
-
-The unit tests are made with pytest and to run the tests use command: `pipenv run pytest`.
-
-**Note:** - you'll need to first shut down any local oxigraph container you have running first as the tests need to spin one up using that same port.
