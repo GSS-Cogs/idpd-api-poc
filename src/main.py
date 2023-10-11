@@ -5,7 +5,7 @@ from fastapi import Depends, FastAPI, Request, Response, status
 
 from constants import JSONLD
 import schemas
-from store import StubCsvStore, StubMetadataStore
+from store import OxigraphMetadataStore, StubCsvStore, StubMetadataStore
 
 # Simple env var flag to allow local browsing of api responses
 # while developing.
