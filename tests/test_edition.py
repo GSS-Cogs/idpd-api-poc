@@ -8,7 +8,7 @@ import pytest
 from constants import JSONLD
 from main import app, StubMetadataStore
 
-from fixtures.editions import edition_data
+from fixtures.editions import expected_edition_response_data
 
 
 # Devnotes:
@@ -21,10 +21,6 @@ from fixtures.editions import edition_data
 
 ENDPOINT = "/datasets/some-dataset-id/editions/some-edition-id"
 
-# Fixture to load expected dataset data from a JSON file
-@pytest.fixture
-def expected_edition_response_data():
-    return edition_data()
 
 def test_edition_valid_structure_200(expected_edition_response_data):
     """
@@ -57,11 +53,11 @@ def test_edition_invalid_structure_raises():
     """
     Confirm that:
     
-    the store.get_edition(id) method is
-    called where an "accept: application/json+ld"
-    header is provided ....but... the store provides
-    invalid data then a server-side exception is
-    raised.
+    - Where we have an "accept: application/json+ld" header.
+    - Then store.get_edition() is called exactly once.
+    - And if store.get_edition() returns data that does not
+      match the response schema.
+    - A ResponseValidationError is raised.
     """
 
     mock_metadata_store = MagicMock()
