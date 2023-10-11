@@ -29,7 +29,10 @@ class StubMetadataStore(BaseMetadataStore):
 
         with open(Path(content_dir / "topics.json").absolute()) as f:
             self.topics = json.load(f)
-
+        
+        with open(Path(content_dir / "versions.json").absolute()) as f:
+            self.versions = json.load(f)
+        
     def get_datasets(self) -> Dict:
         return self.datasets
 

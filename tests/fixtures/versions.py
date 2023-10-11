@@ -5,7 +5,7 @@ import pathlib
 def versions_data():
     """
     Returns a dictionary representing the dictionary
-    we'd expect returned from store.get_datasets().
+    we'd expect returned from store.get_versions().
     """
     file_path = pathlib.Path("src/store/metadata/stub/content/versions.json")
     with open(file_path, "r") as json_file:
