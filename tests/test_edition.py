@@ -8,7 +8,7 @@ import pytest
 from constants import JSONLD
 from main import app, StubMetadataStore
 
-from fixtures.editions import expected_edition_response_data
+from fixtures.editions import edition_test_data
 
 
 # Devnotes:
@@ -22,7 +22,7 @@ from fixtures.editions import expected_edition_response_data
 ENDPOINT = "/datasets/some-dataset-id/editions/some-edition-id"
 
 
-def test_edition_valid_structure_200(expected_edition_response_data):
+def test_edition_valid_structure_200(edition_test_data):
     """
     Confirms that:
 
@@ -35,7 +35,7 @@ def test_edition_valid_structure_200(expected_edition_response_data):
 
     mock_metadata_store = MagicMock()
     mock_metadata_store.get_edition = MagicMock(
-        return_value=expected_edition_response_data
+        return_value=edition_test_data
     )
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 

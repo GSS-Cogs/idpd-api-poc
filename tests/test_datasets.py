@@ -7,7 +7,7 @@ import pytest
 
 from constants import JSONLD
 from main import app, StubMetadataStore
-from fixtures.datasets import datasets_data
+from fixtures.datasets import datasets_test_data
 
 # Devnotes:
 
@@ -20,13 +20,7 @@ from fixtures.datasets import datasets_data
 ENDPOINT = "/datasets"
 
 
-# Fixture to load expected dataset data from a JSON file
-@pytest.fixture
-def expected_datasets_response_data():
-    return datasets_data()
-
-
-def test_datasets_valid_structure_200(expected_datasets_response_data):
+def test_datasets_valid_structure_200(datasets_test_data):
     """
     Confirms that:
 
@@ -38,7 +32,7 @@ def test_datasets_valid_structure_200(expected_datasets_response_data):
 
     mock_metadata_store = MagicMock()
     mock_metadata_store.get_datasets = MagicMock(
-        return_value=expected_datasets_response_data
+        return_value=datasets_test_data
     )
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 

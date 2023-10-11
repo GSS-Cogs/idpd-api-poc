@@ -7,7 +7,7 @@ import pytest
 
 from constants import JSONLD
 from main import app, StubMetadataStore
-from fixtures.editions import expected_editions_response_data
+from fixtures.editions import editions_test_data
 
 # Devnotes:
 
@@ -20,7 +20,7 @@ from fixtures.editions import expected_editions_response_data
 ENDPOINT = "/datasets/some-dataset-id/editions"
 
 
-def test_editions_valid_structure_200(expected_editions_response_data):
+def test_editions_valid_structure_200(editions_test_data):
     """
     Confirms that:
     - Where we have an "accept: application/json+ld" header.
@@ -33,7 +33,7 @@ def test_editions_valid_structure_200(expected_editions_response_data):
     # Create a mock store with a callable mocked get_editions() method
     mock_metadata_store = MagicMock()
     mock_metadata_store.get_editions = MagicMock(
-        return_value=expected_editions_response_data
+        return_value=editions_test_data
     )
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
