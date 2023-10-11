@@ -27,22 +27,19 @@ def get_all_datasets(
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
     """
-    Retrieve a list of datasets.
-
-    This endpoint returns a list of datasets available in the system.
-
-    Parameters:
+    Retrieve all the datasets.
+    This endpoint returns information on datasets available in the system.
+    
     - request: The HTTP request object.
     - response: The HTTP response object.
     - metadata_store: The metadata store dependency.
 
     Response:
-    - 200 OK: Returns a list of datasets.
+    - 200 OK: Returns all the datasets.
     - 404 Not Found: If no datasets are found.
     """
         
     if request.headers["Accept"] == JSONLD or BROWSABLE:
-        response.status_code = status.HTTP_200_OK
         datasets = metadata_store.get_datasets()
         if datasets is not None:
             response.status_code = status.HTTP_200_OK
@@ -63,10 +60,8 @@ def get_dataset_by_id(
 ):
     """
     Retrieve information about a specific dataset by ID.
-
     This endpoint returns detailed information about a dataset based on its unique identifier.
 
-    Parameters:
     - request: The HTTP request object.
     - response: The HTTP response object.
     - dataset_id: The unique identifier of the dataset.
@@ -89,25 +84,23 @@ def get_dataset_by_id(
 
 
 @app.get("/datasets/{dataset_id}/editions")
-def get_dataset_by_editions(
+def get_dataset_editions(
     request: Request,
     response: Response,
     dataset_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
     """
-    Retrieve a list of editions for a specific dataset.
+    Retrieve all the editions for a specific dataset.
+    This endpoint returns all the editions associated with a particular dataset.
 
-    This endpoint returns a list of editions associated with a particular dataset.
-
-    Parameters:
     - request: The HTTP request object.
     - response: The HTTP response object.
     - dataset_id: The unique identifier of the dataset.
     - metadata_store: The metadata store dependency.
 
     Response:
-    - 200 OK: Returns a list of editions.
+    - 200 OK: Returns all the editions.
     - 404 Not Found: If no editions are found for the dataset.
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
@@ -132,10 +125,8 @@ def get_dataset_edition_by_id(
 ):
     """
     Retrieve information about a specific edition of a dataset.
-
     This endpoint returns detailed information about a specific edition of a dataset.
-
-    Parameters:
+    
     - request: The HTTP request object.
     - response: The HTTP response object.
     - dataset_id: The unique identifier of the dataset.
@@ -165,17 +156,15 @@ def get_all_publishers(
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
     """
-    Retrieve a list of publishers.
-
-    This endpoint returns a list of publishers available in the system.
-
-    Parameters:
+    Retrieve all the publishers.
+    This endpoint returns all the publishers available in the system.
+    
     - request: The HTTP request object.
     - response: The HTTP response object.
     - metadata_store: The metadata store dependency.
 
     Response:
-    - 200 OK: Returns a list of publishers.
+    - 200 OK: Returns all the publishers.
     - 404 Not Found: If no publishers are found.
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
@@ -200,10 +189,8 @@ def get_publisher_by_id(
 ):
     """
     Retrieve information about a specific publisher by ID.
-
     This endpoint returns detailed information about a specific publisher based on its unique identifier.
-
-    Parameters:
+    
     - request: The HTTP request object.
     - response: The HTTP response object.
     - publisher_id: The unique identifier of the publisher.
@@ -232,17 +219,15 @@ def get_all_topics(
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
     """
-    Retrieve a list of topics.
-
-    This endpoint returns a list of topics available in the system.
-
-    Parameters:
+    Retrieve all the topics.
+    This endpoint returns all of the topics available in the system.
+    
     - request: The HTTP request object.
     - response: The HTTP response object.
     - metadata_store: The metadata store dependency.
 
     Response:
-    - 200 OK: Returns a list of topics.
+    - 200 OK: Returns all of the topics.
     - 404 Not Found: If no topics are found.
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
@@ -267,10 +252,8 @@ def get_topic_by_id(
 ):
     """
     Retrieve information about a specific topic by ID.
-
     This endpoint returns detailed information about a specific topic based on its unique identifier.
 
-    Parameters:
     - request: The HTTP request object.
     - response: The HTTP response object.
     - topic_id: The unique identifier of the topic.
@@ -304,10 +287,8 @@ def get_dataset_edition_version_by_id(
 ):
     """
     Retrieve a specific version and edition of a dataset.
-
     This endpoint allows downloading a specific version of a dataset in CSV format.
 
-    Parameters:
     - request: The HTTP request object.
     - response: The HTTP response object.
     - dataset_id: The unique identifier of the dataset.
