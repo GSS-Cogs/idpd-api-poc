@@ -42,6 +42,24 @@ class PeriodOfTime(BaseModel):
     )
 
 
+class Column(BaseModel):
+    name: str
+    datatype: str
+    titles: str
+    description: str
+
+
+class TableSchema(BaseModel):
+    columns: list[Column]
+
+
+class Distribution(BaseModel):
+    id: str = Field(alias="@id")
+    type: List[str] = Field(alias="@type")
+    media_type: str
+    table_schema: TableSchema
+
+
 # If we wanted to provide the ability to attach arbitrary RDF we might want to
 # look at https://github.com/pydantic/pydantic/discussions/5853
 class Dataset(BaseModel):
@@ -74,11 +92,44 @@ class Datasets(BaseModel):
     offset: int
     count: int
 
+
+class Edition(BaseModel):
+    context: Literal["https://data.ons.gov.uk/ns#"] = Field(alias="@context")
+    id: str = Field(alias="@id")
+    type: Literal["dcat:Dataset"] = Field(alias="@type")
+    in_series: str
+    identifier: str
+    title: str = Field(max_length=90)
+    summary: str = Field(max_length=200)
+    description: str = Field(max_length=250)
+    publisher: str
+    creator: str
+    contact_point: ContactPoint
+    theme: str
+    frequency: Frequency
+    keywords: list[str]
+    licence: str
+    release_date: str = Field(
+        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
+    )
+    spatial_coverage: str = Field(pattern=r"^[EJKLMNSW]{1}\d{8}$")
+    temporal_coverage: str
+    next_release: str = Field(
+        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",
+    )
+    distribution: Distribution
+
+
+class Editions(BaseModel):
+    items: List[Edition]
+
+
 class Version(BaseModel):
     identifier: int
     foo: str
     in_dataset: str
     in_edition: str
+
 
 class Versions(BaseModel):
     items: List[Version]

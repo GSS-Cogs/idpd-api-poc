@@ -1,10 +1,15 @@
 from unittest.mock import MagicMock
 
 from fastapi import status
+from fastapi.exceptions import ResponseValidationError
 from fastapi.testclient import TestClient
+import pytest
 
 from constants import JSONLD
 from main import app, StubMetadataStore
+
+from fixtures.editions import edition_test_data
+
 
 # Devnotes:
 
@@ -17,18 +22,19 @@ from main import app, StubMetadataStore
 ENDPOINT = "/datasets/some-dataset-id/editions/some-edition-id"
 
 
-def test_edition_200():
+def test_edition_valid_structure_200(edition_test_data):
     """
     Confirms that:
 
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_edition() is called exactly once.
     - And if store.get_edition() returns not None
+    - And the store provides valid data
     - Status code 200 is returned.
     """
 
     mock_metadata_store = MagicMock()
-    mock_metadata_store.get_edition = MagicMock(return_value=["foo"])
+    mock_metadata_store.get_edition = MagicMock(return_value=edition_test_data)
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
@@ -36,9 +42,31 @@ def test_edition_200():
     response = client.get(ENDPOINT, headers={"Accept": JSONLD})
 
     # Assertions
-    assert response.json() == ["foo"]
     assert response.status_code == status.HTTP_200_OK
     mock_metadata_store.get_edition.assert_called_once()
+
+
+def test_edition_invalid_structure_raises():
+    """
+    Confirm that:
+
+    - Where we have an "accept: application/json+ld" header.
+    - Then store.get_edition() is called exactly once.
+    - And if store.get_edition() returns data that does not
+      match the response schema.
+    - A ResponseValidationError is raised.
+    """
+
+    mock_metadata_store = MagicMock()
+    mock_metadata_store.get_edition = MagicMock(
+        return_value={"items": [{"invalid_field": "Invalid edition"}]}
+    )
+    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
+
+    # Create a TestClient for your FastAPI app
+    client = TestClient(app)
+    with pytest.raises(ResponseValidationError):
+        response = client.get(ENDPOINT, headers={"Accept": JSONLD})
 
 
 def test_edition_404():

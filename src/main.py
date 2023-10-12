@@ -52,7 +52,7 @@ def dataset(
         return
 
 
-@app.get("/datasets/{dataset_id}/editions")
+@app.get("/datasets/{dataset_id}/editions", response_model=Optional[schemas.Editions])
 def editions(
     request: Request,
     response: Response,
@@ -71,7 +71,10 @@ def editions(
         return
 
 
-@app.get("/datasets/{dataset_id}/editions/{edition_id}")
+@app.get(
+    "/datasets/{dataset_id}/editions/{edition_id}",
+    response_model=Optional[schemas.Edition],
+)
 def edition(
     request: Request,
     response: Response,
@@ -167,7 +170,10 @@ def topic(
         return
 
 
-@app.get("/datasets/{dataset_id}/editions/{edition_id}/versions",  response_model=Optional[schemas.Versions])
+@app.get(
+    "/datasets/{dataset_id}/editions/{edition_id}/versions",
+    response_model=Optional[schemas.Versions],
+)
 def versions(
     request: Request,
     response: Response,
@@ -185,7 +191,7 @@ def versions(
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
-    
+
 
 # note: download only for now, needs expanding
 @app.get("/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}")
