@@ -88,11 +88,11 @@ class StubMetadataStore(BaseMetadataStore):
         return self.publishers
 
     def get_publisher(self, publisher_id: str) -> Dict:
-        publishers = self.get_publishers(publisher_id)
+        publishers = self.get_publishers()
         if publishers is None:
             return None
         return next(
-            (x for x in publishers["items"] if x["identifier"] == publisher_id),
+            (x for x in publishers["items"] if x["@id"].endswith(publisher_id)),
             None,
         )
 
