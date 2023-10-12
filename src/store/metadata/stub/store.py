@@ -112,11 +112,11 @@ class StubMetadataStore(BaseMetadataStore):
         topic = self.get_topic(topic_id)
         if topic is None:
             return None
-        topic_id = topic["@id"]
         
+        sub_topic_ids = topic["sub_topics"]
         topics = self.get_topics()
-        topics_with_this_child = 
-        sub_topics = 
+        sub_topics = [x for x in topics is x["@id"] in sub_topic_ids]
+        
         if sub_topics is None:
             return None
         return {

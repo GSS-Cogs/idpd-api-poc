@@ -6,19 +6,16 @@
             "identifier": "economy",
             "title": "Economy",
             "description": "something describing economy",
-            "parents_topics": [],
-            "child_topics": 
+            "sub_topics": [
                 "http://localhost:8000/topics/prices"
+            ]
         },
         {
             "@id": "http://localhost:8000/topics/prices",
             "identifier": "prices",
             "title": "Prices",
             "description": "something describing prices",
-            "parents_topics": [
-                "http://localhost:8000/topics/economy"
-            ],
-            "child_topics": []
+            "sub_topics": null
         }
     ],
     "count": 2,
