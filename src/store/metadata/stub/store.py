@@ -30,6 +30,9 @@ class StubMetadataStore(BaseMetadataStore):
         with open(Path(content_dir / "topics.json").absolute()) as f:
             self.topics = json.load(f)
 
+        with open(Path(content_dir / "versions.json").absolute()) as f:
+            self.versions = json.load(f)
+
     def get_datasets(self) -> Dict:
         return self.datasets
 
@@ -62,25 +65,65 @@ class StubMetadataStore(BaseMetadataStore):
         return edition
 
     def get_versions(self, dataset_id: str, edition_id: str) -> Dict:
-        raise NotImplementedError
+        edition = self.get_edition(dataset_id, edition_id)
+        if edition is None:
+            return None
+        versions_for_editions = [x for x in self.versions["items"] if x["version_of"] == edition["@id"]]
+        if versions_for_editions is not None:
+            return {
+                "items": versions_for_editions,
+                "count": len(versions_for_editions),
+                "offset": 0,
+            }
+        return None
 
     def get_version(self, dataset_id: str, edition_id: str, version_id: str) -> Dict:
-        raise NotImplementedError
+        versions = self.get_versions(dataset_id, edition_id)
+        return next(
+            (x for x in versions["items"] if x["identifier"] == version_id),
+            None,
+        )
 
     def get_publishers(self) -> Dict:
         return self.publishers
 
     def get_publisher(self, publisher_id: str) -> Dict:
-        raise NotImplementedError
+        publishers = self.get_publishers(publisher_id)
+        if publishers is None:
+            return None
+        return next(
+            (x for x in publishers["items"] if x["identifier"] == publisher_id),
+            None,
+        )
 
     def get_topics(self) -> Dict:
         return self.topics
 
     def get_topic(self, topic_id: str) -> Dict:
-        raise NotImplementedError
+        topics = self.get_topics()
+        if topics is None:
+            return None
+        return next(
+            (x for x in topics["items"] if x["identifier"].endswith(topic_id)),
+            None,
+        )
 
     def get_sub_topics(self, topic_id: str) -> Dict:
-        raise NotImplementedError
+        topic = self.get_topic(topic_id)
+        if topic is None:
+            return None
+        topic_id = topic["@id"]
+        
+        topics = self.get_topics()
+        topics_with_this_child = 
+        sub_topics = 
+        if sub_topics is None:
+            return None
+        return {
+                "items": sub_topics,
+                "count": len(sub_topics),
+                "offset": 0,
+            }
 
     def get_sub_topic(self, topic_id: str, sub_topic_id: str) -> Dict:
         raise NotImplementedError

@@ -1,55 +1,35 @@
 {
+    "@context": "http://localhost:8000/context",
     "items": [
         {
-            "@context": "https://data.ons.gov.uk/ns#",
-            "@id": "https://data.ons.gov.uk/datasets/cpih/edition/2022-01",
+            "@id": "http://localhost:8000/datasets/cpih/editions/2022-01",
             "@type": "dcat:Dataset",
-            "in_series": "https://data.ons.gov.uk/datasets/cpih",
+            "in_series": "http://localhost:8000/datasets/cpih",
             "identifier": "2022-01",
             "title": "Consumer Prices Index including owner occupiers' housing costs (CPIH)",
             "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a...",
             "description": "The Consumer Prices Index...",
-            "publisher": "office-for-national-statistics",
+            "publisher": "http://localhost:8000/office-for-national-statistics",
             "creator": "office-for-national-statistics",
             "contact_point": {
               "name": "Consumer Price Inflation Enquiries",
               "email": "mailto:cpih@ons.gov.uk"
             },
-            "theme": "economy",
+            "topics": [
+              "http://localhost:8000/topics/economy"
+            ],
             "frequency": "monthly",
             "keywords": ["inflation", "consumer price index", "CPIH"],
             "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
             "release_date": "2017-02-21T09:30:00Z",
             "spatial_coverage": "K02000001",
+            "has_version": [
+              "http://localhost:8000/datasets/cpih/editions/2022-01/versions/1"
+            ],
             "temporal_coverage": "P33Y1M",
-            "next_release": "2017-03-11T09:30:00Z",
-            "distribution": {
-              "@id": "https://data.ons.gov.uk/datasets/cpih/edition/2022-02.csv",
-              "@type": ["dcat:Distribution", "csvw:Table"],
-              "media_type": "text/csv",
-              "table_schema": {
-                "columns": [
-                  {
-                    "name": "geography",
-                    "datatype": "string",
-                    "titles": "Geography",
-                    "description": "The geography associated with the observation."
-                  },
-                  {
-                    "name": "time_period",
-                    "datatype": "string",
-                    "titles": "Time period",
-                    "description": "The time period associated with the observation."
-                  },
-                  {
-                    "name": "cpih",
-                    "datatype": "number",
-                    "titles": "Consumer price index",
-                    "description": "The consumer price index for the given time period."
-                  }
-                ]
-              }
-            }
+            "next_release": "2017-03-11T09:30:00Z"
           }
-    ]
+    ],
+    "count": 1,
+    "offset": 0
 }

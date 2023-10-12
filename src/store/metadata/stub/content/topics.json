@@ -1,22 +1,26 @@
 {
+    "@context": "http://localhost:8000/context",
     "items": [
         {
-            "id": "theme1",
-            "foo": "foo",
-            "bar": "bar",
-            "baz": "baz"
+            "@id": "http://localhost:8000/topics/economy",
+            "identifier": "economy",
+            "title": "Economy",
+            "description": "something describing economy",
+            "parents_topics": [],
+            "child_topics": 
+                "http://localhost:8000/topics/prices"
         },
         {
-            "id": "theme2",
-            "foo": "foo",
-            "bar": "bar",
-            "baz": "baz"
-        },
-        {
-            "id": "theme3",
-            "foo": "foo",
-            "bar": "bar",
-            "baz": "baz"
+            "@id": "http://localhost:8000/topics/prices",
+            "identifier": "prices",
+            "title": "Prices",
+            "description": "something describing prices",
+            "parents_topics": [
+                "http://localhost:8000/topics/economy"
+            ],
+            "child_topics": []
         }
-    ]
+    ],
+    "count": 2,
+    "index": 0
 }

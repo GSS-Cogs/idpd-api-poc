@@ -5,6 +5,7 @@
     "ons": "https://data.ons.gov.uk/ns#",
     "vcard": "http://www.w3.org/2006/vcard/ns#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
     "creator": {
         "@id": "dcterms:creator",
         "@type": "@id",
@@ -107,13 +108,14 @@
     },
     "theme": {
         "@id": "dcat:theme",
-        "@type": "@id",
-        "@context": {
-            "@base": "https://data.ons.gov.uk/theme/"
-        }
+        "@type": "@id"
     },
     "title": {
         "@id": "dcterms:title",
         "@language": "en"
-    }
+    },
+    "items": "hydra:collection",
+    "version_of": "hydra:collection",
+    "offset": "hydra:offset",
+    "count": "hydra:totalitems"
 }

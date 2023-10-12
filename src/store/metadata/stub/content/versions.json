@@ -1,0 +1,74 @@
+{
+    "@context": "http://localhost:8000/context",
+    "items": [
+        {
+            "@type": ["dcat:Distribution", "csvw:Table"],
+            "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1",
+            "identifier": "1",
+            "title": "Consumer Prices Index including owner occupiers' housing costs (CPIH)",
+            "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a...",
+            "description": "The Consumer Prices Index...",
+            "download_url": "http://localhost:8000/datasets/cpih/edition/2022-01/versions/1.csv",
+            "media_type": "text/csv",
+            "version_of": "http://localhost:8000/datasets/cpih/editions/2022-01",
+            "table_schema": {
+            "columns": [
+                {
+                "name": "geography",
+                "datatype": "string",
+                "titles": "Geography",
+                "description": "The geography associated with the observation."
+                },
+                {
+                "name": "time_period",
+                "datatype": "string",
+                "titles": "Time period",
+                "description": "The time period associated with the observation."
+                },
+                {
+                "name": "cpih",
+                "datatype": "number",
+                "titles": "Consumer price index",
+                "description": "The consumer price index for the given time period."
+                }
+            ]
+            }
+        },
+        {
+            "@context": "http://localhost:8000/ns#",
+            "@id": "http://localhost:8000/datasets/cpih/editions/2022-01/versions/2",
+            "identifier": "2",
+            "title": "Consumer Prices Index including owner occupiers' housing costs (CPIH)",
+            "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a...",
+            "description": "The Consumer Prices Index...",
+            "download_url": "http://localhost:8000/datasets/cpih/edition/2022-01/versions/2.csv",
+            "@type": ["dcat:Distribution", "csvw:Table"],
+            "media_type": "text/csv",
+            "version_of": "http://localhost:8000/datasets/cpih/edition/2022-01",
+            "table_schema": {
+            "columns": [
+                {
+                "name": "geography",
+                "datatype": "string",
+                "titles": "Geography",
+                "description": "The geography associated with the observation."
+                },
+                {
+                "name": "time_period",
+                "datatype": "string",
+                "titles": "Time period",
+                "description": "The time period associated with the observation."
+                },
+                {
+                "name": "cpih",
+                "datatype": "number",
+                "titles": "Consumer price index",
+                "description": "The consumer price index for the given time period."
+                }
+            ]
+            }
+        }
+    ],
+    "count": 2,
+    "offset": 0
+}

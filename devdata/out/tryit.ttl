@@ -1,0 +1,34 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <https://data.ons.gov.uk/ns#> .
+@prefix ns2: <http://www.w3.org/2006/vcard/ns#> .
+@prefix ns3: <http://www.w3.org/ns/hydra/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://data.ons.gov.uk/datasets/cpih> a dcat:DatasetSeries ;
+    dcterms:abstract "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with..."@en ;
+    dcterms:accrualPeriodicity <http://purl.org/cld/freq/monthly> ;
+    dcterms:creator <https://staging.idpd.uk/publishers/office-for-national-statistics> ;
+    dcterms:description "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with..."@en ;
+    dcterms:identifier "cpih" ;
+    dcterms:issued "2017-01-01T00:00:00"^^xsd:dateTime ;
+    dcterms:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
+    dcterms:publisher <https://staging.idpd.uk/publishers/office-for-national-statistics> ;
+    dcterms:spatial <http://statistics.data.gov.uk/id/statistical-geography/K02000001> ;
+    dcterms:temporal [ dcat:endDate "2019-03-01T00:00:00+00:00"^^xsd:dateTime ;
+            dcat:startDate "2005-01-01T00:00:00+00:00"^^xsd:dateTime ] ;
+    dcterms:title "Consumer Price Inflation including owner occupiers' housing costs (CPIH)"@en ;
+    dcat:contactPoint [ ns2:fn "Consumer Price Inflation Enquiries"@en ;
+            ns2:hasEmail <mailto:cpih@ons.gov.uk> ] ;
+    dcat:keyword "consumer price index"@en,
+        "consumer price index including owner occupiers' housing costs"@en,
+        "consumer price inflation"@en,
+        "cpi"@en,
+        "cpih"@en,
+        "inflation"@en ;
+    ns1:nextRelease "2019-04-19T09:30:00+00:00"^^xsd:dateTime .
+
+[] ns3:collection <https://data.ons.gov.uk/datasets/cpih> ;
+    ns3:offset 0 ;
+    ns3:totalitems 1 .
+
