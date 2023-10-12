@@ -83,7 +83,6 @@ class Dataset(BaseModel):
     spatial_coverage: str = Field(pattern=r"^[EJKLMNSW]{1}\d{8}$")
     temporal_coverage: PeriodOfTime
 
-
 class Datasets(BaseModel):
     items: List[Dataset]
     offset: int
@@ -113,3 +112,13 @@ class Edition(BaseModel):
 
 class Editions(BaseModel):
     items: List[Edition]
+class Version(BaseModel):
+    identifier: int
+    foo: str
+    in_dataset: str
+    in_edition: str
+
+class Versions(BaseModel):
+    items: List[Version]
+    offset: int
+    count: int
