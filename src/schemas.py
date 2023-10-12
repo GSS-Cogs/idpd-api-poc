@@ -41,14 +41,17 @@ class PeriodOfTime(BaseModel):
         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",
     )
 
+
 class Column(BaseModel):
     name: str
     datatype: str
     titles: str
     description: str
 
+
 class TableSchema(BaseModel):
     columns: list[Column]
+
 
 class Distribution(BaseModel):
     id: str = Field(alias="@id")
@@ -83,10 +86,12 @@ class Dataset(BaseModel):
     spatial_coverage: str = Field(pattern=r"^[EJKLMNSW]{1}\d{8}$")
     temporal_coverage: PeriodOfTime
 
+
 class Datasets(BaseModel):
     items: List[Dataset]
     offset: int
     count: int
+
 
 class Edition(BaseModel):
     context: Literal["https://data.ons.gov.uk/ns#"] = Field(alias="@context")
@@ -104,19 +109,27 @@ class Edition(BaseModel):
     frequency: Frequency
     keywords: list[str]
     licence: str
-    release_date: str = Field(pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$")
+    release_date: str = Field(
+        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
+    )
     spatial_coverage: str = Field(pattern=r"^[EJKLMNSW]{1}\d{8}$")
     temporal_coverage: str
-    next_release: str = Field(pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",)
+    next_release: str = Field(
+        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",
+    )
     distribution: Distribution
+
 
 class Editions(BaseModel):
     items: List[Edition]
+
+
 class Version(BaseModel):
     identifier: int
     foo: str
     in_dataset: str
     in_edition: str
+
 
 class Versions(BaseModel):
     items: List[Version]

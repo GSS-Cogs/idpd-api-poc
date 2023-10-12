@@ -32,9 +32,7 @@ def test_editions_valid_structure_200(editions_test_data):
 
     # Create a mock store with a callable mocked get_editions() method
     mock_metadata_store = MagicMock()
-    mock_metadata_store.get_editions = MagicMock(
-        return_value=editions_test_data
-    )
+    mock_metadata_store.get_editions = MagicMock(return_value=editions_test_data)
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
@@ -48,7 +46,7 @@ def test_editions_valid_structure_200(editions_test_data):
 def test_editions_invalid_structure_raises():
     """
     Confirm that:
-    
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_editions() is called exactly once.
     - And if store.get_editions() returns data that does not
@@ -57,7 +55,7 @@ def test_editions_invalid_structure_raises():
     """
 
     mock_metadata_store = MagicMock()
-    mock_metadata_store.get_editions = MagicMock( 
+    mock_metadata_store.get_editions = MagicMock(
         return_value={"items": [{"title": "Invalid edition"}], "offset": 0}
     )
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store

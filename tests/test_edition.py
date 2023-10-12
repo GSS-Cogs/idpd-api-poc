@@ -34,9 +34,7 @@ def test_edition_valid_structure_200(edition_test_data):
     """
 
     mock_metadata_store = MagicMock()
-    mock_metadata_store.get_edition = MagicMock(
-        return_value=edition_test_data
-    )
+    mock_metadata_store.get_edition = MagicMock(return_value=edition_test_data)
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
@@ -48,11 +46,10 @@ def test_edition_valid_structure_200(edition_test_data):
     mock_metadata_store.get_edition.assert_called_once()
 
 
-
 def test_edition_invalid_structure_raises():
     """
     Confirm that:
-    
+
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_edition() is called exactly once.
     - And if store.get_edition() returns data that does not

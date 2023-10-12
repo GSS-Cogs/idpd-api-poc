@@ -33,9 +33,7 @@ def test_dataset_valid_structure_200(dataset_test_data):
     """
 
     mock_metadata_store = MagicMock()
-    mock_metadata_store.get_dataset = MagicMock(
-        return_value=dataset_test_data
-    )
+    mock_metadata_store.get_dataset = MagicMock(return_value=dataset_test_data)
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
