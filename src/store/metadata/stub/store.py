@@ -96,7 +96,7 @@ class StubMetadataStore(BaseMetadataStore):
         return self.publishers
 
     def get_publisher(self, publisher_id: str) -> Dict:
-        publishers = contextualiseself.get_publishers()
+        publishers = self.get_publishers()
         if publishers is None:
             return None
         return contextualise(next(
