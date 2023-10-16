@@ -1,10 +1,11 @@
 {
     "@context": "http://localhost:8000/context",
     "@id": "http://localhost:8000/publishers",
-    "items": [
+    "@type": "hydra:Collection",
+    "publishers": [
         {
             "@id": "http://localhost:8000/publishers/office-for-national-statistics",
-            "tiitle": "The Office for National Statistics",
+            "title": "The Office for National Statistics",
             "description": "the shop isnt awful",
             "landing_page": "https://www.ons.gov.uk/"
         }

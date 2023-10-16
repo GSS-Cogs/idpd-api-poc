@@ -143,6 +143,11 @@
         "type": "@id",
         "@container": "@set"
       },
+    "publishers": {
+        "@id": "dcat:publisher",
+        "type": "@id",
+        "@container": "@set"
+    },
     "sub_topics": {
         "@id": "skos:narrower",
         "type": "@id",

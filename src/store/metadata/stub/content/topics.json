@@ -1,6 +1,7 @@
 {
     "@context": "http://localhost:8000/context",
     "@id": "http://localhost:8000/topics",
+    "@type": "hydra:Collection",
     "topics": [
         {
             "@id": "http://localhost:8000/topics/economy",
