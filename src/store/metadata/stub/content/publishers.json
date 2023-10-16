@@ -1,5 +1,6 @@
 {
     "@context": "http://localhost:8000/context",
+    "@id": "http://localhost:8000/publishers",
     "items": [
         {
             "@id": "http://localhost:8000/publishers/office-for-national-statistics",

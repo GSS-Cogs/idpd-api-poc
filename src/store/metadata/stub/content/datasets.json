@@ -11,7 +11,8 @@
             "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
             "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
             "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
-            "release_date": "2017-01-01T00:00:00",
+            "issued": "2017-01-01T00:00:00",
+            "modified": "2017-01-01T00:00:00",
             "next_release": "2019-04-19T09:30:00Z",
             "publisher": "http://localhost:8000/publishers/office-for-national-statistics",
             "creator": "http://localhost:8000/publishers/office-for-national-statistics",
@@ -37,8 +38,13 @@
               "start": "2005-01-01T00:00:00Z",
               "end": "2019-03-01T00:00:00Z"
             },
+            "editions_url": "http://localhost:8000/datasets/cpih/editions",
             "editions": [
-              "http://localhost:8000/datasets/cpih/editions/2022-01"
+              {
+                "@id": "http://localhost:8000/datasets/cpih/editions/2022-01",
+                "issued": "2017-02-21T09:30:00Z",
+                "modified": "2017-02-21T09:30:00Z"
+              }
             ]
         }
       ],

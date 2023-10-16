@@ -23,10 +23,16 @@
             "frequency": "monthly",
             "keywords": ["inflation", "consumer price index", "CPIH"],
             "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-            "release_date": "2017-02-21T09:30:00Z",
+            "issued": "2017-02-21T09:30:00Z",
+            "modified": "2017-02-21T09:30:00Z",
             "spatial_coverage": "K02000001",
+            "versions_url": "http://localhost:8000/datasets/cpih/editions/2022-01/versions",
             "versions": [
-              "http://localhost:8000/datasets/cpih/editions/2022-01/versions/1"
+              {
+                "@id": "http://localhost:8000/datasets/cpih/editions/2022-01",
+                "issued": "",
+                "modified": ""
+              }
             ],
             "temporal_coverage": "P33Y1M",
             "next_release": "2017-03-11T09:30:00Z",
