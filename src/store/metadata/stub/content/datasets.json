@@ -1,6 +1,9 @@
 {
     "@context": "http://localhost:8000/context",
-    "items": [
+    "@type": "dcat:Catalog",
+    "@id": "http://localhost:8000/datasets",
+    "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
+    "datasets": [
         {
             "@id": "http://localhost:8000/datasets/cpih",
             "@type": "dcat:DatasetSeries",
@@ -37,8 +40,8 @@
             "editions": [
               "http://localhost:8000/datasets/cpih/editions/2022-01"
             ]
-          }
-    ],
+        }
+      ],
     "offset": 0,
     "count": 1
 }

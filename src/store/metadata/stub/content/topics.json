@@ -1,6 +1,7 @@
 {
     "@context": "http://localhost:8000/context",
-    "items": [
+    "@id": "http://localhost:8000/topics",
+    "topics": [
         {
             "@id": "http://localhost:8000/topics/economy",
             "identifier": "economy",
@@ -8,14 +9,18 @@
             "description": "something describing economy",
             "sub_topics": [
                 "http://localhost:8000/topics/prices"
-            ]
+            ],
+            "parent_topics": null
         },
         {
             "@id": "http://localhost:8000/topics/prices",
             "identifier": "prices",
             "title": "Prices",
             "description": "something describing prices",
-            "sub_topics": null
+            "sub_topics": null,
+            "parent_topics": [
+                "http://localhost:8000/topics/economy"
+            ]
         }
     ],
     "count": 2,

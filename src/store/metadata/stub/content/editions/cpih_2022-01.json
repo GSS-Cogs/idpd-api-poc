@@ -1,9 +1,11 @@
 {
     "@context": "http://localhost:8000/context",
-    "items": [
+    "@id": "http://localhost:8000/datasets/cpih/editions",
+    "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
+    "editions": [
         {
             "@id": "http://localhost:8000/datasets/cpih/editions/2022-01",
-            "@type": "dcat:Dataset",
+            "@type": "dcat:DatasetSeries",
             "in_series": "http://localhost:8000/datasets/cpih",
             "identifier": "2022-01",
             "title": "Consumer Prices Index including owner occupiers' housing costs (CPIH)",
@@ -23,12 +25,34 @@
             "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
             "release_date": "2017-02-21T09:30:00Z",
             "spatial_coverage": "K02000001",
-            "has_version": [
+            "versions": [
               "http://localhost:8000/datasets/cpih/editions/2022-01/versions/1"
             ],
             "temporal_coverage": "P33Y1M",
-            "next_release": "2017-03-11T09:30:00Z"
+            "next_release": "2017-03-11T09:30:00Z",
+            "table_schema": {
+              "columns": [
+                  {
+                  "name": "geography",
+                  "datatype": "string",
+                  "title": "Geography",
+                  "description": "The geography associated with the observation."
+                  },
+                  {
+                  "name": "time_period",
+                  "datatype": "string",
+                  "title": "Time period",
+                  "description": "The time period associated with the observation."
+                  },
+                  {
+                  "name": "cpih",
+                  "datatype": "number",
+                  "title": "Consumer price index",
+                  "description": "The consumer price index for the given time period."
+                  }
+              ]
           }
+        }
     ],
     "count": 1,
     "offset": 0

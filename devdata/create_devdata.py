@@ -1,3 +1,15 @@
+"""
+Tool that uses jsonld files in /src/store/metadata/stub/content to:
+
+- create ttl files per resource
+- create a seed.trig file repredenting single load file of these
+  resources as named graphs.
+- loads this seed.trig into an oxigraph database running on
+  http://localhost:7878
+
+Please run this vai the Makefile if you want to finesses this behaviour.
+"""
+
 from datetime import datetime
 import json
 import os
@@ -10,13 +22,6 @@ from rdflib import ConjunctiveGraph, Dataset, BNode, Graph
 from rdflib import Literal, URIRef
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore, _node_to_sparql
 from rdflib.namespace import DCAT, DCTERMS, FOAF, RDF, XSD
-
-
-this_dir = Path(__file__).parent
-repo_root = this_dir.parent
-subbed_metadata_store_content_path = Path(
-    repo_root / "src/store/metadata/stub/content"
-).absolute()
 
 
 # TODO - will need updating when the details are worked out.
@@ -35,10 +40,13 @@ def set_context(resource_item: dict) -> dict:
     return resource_item
 
 
-def populate(oxigraph_url=None):
-    assert (
-        oxigraph_url
-    ), "You need to specfiy the oxigraph url via the OXIGRAPH_URL env var."
+def populate(oxigraph_url=None, write_to_db=True):
+
+    this_dir = Path(__file__).parent
+    repo_root = this_dir.parent
+    subbed_metadata_store_content_path = Path(
+        repo_root / "src/store/metadata/stub/content"
+    ).absolute()
 
     # Clear up any previous
     out = Path(this_dir / "out")
@@ -59,9 +67,45 @@ def populate(oxigraph_url=None):
     # Dataset resources
     # -----------------
     datasets_source_jsonld = Path(subbed_metadata_store_content_path / "datasets.json")
-
     with open(datasets_source_jsonld) as f:
         resource_file = json.load(f)
+    datasets_datasets_source_jsonl = set_context(resource_file)
+    g = Graph().parse(data=json.dumps(datasets_datasets_source_jsonl), format="json-ld")
+
+    # -----------------
+    # Editions resources
+    # -----------------
+    # Write out our graph
+    editions_source_jsonld = Path(subbed_metadata_store_content_path / "editions/cpih_2022-01.json")
+    with open(editions_source_jsonld) as f:
+        resource_file = json.load(f)
+    editions_source_jsonl = set_context(resource_file)
+    g += Graph().parse(data=json.dumps(editions_source_jsonl), format="json-ld")
+
+    versions_source_jsonld = Path(subbed_metadata_store_content_path / "editions/versions/cpih_2022-01_1.json")
+    with open(versions_source_jsonld) as f:
+        resource_file = json.load(f)
+    versions_source_jsonl = set_context(resource_file)
+    g += Graph().parse(data=json.dumps(versions_source_jsonl), format="json-ld")
+
+    topics_source_jsonld = Path(subbed_metadata_store_content_path / "topics.json")
+    with open(topics_source_jsonld) as f:
+        resource_file = json.load(f)
+    topics_source_jsonl = set_context(resource_file)
+    g += Graph().parse(data=json.dumps(topics_source_jsonl), format="json-ld")
+
+    publisher_source_jsonld = Path(subbed_metadata_store_content_path / "publishers.json")
+    with open(publisher_source_jsonld) as f:
+        resource_file = json.load(f)
+    publisher_source_jsonld = set_context(resource_file)
+    g += Graph().parse(data=json.dumps(publisher_source_jsonld), format="json-ld")
+
+    out_path = Path(repo_root / f"devdata/out/potential_seed.ttl")
+    g.serialize(out_path, format="ttl")
+
+    import sys
+    sys.exit(1)
+    
 
     for i, dataset_dict in enumerate(resource_file["items"]):
         dataset_id = dataset_dict["identifier"]
@@ -134,28 +178,34 @@ def populate(oxigraph_url=None):
 
     # etc etc...
 
-    seed = Path(repo_root / "devdata/out/seed.trig")
-    with open(seed, "w") as f:
-        for prefix in prefixes:
-            f.write(prefix)
-        f.write(linesep)
+    if write_to_db:
 
-        for line in wrangled_lines:
-            f.write(line)
+        assert (
+            oxigraph_url
+        ), "You need to specfiy the oxigraph url via the OXIGRAPH_URL env var."
 
-    # Now get this seed data into the database
-    # adapted from:
-    # - https://github.com/rossbowen/poc-api/blob/main/api/src/poc_api/database.py
-    # - https://github.com/rossbowen/poc-api/blob/main/api/src/poc_api/seed/seed.py
+        seed = Path(repo_root / "devdata/out/seed.trig")
+        with open(seed, "w") as f:
+            for prefix in prefixes:
+                f.write(prefix)
+            f.write(linesep)
 
-    def skolemise(node):
-        if isinstance(node, BNode):
-            return "<bnode:b%s>" % node
-        return _node_to_sparql(node)
+            for line in wrangled_lines:
+                f.write(line)
 
-    configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
-    db = Dataset(store=SPARQLUpdateStore(*configuration, node_to_sparql=skolemise))
-    db.parse(seed)
+        # Now get this seed data into the database
+        # adapted from:
+        # - https://github.com/rossbowen/poc-api/blob/main/api/src/poc_api/database.py
+        # - https://github.com/rossbowen/poc-api/blob/main/api/src/poc_api/seed/seed.py
+
+        def skolemise(node):
+            if isinstance(node, BNode):
+                return "<bnode:b%s>" % node
+            return _node_to_sparql(node)
+
+        configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
+        db = Dataset(store=SPARQLUpdateStore(*configuration, node_to_sparql=skolemise))
+        db.parse(seed)
 
 
 if __name__ == "__main__":
