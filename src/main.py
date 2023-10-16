@@ -1,25 +1,61 @@
+import logging
 import os
 from typing import Optional
 
 from fastapi import Depends, FastAPI, Request, Response, status
+import structlog
 
 from constants import JSONLD
 import schemas
 from store import StubCsvStore, StubMetadataStore
 
+from custom_logging import configure_logger, logger
+from structlog.contextvars import bind_contextvars, clear_contextvars
+import time
 # Simple env var flag to allow local browsing of api responses
 # while developing.
 BROWSABLE = os.environ.get("LOCAL_BROWSE_API")
 
 app = FastAPI()
+configure_logger()
 
 
+@app.middleware("http")
+async def logging_middleware(request: Request, call_next) -> Response:
+    clear_contextvars()
+    # These context vars will be added to all log entries emitted during the request
+    request_id = request.headers.get("request-id")
+    bind_contextvars(request_id=request_id)
+
+    start_time = time.perf_counter_ns()
+
+    try:
+        response = await call_next(request)
+    except Exception as exc:
+        response = Response(status_code=500)
+        structlog.get_logger("api.error").exception("Uncaught exception", exc_info=exc)
+        raise
+    finally:
+        process_time = time.perf_counter_ns() - start_time
+        status_code = response.status_code
+
+        # Your structured logging code here
+
+        response.headers["X-Process-Time"] = str(process_time / 10 ** 9)
+
+    return response
+    
 @app.get("/datasets", response_model=Optional[schemas.Datasets])
-def datasets(
+async def datasets(
     request: Request,
     response: Response,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
+    logger.info("Received request for datasets")
+    
+    # differrenct structure log examples 
+    logger.warning("This is a warning message from Structlog, with attributes", an_extra="attribute")
+    logger.error("This is an error message from Structlog")    
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
         datasets = metadata_store.get_datasets()
@@ -40,6 +76,7 @@ def dataset(
     dataset_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
+    logger.info(f"Received request for dataset with ID: {dataset_id}", dataset_id)
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         dataset = metadata_store.get_dataset(dataset_id)
         if dataset is not None:
