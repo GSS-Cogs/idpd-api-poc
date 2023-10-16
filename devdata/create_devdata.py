@@ -82,7 +82,7 @@ def populate(oxigraph_url=None, write_to_db=True):
     editions_source_jsonl = set_context(resource_file)
     g += Graph().parse(data=json.dumps(editions_source_jsonl), format="json-ld")
 
-    versions_source_jsonld = Path(subbed_metadata_store_content_path / "editions/versions/cpih_2022-01_1.json")
+    versions_source_jsonld = Path(subbed_metadata_store_content_path / "editions/versions/cpih_2022-01.json")
     with open(versions_source_jsonld) as f:
         resource_file = json.load(f)
     versions_source_jsonl = set_context(resource_file)
