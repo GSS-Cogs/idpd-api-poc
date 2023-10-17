@@ -51,7 +51,7 @@
         "@id": "dcat:inSeries",
         "@type": "@id"
     },
-    "release_date": {
+    "issued": {
         "@id": "dcterms:issued",
         "@type": "xsd:dateTime"
     },
@@ -124,14 +124,20 @@
         "@container": "@set"
       },
     "editions": {
-        "@id": "dcat:Dataset",
-        "@type": "@id",
-        "@container": "@set"
+        "@id": "hydra:member",
+        "@type": "@id"
+      },
+    "editions_url": {
+        "@id": "hydra:collection",
+        "@type": "@id"
       },
     "versions": {
-        "@id": "dcat:Distribution",
-        "@type": "@id",
-        "@container": "@set"
+        "@id": "hydra:member",
+        "@type": "@id"
+      },
+    "versions_url": {
+        "@id": "hydra:collection",
+        "@type": "@id"
       },
     "columns": {
         "@id": "csvw:column",

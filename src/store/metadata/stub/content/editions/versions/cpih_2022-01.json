@@ -1,18 +1,18 @@
 {
-    "@context": "http://localhost:8000/context",
-    "@id": "http://localhost:8000/datasets/cpih/editions/2022-01/versions",
+    "@context": "https://staging.idpd.uk/#ns",
+    "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions",
     "@type": "hydra:Collection",
     "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
     "versions": [
         {
             "@type": ["dcat:Distribution", "csvw:Table"],
-            "@id": "http://localhost:8000/datasets/cpih/editions/2022-01/versions/1",
+            "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1",
             "identifier": "1",
-            "issed": "2017-01-01T00:00:00",
+            "issued": "2017-01-01T00:00:00",
             "title": "Consumer Prices Index including owner occupiers' housing costs (CPIH)",
             "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a...",
             "description": "The Consumer Prices Index...",
-            "download_url": "http://localhost:8000/datasets/cpih/edition/2022-01/versions/1.csv",
+            "download_url": "https://staging.idpd.uk/datasets/cpih/edition/2022-01/versions/1.csv",
             "media_type": "text/csv",
             "table_schema": {
                 "columns": [

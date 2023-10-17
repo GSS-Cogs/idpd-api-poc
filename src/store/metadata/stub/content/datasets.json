@@ -1,11 +1,11 @@
 {
-    "@context": "http://localhost:8000/context",
+    "@context": "https://staging.idpd.uk/#ns",
     "@type": ["dcat:Catalog", "hydra:Collection"],
     "@id": "http://localhost:8000/datasets",
     "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
     "datasets": [
         {
-            "@id": "http://localhost:8000/datasets/cpih",
+            "@id": "https://staging.idpd.uk/datasets/cpih",
             "@type": "dcat:DatasetSeries",
             "identifier": "cpih",
             "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
@@ -14,15 +14,15 @@
             "issued": "2017-01-01T00:00:00",
             "modified": "2017-01-01T00:00:00",
             "next_release": "2019-04-19T09:30:00Z",
-            "publisher": "http://localhost:8000/publishers/office-for-national-statistics",
-            "creator": "http://localhost:8000/publishers/office-for-national-statistics",
+            "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+            "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
             "contact_point": {
               "name": "Consumer Price Inflation Enquiries",
               "email": "mailto:cpih@ons.gov.uk"
             },
             "topics": [
-              "http://localhost:8000/topics/economy",
-              "http://localhost:8000/topics/prices"],
+              "https://staging.idpd.uk/topics/economy",
+              "https://staging.idpd.uk/topics/prices"],
             "frequency": "monthly",
             "keywords": [
               "inflation",
@@ -38,10 +38,10 @@
               "start": "2005-01-01T00:00:00Z",
               "end": "2019-03-01T00:00:00Z"
             },
-            "editions_url": "http://localhost:8000/datasets/cpih/editions",
+            "editions_url": "https://staging.idpd.uk/datasets/cpih/editions",
             "editions": [
               {
-                "@id": "http://localhost:8000/datasets/cpih/editions/2022-01",
+                "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01",
                 "issued": "2017-02-21T09:30:00Z",
                 "modified": "2017-02-21T09:30:00Z"
               }

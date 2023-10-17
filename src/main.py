@@ -3,7 +3,7 @@ from typing import Optional
 
 from fastapi import Depends, FastAPI, Request, Response, status
 
-from constants import JSONLD
+from constants import CSV, JSONLD
 import schemas
 from store import OxigraphMetadataStore, StubCsvStore, StubMetadataStore
 
@@ -14,16 +14,7 @@ BROWSABLE = os.environ.get("LOCAL_BROWSE_API")
 app = FastAPI()
 
 
-# ----------------------------
-# this will be getting removed
-from store.metadata.constants import CONTEXT
-@app.get("/context") #, response_model=Optional[schemas.Datasets])
-def datasets():
-    return CONTEXT
-# ----------------------------
-
-
-@app.get("/datasets") #, response_model=Optional[schemas.Datasets])
+@app.get("/datasets", response_model=Optional[schemas.Datasets])
 def datasets(
     request: Request,
     response: Response,
@@ -42,7 +33,7 @@ def datasets(
         return
 
 
-@app.get("/datasets/{dataset_id}") #, response_model=Optional[schemas.Dataset])
+@app.get("/datasets/{dataset_id}", response_model=Optional[schemas.Dataset])
 def dataset(
     request: Request,
     response: Response,
@@ -128,6 +119,7 @@ def version(
     edition_id: str,
     version_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    csv_store: StubCsvStore = Depends(StubCsvStore)
 ):
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         version = metadata_store.get_version(dataset_id, edition_id, version_id)
@@ -136,6 +128,14 @@ def version(
             return version
         response.status_code = status.HTTP_404_NOT_FOUND
         return
+    elif request.headers["Accept"] == CSV:
+        csv_data = csv_store.get_version(dataset_id, edition_id, version_id)
+        if csv_data is not None:
+            response.status_code = status.HTTP_200_OK
+            return csv_data
+        else:
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
@@ -216,21 +216,3 @@ def topic(
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
 
-
-# note: download only for now, needs expanding
-# @app.get("/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}")
-# def version(
-#     request: Request,
-#     response: Response,
-#     dataset_id: str,
-#     edition_id: str,
-#     version_id: str,
-#     csv_store: StubCsvStore = Depends(StubCsvStore),
-# ):
-#     csv_data = csv_store.get_version(dataset_id, edition_id, version_id)
-#     if csv_data is not None:
-#         response.status_code = status.HTTP_200_OK
-#         return csv_data
-#     else:
-#         response.status_code = status.HTTP_404_NOT_FOUND
-#         return

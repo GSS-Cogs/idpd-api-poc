@@ -10,7 +10,7 @@ import sys
 repo_root = Path(__file__).parent.parent
 sys.path.append(str(repo_root.absolute()))
 
-from devdata import create_devdata
+import data
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -45,7 +45,7 @@ def setup_before_all_tests():
     )
     time.sleep(10)
 
-    create_devdata.populate(oxigraph_url="http://localhost:7878")
+    data.populate(oxigraph_url="http://localhost:7878")
 
     # Yield control to the tests
     yield

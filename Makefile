@@ -16,7 +16,10 @@ test: ## Run pytest and check test coverage
 	pipenv run pytest --cov-report term-missing --cov=src --cov-config=./tests/coverage.rc ./tests/
 
 populate: ## Populate an oxigraph DB at localhost:7878
-	pipenv run python3 ./devdata/create_devdata.py
+	pipenv run python3 ./data.py
 
-data: ## Create source ttl and trig files in devdata/out but dont load them
-	pipenv run python -c "from devdata.create_devdata import populate;populate(write_to_db=False)"
+data: ## Create source ttl seed file as ./out/seed.ttl but dont load it
+	pipenv run python -c "from data import populate;populate(write_to_db=False)"
+
+start: ## Start the api
+	pipenv run uvicorn src.main:app --reload

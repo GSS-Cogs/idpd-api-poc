@@ -10,7 +10,7 @@ def dataset_data() -> Dict:
     """
     file_path = pathlib.Path("src/store/metadata/stub/content/datasets.json")
     with open(file_path, "r") as json_file:
-        return json.load(json_file)["items"][0]
+        return json.load(json_file)["datasets"][0]
 
 
 def datasets_data() -> Dict:

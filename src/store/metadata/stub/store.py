@@ -1,17 +1,48 @@
 import json
+import os
 from pathlib import Path
 from typing import Dict
 
 from ..base import BaseMetadataStore
 
 
+def recursive_replace(data, find, replace):
+    """
+    Recursively replace specific values with value
+    fields of a dictionary.
+    """
+    if isinstance(data, dict):
+        for key, value in data.items():
+            if isinstance(value, (dict, list)):
+                recursive_replace(value, find, replace)
+            elif isinstance(value, str):
+                data[key] = value.replace(find, replace)
+    elif isinstance(data, list):
+        for i, item in enumerate(data):
+            if isinstance(item, (dict, list)):
+                recursive_replace(item, find, replace)
+            elif isinstance(item, str):
+                data[i] = item.replace(find, replace)
+
+
 def contextualise(resource) -> Dict:
     """
-    Add an appropriate context field
+    Add an appropriate context field.
+
+    Where specified by an env var replace the host path
+    as it appears in value fields.
     """
     if resource is None:
         return None
-    return {"@context": "http://localhost:8000/context"} | resource
+    
+    if "@context" not in resource.keys():
+        resource = {"@context": "https://staging.idpd.uk/#ns"} | resource
+
+    replace_host = os.environ.get("LOCALISE_URIS", None)
+    if replace_host is not None:
+        recursive_replace(resource, "https://staging.idpd.uk", "http://localhost:8000")
+    return resource
+
 
 class StubMetadataStore(BaseMetadataStore):
     """
@@ -29,9 +60,13 @@ class StubMetadataStore(BaseMetadataStore):
         with open(Path(content_dir / "datasets.json").absolute()) as f:
             self.datasets = json.load(f)
 
+        # TODO - grep the whole folder for editions json's, use dataset_id and
+        # edition_id as key in data holding dict
         with open(Path(content_dir / "editions/cpih_2022-01.json").absolute()) as f:
             self.editions = {"cpih_2022-01": json.load(f)}
 
+        # TODO - grep the whole folder for editions json's, use dataset_id and
+        # edition_id as key in data holding dict
         with open(Path(content_dir / "editions/versions/cpih_2022-01.json").absolute()) as f:
             self.versions = {"cpih_2022-01": json.load(f)}
 
@@ -42,7 +77,7 @@ class StubMetadataStore(BaseMetadataStore):
             self.topics = json.load(f)
 
     def get_datasets(self) -> Dict:
-        return self.datasets
+        return contextualise(self.datasets)
 
     def get_dataset(self, id: str) -> Dict:
         dataset = contextualise(next(
@@ -56,7 +91,7 @@ class StubMetadataStore(BaseMetadataStore):
             (x for x in all_edition_keys if x.split("_")[0] == dataset_id),
             None,
         )
-        return self.editions.get(edition_key, None)
+        return contextualise(self.editions.get(edition_key, None))
  
     def get_edition(self, dataset_id: str, edition_id: str) -> Dict:
         editions_for_dataset = self.get_editions(dataset_id)
@@ -74,7 +109,7 @@ class StubMetadataStore(BaseMetadataStore):
             (x for x in all_version_keys if x == f"{dataset_id}_{edition_id}"),
             None,
         )
-        return self.versions.get(version_key, None)
+        return contextualise(self.versions.get(version_key, None))
  
     def get_version(self, dataset_id: str, edition_id: str, version_id: str) -> Dict:
         versions_for_dataset = self.get_versions(dataset_id, edition_id)
@@ -87,7 +122,7 @@ class StubMetadataStore(BaseMetadataStore):
         return contextualise(edition)
 
     def get_publishers(self) -> Dict:
-        return self.publishers
+        return contextualise(self.publishers)
 
     def get_publisher(self, publisher_id: str) -> Dict:
         publishers = self.get_publishers()
@@ -99,7 +134,7 @@ class StubMetadataStore(BaseMetadataStore):
         ))
 
     def get_topics(self) -> Dict:
-        return self.topics
+        return contextualise(self.topics)
 
     def get_topic(self, topic_id: str) -> Dict:
         topics = self.get_topics()

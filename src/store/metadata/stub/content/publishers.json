@@ -1,15 +1,16 @@
 {
-    "@context": "http://localhost:8000/context",
-    "@id": "http://localhost:8000/publishers",
+    "@context": "https://staging.idpd.uk/#ns",
+    "@id": "https://staging.idpd.uk/publishers",
     "@type": "hydra:Collection",
     "publishers": [
         {
-            "@id": "http://localhost:8000/publishers/office-for-national-statistics",
+            "@id": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+            "@type": "dcat:publisher",
             "title": "The Office for National Statistics",
-            "description": "the shop isnt awful",
+            "description": "A description of ONS",
             "landing_page": "https://www.ons.gov.uk/"
         }
     ],
     "count": 1,
-    "index": 0
+    "offset": 0
 }

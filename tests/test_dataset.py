@@ -66,7 +66,7 @@ def test_dataset_invalid_structure_raises():
 
     mock_metadata_store = MagicMock()
     mock_metadata_store.get_dataset = MagicMock(
-        return_value={"items": [{"invalid_field": "Invalid Dataset"}], "offset": 0}
+        return_value={"datasets": [{"invalid_field": "Invalid Dataset"}], "offset": 0}
     )
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
@@ -111,7 +111,7 @@ def test_dataset_406():
     # Create a mock store with a callable mocked get_datasets() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
-    mock_metadata_store.get_dataset = MagicMock(return_value=["foo"])
+    mock_metadata_store.get_dataset = MagicMock(return_value={})
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Override the stub_store dependency with the mock_metadata_store

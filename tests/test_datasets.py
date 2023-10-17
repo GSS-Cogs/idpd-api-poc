@@ -63,7 +63,7 @@ def test_datasets_invalid_structure_raises():
 
     # Create a mock store with a callable mocked
     mock_metadata_store = MagicMock()
-    invalid_response_data = {"items": [{"title": "Invalid Dataset"}], "offset": 0}
+    invalid_response_data = {"datasets": [{"title": "Invalid Dataset"}], "offset": 0}
     mock_metadata_store.get_datasets = MagicMock(return_value=invalid_response_data)
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
