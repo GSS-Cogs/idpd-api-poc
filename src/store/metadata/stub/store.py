@@ -38,7 +38,7 @@ def contextualise(resource) -> Dict:
     if "@context" not in resource.keys():
         resource = {"@context": "https://staging.idpd.uk/#ns"} | resource
 
-    replace_host = os.environ.get("LOCALISE_URIS", None)
+    replace_host = os.environ.get("LOCAL_BROWSE_API", None)
     if replace_host is not None:
         recursive_replace(resource, "https://staging.idpd.uk", "http://localhost:8000")
     return resource

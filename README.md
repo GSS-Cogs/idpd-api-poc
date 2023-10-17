@@ -17,15 +17,9 @@ If you want to browse the api content in your web browser (while developing only
 export LOCAL_BROWSE_API=true
 ```
 
+This will allow browser traffic despite mimetypes and will replace all `staging.idpd.uk` values with `localhost:8000` to allow click through navigation.
+
 To turn this off `unset LOCAL_BROWSE_API`.
-
-If you want to substitute the default host (staging.idpd.uk) with localhost (to make the api navigable locally) then:
-
-```
-export LOCALISE_URIS=true
-```
-
-Again, unset the env var to restore standard behaviour.
 
 There is a `Makefile` with some useful development helpers:
 
