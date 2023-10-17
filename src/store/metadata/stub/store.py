@@ -80,10 +80,10 @@ class StubMetadataStore(BaseMetadataStore):
         return contextualise(self.datasets)
 
     def get_dataset(self, id: str) -> Dict:
-        dataset = contextualise(next(
+        dataset = next(
             (x for x in self.datasets["datasets"] if x["identifier"] == id), None
-        ))
-        return dataset
+        )
+        return contextualise(dataset)
 
     def get_editions(self, dataset_id: str) -> Dict:
         all_edition_keys = self.editions.keys()
