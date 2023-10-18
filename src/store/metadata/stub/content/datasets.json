@@ -60,8 +60,8 @@
           "publisher": "https://staging.idpd.uk/publishers/department-for-business-energy-and-industrial-strategy",
           "creator": "https://staging.idpd.uk/publishers/department-for-business-energy-and-industrial-strategy",
           "contact_point": {
-            "name": "Consumer Price Inflation Enquiries",
-            "email": "mailto:cpih@ons.gov.uk"
+            "name": "",
+            "email": ""
           },
           "topics": [
             "https://staging.idpd.uk/topics/economy",
