@@ -68,18 +68,12 @@
             ""],
           "frequency": "",
           "keywords": [
-            "inflation",
-            "consumer price inflation",
-            "cpi",
-            "cpih",
-            "consumer price index",
-            "consumer price index including owner occupiers' housing costs"
           ],
           "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
           "spatial_coverage": "K02000001",
           "temporal_coverage": {
-            "start": "2005-01-01T00:00:00Z",
-            "end": "2019-03-01T00:00:00Z"
+            "start": "",
+            "end": ""
           },
           "editions_url": "https://staging.idpd.uk/datasets/cpih/editions",
           "editions": [
