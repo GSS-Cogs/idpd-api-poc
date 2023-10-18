@@ -75,12 +75,12 @@
             "start": "2005-01-01T00:00:00Z",
             "end": "2019-12-31T00:00:00Z"
           },
-          "editions_url": "https://staging.idpd.uk/datasets/cpih/editions",
+          "editions_url": "",
           "editions": [
             {
-              "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01",
-              "issued": "2017-02-21T09:30:00Z",
-              "modified": "2017-02-21T09:30:00Z"
+              "@id": "",
+              "issued": "",
+              "modified": ""
             }
           ]
         }
