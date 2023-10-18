@@ -50,7 +50,7 @@
         {
           "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions",
           "@type": "dcat:DatasetSeries",
-          "identifier": "cpih",
+          "identifier": "beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions",
           "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
           "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
           "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
