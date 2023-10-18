@@ -64,9 +64,9 @@
             "email": ""
           },
           "topics": [
-            "https://staging.idpd.uk/topics/economy",
-            "https://staging.idpd.uk/topics/prices"],
-          "frequency": "monthly",
+            "",
+            ""],
+          "frequency": "",
           "keywords": [
             "inflation",
             "consumer price inflation",
