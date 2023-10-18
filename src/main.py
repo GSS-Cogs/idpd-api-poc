@@ -83,7 +83,7 @@ async def datasets(
 
 
 @app.get("/datasets/{dataset_id}", response_model=Optional[schemas.Dataset])
-def dataset(
+async def dataset(
     request: Request,
     response: Response,
     dataset_id: str,
@@ -103,7 +103,7 @@ def dataset(
 
 
 @app.get("/datasets/{dataset_id}/editions")
-def editions(
+async def editions(
     request: Request,
     response: Response,
     dataset_id: str,
@@ -123,7 +123,7 @@ def editions(
 
 
 @app.get("/datasets/{dataset_id}/editions/{edition_id}")
-def edition(
+async def edition(
     request: Request,
     response: Response,
     dataset_id: str,
@@ -144,7 +144,7 @@ def edition(
 
 
 @app.get("/publishers")
-def publishers(
+async def publishers(
     request: Request,
     response: Response,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
@@ -164,7 +164,7 @@ def publishers(
 
 
 @app.get("/publishers/{publisher_id}")
-def publisher(
+async def publisher(
     request: Request,
     response: Response,
     publisher_id: str,
@@ -184,7 +184,7 @@ def publisher(
 
 
 @app.get("/topics")
-def topics(
+async def topics(
     request: Request,
     response: Response,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
@@ -204,7 +204,7 @@ def topics(
 
 
 @app.get("/topics/{topic_id}")
-def topic(
+async def topic(
     request: Request,
     response: Response,
     topic_id: str,
@@ -225,7 +225,7 @@ def topic(
 
 # note: download only for now, needs expanding
 @app.get("/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}")
-def version(
+async def version(
     request: Request,
     response: Response,
     dataset_id: str,
