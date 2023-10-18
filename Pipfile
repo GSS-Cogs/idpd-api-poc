@@ -8,6 +8,7 @@ SPARQLWrapper = "*"
 fastapi = "*"
 uvicorn = "*"
 httpx = "*"
+structlog = "*"
 
 [dev-packages]
 pytest = "*"

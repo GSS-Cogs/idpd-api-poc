@@ -39,7 +39,23 @@ async def logging_middleware(request: Request, call_next) -> Response:
         process_time = time.perf_counter_ns() - start_time
         status_code = response.status_code
 
-        # Your structured logging code here
+    log_message = "Request completed"
+    log_context = {
+        "path": request.url.path,
+        "method": request.method,
+        "status_code": status_code,
+        "process_time": process_time / 10 ** 9,  # Convert to seconds
+    }
+
+    if status_code == 200:
+        logger.info(log_message, **log_context)
+    elif status_code == 404:
+        log_message = "Resource not found"
+        logger.info(log_message, **log_context)
+    elif status_code == 406:
+        log_message = "Request not acceptable"
+        logger.error(log_message, **log_context)
+
 
         response.headers["X-Process-Time"] = str(process_time / 10 ** 9)
 
@@ -52,10 +68,7 @@ async def datasets(
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
     logger.info("Received request for datasets")
-    
-    # differrenct structure log examples 
-    logger.warning("This is a warning message from Structlog, with attributes", an_extra="attribute")
-    logger.error("This is an error message from Structlog")    
+       
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
         datasets = metadata_store.get_datasets()
@@ -96,6 +109,7 @@ def editions(
     dataset_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
+    logger.info(f"Received request for dataset (ID: {dataset_id}) editions.")
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         editions = metadata_store.get_editions(dataset_id)
         if editions is not None:
@@ -116,6 +130,7 @@ def edition(
     edition_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
+    logger.info(f"Received request for dataset (ID: {dataset_id}) and edition (ID: {edition_id}).")
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         edition = metadata_store.get_edition(dataset_id, edition_id)
         if edition is not None:
@@ -134,6 +149,7 @@ def publishers(
     response: Response,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
+    logger.info("Received request for publishers")
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
         publishers = metadata_store.get_publishers()
@@ -154,6 +170,7 @@ def publisher(
     publisher_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
+    logger.info(f"Received request for publisher with ID: {publisher_id}", publisher_id)
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         publisher = metadata_store.get_publisher(publisher_id)
         if publisher is not None:
@@ -172,6 +189,7 @@ def topics(
     response: Response,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
+    logger.info("Received request for publishers")
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
         topics = metadata_store.get_topics()
@@ -192,6 +210,7 @@ def topic(
     topic_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
+    logger.info(f"Received request for topic with ID: {topic_id}", topic_id)
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         topic = metadata_store.get_topic(topic_id)
         if topic is not None:
@@ -214,6 +233,7 @@ def version(
     version_id: str,
     csv_store: StubCsvStore = Depends(StubCsvStore),
 ):
+    logger.info(f"Received request for dataset (ID: {dataset_id}), edition (ID: {edition_id}), and version (ID: {version_id}).")
     csv_data = csv_store.get_version(dataset_id, edition_id, version_id)
     if csv_data is not None:
         response.status_code = status.HTTP_200_OK
