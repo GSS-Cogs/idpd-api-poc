@@ -5,6 +5,9 @@
     "ons": "https://data.ons.gov.uk/ns#",
     "vcard": "http://www.w3.org/2006/vcard/ns#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+    "csvw": "https://www.w3.org/ns/csvw#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
     "creator": {
         "@id": "dcterms:creator",
         "@type": "@id",
@@ -48,7 +51,7 @@
         "@id": "dcat:inSeries",
         "@type": "@id"
     },
-    "release_date": {
+    "issued": {
         "@id": "dcterms:issued",
         "@type": "xsd:dateTime"
     },
@@ -107,13 +110,62 @@
     },
     "theme": {
         "@id": "dcat:theme",
-        "@type": "@id",
-        "@context": {
-            "@base": "https://data.ons.gov.uk/theme/"
-        }
+        "@type": "@id"
     },
     "title": {
         "@id": "dcterms:title",
         "@language": "en"
-    }
+    },
+    "offset": "hydra:offset",
+    "count": "hydra:totalitems",
+    "datasets": {
+        "@id": "dcat:DatasetSeries",
+        "@type": "@id",
+        "@container": "@set"
+      },
+    "editions": {
+        "@id": "hydra:member",
+        "@type": "@id"
+      },
+    "editions_url": {
+        "@id": "hydra:collection",
+        "@type": "@id"
+      },
+    "versions": {
+        "@id": "hydra:member",
+        "@type": "@id"
+      },
+    "versions_url": {
+        "@id": "hydra:collection",
+        "@type": "@id"
+      },
+    "columns": {
+        "@id": "csvw:column",
+        "@type": "@id",
+        "@container": "@set"
+      },
+    "topics": {
+        "@id": "dcat:theme",
+        "type": "@id",
+        "@container": "@set"
+      },
+    "publishers": {
+        "@id": "dcat:publisher",
+        "type": "@id",
+        "@container": "@set"
+    },
+    "sub_topics": {
+        "@id": "skos:narrower",
+        "type": "@id",
+        "@container": "@set"
+    },
+    "parent_topics": {
+        "@id": "skos:broader",
+        "type": "@id",
+        "@container": "@set"
+    },
+    "download_url": "dcat:downloadUrl",
+    "table_schema": "csvw:schema",
+    "datatype": "csvw:datatype",
+    "name": "csvw:name"
 }

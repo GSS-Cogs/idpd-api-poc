@@ -15,14 +15,8 @@ class StubCsvStore(BaseCsvStore):
         self.datasets = {}
 
         content_dir = Path(Path(__file__).parent / "content")
-        self.datasets["cpih/2022-3/1"] = Path(
-            content_dir / "cpih/2022-3/1.csv"
-        ).absolute()
-        self.datasets["cpih/2022-3/2"] = Path(
-            content_dir / "cpih/2022-3/2.csv"
-        ).absolute()
-        self.datasets["cpih/2022-3/3"] = Path(
-            content_dir / "cpih/2022-3/3.csv"
+        self.datasets["cpih/2022-01/1"] = Path(
+            content_dir / "cpih/2022-1/1.csv"
         ).absolute()
 
     def get_version(self, dataset_id: str, edition_id: str, version_id: str):

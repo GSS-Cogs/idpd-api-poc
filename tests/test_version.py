@@ -3,7 +3,9 @@ from unittest.mock import MagicMock
 from fastapi import status
 from fastapi.testclient import TestClient
 
+from constants import CSV
 from main import app, StubCsvStore
+
 
 # Devnotes:
 
@@ -15,6 +17,7 @@ from main import app, StubCsvStore
 
 ENDPOINT = "/datasets/some-dataset-id/editions/some-edition-id/versions/some-version-id"
 
+# TODO - test coverage for the non csv endpoints.
 
 def test_version_csv_200():
     """
@@ -33,7 +36,7 @@ def test_version_csv_200():
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
-    response = client.get(ENDPOINT)
+    response = client.get(ENDPOINT, headers={"Accept": CSV})
 
     # Assertions
     assert response.status_code == status.HTTP_200_OK
@@ -56,7 +59,7 @@ def test_version_csv_404():
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
-    response = client.get(ENDPOINT)
+    response = client.get(ENDPOINT, headers={"Accept": CSV})
 
     # Assertions
     assert response.status_code == status.HTTP_404_NOT_FOUND
