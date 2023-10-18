@@ -5,7 +5,7 @@ from fastapi import Depends, FastAPI, Request, Response, status
 
 from constants import CSV, JSONLD
 import schemas
-from store import OxigraphMetadataStore, StubCsvStore, StubMetadataStore
+from store import OxigraphMetadataStore, StubCsvStore, StubMetadataStore, CloudStorageCsvStore
 
 # Simple env var flag to allow local browsing of api responses
 # while developing.
@@ -217,5 +217,63 @@ def topic(
         return
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
+        return
+
+@app.get(
+    "/datasets/{dataset_id}/editions/{edition_id}/versions"
+)
+def versions(
+    request: Request,
+    response: Response,
+    dataset_id: str,
+    edition_id: str,
+    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+):
+    if request.headers["Accept"] == JSONLD or BROWSABLE:
+        versions = metadata_store.get_versions(dataset_id, edition_id)
+        if versions is not None:
+            response.status_code = status.HTTP_200_OK
+            return versions
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return
+    else:
+        response.status_code = status.HTTP_406_NOT_ACCEPTABLE
+        return
+
+
+# note: download only for now, needs expanding
+@app.get("/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}")
+def version(
+    request: Request,
+    response: Response,
+    dataset_id: str,
+    edition_id: str,
+    version_id: str,
+    csv_store: StubCsvStore = Depends(StubCsvStore),
+):
+    csv_data = csv_store.get_version(dataset_id, edition_id, version_id)
+    if csv_data is not None:
+        response.status_code = status.HTTP_200_OK
+        return csv_data
+    else:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return
+
+#this will require changing later(to check if file has been downloaded)
+@app.get("/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}")
+def cloud_file(
+    request: Request,
+    response: Response,
+    dataset_id: str,
+    edition_id: str,
+    version_id: str,
+    cloud_file: CloudStorageCsvStore = Depends(CloudStorageCsvStore),
+):
+    the_data = cloud_file.get_version(dataset_id, edition_id, version_id)
+    if the_data is not None:
+        response.status_code = status.HTTP_200_OK
+        return the_data
+    else:
+        response.status_code = status.HTTP_404_NOT_FOUND
         return
 

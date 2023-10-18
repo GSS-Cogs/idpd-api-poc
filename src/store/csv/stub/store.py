@@ -1,4 +1,5 @@
 from pathlib import Path
+from google.cloud import storage
 
 from fastapi.responses import FileResponse
 
@@ -23,3 +24,18 @@ class StubCsvStore(BaseCsvStore):
         csv_identifier = f"{dataset_id}/{edition_id}/{version_id}"
         csv_path = self.datasets.get(csv_identifier, None)
         return FileResponse(csv_path) if csv_path else None
+
+class CloudStorageCsvStore(BaseCsvStore):
+    """
+    stub of a google clouds storage(bucket)
+    that returns a csvfile
+    """
+
+    #create the client in setup
+    def setup(self):
+        self.bucket = storage.Client().get_bucket("idpd-poc-api")
+    
+    def get_version(self, dataset_id: str, edition_id: str, version_id: str):
+        file_path = f"{dataset_id}/{edition_id}/{version_id}"
+        blop = self.bucket.blob(file_path + ".csv")
+        blop.download_to_file(".")
