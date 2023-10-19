@@ -151,17 +151,27 @@ class Datasets(BaseModel):
     offset: int
     count: int
 
+class Version(BaseModel):
+    type: Literal["dcat:Distribution"] = Field(alias="@type")
+    id: str = Field(alias="@id")
+    identifier: str
+    issued: str = Field(
+        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
+    )
+    title: str = Field(max_length=90)
+    summary: str = Field(max_length=200)
+    description: str = Field(max_length=250)
+    download_url: str
+    media_type: str
+    table_schema: TableSchema
 
-# TODO - now we've got a data model for this
 
-# class Version(BaseModel):
-#     identifier: int
-#     foo: str
-#     in_dataset: str
-#     in_edition: str
+class Versions(BaseModel):
+    context: str = Field(alias="@context")
+    id: str = Field(alias="@id")
+    type: List[str] = Field(alias="@type")
+    title: str = Field(max_length=90)
+    versions: List[Version]
+    count: int
+    offset: int
 
-
-# class Versions(BaseModel):
-#     items: List[Version]
-#     offset: int
-#     count: int
