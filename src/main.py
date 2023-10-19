@@ -259,21 +259,3 @@ def version(
         response.status_code = status.HTTP_404_NOT_FOUND
         return
 
-#this will require changing later(to check if file has been downloaded)
-@app.get("/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}")
-def cloud_file(
-    request: Request,
-    response: Response,
-    dataset_id: str,
-    edition_id: str,
-    version_id: str,
-    cloud_file: CloudStorageCsvStore = Depends(CloudStorageCsvStore),
-):
-    the_data = cloud_file.get_version(dataset_id, edition_id, version_id)
-    if the_data is not None:
-        response.status_code = status.HTTP_200_OK
-        return the_data
-    else:
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return
-
