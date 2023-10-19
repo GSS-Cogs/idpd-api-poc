@@ -34,17 +34,14 @@ class CloudStorageCsvStore(BaseCsvStore):
 
     #create the client in setup
     def setup(self):
-        pass
+        self.client = storage.Client.create_anonymous_client()
+        self.bucket = self.client.lookup_bucket("idpd-poc-api")
     
     def get_version(self, dataset_id: str, edition_id: str, version_id: str):
-        client = storage.Client.create_anonymous_client()
-        bucket = client.lookup_bucket("idpd-poc-api")
         file_path = f"{dataset_id}/{edition_id}/{version_id}"
         if not file_path.endswith(".csv"):
             file_path = file_path + ".csv"
-        blop = bucket.blob(file_path)
-        the_url = f"gs://idpd-poc-api/{blop.name}/{file_path}"
+        blop = self.bucket.blob(file_path)
+        the_url = f"gs://idpd-poc-api/{file_path}"
         #the_url = f"https://storage.googleapis.com/idpd-poc-api/{blop.name}/{file_path}"
-        return FileResponse(the_url)
-        #if the_url else None
-        #blop.download_to_filename("src/store/csv/stub/1.csv")
+        return FileResponse(Path(the_url))
