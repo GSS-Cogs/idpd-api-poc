@@ -94,7 +94,7 @@ def edition(
         return
 
 
-@app.get("/datasets/{dataset_id}/editions/{edition_id}/versions")
+@app.get("/datasets/{dataset_id}/editions/{edition_id}/versions",  response_model=Optional[schemas.Versions])
 def versions(
     request: Request,
     response: Response,
@@ -114,7 +114,7 @@ def versions(
         return
 
 
-@app.get("/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}")
+@app.get("/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}", response_model=Optional[schemas.Version])
 def version(
     request: Request,
     response: Response,

@@ -7,7 +7,7 @@ import pytest
 
 from constants import JSONLD
 from main import app, StubMetadataStore
-from fixtures.versions import versions_data
+from fixtures.versions import versions_test_data
 
 # Devnotes:
 
@@ -22,7 +22,7 @@ ENDPOINT = "datasets/some-dataset-id/editions/some-edition-id/versions"
 
 # TODO - reimplement once we've got a schema of the data model.
 
-def test_versions_valid_structure_200(versions_data):
+def test_versions_valid_structure_200(versions_test_data):
     """
     Confirms that:
 
@@ -34,7 +34,7 @@ def test_versions_valid_structure_200(versions_data):
 
     mock_metadata_store = MagicMock()
     mock_metadata_store.get_versions = MagicMock(
-        return_value=expected_versions_response_data
+        return_value= versions_test_data
     )
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
@@ -59,7 +59,7 @@ def test_versions_invalid_structure_raises():
 
     # Create a mock store with a callable mocked
     mock_metadata_store = MagicMock()
-    invalid_response_data = {"items": [{"title": "Invalid version"}]}
+    invalid_response_data = {"items": [{"title": "Invalid version"}], "offset": 0}
     mock_metadata_store.get_versions = MagicMock(return_value=invalid_response_data)
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 

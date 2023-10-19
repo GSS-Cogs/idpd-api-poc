@@ -45,7 +45,7 @@ class PeriodOfTime(BaseModel):
 class Column(BaseModel):
     name: str
     datatype: str
-    titles: str
+    title: str
     description: str
 
 
@@ -152,7 +152,7 @@ class Datasets(BaseModel):
     count: int
 
 class Version(BaseModel):
-    type: Literal["dcat:Distribution"] = Field(alias="@type")
+    type: List[str] = Field(alias="@type")
     id: str = Field(alias="@id")
     identifier: str
     issued: str = Field(
@@ -169,7 +169,7 @@ class Version(BaseModel):
 class Versions(BaseModel):
     context: str = Field(alias="@context")
     id: str = Field(alias="@id")
-    type: List[str] = Field(alias="@type")
+    type: Literal["hydra:Collection"] = Field(alias="@type")
     title: str = Field(max_length=90)
     versions: List[Version]
     count: int
