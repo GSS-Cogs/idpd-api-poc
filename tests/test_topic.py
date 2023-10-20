@@ -30,8 +30,9 @@ def test_topic_valid_structure_200(topic_test_data):
       match the response schema.
     - Status code 200 is returned.
     """
-
+    # Create a mock store with a callable mocked get_topic() method
     mock_metadata_store = MagicMock()
+    # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_topic = MagicMock(return_value=topic_test_data)
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
@@ -74,12 +75,13 @@ def test_topic_404():
 
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_topic() is called exactly once.
-    - And if store.get_topics() returns None
+    - And if store.get_topic() returns None
     - Status code 404 is returned.
 
     """
-
+    # Create a mock store with a callable mocked get_topic() method
     mock_metadata_store = MagicMock()
+    # Note: returning an empty list to simulate "id is not found"
     mock_metadata_store.get_topic = MagicMock(return_value=None)
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
@@ -99,7 +101,7 @@ def test_topic_406():
     - Then store.get_topic() is not called.
     - Status code 406 is returned.
     """
-    # Create a mock store with a callable mocked get_topics() method
+    # Create a mock store with a callable mocked get_topic() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_topic = MagicMock(return_value={})
