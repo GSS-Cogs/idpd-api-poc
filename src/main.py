@@ -182,7 +182,7 @@ def publisher(
         return
 
 
-@app.get("/topics")
+@app.get("/topics", response_model=Optional[schemas.topics])
 def topics(
     request: Request,
     response: Response,
@@ -201,7 +201,7 @@ def topics(
         return
 
 
-@app.get("/topics/{topic_id}")
+@app.get("/topics/{topic_id}", response_model=Optional[schemas.topic])
 def topic(
     request: Request,
     response: Response,

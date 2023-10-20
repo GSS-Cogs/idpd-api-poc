@@ -165,3 +165,21 @@ class Datasets(BaseModel):
 #     items: List[Version]
 #     offset: int
 #     count: int
+
+
+class topic(BaseModel):
+    id: str = Field(alias="@id")
+    type: Literal["dcat:theme"] = Field(alias="@type")
+    identifier: str
+    title: str = Field(max_length=90)
+    description: str = Field(max_length=250)
+    sub_topics: Union[List[str], None]
+    parent_topics: Union[List[str], None]
+
+class topics(BaseModel):
+    context: str = Field(alias="@context")
+    id: str = Field(alias="@id")
+    type: Literal["hydra:Collection"] = Field(alias="@type")
+    topics: List[topic]
+    count: int
+    offset: int
