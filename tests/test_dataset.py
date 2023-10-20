@@ -7,7 +7,7 @@ from fastapi.testclient import TestClient
 from fastapi.exceptions import ResponseValidationError
 
 from constants import JSONLD
-from fixtures.datasets import dataset_data
+from fixtures.datasets import dataset_test_data
 from main import app, StubMetadataStore
 
 # Devnotes:
@@ -22,13 +22,7 @@ from main import app, StubMetadataStore
 ENDPOINT = "/datasets/some-id"
 
 
-# Fixture to load expected dataset data from a JSON file
-@pytest.fixture
-def expected_dataset_response_data():
-    return dataset_data()
-
-
-def test_dataset_valid_structure_200(expected_dataset_response_data):
+def test_dataset_valid_structure_200(dataset_test_data):
     """
     Confirms that:
 
@@ -39,9 +33,7 @@ def test_dataset_valid_structure_200(expected_dataset_response_data):
     """
 
     mock_metadata_store = MagicMock()
-    mock_metadata_store.get_dataset = MagicMock(
-        return_value=expected_dataset_response_data
-    )
+    mock_metadata_store.get_dataset = MagicMock(return_value=dataset_test_data)
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
@@ -66,7 +58,7 @@ def test_dataset_invalid_structure_raises():
 
     mock_metadata_store = MagicMock()
     mock_metadata_store.get_dataset = MagicMock(
-        return_value={"items": [{"invalid_field": "Invalid Dataset"}], "offset": 0}
+        return_value={"datasets": [{"invalid_field": "Invalid Dataset"}], "offset": 0}
     )
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
@@ -111,7 +103,7 @@ def test_dataset_406():
     # Create a mock store with a callable mocked get_datasets() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
-    mock_metadata_store.get_dataset = MagicMock(return_value=["foo"])
+    mock_metadata_store.get_dataset = MagicMock(return_value={})
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Override the stub_store dependency with the mock_metadata_store
