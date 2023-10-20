@@ -27,15 +27,15 @@ app = FastAPI(
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns a list of datasets.",
-            "model": Optional[schemas.Datasets],
+            "model": schemas.Datasets,
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. No datasets found.",
-            "model": str,
+            "model": None,
         },
         status.HTTP_406_NOT_ACCEPTABLE: {
             "description": "Not Acceptable. The requested format is not supported.",
-            "model": str,
+            "model": None,
         },
     }
 )
@@ -48,13 +48,6 @@ def get_all_datasets(
     Retrieve all the datasets.
     This endpoint returns information on datasets available in the system.
     
-    - request: The HTTP request object.
-    - response: The HTTP response object.
-    - metadata_store: The metadata store dependency.
-
-    Response:
-    - 200 OK: Returns all the datasets.
-    - 404 Not Found: If no datasets are found.
     """
         
     if request.headers["Accept"] == JSONLD or BROWSABLE:
@@ -74,15 +67,15 @@ def get_all_datasets(
         responses={
             status.HTTP_200_OK: {
                 "description": "Successful response. Returns detailed information about the dataset.",
-                "model": Optional[schemas.Dataset],
+                "model": schemas.Dataset,
             },
             status.HTTP_404_NOT_FOUND: {
                 "description": "Not Found. The dataset with the given ID is not found.",
-                "model": str,
+                "model": None,
             },
             status.HTTP_406_NOT_ACCEPTABLE: {
                 "description": "Not Acceptable. The requested format is not supported.",
-                "model": str,
+                "model": None,
             }
         }
 )
@@ -96,14 +89,6 @@ def get_dataset_by_id(
     Retrieve information about a specific dataset by ID.
     This endpoint returns detailed information about a dataset based on its unique identifier.
 
-    - request: The HTTP request object.
-    - response: The HTTP response object.
-    - dataset_id: The unique identifier of the dataset.
-    - metadata_store: The metadata store dependency.
-
-    Response:
-    - 200 OK: Returns the dataset information.
-    - 404 Not Found: If the dataset with the given ID is not found.
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         dataset = metadata_store.get_dataset(dataset_id)
@@ -125,11 +110,11 @@ def get_dataset_by_id(
             },
             status.HTTP_404_NOT_FOUND: {
                 "description": "Not Found. No editions are found for the dataset.",
-                "model": str,
+                "model": None,
             },
             status.HTTP_406_NOT_ACCEPTABLE: {
                 "description": "Not Acceptable. The requested format is not supported.",
-                "model": str,
+                "model": None,
             }
         }
 )
@@ -143,14 +128,6 @@ def get_dataset_editions(
     Retrieve all the editions for a specific dataset.
     This endpoint returns all the editions associated with a particular dataset.
 
-    - request: The HTTP request object.
-    - response: The HTTP response object.
-    - dataset_id: The unique identifier of the dataset.
-    - metadata_store: The metadata store dependency.
-
-    Response:
-    - 200 OK: Returns all the editions.
-    - 404 Not Found: If no editions are found for the dataset.
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         editions = metadata_store.get_editions(dataset_id)
@@ -172,11 +149,11 @@ def get_dataset_editions(
             },
             status.HTTP_404_NOT_FOUND: {
                 "description": "Not Found. The edition with the given ID is not found.",
-                "model": str,
+                "model": None,
             },
             status.HTTP_406_NOT_ACCEPTABLE: {
                 "description": "Not Acceptable. The requested format is not supported.",
-                "model": str,
+                "model": None,
             }
         }
 )
@@ -191,15 +168,6 @@ def get_dataset_edition_by_id(
     Retrieve information about a specific edition of a dataset.
     This endpoint returns detailed information about a specific edition of a dataset.
     
-    - request: The HTTP request object.
-    - response: The HTTP response object.
-    - dataset_id: The unique identifier of the dataset.
-    - edition_id: The unique identifier of the edition.
-    - metadata_store: The metadata store dependency.
-
-    Response:
-    - 200 OK: Returns the edition information.
-    - 404 Not Found: If the edition with the given ID is not found.
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         edition = metadata_store.get_edition(dataset_id, edition_id)
@@ -221,11 +189,11 @@ def get_dataset_edition_by_id(
             },
             status.HTTP_404_NOT_FOUND: {
                 "description": "Not Found. No publishers are found.",
-                "model": str,
+                "model": None,
             },
             status.HTTP_406_NOT_ACCEPTABLE: {
                 "description": "Not Acceptable. The requested format is not supported.",
-                "model": str,
+                "model": None,
             }
         }
 )
@@ -237,14 +205,7 @@ def get_all_publishers(
     """
     Retrieve all the publishers.
     This endpoint returns all the publishers available in the system.
-    
-    - request: The HTTP request object.
-    - response: The HTTP response object.
-    - metadata_store: The metadata store dependency.
-
-    Response:
-    - 200 OK: Returns all the publishers.
-    - 404 Not Found: If no publishers are found.
+ 
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
@@ -267,11 +228,11 @@ def get_all_publishers(
             },
             status.HTTP_404_NOT_FOUND: {
                 "description": "Not Found. The publisher with the given ID is not found.",
-                "model": str,
+                "model": None,
             },
             status.HTTP_406_NOT_ACCEPTABLE: {
                 "description": "Not Acceptable. The requested format is not supported.",
-                "model": str,
+                "model": None,
             }
         }
 )
@@ -285,14 +246,6 @@ def get_publisher_by_id(
     Retrieve information about a specific publisher by ID.
     This endpoint returns detailed information about a specific publisher based on its unique identifier.
     
-    - request: The HTTP request object.
-    - response: The HTTP response object.
-    - publisher_id: The unique identifier of the publisher.
-    - metadata_store: The metadata store dependency.
-
-    Response:
-    - 200 OK: Returns the publisher information.
-    - 404 Not Found: If the publisher with the given ID is not found.
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         publisher = metadata_store.get_publisher(publisher_id)
@@ -314,11 +267,11 @@ def get_publisher_by_id(
             },
             status.HTTP_404_NOT_FOUND: {
                 "description": "Not Found. No topics are found.",
-                "model": str,
+                "model": None,
             },
             status.HTTP_406_NOT_ACCEPTABLE: {
                 "description": "Not Acceptable. The requested format is not supported.",
-                "model": str,
+                "model": None,
             }
         }
 )
@@ -331,13 +284,6 @@ def get_all_topics(
     Retrieve all the topics.
     This endpoint returns all of the topics available in the system.
     
-    - request: The HTTP request object.
-    - response: The HTTP response object.
-    - metadata_store: The metadata store dependency.
-
-    Response:
-    - 200 OK: Returns all of the topics.
-    - 404 Not Found: If no topics are found.
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
@@ -360,11 +306,11 @@ def get_all_topics(
             },
             status.HTTP_404_NOT_FOUND: {
                 "description": "Not Found. The topic with the given ID is not found.",
-                "model": str,
+                "model": None,
             },
             status.HTTP_406_NOT_ACCEPTABLE: {
                 "description": "Not Acceptable. The requested format is not supported.",
-                "model": str,
+                "model": None,
             }
         }
 )
@@ -378,14 +324,6 @@ def get_topic_by_id(
     Retrieve information about a specific topic by ID.
     This endpoint returns detailed information about a specific topic based on its unique identifier.
 
-    - request: The HTTP request object.
-    - response: The HTTP response object.
-    - topic_id: The unique identifier of the topic.
-    - metadata_store: The metadata store dependency.
-
-    Response:
-    - 200 OK: Returns the topic information.
-    - 404 Not Found: If the topic with the given ID is not found.
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         topic = metadata_store.get_topic(topic_id)
@@ -423,16 +361,6 @@ def get_dataset_edition_version_by_id(
     Retrieve a specific version and edition of a dataset.
     This endpoint allows downloading a specific version of a dataset in CSV format.
 
-    - request: The HTTP request object.
-    - response: The HTTP response object.
-    - dataset_id: The unique identifier of the dataset.
-    - edition_id: The unique identifier of the edition.
-    - version_id: The unique identifier of the version.
-    - csv_store: The CSV store dependency.
-
-    Response:
-    - 200 OK: Returns the CSV data for the specified version.
-    - 404 Not Found: If the specified version is not found.
     """
     csv_data = csv_store.get_version(dataset_id, edition_id, version_id)
     if csv_data is not None:
