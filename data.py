@@ -10,12 +10,17 @@ Tool that uses jsonld files in /src/store/metadata/stub/content to:
 Please run this vai the Makefile if you want to finesses this behaviour.
 """
 
+from ast import List
+from ctypes import Union
+from dataclasses import Field
 from datetime import datetime
+from enum import Enum
 import json
 import os
 from os import linesep
 from pathlib import Path
 import shutil
+from pydantic import BaseModel
 
 from pytz import timezone
 from rdflib import ConjunctiveGraph, Dataset, BNode, Graph
@@ -87,7 +92,76 @@ def populate(oxigraph_url=None, write_to_db=True):
         editions_source_dict = json.load(f)
 
     # Validate then add to graph
-    # TODO - add schema validation
+    class ContactPoint(BaseModel):
+        name: str
+        email: str = Field(pattern=r"^mailto:[\w\.-]+@[\w\.-]+\.\w{2,}$")
+    
+    class Frequency(Enum):
+        triennial = "triennial"
+        biennial = "biennial"
+        annual = "annual"
+        semiannual = "semiannual"
+        threeTimesAYear = "three_times_a_year"
+        quarterly = "quarterly"
+        bimonthly = "bimonthly"
+        monthly = "monthly"
+        semimonthly = "semimonthly"
+        biweekly = "biweekly"
+        threeTimesAMonth = "three_times_a_week"
+        weekly = "weekly"
+        semiweekly = "semiweekly"
+        threeTimesAWeek = "three_times_a_week"
+        daily = "daily"
+        continuous = "continuous"
+        irregular = "irregular"
+    
+    class Column(BaseModel):
+        name: str
+        datatype: str
+        titles: str
+        description: str
+
+    class TableSchema(BaseModel):
+        columns: list[Column]
+
+    class Edition(BaseModel):
+        id: str = Field(alias="@id")
+        type: Literal["dcat:Dataset"] = Field(alias="@type")
+        in_series: str
+        identifier: str
+        title: str = Field(max_length=90)
+        summary: str = Field(max_length=200)
+        description: str = Field(max_length=250)
+        publisher: str
+        creator: str
+        contact_point: ContactPoint
+        topics: Union[str, List[str]]
+        frequency: Frequency
+        keywords: list[str]
+        licence: str
+        issued: str = Field(
+            pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
+        )
+        modified: str = Field(
+            pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
+        )
+        spatial_coverage: str = Field(pattern=r"^[EJKLMNSW]{1}\d{8}$")
+        temporal_coverage: str
+        next_release: str = Field(
+            pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",
+        )
+        versions_url: str
+        versions: List
+        table_schema: TableSchema
+
+    class Editions(BaseModel):
+        context: str = Field(alias="@context")
+        id: str = Field(alias="@id")
+        type: Literal["hydra:Collection"] = Field(alias="@type")
+        title: str = Field(max_length=90)
+        editions: List[Edition]
+
+
     g += Graph().parse(data=json.dumps(set_context(editions_source_dict)), format="json-ld")
 
     # ------------------
@@ -100,7 +174,39 @@ def populate(oxigraph_url=None, write_to_db=True):
         versions_source_dict = json.load(f)
 
     # Validate then add to graph
-    # TODO - add schema validation
+    class Column(BaseModel):
+        name: str
+        datatype: str
+        titles: str
+        description: str
+
+    class TableSchema(BaseModel):
+        columns: list[Column]
+
+    class Version(BaseModel):
+        type: List[str] = Field(alias="@type")
+        id: str = Field(alias="@id")
+        identifier: str
+        issued: str = Field(
+            pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
+        )
+        title: str = Field(max_length=90)
+        summary: str = Field(max_length=200)
+        description: str = Field(max_length=250)
+        download_url: str
+        media_type: str
+        table_schema: TableSchema
+
+    class Versions(BaseModel):
+        context: str = Field(alias="@context")
+        id: str = Field(alias="@id")
+        type: Literal["hydra:Collection"] = Field(alias="@type")
+        title: str = Field(max_length=90)
+        versions: List[Version]
+        count: int
+        offset: int
+
+
     g += Graph().parse(data=json.dumps(set_context(versions_source_dict)), format="json-ld")
 
     # ------------------

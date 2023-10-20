@@ -45,7 +45,7 @@ class PeriodOfTime(BaseModel):
 class Column(BaseModel):
     name: str
     datatype: str
-    title: str
+    titles: str
     description: str
 
 
