@@ -103,11 +103,11 @@ def get_dataset_by_id(
 
 
 @app.get("/datasets/{dataset_id}/editions",
-        response_model=Optional[schemas.Editions],
+        response_model=Optional[schemas.Editions], 
         responses={
             status.HTTP_200_OK: {
                 "description": "Successful response. Returns all the editions for the dataset.",
-                "model": schemas.Edition,
+                "model": schemas.Editions,
             },
             status.HTTP_404_NOT_FOUND: {
                 "description": "Not Found. No editions are found for the dataset.",
@@ -143,7 +143,7 @@ def get_dataset_editions(
 
 
 @app.get("/datasets/{dataset_id}/editions/{edition_id}",
-         response_model=Optional[schemas.Edition],
+        response_model=Optional[schemas.Edition], 
         responses={
             status.HTTP_200_OK: {
                 "description": "Successful response. Returns detailed information about the edition.",
