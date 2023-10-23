@@ -36,27 +36,51 @@
               }
             ],
             "temporal_coverage": "",
-            "next_release": "2017-03-11T09:30:00Z",
+            "next_release": "",
             "table_schema": {
               "columns": [
-                  {
-                  "name": "geography",
-                  "datatype": "string",
-                  "titles": "Geography",
-                  "description": "The geography associated with the observation."
-                  },
-                  {
-                  "name": "time_period",
-                  "datatype": "string",
-                  "titles": "Time period",
-                  "description": "The time period associated with the observation."
-                  },
-                  {
-                  "name": "cpih",
+                {
+                  "name": "year",
                   "datatype": "number",
-                  "titles": "Consumer price index",
-                  "description": "The consumer price index for the given time period."
-                  }
+                  "titles": "Year",
+                  "description": "The year associated with the observation."
+                
+                },
+                {
+                  "name": "country",
+                  "datatype": "string",
+                  "titles": "Country",
+                  "description": "The country associated with the observation."
+                
+                },
+                {
+                  "name": "local authority",
+                  "datatype": "string",
+                  "titles": "Local Authority",
+                  "description": "The local authority associated with the observation."
+                
+                },
+                {
+                  "name": "local authority code",
+                  "datatype": "string",
+                  "titles": "Local Authority Code",
+                  "description": "The code representing the local authority area"
+                
+                },
+                {
+                  "name": "LA CO2 Sector",
+                  "datatype": "string",
+                  "titles": "LA CO2 Sector",
+                  "description": ""
+                
+                },
+                {
+                  "name": "LA CO2 Sub-sector",
+                  "datatype": "string",
+                  "titles": "LA CO2 Sub-sector",
+                  "description": ""
+                
+                }
               ]
           }
         }
