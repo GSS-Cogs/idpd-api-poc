@@ -2,48 +2,47 @@
     "@context": "https://staging.idpd.uk/#ns",
     "@type": ["dcat:Catalog", "hydra:Collection"],
     "@id": "http://localhost:8000/datasets",
-    "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
+    "title": "4G Coverage",
     "datasets": [
         {
-            "@id": "https://staging.idpd.uk/datasets/cpih",
+            "@id": "https://staging.idpd.uk/datasets/4gc",
             "@type": "dcat:DatasetSeries",
-            "identifier": "cpih",
-            "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
-            "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
-            "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
-            "issued": "2017-01-01T00:00:00",
-            "modified": "2017-01-01T00:00:00",
-            "next_release": "2019-04-19T09:30:00Z",
+            "identifier": "4gc",
+            "title": "4G Coverage",
+            "summary": "Percentage of geographic areas with 4G signal outdoors from at least 1 operator (signal threshold: 105dBm), UK, September 2022.",
+            "description": "This dataset shows the percentage of geographic areas with 4G signal outdoors from at least 1 operator (signal threshold: 105dBm), in the UK, for September 2022.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities\n\n### Source\n\n - United Kingdom: [Ofcom](https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/connected-nations-2022) \n\n\n",
+            "issued": "2023-03-31T12:10:00",
+            "modified": "2023-08-24T15:55:00",
+            "next_release": "2023-11-24T09:30:00Z",
             "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-            "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+            "creator": "https://staging.idpd.uk/publishers/ofcom",
             "contact_point": {
-              "name": "Consumer Price Inflation Enquiries",
-              "email": "mailto:cpih@ons.gov.uk"
+              "name": "Ofcom Open Data",
+              "email": "mailto:open.data@ofcom.org.uk"
             },
             "topics": [
-              "https://staging.idpd.uk/topics/economy",
-              "https://staging.idpd.uk/topics/prices"],
+              "https://staging.idpd.uk/topics/communication",
+              "https://staging.idpd.uk/topics/itandinternetindustry"],
             "frequency": "monthly",
             "keywords": [
-              "inflation",
-              "consumer price inflation",
-              "cpi",
-              "cpih",
-              "consumer price index",
-              "consumer price index including owner occupiers' housing costs"
+              "communication",
+              "broadband-mobile-coverage",
+              "connectivity",
+              "local-authority",
+              "subnational"
             ],
             "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
             "spatial_coverage": "K02000001",
             "temporal_coverage": {
-              "start": "2005-01-01T00:00:00Z",
-              "end": "2019-03-01T00:00:00Z"
+              "start": "2022-09-01T00:00:00Z",
+              "end": "2022-09-01T00:00:00Z"
             },
-            "editions_url": "https://staging.idpd.uk/datasets/cpih/editions",
+            "editions_url": "https://staging.idpd.uk/datasets/4gc/editions",
             "editions": [
               {
-                "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01",
-                "issued": "2017-02-21T09:30:00Z",
-                "modified": "2017-02-21T09:30:00Z"
+                "@id": "https://staging.idpd.uk/datasets/4gc/editions/2022-09",
+                "issued": "2023-08-24T09:30:00Z",
+                "modified": "2023-08-24T09:30:00Z"
               }
             ]
         }

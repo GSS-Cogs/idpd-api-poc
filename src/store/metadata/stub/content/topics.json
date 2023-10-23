@@ -24,6 +24,28 @@
             "parent_topics": [
                 "https://staging.idpd.uk/topics/economy"
             ]
+        },
+        {
+            "@id": "https://staging.idpd.uk/topics/communication",
+            "@type": "dcat:theme",
+            "identifier": "communication",
+            "title": "Communication",
+            "description": "something describing communication",
+            "sub_topics": null,
+            "parent_topics": [
+                "https://staging.idpd.uk/topics/itandinternetindustry"
+            ]
+        },
+        {
+            "@id": "https://staging.idpd.uk/topics/itandinternetindustry",
+            "@type": "dcat:theme",
+            "identifier": "itandinternetindustry",
+            "title": "IT and Internet Industry",
+            "description": "something describing IT and Internet Industry",
+            "sub_topics": null,
+            "parent_topics": [
+                "https://staging.idpd.uk/topics/communication"
+            ]
         }
     ],
     "count": 2,
