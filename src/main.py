@@ -267,7 +267,7 @@ def get_publisher_by_id(
         responses={
             status.HTTP_200_OK: {
                 "description": "Successful response. Returns all of the topics available in the system.",
-                "model": "",
+                "model": schemas.topics,
             },
             status.HTTP_404_NOT_FOUND: {
                 "description": "Not Found. No topics are found.",
@@ -308,7 +308,7 @@ def get_all_topics(
         responses={
             status.HTTP_200_OK: {
                 "description": "Successful response. Returns detailed information about the topic.",
-                "model": "",
+                "model": schemas.topic,
             },
             status.HTTP_404_NOT_FOUND: {
                 "description": "Not Found. The topic with the given ID is not found.",
