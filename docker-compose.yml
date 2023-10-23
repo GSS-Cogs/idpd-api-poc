@@ -1,0 +1,9 @@
+version: "3"
+services:
+
+  oxigraph:
+    image: ghcr.io/oxigraph/oxigraph:latest
+    ports:
+      - 7878:7878
+    volumes:
+      - ./data:/data

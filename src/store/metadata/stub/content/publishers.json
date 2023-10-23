@@ -1,22 +1,16 @@
 {
-    "items": [
+    "@context": "https://staging.idpd.uk/#ns",
+    "@id": "https://staging.idpd.uk/publishers",
+    "@type": "hydra:Collection",
+    "publishers": [
         {
-            "id": "publisher1",
-            "foo": "foo",
-            "bar": "bar",
-            "baz": "baz"
-        },
-        {
-            "id": "publisher2",
-            "foo": "foo",
-            "bar": "bar",
-            "baz": "baz"
-        },
-        {
-            "id": "publisher3",
-            "foo": "foo",
-            "bar": "bar",
-            "baz": "baz"
+            "@id": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+            "@type": "dcat:publisher",
+            "title": "The Office for National Statistics",
+            "description": "A description of ONS",
+            "landing_page": "https://www.ons.gov.uk/"
         }
-    ]
+    ],
+    "count": 1,
+    "offset": 0
 }

@@ -8,7 +8,11 @@ SPARQLWrapper = "*"
 fastapi = "*"
 uvicorn = "*"
 httpx = "*"
+<<<<<<< HEAD
 structlog = "*"
+=======
+pyld = "*"
+>>>>>>> main
 
 [dev-packages]
 pytest = "*"
@@ -16,6 +20,9 @@ pytest-vcr = "*"
 black = "*"
 pytest-cov = "*"
 ruff = "*"
+pytz = "*"
+docker = "*"
+requests = "*"
 
 [requires]
 python_version = "3.9"

@@ -1,19 +1,21 @@
 import json
 import pathlib
-from typing import Dict
+import pytest
 
 
-def dataset_data() -> Dict:
+@pytest.fixture
+def dataset_test_data():
     """
     Returns a dictionary representing the dictionary
     we'd expect returned from store.get_dataset().
     """
     file_path = pathlib.Path("src/store/metadata/stub/content/datasets.json")
     with open(file_path, "r") as json_file:
-        return json.load(json_file)["items"][0]
+        return json.load(json_file)["datasets"][0]
 
 
-def datasets_data() -> Dict:
+@pytest.fixture
+def datasets_test_data():
     """
     Returns a dictionary representing the dictionary
     we'd expect returned from store.get_datasets().

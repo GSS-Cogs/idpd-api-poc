@@ -1,22 +1,31 @@
 {
-    "items": [
+    "@context": "https://staging.idpd.uk/#ns",
+    "@id": "https://staging.idpd.uk/topics",
+    "@type": "hydra:Collection",
+    "topics": [
         {
-            "id": "theme1",
-            "foo": "foo",
-            "bar": "bar",
-            "baz": "baz"
+            "@id": "https://staging.idpd.uk/topics/economy",
+            "@type": "dcat:theme",
+            "identifier": "economy",
+            "title": "Economy",
+            "description": "something describing economy",
+            "sub_topics": [
+                "https://staging.idpd.uk/topics/prices"
+            ],
+            "parent_topics": null
         },
         {
-            "id": "theme2",
-            "foo": "foo",
-            "bar": "bar",
-            "baz": "baz"
-        },
-        {
-            "id": "theme3",
-            "foo": "foo",
-            "bar": "bar",
-            "baz": "baz"
+            "@id": "https://staging.idpd.uk/topics/prices",
+            "@type": "dcat:theme",
+            "identifier": "prices",
+            "title": "Prices",
+            "description": "something describing prices",
+            "sub_topics": null,
+            "parent_topics": [
+                "https://staging.idpd.uk/topics/economy"
+            ]
         }
-    ]
+    ],
+    "count": 2,
+    "offset": 0
 }
