@@ -165,3 +165,20 @@ class Datasets(BaseModel):
 #     items: List[Version]
 #     offset: int
 #     count: int
+
+
+class Publisher(BaseModel):
+    id: str = Field(alias="@id")
+    type: Literal["dcat:publisher"] = Field(alias="@type")
+    title: str = Field(max_length=90)
+    description: str
+    landing_page: str
+
+
+class Publishers(BaseModel):
+    context: Optional[str] = Field(alias="@context")
+    id: str = Field(alias="@id")
+    type: Literal["hydra:Collection"] = Field(alias="@type")
+    publishers: List[Publisher]
+    count: int
+    offset: int
