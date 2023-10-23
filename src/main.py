@@ -27,10 +27,6 @@ app = FastAPI(
 app.middleware("http")(logging_middleware)
 
 
-<<<<<<< HEAD
-@app.get("/datasets", response_model=Optional[schemas.Datasets])
-async def datasets(
-=======
 @app.get(
     "/datasets", 
     response_model=Optional[schemas.Datasets], 
@@ -50,22 +46,18 @@ async def datasets(
     }
 )
 def get_all_datasets(
->>>>>>> main
     request: Request,
     response: Response,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-<<<<<<< HEAD
     logger.info("Received request for datasets", data={"request_type": "datasets"})
        
-=======
     """
     Retrieve all the datasets.
     This endpoint returns information on datasets available in the system.
     
     """
         
->>>>>>> main
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         datasets = metadata_store.get_datasets()
         if datasets is not None:
@@ -77,10 +69,6 @@ def get_all_datasets(
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
 
-<<<<<<< HEAD
-@app.get("/datasets/{dataset_id}", response_model=Optional[schemas.Dataset])
-async def dataset(
-=======
 
 @app.get("/datasets/{dataset_id}", 
         response_model=Optional[schemas.Dataset],
@@ -100,21 +88,17 @@ async def dataset(
         }
 )
 def get_dataset_by_id(
->>>>>>> main
     request: Request,
     response: Response,
     dataset_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-<<<<<<< HEAD
     logger.info("Received request for dataset with ID", data={"dataset_id": dataset_id})
-=======
     """
     Retrieve information about a specific dataset by ID.
     This endpoint returns detailed information about a dataset based on its unique identifier.
 
     """
->>>>>>> main
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         dataset = metadata_store.get_dataset(dataset_id)
         if dataset is not None:
@@ -127,10 +111,6 @@ def get_dataset_by_id(
         return
 
 
-<<<<<<< HEAD
-@app.get("/datasets/{dataset_id}/editions")
-async def editions(
-=======
 @app.get("/datasets/{dataset_id}/editions",
         response_model=Optional[schemas.Editions],
         responses={
@@ -149,21 +129,17 @@ async def editions(
         }
 )
 def get_dataset_editions(
->>>>>>> main
     request: Request,
     response: Response,
     dataset_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-<<<<<<< HEAD
     logger.info("Received request for dataset editions", data={"dataset_id": dataset_id})
-=======
     """
     Retrieve all the editions for a specific dataset.
     This endpoint returns all the editions associated with a particular dataset.
 
     """
->>>>>>> main
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         editions = metadata_store.get_editions(dataset_id)
         if editions is not None:
@@ -176,10 +152,6 @@ def get_dataset_editions(
         return
 
 
-<<<<<<< HEAD
-@app.get("/datasets/{dataset_id}/editions/{edition_id}")
-async def edition(
-=======
 @app.get("/datasets/{dataset_id}/editions/{edition_id}",
          response_model=Optional[schemas.Edition],
         responses={
@@ -198,22 +170,18 @@ async def edition(
         }
 )
 def get_dataset_edition_by_id(
->>>>>>> main
     request: Request,
     response: Response,
     dataset_id: str,
     edition_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-<<<<<<< HEAD
     logger.info("Received request for dataset and edition", data={"dataset_id": dataset_id, "edition_id": edition_id})
-=======
     """
     Retrieve information about a specific edition of a dataset.
     This endpoint returns detailed information about a specific edition of a dataset.
     
     """
->>>>>>> main
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         edition = metadata_store.get_edition(dataset_id, edition_id)
         if edition is not None:
@@ -226,10 +194,6 @@ def get_dataset_edition_by_id(
         return
 
 
-<<<<<<< HEAD
-@app.get("/publishers")
-async def publishers(
-=======
 @app.get("/publishers",
         responses={
             status.HTTP_200_OK: {
@@ -247,20 +211,16 @@ async def publishers(
         }
 )
 def get_all_publishers(
->>>>>>> main
     request: Request,
     response: Response,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-<<<<<<< HEAD
     logger.info("Received request for publishers", data={"request_type": "publishers"})
-=======
     """
     Retrieve all the publishers.
     This endpoint returns all the publishers available in the system.
  
     """
->>>>>>> main
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
         publishers = metadata_store.get_publishers()
@@ -274,10 +234,6 @@ def get_all_publishers(
         return
 
 
-<<<<<<< HEAD
-@app.get("/publishers/{publisher_id}")
-async def publisher(
-=======
 @app.get("/publishers/{publisher_id}",
         responses={
             status.HTTP_200_OK: {
@@ -295,21 +251,17 @@ async def publisher(
         }
 )
 def get_publisher_by_id(
->>>>>>> main
     request: Request,
     response: Response,
     publisher_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-<<<<<<< HEAD
     logger.info("Received request for publisher with ID", data={"publisher_id": publisher_id})
-=======
     """
     Retrieve information about a specific publisher by ID.
     This endpoint returns detailed information about a specific publisher based on its unique identifier.
     
     """
->>>>>>> main
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         publisher = metadata_store.get_publisher(publisher_id)
         if publisher is not None:
@@ -322,10 +274,6 @@ def get_publisher_by_id(
         return
 
 
-<<<<<<< HEAD
-@app.get("/topics")
-async def topics(
-=======
 @app.get("/topics", 
         responses={
             status.HTTP_200_OK: {
@@ -343,20 +291,16 @@ async def topics(
         }
 )
 def get_all_topics(
->>>>>>> main
     request: Request,
     response: Response,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-<<<<<<< HEAD
     logger.info("Received request for topics", data={"request_type": "topics"})
-=======
     """
     Retrieve all the topics.
     This endpoint returns all of the topics available in the system.
     
     """
->>>>>>> main
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
         topics = metadata_store.get_topics()
@@ -370,10 +314,6 @@ def get_all_topics(
         return
 
 
-<<<<<<< HEAD
-@app.get("/topics/{topic_id}")
-async def topic(
-=======
 @app.get("/topics/{topic_id}", 
         responses={
             status.HTTP_200_OK: {
@@ -391,21 +331,17 @@ async def topic(
         }
 )
 def get_topic_by_id(
->>>>>>> main
     request: Request,
     response: Response,
     topic_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-<<<<<<< HEAD
     logger.info("Received request for topic with ID", data={"topic_id": topic_id})
-=======
     """
     Retrieve information about a specific topic by ID.
     This endpoint returns detailed information about a specific topic based on its unique identifier.
 
     """
->>>>>>> main
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         topic = metadata_store.get_topic(topic_id)
         if topic is not None:
@@ -417,11 +353,6 @@ def get_topic_by_id(
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
 
-<<<<<<< HEAD
-# Note: download only for now, needs expanding
-@app.get("/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}")
-async def version(
-=======
 
 # note: download only for now, needs expanding
 @app.get("/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}",
@@ -436,7 +367,6 @@ async def version(
         }
 )
 def get_dataset_edition_version_by_id(
->>>>>>> main
     request: Request,
     response: Response,
     dataset_id: str,
@@ -444,15 +374,12 @@ def get_dataset_edition_version_by_id(
     version_id: str,
     csv_store: StubCsvStore = Depends(StubCsvStore),
 ):
-<<<<<<< HEAD
     logger.info("Received request for dataset, edition, and version", data={"dataset_id": dataset_id, "edition_id": edition_id, "version_id": version_id})
-=======
     """
     Retrieve a specific version and edition of a dataset.
     This endpoint allows downloading a specific version of a dataset in CSV format.
 
     """
->>>>>>> main
     csv_data = csv_store.get_version(dataset_id, edition_id, version_id)
     if csv_data is not None:
         response.status_code = status.HTTP_200_OK
