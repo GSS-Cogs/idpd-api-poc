@@ -35,7 +35,7 @@
                 "modified": ""
               }
             ],
-            "temporal_coverage": "P33Y1M",
+            "temporal_coverage": "",
             "next_release": "2017-03-11T09:30:00Z",
             "table_schema": {
               "columns": [
