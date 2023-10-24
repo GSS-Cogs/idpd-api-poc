@@ -2,7 +2,7 @@
     "@context": "https://staging.idpd.uk/#ns",
     "@type": ["dcat:Catalog", "hydra:Collection"],
     "@id": "http://localhost:8000/datasets",
-    "title": "4G Coverage",
+    "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
     "datasets": [
           {
             "@id": "https://staging.idpd.uk/datasets/cpih",
@@ -68,7 +68,6 @@
               "https://staging.idpd.uk/topics/itandinternetindustry"],
             "frequency": "monthly",
             "keywords": [
-              "communication",
               "broadband-mobile-coverage",
               "connectivity",
               "local-authority",
@@ -91,5 +90,5 @@
         }
       ],
     "offset": 0,
-    "count": 1
+    "count": 2
 }
