@@ -1,12 +1,12 @@
 {
     "@context": "https://staging.idpd.uk/#ns",
-    "@id": "https://staging.idpd.uk/datasets/4gc/editions/2022-01/versions",
+    "@id": "https://staging.idpd.uk/datasets/4gc/editions/2023-09/versions",
     "@type": "hydra:Collection",
     "title": "4G Coverage",
     "versions": [
         {
             "@type": ["dcat:Distribution", "csvw:Table"],
-            "@id": "https://staging.idpd.uk/datasets/4gc/editions/2022-01/versions/1",
+            "@id": "https://staging.idpd.uk/datasets/4gc/editions/2023-09/versions/1",
             "identifier": "1",
             "issued": "2023-03-31T12:10:00",
             "title": "4G Coverage",
