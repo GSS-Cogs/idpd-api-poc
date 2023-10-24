@@ -56,18 +56,22 @@
           "description": "These statistics provide the most reliable and consistent breakdown of CO2 emissions across the country, using nationally available data sets going back to 2005.\n\nThe main data sources are the UK National Atmospheric Emissions Inventory and the BEIS National Statistics of energy consumption for local authority areas. All emissions included in the national inventory are covered, except aviation, shipping and military transport, for which there is no obvious basis for allocation to local areas.",
           "issued": "2021-06-24T08:30:00",
           "modified": "2022-08-18T10:51:00",
-          "next_release": "",
+          "next_release": "2024-04-19T09:30:00Z",
           "publisher": "https://staging.idpd.uk/publishers/department-for-business-energy-and-industrial-strategy",
           "creator": "https://staging.idpd.uk/publishers/department-for-business-energy-and-industrial-strategy",
           "contact_point": {
-            "name": "",
-            "email": ""
+            "name": "Department for Business, Energy & Industrial Strategy",
+            "email": "Climatechange.Statistics@beis.gov.uk"
           },
           "topics": [
-            "",
-            ""],
-          "frequency": "",
+            "https://staging.idpd.uk/topics/climatechange",
+            "https://staging.idpd.uk/topics/carbonemissions"],
+          "frequency": "Onetime",
           "keywords": [
+            "carbon",
+            "emissions",
+            "local authority",
+            "beis"
           ],
           "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
           "spatial_coverage": "K02000001",
@@ -75,15 +79,15 @@
             "start": "2005-01-01T00:00:00Z",
             "end": "2019-12-31T00:00:00Z"
           },
-          "editions_url": "",
+          "editions_url": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions",
           "editions": [
             {
-              "@id": "",
-              "issued": "",
-              "modified": ""
+              "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions/placeholder",
+              "issued": "2021-06-24T08:30:00Z",
+              "modified": "2022-08-18T10:51:00Z"
             }
           ]
-        }
+      }
       ],
     "offset": 0,
     "count": 1
