@@ -19,7 +19,6 @@ from main import app, StubCsvStore
 ENDPOINT = "/datasets/some-dataset-id/editions/some-edition-id/versions/some-version-id"
 
 
-
 def test_version_csv_200(version_test_data):
     """
     Confirms that:

@@ -20,8 +20,6 @@ from fixtures.versions import versions_test_data
 ENDPOINT = "datasets/some-dataset-id/editions/some-edition-id/versions"
 
 
-
-
 def test_versions_valid_structure_200(versions_test_data):
     """
     Confirms that:
@@ -33,9 +31,7 @@ def test_versions_valid_structure_200(versions_test_data):
     """
 
     mock_metadata_store = MagicMock()
-    mock_metadata_store.get_versions = MagicMock(
-        return_value= versions_test_data
-    )
+    mock_metadata_store.get_versions = MagicMock(return_value=versions_test_data)
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
