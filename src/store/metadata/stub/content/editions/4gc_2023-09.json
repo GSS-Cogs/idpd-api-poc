@@ -57,6 +57,18 @@
                 "description": "The geography code associated with the observation."
                 },
                 {
+                "name": "AREANM",
+                "datatype": "string",
+                "titles": "Area Name",
+                "description": "The name assiciated with The geography code "
+                },
+                {
+                "name": "Geography",
+                "datatype": "string",
+                "titles": "Geography Type",
+                "description": "The categorisation of the geography code"
+                },
+                {
                 "name": "Value",
                 "datatype": "decimal",
                 "titles": "Geographic area with 4G coverage by at least one provider",

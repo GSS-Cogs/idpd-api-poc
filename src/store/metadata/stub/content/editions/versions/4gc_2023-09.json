@@ -17,53 +17,65 @@
             "table_schema": {
                 "columns": [
                     {
-                    "name": "Period",
-                    "datatype": "string",
-                    "titles": "Period",
-                    "description": "The time period associated with the observation."
-                    },
-                    {
-                    "name": "AREACD",
-                    "datatype": "string",
-                    "titles": "Statistical Geography",
-                    "description": "The geography code associated with the observation."
-                    },
-                    {
-                    "name": "Value",
-                    "datatype": "decimal",
-                    "titles": "Geographic area with 4G coverage by at least one provider",
-                    "description": "Observational Value"
-                    },
-                    {
-                    "name": "Measure",
-                    "datatype": "string",
-                    "titles": "Measure Type",
-                    "description": "Measure Type of the Observational Value"
-                    },
-                    {
-                    "name": "Unit",
-                    "datatype": "string",
-                    "titles": "Unit",
-                    "description": "Unit Type of the Observational Value"
-                    },
-                    {
-                    "name": "Lower Confidence Interval (95%)",
-                    "datatype": "decimal",
-                    "titles": "Lower Confidence Interval",
-                    "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Lower bound"
-                    },
-                    {
-                    "name": "Upper Confidence Interval (95%)",
-                    "datatype": "decimal",
-                    "titles": "Upper Confidence Interval",
-                    "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Upper bound"
-                    },
-                    {
-                    "name": "Observation Status",
-                    "datatype": "string",
-                    "titles": "Observation Status",
-                    "description": "Additional Context to the Observation if needed"
-                    }
+                        "name": "Period",
+                        "datatype": "string",
+                        "titles": "Period",
+                        "description": "The time period associated with the observation."
+                        },
+                        {
+                        "name": "AREACD",
+                        "datatype": "string",
+                        "titles": "Statistical Geography",
+                        "description": "The geography code associated with the observation."
+                        },
+                        {
+                        "name": "AREANM",
+                        "datatype": "string",
+                        "titles": "Area Name",
+                        "description": "The name assiciated with The geography code "
+                        },
+                        {
+                        "name": "Geography",
+                        "datatype": "string",
+                        "titles": "Geography Type",
+                        "description": "The categorisation of the geography code"
+                        },
+                        {
+                        "name": "Value",
+                        "datatype": "decimal",
+                        "titles": "Geographic area with 4G coverage by at least one provider",
+                        "description": "Observational Value"
+                        },
+                        {
+                        "name": "Measure",
+                        "datatype": "string",
+                        "titles": "Measure Type",
+                        "description": "Measure Type of the Observational Value"
+                        },
+                        {
+                        "name": "Unit",
+                        "datatype": "string",
+                        "titles": "Unit",
+                        "description": "Unit Type of the Observational Value"
+                        },
+                        {
+                        "name": "Lower Confidence Interval (95%)",
+                        "datatype": "decimal",
+                        "titles": "Lower Confidence Interval",
+                        "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Lower bound"
+                        },
+                        {
+                        "name": "Upper Confidence Interval (95%)",
+                        "datatype": "decimal",
+                        "titles": "Upper Confidence Interval",
+                        "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Upper bound"
+                        },
+                        {
+                        "name": "Observation Status",
+                        "datatype": "string",
+                        "titles": "Observation Status",
+                        "description": "Additional Context to the Observation if needed"
+                        }
                 ]
             }
         }
