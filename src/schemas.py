@@ -146,7 +146,6 @@ class Datasets(BaseModel):
     context: str = Field(alias="@context")
     id: str = Field(alias="@id")
     type: List[str] = Field(alias="@type")
-    title: str = Field(max_length=90)
     datasets: List  # TODO - stricter
     offset: int
     count: int
