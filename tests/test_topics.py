@@ -26,7 +26,7 @@ def test_topics_valid_structure_200(topics_test_data):
 
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_topics() is called exactly once.
-    - And if store.get_topics() returns data that does 
+    - And if store.get_topics() returns data that does
       match the response schema.
     - Status code 200 is returned.
     """

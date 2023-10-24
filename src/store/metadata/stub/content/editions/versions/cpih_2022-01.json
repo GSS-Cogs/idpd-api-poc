@@ -19,19 +19,19 @@
                     {
                     "name": "geography",
                     "datatype": "string",
-                    "title": "Geography",
+                    "titles": "Geography",
                     "description": "The geography associated with the observation."
                     },
                     {
                     "name": "time_period",
                     "datatype": "string",
-                    "title": "Time period",
+                    "titles": "Time period",
                     "description": "The time period associated with the observation."
                     },
                     {
                     "name": "cpih",
                     "datatype": "number",
-                    "title": "Consumer price index",
+                    "titles": "Consumer price index",
                     "description": "The consumer price index for the given time period."
                     }
                 ]
