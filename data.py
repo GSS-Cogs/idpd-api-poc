@@ -10,23 +10,13 @@ Tool that uses jsonld files in /src/store/metadata/stub/content to:
 Please run this vai the Makefile if you want to finesses this behaviour.
 """
 
-from ast import List
-from ctypes import Union
-from dataclasses import Field
-from datetime import datetime
-from enum import Enum
 import json
 import os
-from os import linesep
 from pathlib import Path
 import shutil
-from pydantic import BaseModel
 
-from pytz import timezone
 from rdflib import ConjunctiveGraph, Dataset, BNode, Graph
-from rdflib import Literal, URIRef
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore, _node_to_sparql
-from rdflib.namespace import DCAT, DCTERMS, FOAF, RDF, XSD
 
 from src import schemas
 

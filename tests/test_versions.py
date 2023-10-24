@@ -20,7 +20,7 @@ from fixtures.versions import versions_test_data
 ENDPOINT = "datasets/some-dataset-id/editions/some-edition-id/versions"
 
 
-# TODO - reimplement once we've got a schema of the data model.
+
 
 def test_versions_valid_structure_200(versions_test_data):
     """
