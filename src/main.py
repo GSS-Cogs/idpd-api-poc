@@ -263,11 +263,11 @@ def get_publisher_by_id(
 
 
 @app.get("/topics",
-         response_model=Optional[schemas.topics] ,
+         response_model=Optional[schemas.Topics] ,
         responses={
             status.HTTP_200_OK: {
                 "description": "Successful response. Returns all of the topics available in the system.",
-                "model": schemas.topics,
+                "model": schemas.Topics,
             },
             status.HTTP_404_NOT_FOUND: {
                 "description": "Not Found. No topics are found.",
@@ -304,11 +304,11 @@ def get_all_topics(
 
 
 @app.get("/topics/{topic_id}",
-         response_model=Optional[schemas.topic], 
+         response_model=Optional[schemas.Topic], 
         responses={
             status.HTTP_200_OK: {
                 "description": "Successful response. Returns detailed information about the topic.",
-                "model": schemas.topic,
+                "model": schemas.Topic,
             },
             status.HTTP_404_NOT_FOUND: {
                 "description": "Not Found. The topic with the given ID is not found.",
