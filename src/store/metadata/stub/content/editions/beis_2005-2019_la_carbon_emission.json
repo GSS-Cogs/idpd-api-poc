@@ -80,7 +80,43 @@
                   "titles": "LA CO2 Sub-sector",
                   "description": ""
                 
+                },
+                {
+                  "name": "territorial emissions per area",
+                  "datatype": "number",
+                  "titles": "Territorial emissions per area",
+                  "description": "Territorial emissions per area"
+                
+                },
+                {
+                  "name": "Emissions within the scope of influence of LAs",
+                  "datatype": "number",
+                  "titles": "Emissions within the scope of influence of LAs",
+                  "description": "Emissions within the scope of influence of LAs"
+                
+                },
+                {
+                  "name": "Territorial emissions per capita",
+                  "datatype": "number",
+                  "titles": "Territorial emissions per capita",
+                  "description": "Territorial emissions per capita"
+                
+                },
+                {
+                  "name": "Territorial emissions",
+                  "datatype": "number",
+                  "titles": "Territorial emissions",
+                  "description": "Territorial emissions"
+                
+                },
+                {
+                  "name": "Unit of Measure",
+                  "datatype": "string",
+                  "titles": "Unit of Measure",
+                  "description": ""
+                
                 }
+
               ]
           }
         }
