@@ -103,7 +103,7 @@ def get_dataset_by_id(
 
 
 @app.get("/datasets/{dataset_id}/editions",
-         response_model=Optional[schemas.Editions], 
+        response_model=Optional[schemas.Editions], 
         responses={
             status.HTTP_200_OK: {
                 "description": "Successful response. Returns all the editions for the dataset.",
@@ -261,11 +261,13 @@ def get_publisher_by_id(
         return
 
 
-@app.get("/topics", 
+
+@app.get("/topics",
+         response_model=Optional[schemas.Topics] ,
         responses={
             status.HTTP_200_OK: {
                 "description": "Successful response. Returns all of the topics available in the system.",
-                "model": "",
+                "model": schemas.Topics,
             },
             status.HTTP_404_NOT_FOUND: {
                 "description": "Not Found. No topics are found.",
@@ -300,11 +302,13 @@ def get_all_topics(
         return
 
 
-@app.get("/topics/{topic_id}", 
+
+@app.get("/topics/{topic_id}",
+         response_model=Optional[schemas.Topic], 
         responses={
             status.HTTP_200_OK: {
                 "description": "Successful response. Returns detailed information about the topic.",
-                "model": "",
+                "model": schemas.Topic,
             },
             status.HTTP_404_NOT_FOUND: {
                 "description": "Not Found. The topic with the given ID is not found.",
