@@ -183,21 +183,23 @@ def get_dataset_edition_by_id(
         return
 
 
-@app.get("/publishers",
-        responses={
-            status.HTTP_200_OK: {
-                "description": "Successful response. Returns all the publishers available in the system.",
-                "model": "",
-            },
-            status.HTTP_404_NOT_FOUND: {
-                "description": "Not Found. No publishers are found.",
-                "model": None,
-            },
-            status.HTTP_406_NOT_ACCEPTABLE: {
-                "description": "Not Acceptable. The requested format is not supported.",
-                "model": None,
-            }
+@app.get(
+    "/publishers",
+    response_model=Optional[schemas.Publishers],
+    responses={
+        status.HTTP_200_OK: {
+            "description": "Successful response. Returns all the publishers available in the system.",
+            "model": schemas.Publishers,
+        },
+        status.HTTP_404_NOT_FOUND: {
+            "description": "Not Found. No publishers are found.",
+            "model": None,
+        },
+        status.HTTP_406_NOT_ACCEPTABLE: {
+            "description": "Not Acceptable. The requested format is not supported.",
+            "model": None,
         }
+    }
 )
 def get_all_publishers(
     request: Request,
@@ -222,21 +224,23 @@ def get_all_publishers(
         return
 
 
-@app.get("/publishers/{publisher_id}",
-        responses={
-            status.HTTP_200_OK: {
-                "description": "Successful response. Returns detailed information about the publisher.",
-                "model": "",
-            },
-            status.HTTP_404_NOT_FOUND: {
-                "description": "Not Found. The publisher with the given ID is not found.",
-                "model": None,
-            },
-            status.HTTP_406_NOT_ACCEPTABLE: {
-                "description": "Not Acceptable. The requested format is not supported.",
-                "model": None,
-            }
+@app.get(
+    "/publishers/{publisher_id}",
+    response_model=Optional[schemas.Publisher],
+    responses={
+        status.HTTP_200_OK: {
+            "description": "Successful response. Returns detailed information about the publisher.",
+            "model": schemas.Publisher,
+        },
+        status.HTTP_404_NOT_FOUND: {
+            "description": "Not Found. The publisher with the given ID is not found.",
+            "model": None,
+        },
+        status.HTTP_406_NOT_ACCEPTABLE: {
+            "description": "Not Acceptable. The requested format is not supported.",
+            "model": None,
         }
+    }
 )
 def get_publisher_by_id(
     request: Request,
