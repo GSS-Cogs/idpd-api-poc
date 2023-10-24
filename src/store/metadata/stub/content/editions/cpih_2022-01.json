@@ -16,7 +16,7 @@
             "creator": "office-for-national-statistics",
             "contact_point": {
               "name": "Consumer Price Inflation Enquiries",
-              "email": "mailto:cpih@ons.gov.uk"
+              "email": "mailto:cpi@ons.gov.uk"
             },
             "topics": [
               "https://staging.idpd.uk/topics/economy"
@@ -24,9 +24,10 @@
             "frequency": "monthly",
             "keywords": ["inflation", "consumer price index", "CPIH"],
             "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-            "issued": "2017-02-21T09:30:00Z",
-            "modified": "2017-02-21T09:30:00Z",
+            "issued": "2022-02-16T09:30:00Z",
+            "modified": "2022-02-16T09:30:00Z",
             "spatial_coverage": "K02000001",
+            "spatial_resolution": ["K02"],
             "versions_url": "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions",
             "versions": [
               {
@@ -35,7 +36,12 @@
                 "modified": "2017-01-01T00:00:00"
               }
             ],
-            "temporal_coverage": "P33Y1M",
+            "temporal_coverage":
+              {
+                "start_date": "1989-01-01",
+                "end_date": "2022-01-31"
+              },
+            "temporal_resolution": ["P1M", "P1Q", "P1Y"],
             "next_release": "2017-03-11T09:30:00Z",
             "table_schema": {
               "columns": [
