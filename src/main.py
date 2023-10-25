@@ -9,6 +9,9 @@ from constants import CSV, JSONLD
 import schemas
 from store import OxigraphMetadataStore, StubCsvStore, StubMetadataStore
 
+from custom_logging import logger
+from middleware import logging_middleware 
+
 # Simple env var flag to allow local browsing of api responses
 # while developing.
 BROWSABLE = os.environ.get("LOCAL_BROWSE_API")
@@ -19,6 +22,9 @@ app = FastAPI(
     description="A proof of concept API layer to manage content negotiation across IDPD resources and provide an abstraction to 3rd party data services. This API provides access to various metadata, including datasets, editions, publishers, and topics.",
     version="0.0.1",
 )
+
+# Add the logging middleware to the app
+app.middleware("http")(logging_middleware)
 
 
 @app.get(
@@ -44,6 +50,8 @@ def get_all_datasets(
     response: Response,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
+    logger.info("Received request for datasets", data={"request_type": "datasets"})
+       
     """
     Retrieve all the datasets.
     This endpoint returns information on datasets available in the system.
@@ -86,6 +94,7 @@ def get_dataset_by_id(
     dataset_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
+    logger.info("Received request for dataset with ID", data={"dataset_id": dataset_id})
     """
     Retrieve information about a specific dataset by ID.
     This endpoint returns detailed information about a dataset based on its unique identifier.
@@ -127,6 +136,7 @@ def get_dataset_editions(
     dataset_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
+    logger.info("Received request for dataset editions", data={"dataset_id": dataset_id})
     """
     Retrieve all the editions for a specific dataset.
     This endpoint returns all the editions associated with a particular dataset.
@@ -161,6 +171,7 @@ def get_dataset_editions(
             "model": None,
         },
     },
+
 )
 def get_dataset_edition_by_id(
     request: Request,
@@ -169,6 +180,7 @@ def get_dataset_edition_by_id(
     edition_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
+    logger.info("Received request for dataset and edition", data={"dataset_id": dataset_id, "edition_id": edition_id})
     """
     Retrieve information about a specific edition of a dataset.
     This endpoint returns detailed information about a specific edition of a dataset.
@@ -302,6 +314,7 @@ def get_all_publishers(
     response: Response,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
+    logger.info("Received request for publishers", data={"request_type": "publishers"})
     """
     Retrieve all the publishers.
     This endpoint returns all the publishers available in the system.
@@ -343,6 +356,7 @@ def get_publisher_by_id(
     publisher_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
+    logger.info("Received request for publisher with ID", data={"publisher_id": publisher_id})
     """
     Retrieve information about a specific publisher by ID.
     This endpoint returns detailed information about a specific publisher based on its unique identifier.
@@ -383,6 +397,7 @@ def get_all_topics(
     response: Response,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
+    logger.info("Received request for topics", data={"request_type": "topics"})
     """
     Retrieve all the topics.
     This endpoint returns all of the topics available in the system.
@@ -425,6 +440,7 @@ def get_topic_by_id(
     topic_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
+    logger.info("Received request for topic with ID", data={"topic_id": topic_id})
     """
     Retrieve information about a specific topic by ID.
     This endpoint returns detailed information about a specific topic based on its unique identifier.
@@ -463,6 +479,7 @@ def get_dataset_edition_version_by_id(
     version_id: str,
     csv_store: StubCsvStore = Depends(StubCsvStore),
 ):
+    logger.info("Received request for dataset, edition, and version", data={"dataset_id": dataset_id, "edition_id": edition_id, "version_id": version_id})
     """
     Retrieve a specific version and edition of a dataset.
     This endpoint allows downloading a specific version of a dataset in CSV format.
