@@ -17,7 +17,6 @@ import glob
 from pathlib import Path
 
 from rdflib import ConjunctiveGraph, Dataset, BNode, Graph
-from rdflib import Literal, URIRef
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore, _node_to_sparql
 from src import schemas
 

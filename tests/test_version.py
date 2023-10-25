@@ -4,6 +4,7 @@ from fastapi import status
 from fastapi.testclient import TestClient
 
 from constants import CSV
+from fixtures.versions import version_test_data
 from main import app, StubCsvStore
 
 
@@ -17,10 +18,13 @@ from main import app, StubCsvStore
 
 ENDPOINT = "/datasets/some-dataset-id/editions/some-edition-id/versions/some-version-id"
 
-# TODO - test coverage for the non csv endpoints.
 
+<<<<<<< HEAD
 
 def test_version_csv_200():
+=======
+def test_version_csv_200(version_test_data):
+>>>>>>> origin
     """
     Confirms that:
 
@@ -32,7 +36,7 @@ def test_version_csv_200():
     # Create a mock store with a callable mocked get_version() method
     mock_csv_store = MagicMock()
     # Note: returning a populated list to simulate id is found
-    mock_csv_store.get_version = MagicMock(return_value="")
+    mock_csv_store.get_version = MagicMock(return_value=version_test_data)
     app.dependency_overrides[StubCsvStore] = lambda: mock_csv_store
 
     # Create a TestClient for your FastAPI app
