@@ -180,6 +180,23 @@ class Versions(BaseModel):
     offset: int
 
 
+class Publisher(BaseModel):
+    id: str = Field(alias="@id")
+    type: Literal["dcat:publisher"] = Field(alias="@type")
+    title: str = Field(max_length=90)
+    description: str
+    landing_page: str
+
+
+class Publishers(BaseModel):
+    context: Optional[str] = Field(alias="@context")
+    id: str = Field(alias="@id")
+    type: Literal["hydra:Collection"] = Field(alias="@type")
+    publishers: List[Publisher]
+    count: int
+    offset: int
+
+
 class Topic(BaseModel):
     id: str = Field(alias="@id")
     type: Literal["dcat:theme"] = Field(alias="@type")

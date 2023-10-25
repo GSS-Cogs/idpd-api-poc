@@ -6,6 +6,7 @@ from custom_logging import configure_logger, logger
 
 configure_logger()
 
+
 async def logging_middleware(request: Request, call_next) -> Response:
     clear_contextvars()
     # These context vars will be added to all log entries emitted during the request
@@ -27,10 +28,10 @@ async def logging_middleware(request: Request, call_next) -> Response:
     log_message = "Request completed"
     log_context = {
         "data": {
-               "path": request.url.path,
-               "method": request.method,
-               "status_code": status_code,
-               "process_time": process_time / 10 ** 9,  # Convert to seconds
+            "path": request.url.path,
+            "method": request.method,
+            "status_code": status_code,
+            "process_time": process_time / 10**9,  # Convert to seconds
         }
     }
 
@@ -43,7 +44,6 @@ async def logging_middleware(request: Request, call_next) -> Response:
         log_message = "Request not acceptable"
         logger.info(log_message, **log_context)
 
-
-        response.headers["X-Process-Time"] = str(process_time / 10 ** 9)
+        response.headers["X-Process-Time"] = str(process_time / 10**9)
 
     return response

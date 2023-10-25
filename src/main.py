@@ -2,15 +2,13 @@ import os
 from typing import Optional
 
 from fastapi import Depends, FastAPI, Request, Response, status
-from fastapi.openapi.utils import get_openapi
-from pydantic import BaseModel
 
 from constants import CSV, JSONLD
 import schemas
 from store import OxigraphMetadataStore, StubCsvStore, StubMetadataStore
 
 from custom_logging import logger
-from middleware import logging_middleware 
+from middleware import logging_middleware
 
 # Simple env var flag to allow local browsing of api responses
 # while developing.
@@ -50,13 +48,12 @@ def get_all_datasets(
     response: Response,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-    logger.info("Received request for datasets", data={"request_type": "datasets"})
-       
     """
     Retrieve all the datasets.
     This endpoint returns information on datasets available in the system.
-
     """
+
+    logger.info("Received request for datasets")
 
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         datasets = metadata_store.get_datasets()
@@ -94,12 +91,12 @@ def get_dataset_by_id(
     dataset_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-    logger.info("Received request for dataset with ID", data={"dataset_id": dataset_id})
     """
     Retrieve information about a specific dataset by ID.
     This endpoint returns detailed information about a dataset based on its unique identifier.
-
     """
+    logger.info("Received request for dataset with ID", data={"dataset_id": dataset_id})
+
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         dataset = metadata_store.get_dataset(dataset_id)
         if dataset is not None:
@@ -136,12 +133,14 @@ def get_dataset_editions(
     dataset_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-    logger.info("Received request for dataset editions", data={"dataset_id": dataset_id})
     """
     Retrieve all the editions for a specific dataset.
     This endpoint returns all the editions associated with a particular dataset.
-
     """
+    logger.info(
+        "Received request for dataset editions", data={"dataset_id": dataset_id}
+    )
+
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         editions = metadata_store.get_editions(dataset_id)
         if editions is not None:
@@ -171,7 +170,6 @@ def get_dataset_editions(
             "model": None,
         },
     },
-
 )
 def get_dataset_edition_by_id(
     request: Request,
@@ -180,12 +178,15 @@ def get_dataset_edition_by_id(
     edition_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-    logger.info("Received request for dataset and edition", data={"dataset_id": dataset_id, "edition_id": edition_id})
     """
     Retrieve information about a specific edition of a dataset.
     This endpoint returns detailed information about a specific edition of a dataset.
-
     """
+    logger.info(
+        "Received request for dataset and edition",
+        data={"dataset_id": dataset_id, "edition_id": edition_id},
+    )
+
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         edition = metadata_store.get_edition(dataset_id, edition_id)
         if edition is not None:
@@ -216,7 +217,7 @@ def get_dataset_edition_by_id(
         },
     },
 )
-def versions(
+def get_dataset_edition_versions(
     request: Request,
     response: Response,
     dataset_id: str,
@@ -226,7 +227,6 @@ def versions(
     """
     Retrieve all the versions for a specific edition of a dataset.
     This endpoint returns all the versions associated with a particular edition of a dataset.
-
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         versions = metadata_store.get_versions(dataset_id, edition_id)
@@ -258,7 +258,7 @@ def versions(
         },
     },
 )
-def version(
+def get_dataset_edition_version_by_id(
     request: Request,
     response: Response,
     dataset_id: str,
@@ -270,7 +270,6 @@ def version(
     """
     Retrieve information about a specific version of a dataset.
     This endpoint returns detailed information about a specific version of a dataset based on its unique identifier.
-
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         version = metadata_store.get_version(dataset_id, edition_id, version_id)
@@ -294,10 +293,11 @@ def version(
 
 @app.get(
     "/publishers",
+    response_model=Optional[schemas.Publishers],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns all the publishers available in the system.",
-            "model": "",
+            "model": schemas.Publishers,
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. No publishers are found.",
@@ -314,12 +314,12 @@ def get_all_publishers(
     response: Response,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-    logger.info("Received request for publishers", data={"request_type": "publishers"})
     """
     Retrieve all the publishers.
     This endpoint returns all the publishers available in the system.
-
     """
+    logger.info("Received request for publishers", data={"request_type": "publishers"})
+
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
         publishers = metadata_store.get_publishers()
@@ -335,10 +335,11 @@ def get_all_publishers(
 
 @app.get(
     "/publishers/{publisher_id}",
+    response_model=Optional[schemas.Publisher],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns detailed information about the publisher.",
-            "model": "",
+            "model": schemas.Publisher,
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. The publisher with the given ID is not found.",
@@ -356,12 +357,14 @@ def get_publisher_by_id(
     publisher_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-    logger.info("Received request for publisher with ID", data={"publisher_id": publisher_id})
     """
     Retrieve information about a specific publisher by ID.
     This endpoint returns detailed information about a specific publisher based on its unique identifier.
-
     """
+    logger.info(
+        "Received request for publisher with ID", data={"publisher_id": publisher_id}
+    )
+
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         publisher = metadata_store.get_publisher(publisher_id)
         if publisher is not None:
@@ -397,12 +400,12 @@ def get_all_topics(
     response: Response,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-    logger.info("Received request for topics", data={"request_type": "topics"})
     """
     Retrieve all the topics.
     This endpoint returns all of the topics available in the system.
-
     """
+    logger.info("Received request for topics", data={"request_type": "topics"})
+
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
         topics = metadata_store.get_topics()
@@ -440,12 +443,12 @@ def get_topic_by_id(
     topic_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
-    logger.info("Received request for topic with ID", data={"topic_id": topic_id})
     """
     Retrieve information about a specific topic by ID.
     This endpoint returns detailed information about a specific topic based on its unique identifier.
-
     """
+    logger.info("Received request for topic with ID", data={"topic_id": topic_id})
+
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         topic = metadata_store.get_topic(topic_id)
         if topic is not None:
@@ -455,40 +458,4 @@ def get_topic_by_id(
         return
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
-        return
-
-
-# note: download only for now, needs expanding
-@app.get(
-    "/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}",
-    responses={
-        status.HTTP_200_OK: {
-            "description": "Successful response. Returns the CSV data for the specified version.",
-            "media_type": "text/csv",
-        },
-        status.HTTP_404_NOT_FOUND: {
-            "description": "Not Found.",
-        },
-    },
-)
-def get_dataset_edition_version_by_id(
-    request: Request,
-    response: Response,
-    dataset_id: str,
-    edition_id: str,
-    version_id: str,
-    csv_store: StubCsvStore = Depends(StubCsvStore),
-):
-    logger.info("Received request for dataset, edition, and version", data={"dataset_id": dataset_id, "edition_id": edition_id, "version_id": version_id})
-    """
-    Retrieve a specific version and edition of a dataset.
-    This endpoint allows downloading a specific version of a dataset in CSV format.
-
-    """
-    csv_data = csv_store.get_version(dataset_id, edition_id, version_id)
-    if csv_data is not None:
-        response.status_code = status.HTTP_200_OK
-        return csv_data
-    else:
-        response.status_code = status.HTTP_404_NOT_FOUND
         return

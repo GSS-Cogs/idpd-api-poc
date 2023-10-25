@@ -1,10 +1,13 @@
 from unittest.mock import MagicMock
 
+from fastapi.exceptions import ResponseValidationError
 from fastapi import status
 from fastapi.testclient import TestClient
+import pytest
 
 from constants import JSONLD
 from main import app, StubMetadataStore
+from fixtures.publishers import publishers_test_data
 
 # Devnotes:
 
@@ -17,7 +20,7 @@ from main import app, StubMetadataStore
 ENDPOINT = "/publishers"
 
 
-def test_publishers_200():
+def test_publishers_valid_structure_200(publishers_test_data):
     """
     Confirms that:
 
@@ -27,9 +30,8 @@ def test_publishers_200():
     - Status code 200 is returned.
     """
 
-    # Create a mock store with a callable mocked get_publishers() method
     mock_metadata_store = MagicMock()
-    mock_metadata_store.get_publishers = MagicMock(return_value={})
+    mock_metadata_store.get_publishers = MagicMock(return_value=publishers_test_data)
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
@@ -41,17 +43,44 @@ def test_publishers_200():
     mock_metadata_store.get_publishers.assert_called_once()
 
 
+def test_publishers_invalid_structure_raises():
+    """
+    Confirms that:
+
+     - Where we have an "accept: application/json+ld" header.
+     - Then store.get_publishers() is called exactly once.
+     - And if store.get_publishers() returns data that does not
+       match the response schema.
+     - A ResponseValidationError is raised.
+    """
+
+    # Create a mock store with a callable mocked
+    mock_metadata_store = MagicMock()
+    invalid_response_data = {
+        "publishers": [{"title": "Invalid publisher"}],
+        "offset": 0,
+    }
+    mock_metadata_store.get_publishers = MagicMock(return_value=invalid_response_data)
+    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
+
+    # Create a TestClient for your FastAPI app
+    client = TestClient(app)
+
+    with pytest.raises(ResponseValidationError):
+        client.get(ENDPOINT, headers={"Accept": JSONLD})
+
+
 def test_publishers_404():
     """
     Confirms that:
 
     - Where we have an "accept: application/json+ld" header.
     - Then store.get_publishers() is called exactly once.
-    - And if store.get_publishers() returns None
+    - And if store.get_publishers() method returns None
     - Status code 404 is returned.
     """
 
-    # Create a mock store with a callable mocked get_dataset() method
+    # Create a mock store with a callable mocked get_publishers() method
     mock_metadata_store = MagicMock()
     # Note: returning an empty list to simulate "id is not found"
     mock_metadata_store.get_publishers = MagicMock(return_value=None)
@@ -70,10 +99,9 @@ def test_publishers_406():
     """
     Confirms that:
 
-    - Where we have an "accept: application/json+ld" header.
-    - Then store.get_publishers() is called exactly once.
-    - And if store.get_publishers() returns None
-    - Status code 404 is returned.
+    - Where we do not have an "accept: application/json+ld" header.
+    - Then store.get_publishers() is not called.
+    - Status code 406 is returned.
     """
 
     # Create a mock store with a callable mocked get_publishers() method

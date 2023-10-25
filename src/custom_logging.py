@@ -9,7 +9,8 @@ from starlette.requests import Request
 from starlette.responses import Response
 
 
-logger = structlog.stdlib.get_logger() 
+logger = structlog.stdlib.get_logger()
+
 
 class DpLogger:
     def __init__(self, namespace="idpd-api-poc"):
@@ -23,7 +24,9 @@ class DpLogger:
             "debug": 3,  # INFO
             "warning": 2,  # WARNING
             "error": 1,  # ERROR
-        }.get(level, 3)  # Default to INFO
+        }.get(
+            level, 3
+        )  # Default to INFO
 
         log_entry = {
             "namespace": self.namespace,
@@ -45,8 +48,10 @@ class DpLogger:
     def error(self, event, data=None):
         self.log(event, "error", data)
 
+
 def generate_trace_id():
     return "your_trace_id"
+
 
 def generate_span_id():
     return "your_span_id"
@@ -91,6 +96,7 @@ def configure_logger(enable_json_logs: bool = False):
 
     _configure_default_logging_by_custom(shared_processors, logs_render)
 
+
 def _configure_default_logging_by_custom(shared_processors, logs_render):
     handler = logging.StreamHandler()
     formatter = structlog.stdlib.ProcessorFormatter(
@@ -105,6 +111,7 @@ def _configure_default_logging_by_custom(shared_processors, logs_render):
     root_uvicorn_logger = logging.getLogger()
     root_uvicorn_logger.addHandler(handler)
     root_uvicorn_logger.setLevel(logging.INFO)
+
 
 def _extract_from_record(_, __, event_dict):
     record = event_dict["_record"]
@@ -143,6 +150,7 @@ def create_log_event(
 
     logger.info(**log_event)
 
+
 # Handle uncaught exceptions
 def handle_exception(exc_type, exc_value, exc_traceback):
     """
@@ -162,5 +170,6 @@ def handle_exception(exc_type, exc_value, exc_traceback):
         errors=[{"message": str(exc_value)}],
     )
     sys.__excepthook__(exc_type, exc_value, exc_traceback)
+
 
 sys.excepthook = handle_exception
