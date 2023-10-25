@@ -13,5 +13,12 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+
+      - name: Install pipenv
+        run: pip install pipenv
+
+      - name: Install Tests Deoendencies
+        run: pipenv sync --dev
+
       - name: Run Pytest
         run: pipenv run pytest --cov-report term-missing --cov=src --cov-config=./tests/coverage.rc ./tests/
