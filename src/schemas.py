@@ -59,6 +59,7 @@ class Distribution(BaseModel):
     media_type: str
     table_schema: TableSchema
 
+
 class Edition(BaseModel):
     id: str = Field(alias="@id")
     type: Literal["dcat:Dataset"] = Field(alias="@type")
@@ -95,6 +96,7 @@ class SummarisedEdition(BaseModel):
     A short form schema for Edition as presented
     at the /datasets level
     """
+
     id: str = Field(alias="@id")
     issued: str = Field(
         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
@@ -102,6 +104,7 @@ class SummarisedEdition(BaseModel):
     modified: str = Field(
         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
     )
+
 
 class Editions(BaseModel):
     context: str = Field(alias="@context")
@@ -114,7 +117,7 @@ class Editions(BaseModel):
 # If we wanted to provide the ability to attach arbitrary RDF we might want to
 # look at https://github.com/pydantic/pydantic/discussions/5853
 class Dataset(BaseModel):
-    #context: Optional[str] = Field(alias="@context")
+    # context: Optional[str] = Field(alias="@context")
     id: str = Field(alias="@id")
     type: Literal["dcat:DatasetSeries"] = Field(alias="@type")
     identifier: str
@@ -141,6 +144,7 @@ class Dataset(BaseModel):
     temporal_coverage: PeriodOfTime
     editions: List[Union[Edition, SummarisedEdition]]
     editions_url: str
+
 
 class Datasets(BaseModel):
     context: str = Field(alias="@context")

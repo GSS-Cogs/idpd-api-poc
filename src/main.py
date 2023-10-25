@@ -22,8 +22,8 @@ app = FastAPI(
 
 
 @app.get(
-    "/datasets", 
-    response_model=Optional[schemas.Datasets], 
+    "/datasets",
+    response_model=Optional[schemas.Datasets],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns a list of datasets.",
@@ -37,7 +37,7 @@ app = FastAPI(
             "description": "Not Acceptable. The requested format is not supported.",
             "model": None,
         },
-    }
+    },
 )
 def get_all_datasets(
     request: Request,
@@ -47,9 +47,9 @@ def get_all_datasets(
     """
     Retrieve all the datasets.
     This endpoint returns information on datasets available in the system.
-    
+
     """
-        
+
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         datasets = metadata_store.get_datasets()
         if datasets is not None:
@@ -62,22 +62,23 @@ def get_all_datasets(
         return
 
 
-@app.get("/datasets/{dataset_id}", 
-        response_model=Optional[schemas.Dataset],
-        responses={
-            status.HTTP_200_OK: {
-                "description": "Successful response. Returns detailed information about the dataset.",
-                "model": schemas.Dataset,
-            },
-            status.HTTP_404_NOT_FOUND: {
-                "description": "Not Found. The dataset with the given ID is not found.",
-                "model": None,
-            },
-            status.HTTP_406_NOT_ACCEPTABLE: {
-                "description": "Not Acceptable. The requested format is not supported.",
-                "model": None,
-            }
-        }
+@app.get(
+    "/datasets/{dataset_id}",
+    response_model=Optional[schemas.Dataset],
+    responses={
+        status.HTTP_200_OK: {
+            "description": "Successful response. Returns detailed information about the dataset.",
+            "model": schemas.Dataset,
+        },
+        status.HTTP_404_NOT_FOUND: {
+            "description": "Not Found. The dataset with the given ID is not found.",
+            "model": None,
+        },
+        status.HTTP_406_NOT_ACCEPTABLE: {
+            "description": "Not Acceptable. The requested format is not supported.",
+            "model": None,
+        },
+    },
 )
 def get_dataset_by_id(
     request: Request,
@@ -102,22 +103,23 @@ def get_dataset_by_id(
         return
 
 
-@app.get("/datasets/{dataset_id}/editions",
-        response_model=Optional[schemas.Editions],
-        responses={
-            status.HTTP_200_OK: {
-                "description": "Successful response. Returns all the editions for the dataset.",
-                "model": schemas.Edition,
-            },
-            status.HTTP_404_NOT_FOUND: {
-                "description": "Not Found. No editions are found for the dataset.",
-                "model": None,
-            },
-            status.HTTP_406_NOT_ACCEPTABLE: {
-                "description": "Not Acceptable. The requested format is not supported.",
-                "model": None,
-            }
-        }
+@app.get(
+    "/datasets/{dataset_id}/editions",
+    response_model=Optional[schemas.Editions],
+    responses={
+        status.HTTP_200_OK: {
+            "description": "Successful response. Returns all the editions for the dataset.",
+            "model": schemas.Edition,
+        },
+        status.HTTP_404_NOT_FOUND: {
+            "description": "Not Found. No editions are found for the dataset.",
+            "model": None,
+        },
+        status.HTTP_406_NOT_ACCEPTABLE: {
+            "description": "Not Acceptable. The requested format is not supported.",
+            "model": None,
+        },
+    },
 )
 def get_dataset_editions(
     request: Request,
@@ -142,22 +144,23 @@ def get_dataset_editions(
         return
 
 
-@app.get("/datasets/{dataset_id}/editions/{edition_id}",
-         response_model=Optional[schemas.Edition],
-        responses={
-            status.HTTP_200_OK: {
-                "description": "Successful response. Returns detailed information about the edition.",
-                "model":schemas.Edition,
-            },
-            status.HTTP_404_NOT_FOUND: {
-                "description": "Not Found. The edition with the given ID is not found.",
-                "model": None,
-            },
-            status.HTTP_406_NOT_ACCEPTABLE: {
-                "description": "Not Acceptable. The requested format is not supported.",
-                "model": None,
-            }
-        }
+@app.get(
+    "/datasets/{dataset_id}/editions/{edition_id}",
+    response_model=Optional[schemas.Edition],
+    responses={
+        status.HTTP_200_OK: {
+            "description": "Successful response. Returns detailed information about the edition.",
+            "model": schemas.Edition,
+        },
+        status.HTTP_404_NOT_FOUND: {
+            "description": "Not Found. The edition with the given ID is not found.",
+            "model": None,
+        },
+        status.HTTP_406_NOT_ACCEPTABLE: {
+            "description": "Not Acceptable. The requested format is not supported.",
+            "model": None,
+        },
+    },
 )
 def get_dataset_edition_by_id(
     request: Request,
@@ -169,7 +172,7 @@ def get_dataset_edition_by_id(
     """
     Retrieve information about a specific edition of a dataset.
     This endpoint returns detailed information about a specific edition of a dataset.
-    
+
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         edition = metadata_store.get_edition(dataset_id, edition_id)
@@ -183,21 +186,22 @@ def get_dataset_edition_by_id(
         return
 
 
-@app.get("/publishers",
-        responses={
-            status.HTTP_200_OK: {
-                "description": "Successful response. Returns all the publishers available in the system.",
-                "model": "",
-            },
-            status.HTTP_404_NOT_FOUND: {
-                "description": "Not Found. No publishers are found.",
-                "model": None,
-            },
-            status.HTTP_406_NOT_ACCEPTABLE: {
-                "description": "Not Acceptable. The requested format is not supported.",
-                "model": None,
-            }
-        }
+@app.get(
+    "/publishers",
+    responses={
+        status.HTTP_200_OK: {
+            "description": "Successful response. Returns all the publishers available in the system.",
+            "model": "",
+        },
+        status.HTTP_404_NOT_FOUND: {
+            "description": "Not Found. No publishers are found.",
+            "model": None,
+        },
+        status.HTTP_406_NOT_ACCEPTABLE: {
+            "description": "Not Acceptable. The requested format is not supported.",
+            "model": None,
+        },
+    },
 )
 def get_all_publishers(
     request: Request,
@@ -207,7 +211,7 @@ def get_all_publishers(
     """
     Retrieve all the publishers.
     This endpoint returns all the publishers available in the system.
- 
+
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
@@ -222,21 +226,22 @@ def get_all_publishers(
         return
 
 
-@app.get("/publishers/{publisher_id}",
-        responses={
-            status.HTTP_200_OK: {
-                "description": "Successful response. Returns detailed information about the publisher.",
-                "model": "",
-            },
-            status.HTTP_404_NOT_FOUND: {
-                "description": "Not Found. The publisher with the given ID is not found.",
-                "model": None,
-            },
-            status.HTTP_406_NOT_ACCEPTABLE: {
-                "description": "Not Acceptable. The requested format is not supported.",
-                "model": None,
-            }
-        }
+@app.get(
+    "/publishers/{publisher_id}",
+    responses={
+        status.HTTP_200_OK: {
+            "description": "Successful response. Returns detailed information about the publisher.",
+            "model": "",
+        },
+        status.HTTP_404_NOT_FOUND: {
+            "description": "Not Found. The publisher with the given ID is not found.",
+            "model": None,
+        },
+        status.HTTP_406_NOT_ACCEPTABLE: {
+            "description": "Not Acceptable. The requested format is not supported.",
+            "model": None,
+        },
+    },
 )
 def get_publisher_by_id(
     request: Request,
@@ -247,7 +252,7 @@ def get_publisher_by_id(
     """
     Retrieve information about a specific publisher by ID.
     This endpoint returns detailed information about a specific publisher based on its unique identifier.
-    
+
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         publisher = metadata_store.get_publisher(publisher_id)
@@ -261,21 +266,22 @@ def get_publisher_by_id(
         return
 
 
-@app.get("/topics", 
-        responses={
-            status.HTTP_200_OK: {
-                "description": "Successful response. Returns all of the topics available in the system.",
-                "model": "",
-            },
-            status.HTTP_404_NOT_FOUND: {
-                "description": "Not Found. No topics are found.",
-                "model": None,
-            },
-            status.HTTP_406_NOT_ACCEPTABLE: {
-                "description": "Not Acceptable. The requested format is not supported.",
-                "model": None,
-            }
-        }
+@app.get(
+    "/topics",
+    responses={
+        status.HTTP_200_OK: {
+            "description": "Successful response. Returns all of the topics available in the system.",
+            "model": "",
+        },
+        status.HTTP_404_NOT_FOUND: {
+            "description": "Not Found. No topics are found.",
+            "model": None,
+        },
+        status.HTTP_406_NOT_ACCEPTABLE: {
+            "description": "Not Acceptable. The requested format is not supported.",
+            "model": None,
+        },
+    },
 )
 def get_all_topics(
     request: Request,
@@ -285,7 +291,7 @@ def get_all_topics(
     """
     Retrieve all the topics.
     This endpoint returns all of the topics available in the system.
-    
+
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
@@ -300,21 +306,22 @@ def get_all_topics(
         return
 
 
-@app.get("/topics/{topic_id}", 
-        responses={
-            status.HTTP_200_OK: {
-                "description": "Successful response. Returns detailed information about the topic.",
-                "model": "",
-            },
-            status.HTTP_404_NOT_FOUND: {
-                "description": "Not Found. The topic with the given ID is not found.",
-                "model": None,
-            },
-            status.HTTP_406_NOT_ACCEPTABLE: {
-                "description": "Not Acceptable. The requested format is not supported.",
-                "model": None,
-            }
-        }
+@app.get(
+    "/topics/{topic_id}",
+    responses={
+        status.HTTP_200_OK: {
+            "description": "Successful response. Returns detailed information about the topic.",
+            "model": "",
+        },
+        status.HTTP_404_NOT_FOUND: {
+            "description": "Not Found. The topic with the given ID is not found.",
+            "model": None,
+        },
+        status.HTTP_406_NOT_ACCEPTABLE: {
+            "description": "Not Acceptable. The requested format is not supported.",
+            "model": None,
+        },
+    },
 )
 def get_topic_by_id(
     request: Request,
@@ -340,16 +347,17 @@ def get_topic_by_id(
 
 
 # note: download only for now, needs expanding
-@app.get("/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}",
-        responses={
-            status.HTTP_200_OK: {
-                "description": "Successful response. Returns the CSV data for the specified version.",
-                "media_type": "text/csv",
-            },           
-            status.HTTP_404_NOT_FOUND: {
-                "description": "Not Found.",
-            }
-        }
+@app.get(
+    "/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}",
+    responses={
+        status.HTTP_200_OK: {
+            "description": "Successful response. Returns the CSV data for the specified version.",
+            "media_type": "text/csv",
+        },
+        status.HTTP_404_NOT_FOUND: {
+            "description": "Not Found.",
+        },
+    },
 )
 def get_dataset_edition_version_by_id(
     request: Request,

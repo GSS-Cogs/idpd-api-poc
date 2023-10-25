@@ -10,56 +10,55 @@ Tool that uses jsonld files in /src/store/metadata/stub/content to:
 Please run this vai the Makefile if you want to finesses this behaviour.
 """
 
-from datetime import datetime
 import json
 import os
-from os import linesep
-from pathlib import Path
 import shutil
 import glob
+from pathlib import Path
 
-from pytz import timezone
 from rdflib import ConjunctiveGraph, Dataset, BNode, Graph
 from rdflib import Literal, URIRef
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore, _node_to_sparql
-from rdflib.namespace import DCAT, DCTERMS, FOAF, RDF, XSD
-
 from src import schemas
 
-def process_json_files(g, dir_path, context_file):
+
+def process_json_files(g, dir_path, context_file, schema):
     """
     Process JSON files in a directory, apply context, and add to an RDF graph.
     """
-    for json_file in glob.glob(os.path.join(dir_path, '*.json')):
+    for json_file in glob.glob(os.path.join(dir_path, "*.json")):
         with open(json_file) as f:
             resource_dict = json.load(f)
+            #  add schema validation
+            schema(**resource_dict)
 
         # Apply context
         resource_dict["@context"] = context_file
 
         # Parse the JSON-LD and add to the graph
-        g += Graph().parse(data=json.dumps(resource_dict), format="json-ld")
+        g += Graph().parse(
+            data=json.dumps(set_context(resource_dict, context_file)), format="json-ld"
+        )
 
 
 # TODO - will need updating when the details are worked out.
-def set_context(resource_item: dict) -> dict:
+def set_context(resource_item, context_file):
     """
     Set a specific context location to inform the RDF created
     from the jsonld samples.
     """
-    context_file = Path("src/store/metadata/context.json")
-
     with open(context_file) as f:
         context = json.load(f)
 
     resource_item["@context"] = context
     return resource_item
 
-def populate(oxigraph_url=None, write_to_db=True):
 
+def populate(oxigraph_url=None, write_to_db=True):
     this_dir = Path(__file__).parent
     repo_root = this_dir.parent
-    subbed_metadata_store_content_path = Path("src/store/metadata/stub/content"
+    subbed_metadata_store_content_path = Path(
+        "src/store/metadata/stub/content"
     ).absolute()
 
     # Clear up any previous
@@ -78,7 +77,9 @@ def populate(oxigraph_url=None, write_to_db=True):
         shutil.rmtree(out_dir)
     out_dir.mkdir()
 
-    # ------------------
+    # Load context file
+    context_file = Path("src/store/metadata/context.json")
+
     # Datasets resources
     # ------------------
 
@@ -86,10 +87,12 @@ def populate(oxigraph_url=None, write_to_db=True):
     datasets_source_path = Path(subbed_metadata_store_content_path / "datasets.json")
     with open(datasets_source_path) as f:
         datasets_source_dict = json.load(f)
-
-    # Validate then add to graph
-    schemas.Datasets(**datasets_source_dict)
-    g = Graph().parse(data=json.dumps(set_context(datasets_source_dict)), format="json-ld")
+        # Validate then add to graph
+        schemas.Datasets(**datasets_source_dict)
+        g = Graph().parse(
+            data=json.dumps(set_context(datasets_source_dict, context_file)),
+            format="json-ld",
+        )
 
     # ------------------
     # Editions resources
@@ -101,21 +104,21 @@ def populate(oxigraph_url=None, write_to_db=True):
     editions_source_dict = subbed_metadata_store_content_path / "editions"
 
     # Validate then add to graph
-    # TODO - add schema validation
-    schemas.Editions(**editions_source_dict)
-    process_json_files(g, editions_source_dict, context_file)
-
+    schema = schemas.Editions
+    process_json_files(g, editions_source_dict, context_file, schema)
 
     # ------------------
     # Versions resources
     # ------------------
 
     # TODO - need to iterate all files in ./editions/versions not just the one
-    versions_source_dict = Path(subbed_metadata_store_content_path / "editions/versions")
+    versions_source_dict = Path(
+        subbed_metadata_store_content_path / "editions/versions"
+    )
 
     # Validate then add to graph
-    schemas.Versions(**versions_source_dict)
-    process_json_files(g, versions_source_dict, context_file)
+    schema = schemas.Versions
+    process_json_files(g, versions_source_dict, context_file, schema)
 
     # ------------------
     # Topics resources
@@ -124,10 +127,11 @@ def populate(oxigraph_url=None, write_to_db=True):
     topics_source_path = Path(subbed_metadata_store_content_path / "topics.json")
     with open(topics_source_path) as f:
         topics_source_dict = json.load(f)
-
-    # Validate then add to graph
-    # TODO - add schema validation
-    g += Graph().parse(data=json.dumps(set_context(topics_source_dict)), format="json-ld")
+        # Validate then add to graph
+        g += Graph().parse(
+            data=json.dumps(set_context(topics_source_dict, context_file)),
+            format="json-ld",
+        )
 
     # --------------------
     # Publishers resources
@@ -135,17 +139,18 @@ def populate(oxigraph_url=None, write_to_db=True):
 
     publisher_source_path = Path(subbed_metadata_store_content_path / "publishers.json")
     with open(publisher_source_path) as f:
-        topics_source_dict = json.load(f)
-
-    # Validate then add to graph
-    # TODO - add schema validation
-    g += Graph().parse(data=json.dumps(set_context(topics_source_dict)), format="json-ld")
+        publisher_source_dict = json.load(f)
+        # Validate then add to graph
+        # TODO - add schema validation
+        g += Graph().parse(
+            data=json.dumps(set_context(publisher_source_dict, context_file)),
+            format="json-ld",
+        )
 
     out_path = Path("out/seed.ttl")
     g.serialize(out_path, format="ttl")
 
     if write_to_db:
-
         assert (
             oxigraph_url
         ), "You need to specfiy the oxigraph url via the OXIGRAPH_URL env var."
@@ -167,5 +172,4 @@ def populate(oxigraph_url=None, write_to_db=True):
 
 if __name__ == "__main__":
     oxigraph_url = os.getenv("GRAPH_DB_URL", None)
-    context_file = Path("src/store/metadata/context.json")
     populate(oxigraph_url=oxigraph_url)
