@@ -196,7 +196,7 @@ class Publishers(BaseModel):
     count: int
     offset: int
 
-    
+
 class Topic(BaseModel):
     id: str = Field(alias="@id")
     type: Literal["dcat:theme"] = Field(alias="@type")

@@ -8,7 +8,7 @@ import schemas
 from store import OxigraphMetadataStore, StubCsvStore, StubMetadataStore
 
 from custom_logging import logger
-from middleware import logging_middleware 
+from middleware import logging_middleware
 
 # Simple env var flag to allow local browsing of api responses
 # while developing.
@@ -47,13 +47,13 @@ def get_all_datasets(
     request: Request,
     response: Response,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
-):  
+):
     """
     Retrieve all the datasets.
     This endpoint returns information on datasets available in the system.
     """
 
-    logger.info("Received request for datasets") 
+    logger.info("Received request for datasets")
 
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         datasets = metadata_store.get_datasets()
@@ -96,7 +96,7 @@ def get_dataset_by_id(
     This endpoint returns detailed information about a dataset based on its unique identifier.
     """
     logger.info("Received request for dataset with ID", data={"dataset_id": dataset_id})
-    
+
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         dataset = metadata_store.get_dataset(dataset_id)
         if dataset is not None:
@@ -109,22 +109,23 @@ def get_dataset_by_id(
         return
 
 
-@app.get("/datasets/{dataset_id}/editions",
-        response_model=Optional[schemas.Editions], 
-        responses={
-            status.HTTP_200_OK: {
-                "description": "Successful response. Returns all the editions for the dataset.",
-                "model": schemas.Editions,
-            },
-            status.HTTP_404_NOT_FOUND: {
-                "description": "Not Found. No editions are found for the dataset.",
-                "model": None,
-            },
-            status.HTTP_406_NOT_ACCEPTABLE: {
-                "description": "Not Acceptable. The requested format is not supported.",
-                "model": None,
-            }
-        }
+@app.get(
+    "/datasets/{dataset_id}/editions",
+    response_model=Optional[schemas.Editions],
+    responses={
+        status.HTTP_200_OK: {
+            "description": "Successful response. Returns all the editions for the dataset.",
+            "model": schemas.Editions,
+        },
+        status.HTTP_404_NOT_FOUND: {
+            "description": "Not Found. No editions are found for the dataset.",
+            "model": None,
+        },
+        status.HTTP_406_NOT_ACCEPTABLE: {
+            "description": "Not Acceptable. The requested format is not supported.",
+            "model": None,
+        },
+    },
 )
 def get_dataset_editions(
     request: Request,
@@ -136,8 +137,10 @@ def get_dataset_editions(
     Retrieve all the editions for a specific dataset.
     This endpoint returns all the editions associated with a particular dataset.
     """
-    logger.info("Received request for dataset editions", data={"dataset_id": dataset_id})
-    
+    logger.info(
+        "Received request for dataset editions", data={"dataset_id": dataset_id}
+    )
+
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         editions = metadata_store.get_editions(dataset_id)
         if editions is not None:
@@ -167,7 +170,6 @@ def get_dataset_editions(
             "model": None,
         },
     },
-
 )
 def get_dataset_edition_by_id(
     request: Request,
@@ -180,8 +182,11 @@ def get_dataset_edition_by_id(
     Retrieve information about a specific edition of a dataset.
     This endpoint returns detailed information about a specific edition of a dataset.
     """
-    logger.info("Received request for dataset and edition", data={"dataset_id": dataset_id, "edition_id": edition_id})
-    
+    logger.info(
+        "Received request for dataset and edition",
+        data={"dataset_id": dataset_id, "edition_id": edition_id},
+    )
+
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         edition = metadata_store.get_edition(dataset_id, edition_id)
         if edition is not None:
@@ -314,7 +319,7 @@ def get_all_publishers(
     This endpoint returns all the publishers available in the system.
     """
     logger.info("Received request for publishers", data={"request_type": "publishers"})
-    
+
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
         publishers = metadata_store.get_publishers()
@@ -356,7 +361,9 @@ def get_publisher_by_id(
     Retrieve information about a specific publisher by ID.
     This endpoint returns detailed information about a specific publisher based on its unique identifier.
     """
-    logger.info("Received request for publisher with ID", data={"publisher_id": publisher_id})
+    logger.info(
+        "Received request for publisher with ID", data={"publisher_id": publisher_id}
+    )
 
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         publisher = metadata_store.get_publisher(publisher_id)
@@ -398,7 +405,7 @@ def get_all_topics(
     This endpoint returns all of the topics available in the system.
     """
     logger.info("Received request for topics", data={"request_type": "topics"})
-    
+
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
         topics = metadata_store.get_topics()

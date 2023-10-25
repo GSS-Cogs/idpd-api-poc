@@ -58,7 +58,10 @@ def test_publisher_invalid_structure_raises():
 
     mock_metadata_store = MagicMock()
     mock_metadata_store.get_publisher = MagicMock(
-        return_value={"publishers": [{"invalid_field": "Invalid publisher"}], "offset": 0}
+        return_value={
+            "publishers": [{"invalid_field": "Invalid publisher"}],
+            "offset": 0,
+        }
     )
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 

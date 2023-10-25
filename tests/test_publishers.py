@@ -56,7 +56,10 @@ def test_publishers_invalid_structure_raises():
 
     # Create a mock store with a callable mocked
     mock_metadata_store = MagicMock()
-    invalid_response_data = {"publishers": [{"title": "Invalid publisher"}], "offset": 0}
+    invalid_response_data = {
+        "publishers": [{"title": "Invalid publisher"}],
+        "offset": 0,
+    }
     mock_metadata_store.get_publishers = MagicMock(return_value=invalid_response_data)
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 

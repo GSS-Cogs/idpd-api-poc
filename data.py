@@ -128,14 +128,18 @@ def populate(oxigraph_url=None, write_to_db=True):
     # Publishers resources
     # --------------------
 
-    publishers_source_path = Path(subbed_metadata_store_content_path / "publishers.json")
+    publishers_source_path = Path(
+        subbed_metadata_store_content_path / "publishers.json"
+    )
     with open(publishers_source_path) as f:
         publishers_source_dict = json.load(f)
 
     # Validate then add to graph
     schemas.Publishers(**publishers_source_dict)
-    g += Graph().parse(data=json.dumps(set_context(publishers_source_dict)), format="json-ld")
-    
+    g += Graph().parse(
+        data=json.dumps(set_context(publishers_source_dict)), format="json-ld"
+    )
+
     # TODO - add schema validation
     g += Graph().parse(
         data=json.dumps(set_context(topics_source_dict)), format="json-ld"
