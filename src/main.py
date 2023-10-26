@@ -115,11 +115,7 @@ def get_dataset_by_id(
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns all the editions for the dataset.",
-<<<<<<< HEAD
-            "model": schemas.Edition,
-=======
             "model": schemas.Editions,
->>>>>>> origin
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. No editions are found for the dataset.",
@@ -204,8 +200,6 @@ def get_dataset_edition_by_id(
 
 
 @app.get(
-<<<<<<< HEAD
-=======
     "/datasets/{dataset_id}/editions/{edition_id}/versions",
     response_model=Optional[schemas.Versions],
     responses={
@@ -298,7 +292,6 @@ def get_dataset_edition_version_by_id(
 
 
 @app.get(
->>>>>>> origin
     "/publishers",
     response_model=Optional[schemas.Publishers],
     responses={
@@ -386,18 +379,11 @@ def get_publisher_by_id(
 
 @app.get(
     "/topics",
-<<<<<<< HEAD
-    responses={
-        status.HTTP_200_OK: {
-            "description": "Successful response. Returns all of the topics available in the system.",
-            "model": "",
-=======
     response_model=Optional[schemas.Topics],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns all of the topics available in the system.",
             "model": schemas.Topics,
->>>>>>> origin
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. No topics are found.",
@@ -435,18 +421,11 @@ def get_all_topics(
 
 @app.get(
     "/topics/{topic_id}",
-<<<<<<< HEAD
-    responses={
-        status.HTTP_200_OK: {
-            "description": "Successful response. Returns detailed information about the topic.",
-            "model": "",
-=======
     response_model=Optional[schemas.Topic],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns detailed information about the topic.",
             "model": schemas.Topic,
->>>>>>> origin
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. The topic with the given ID is not found.",
