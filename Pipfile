@@ -8,8 +8,10 @@ SPARQLWrapper = "*"
 fastapi = "*"
 uvicorn = "*"
 httpx = "*"
+structlog = "*"
 pyld = "*"
 google-cloud-storage = "*"
+
 
 [dev-packages]
 pytest = "*"

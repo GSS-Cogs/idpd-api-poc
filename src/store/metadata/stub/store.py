@@ -34,7 +34,7 @@ def contextualise(resource) -> Dict:
     """
     if resource is None:
         return None
-    
+
     if "@context" not in resource.keys():
         resource = {"@context": "https://staging.idpd.uk/#ns"} | resource
 
@@ -67,7 +67,9 @@ class StubMetadataStore(BaseMetadataStore):
 
         # TODO - grep the whole folder for editions json's, use dataset_id and
         # edition_id as key in data holding dict
-        with open(Path(content_dir / "editions/versions/cpih_2022-01.json").absolute()) as f:
+        with open(
+            Path(content_dir / "editions/versions/cpih_2022-01.json").absolute()
+        ) as f:
             self.versions = {"cpih_2022-01": json.load(f)}
 
         with open(Path(content_dir / "publishers.json").absolute()) as f:
@@ -92,13 +94,17 @@ class StubMetadataStore(BaseMetadataStore):
             None,
         )
         return contextualise(self.editions.get(edition_key, None))
- 
+
     def get_edition(self, dataset_id: str, edition_id: str) -> Dict:
         editions_for_dataset = self.get_editions(dataset_id)
         if editions_for_dataset is None:
             return None
         edition = next(
-            (x for x in editions_for_dataset["editions"] if x["identifier"] == edition_id),
+            (
+                x
+                for x in editions_for_dataset["editions"]
+                if x["identifier"] == edition_id
+            ),
             None,
         )
         return contextualise(edition)
@@ -110,13 +116,17 @@ class StubMetadataStore(BaseMetadataStore):
             None,
         )
         return contextualise(self.versions.get(version_key, None))
- 
+
     def get_version(self, dataset_id: str, edition_id: str, version_id: str) -> Dict:
         versions_for_dataset = self.get_versions(dataset_id, edition_id)
         if versions_for_dataset is None:
             return None
         edition = next(
-            (x for x in versions_for_dataset["versions"] if x["identifier"] == version_id),
+            (
+                x
+                for x in versions_for_dataset["versions"]
+                if x["identifier"] == version_id
+            ),
             None,
         )
         return contextualise(edition)
@@ -128,10 +138,12 @@ class StubMetadataStore(BaseMetadataStore):
         publishers = self.get_publishers()
         if publishers is None:
             return None
-        return contextualise(next(
-            (x for x in publishers["items"] if x["@id"].endswith(publisher_id)),
-            None,
-        ))
+        return contextualise(
+            next(
+                (x for x in publishers["publishers"] if x["@id"].endswith(publisher_id)),
+                None,
+            )
+        )
 
     def get_topics(self) -> Dict:
         return contextualise(self.topics)
@@ -140,27 +152,31 @@ class StubMetadataStore(BaseMetadataStore):
         topics = self.get_topics()
         if topics is None:
             return None
-        return contextualise(next(
-            (x for x in topics["topics"] if x["identifier"].endswith(topic_id)),
-            None,
-        ))
+        return contextualise(
+            next(
+                (x for x in topics["topics"] if x["identifier"].endswith(topic_id)),
+                None,
+            )
+        )
 
     def get_sub_topics(self, topic_id: str) -> Dict:
         topic = self.get_topic(topic_id)
         if topic is None:
             return None
-        
+
         sub_topic_ids = topic["sub_topics"]
         topics = self.get_topics()
         sub_topics = [x for x in topics if x["@id"] in sub_topic_ids]
-        
+
         if sub_topics is None:
             return None
-        return contextualise({
+        return contextualise(
+            {
                 "items": sub_topics,
                 "count": len(sub_topics),
                 "offset": 0,
-            })
+            }
+        )
 
     def get_sub_topic(self, topic_id: str, sub_topic_id: str) -> Dict:
         raise NotImplementedError
