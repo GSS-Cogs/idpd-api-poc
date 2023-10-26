@@ -80,14 +80,14 @@
                   "name": "LA CO2 Sector",
                   "datatype": "string",
                   "titles": "LA CO2 Sector",
-                  "description": ""
+                  "description": "LA CO2 Sector"
                 
                 },
                 {
                   "name": "LA CO2 Sub-sector",
                   "datatype": "string",
                   "titles": "LA CO2 Sub-sector",
-                  "description": ""
+                  "description": "LA CO2 Sub-sector"
                 
                 },
                 {
@@ -122,7 +122,7 @@
                   "name": "Unit of Measure",
                   "datatype": "string",
                   "titles": "Unit of Measure",
-                  "description": ""
+                  "description": "Unit of Measure"
                 
                 }
 
