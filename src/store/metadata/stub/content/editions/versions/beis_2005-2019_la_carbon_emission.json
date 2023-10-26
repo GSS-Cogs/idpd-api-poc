@@ -1,18 +1,18 @@
 {
-    "@context": "",
-    "@id": "",
+    "@context": "https://staging.idpd.uk/#ns",
+    "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions/2005-2019/versions",
     "@type": "hydra:Collection",
     "title": "2005 to 2019 local authority carbon dioxide (CO2) emissions",
     "versions": [
         {
             "@type": ["dcat:Distribution", "csvw:Table"],
-            "@id": "",
+            "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions/2005-2019/versions/1",
             "identifier": "1",
-            "issued": "2017-01-01T00:00:00",
+            "issued": "2021-06-24T08:30:00",
             "title": "2005 to 2019 local authority carbon dioxide (CO2) emissions",
             "summary": "These statistics provide the most reliable and consistent breakdown of CO2 emissions across the country, using nationally available data sets going back to 2005.\n\nThe main data sources are the UK National Atmospheric Emissions Inventory and the BEIS National Statistics of energy consumption for local authority areas. All emissions included in the national inventory are covered, except aviation, shipping and military transport, for which there is no obvious basis for allocation to local areas.",
             "description": "These statistics provide the most reliable and consistent breakdown of CO2 emissions across the country, using nationally available data sets going back to 2005.\n\nThe main data sources are the UK National Atmospheric Emissions Inventory and the BEIS National Statistics of energy consumption for local authority areas. All emissions included in the national inventory are covered, except aviation, shipping and military transport, for which there is no obvious basis for allocation to local areas.",
-            "download_url": "",
+            "download_url": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions/2005-2019/versions/1.csv",
             "media_type": "text/csv",
             "table_schema": {
                 "columns": [
@@ -48,14 +48,14 @@
                         "name": "LA CO2 Sector",
                         "datatype": "string",
                         "titles": "LA CO2 Sector",
-                        "description": ""
+                        "description": "LA CO2 Sub-sector"
                       
                       },
                       {
                         "name": "LA CO2 Sub-sector",
                         "datatype": "string",
                         "titles": "LA CO2 Sub-sector",
-                        "description": ""
+                        "description": "LA CO2 Sub-sector"
                       
                       },
                       {
@@ -90,7 +90,7 @@
                         "name": "Unit of Measure",
                         "datatype": "string",
                         "titles": "Unit of Measure",
-                        "description": ""
+                        "description": "Unit of Measure"
                       
                       }
                 ]
