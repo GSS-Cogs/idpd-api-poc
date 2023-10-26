@@ -19,12 +19,7 @@ from main import app, StubCsvStore
 ENDPOINT = "/datasets/some-dataset-id/editions/some-edition-id/versions/some-version-id"
 
 
-<<<<<<< HEAD
-
-def test_version_csv_200():
-=======
 def test_version_csv_200(version_test_data):
->>>>>>> origin
     """
     Confirms that:
 
