@@ -82,7 +82,7 @@ def populate(oxigraph_url=None, write_to_db=True):
     # TODO - need to iterate all files in ./edtions not just the one
 
     # Load from disk
-    editions_source_path = Path(subbed_metadata_store_content_path / "editions/cpih_2022-01.json")
+    editions_source_path = Path(subbed_metadata_store_content_path / "editions/beis_2005-2019_la_carbon_emission.json")
     with open(editions_source_path) as f:
         editions_source_dict = json.load(f)
 
@@ -95,7 +95,7 @@ def populate(oxigraph_url=None, write_to_db=True):
     # ------------------
 
     # TODO - need to iterate all files in ./editions/versions not just the one
-    versions_source_path = Path(subbed_metadata_store_content_path / "editions/versions/cpih_2022-01.json")
+    versions_source_path = Path(subbed_metadata_store_content_path / "editions/versions/beis_2005-2019_la_carbon_emission.json")
     with open(versions_source_path) as f:
         versions_source_dict = json.load(f)
 
