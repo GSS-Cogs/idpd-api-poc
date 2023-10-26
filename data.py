@@ -126,25 +126,34 @@ def populate(oxigraph_url=None, write_to_db=True):
     topics_source_path = Path(subbed_metadata_store_content_path / "topics.json")
     with open(topics_source_path) as f:
         topics_source_dict = json.load(f)
-        # Validate then add to graph
-        g += Graph().parse(
-            data=json.dumps(set_context(topics_source_dict, context_file)),
-            format="json-ld",
-        )
+
+    # Validate then add to graph
+    schemas.Topics(**topics_source_dict)
+    g += Graph().parse(
+        data=json.dumps(set_context(topics_source_dict)), format="json-ld"
+    )
+
 
     # --------------------
     # Publishers resources
     # --------------------
 
-    publisher_source_path = Path(subbed_metadata_store_content_path / "publishers.json")
-    with open(publisher_source_path) as f:
-        publisher_source_dict = json.load(f)
-        # Validate then add to graph
-        # TODO - add schema validation
-        g += Graph().parse(
-            data=json.dumps(set_context(publisher_source_dict, context_file)),
-            format="json-ld",
-        )
+    publishers_source_path = Path(
+        subbed_metadata_store_content_path / "publishers.json"
+    )
+    with open(publishers_source_path) as f:
+        publishers_source_dict = json.load(f)
+
+    # Validate then add to graph
+    schemas.Publishers(**publishers_source_dict)
+    g += Graph().parse(
+        data=json.dumps(set_context(publishers_source_dict)), format="json-ld"
+    )
+
+    # TODO - add schema validation
+    g += Graph().parse(
+        data=json.dumps(set_context(topics_source_dict)), format="json-ld"
+    )
 
     out_path = Path("out/seed.ttl")
     g.serialize(out_path, format="ttl")
