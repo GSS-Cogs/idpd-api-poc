@@ -38,7 +38,6 @@ def set_context(resource_item: dict) -> dict:
 
 def populate(oxigraph_url=None, write_to_db=True):
     this_dir = Path(__file__).parent
-    repo_root = this_dir.parent
     subbed_metadata_store_content_path = Path(
         "src/store/metadata/stub/content"
     ).absolute()
