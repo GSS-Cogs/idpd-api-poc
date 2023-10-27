@@ -1,6 +1,6 @@
-from store.csv.stub.store import StubCsvStore
-
 from starlette.responses import FileResponse
+
+from store.csv.stub.store import StubCsvStore
 
 
 def test_csv_stub_instantiation():
