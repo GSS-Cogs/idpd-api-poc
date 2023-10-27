@@ -14,7 +14,7 @@ def test_csv_stub_instantiation():
 def test_csv_stub_returns_csv_without_file_extentions():
     """
     Just test the store can return a csv when we
-    ask for a csv that we know exists but dont include
+    ask for a csv that we know exists but do include
     the ".csv" file extensions.
     """
     csv_store = StubCsvStore()
@@ -24,7 +24,7 @@ def test_csv_stub_returns_csv_without_file_extentions():
 def test_csv_stub_returns_csv_with_file_extentions():
     """
     Just test the store can return a csv when we
-    ask for a csv that we know exists and we do include
+    ask for a csv that we know exists and we dont include
     the ".csv" file extension.
     """
     csv_store = StubCsvStore()
