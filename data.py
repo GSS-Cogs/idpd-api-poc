@@ -83,15 +83,14 @@ def populate(oxigraph_url=None, write_to_db=True):
     # ------------------
 
     # Load from disk
-    datasets_source_path = Path(subbed_metadata_store_content_path / "datasets.json")
-    with open(datasets_source_path) as f:
-        datasets_source_dict = json.load(f)
-        # Validate then add to graph
-        schemas.Datasets(**datasets_source_dict)
-        g = Graph().parse(
-            data=json.dumps(set_context(datasets_source_dict, context_file)),
-            format="json-ld",
-        )
+    # Load from disk
+    datasets_source_path = Path(
+        subbed_metadata_store_content_path / "datasets"
+    )
+    # Validate then add to graph
+    schema = schemas.Datasets
+    process_json_files(g, datasets_source_path, context_file, schema)
+
 
     # ------------------
     # Editions resources
@@ -100,38 +99,36 @@ def populate(oxigraph_url=None, write_to_db=True):
     # TODO - need to iterate all files in ./edtions not just the one
 
     # Load from disk
-    editions_source_dict = subbed_metadata_store_content_path / "editions"
-
+    editions_source_path = Path(
+        subbed_metadata_store_content_path / "editions"
+    )
     # Validate then add to graph
     schema = schemas.Editions
-    process_json_files(g, editions_source_dict, context_file, schema)
+    process_json_files(g, editions_source_path, context_file, schema)
 
     # ------------------
     # Versions resources
     # ------------------
 
     # TODO - need to iterate all files in ./editions/versions not just the one
-    versions_source_dict = Path(
+    versions_source_path = Path(
         subbed_metadata_store_content_path / "editions/versions"
     )
 
     # Validate then add to graph
     schema = schemas.Versions
-    process_json_files(g, versions_source_dict, context_file, schema)
+    process_json_files(g, versions_source_path, context_file, schema)
 
     # ------------------
     # Topics resources
     # ------------------
 
-    topics_source_path = Path(subbed_metadata_store_content_path / "topics.json")
-    with open(topics_source_path) as f:
-        topics_source_dict = json.load(f)
-
+    topics_source_path = Path(
+        subbed_metadata_store_content_path / "topics"
+    )   
     # Validate then add to graph
-    schemas.Topics(**topics_source_dict)
-    g += Graph().parse(
-        data=json.dumps(set_context(topics_source_dict)), format="json-ld"
-    )
+    schema = schemas.Topics
+    process_json_files(g, topics_source_path, context_file, schema)
 
 
     # --------------------
@@ -139,21 +136,14 @@ def populate(oxigraph_url=None, write_to_db=True):
     # --------------------
 
     publishers_source_path = Path(
-        subbed_metadata_store_content_path / "publishers.json"
+        subbed_metadata_store_content_path / "publishers"
     )
-    with open(publishers_source_path) as f:
-        publishers_source_dict = json.load(f)
 
     # Validate then add to graph
-    schemas.Publishers(**publishers_source_dict)
-    g += Graph().parse(
-        data=json.dumps(set_context(publishers_source_dict)), format="json-ld"
-    )
+    schema = schemas.Publishers
+    process_json_files(g, publishers_source_path, context_file, schema)
 
-    # TODO - add schema validation
-    g += Graph().parse(
-        data=json.dumps(set_context(topics_source_dict)), format="json-ld"
-    )
+
 
     out_path = Path("out/seed.ttl")
     g.serialize(out_path, format="ttl")
