@@ -140,7 +140,11 @@ class StubMetadataStore(BaseMetadataStore):
             return None
         return contextualise(
             next(
-                (x for x in publishers["publishers"] if x["@id"].endswith(publisher_id)),
+                (
+                    x
+                    for x in publishers["publishers"]
+                    if x["@id"].endswith(publisher_id)
+                ),
                 None,
             )
         )

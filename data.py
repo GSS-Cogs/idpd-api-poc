@@ -133,7 +133,6 @@ def populate(oxigraph_url=None, write_to_db=True):
         data=json.dumps(set_context(topics_source_dict)), format="json-ld"
     )
 
-
     # --------------------
     # Publishers resources
     # --------------------
