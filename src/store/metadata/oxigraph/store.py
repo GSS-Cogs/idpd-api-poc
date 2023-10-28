@@ -1,21 +1,20 @@
-import os
 import json
+import os
 from typing import Dict, Optional
 
 from pyld import jsonld
-from rdflib import Dataset, Graph
+from rdflib import Dataset, Graph, URIRef
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore
-from rdflib import URIRef
 
+from .. import constants
 from ..base import BaseMetadataStore
 from .sparql.construct import (
+    construct_dataset_contact_point,
     construct_dataset_core,
     construct_dataset_keywords,
-    construct_dataset_themes,
-    construct_dataset_contact_point,
     construct_dataset_temporal_coverage,
+    construct_dataset_themes,
 )
-from .. import constants
 
 
 class OxigraphMetadataStore(BaseMetadataStore):

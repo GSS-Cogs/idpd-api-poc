@@ -4,7 +4,7 @@
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-format: ## Run the black and isort against the codebase (auto triggered on pre-commit)
+fmt: ## (Format) - runs black and isort against the codebase (auto triggered on pre-commit)
 	pipenv run black ./src/*
 	pipenv run isort ./src/*
 
