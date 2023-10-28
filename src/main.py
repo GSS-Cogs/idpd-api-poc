@@ -5,7 +5,7 @@ from fastapi import Depends, FastAPI, Request, Response, status
 
 from constants import CSV, JSONLD
 import schemas
-from store import OxigraphMetadataStore, StubCsvStore, StubMetadataStore
+from store import StubCsvStore, StubMetadataStore
 
 from custom_logging import logger
 from middleware import logging_middleware

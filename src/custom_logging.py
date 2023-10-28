@@ -1,12 +1,6 @@
 import logging
 import sys
-from typing import Union
 import structlog
-import uvicorn
-from fastapi import FastAPI
-from fastapi.responses import PlainTextResponse
-from starlette.requests import Request
-from starlette.responses import Response
 
 
 logger = structlog.stdlib.get_logger()
@@ -164,7 +158,7 @@ def handle_exception(exc_type, exc_value, exc_traceback):
         "Uncaught exception", exc_info=(exc_type, exc_value, exc_traceback)
     )
 
-    log_event = create_log_event(
+    create_log_event(
         event="Uncaught exception",
         severity="ERROR",
         errors=[{"message": str(exc_value)}],
