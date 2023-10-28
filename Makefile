@@ -4,7 +4,7 @@
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-black: ## (Optionally) Run the black formatter against the codebase
+black: ## (Optionally) Run the black formatter against the codebase (auto triggered on pre-commit)
 	pipenv run black .
 
 lint: ## Run the ruff python linter (auto triggered on pre-commit)
@@ -13,7 +13,7 @@ lint: ## Run the ruff python linter (auto triggered on pre-commit)
 test: ## Run pytest and check test coverage (auto triggered on pre-push)
 	pipenv run pytest --cov-report term-missing --cov=src --cov-config=./tests/coverage.rc ./tests/
 
-populate: ## Populate an oxigraph DB at localhost:7878
+populate: ## Populate an oxigraph DB (that/if/when) one is running on localhost:7878
 	pipenv run python3 ./data.py
 
 data: ## Create source ttl seed file as ./out/seed.ttl but dont load it
