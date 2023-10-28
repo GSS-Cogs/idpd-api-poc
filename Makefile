@@ -26,3 +26,5 @@ start: ## Start the api
 configure_dev: ## Configure this repo for development purposes (activate hooks etc)
 	cp ./hooks/pre-commit ./.git/hooks/pre-commit
 	cp ./hooks/pre-push ./.git/hooks/pre-push
+	chmod +x ./.git/hooks/pre-commit
+	chmod +x ./.git/hooks/pre-push
