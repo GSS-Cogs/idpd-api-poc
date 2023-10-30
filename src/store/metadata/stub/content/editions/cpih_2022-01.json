@@ -28,7 +28,7 @@
             "modified": "2017-02-21T09:30:00Z",
             "spatial_resolution":["E01", "E92"],
             "spatial_coverage": "E92000001",
-            "temporal_resolution": ["P1M", "P1Q", "P1Y"],
+            "temporal_resolution": ["P1M","P3M","P1Y"],
             "temporal_coverage": {
               "start": "1981-01-01T00:00:00Z",
               "end": "2022-01-31T00:00:00Z"
