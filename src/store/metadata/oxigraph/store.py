@@ -41,9 +41,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
 
         # Specify the named graph from which we are fetching data
-        graph = self.db.get_context(
-            URIRef(f"https://data.ons.gov.uk/datasets/{dataset_id}/record")
-        )
+        graph = self.db.get_context()
 
         # Use the construct wrappers to pull the raw RDF triples
         # (as one rdflib.Graph() for each function) and add them
@@ -84,19 +82,23 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # Compact and embed anonymous nodes
         # TODO - we'll want to make sure these fields exist
         # to avoid key errors.
-        dataset_graph["contact_point"] = {
-            "name": contact_point_graph["vcard:fn"]["@value"],
-            "email": contact_point_graph["vcard:hasEmail"]["@id"],
-        }
-        dataset_graph["temporal_coverage"] = {
-            "start": temporal_coverage_graph["dcat:endDate"]["@value"],
-            "end": temporal_coverage_graph["dcat:startDate"]["@value"],
-        }
+        if dataset_graph and contact_point_graph and temporal_coverage_graph:
+            # Compact and embed anonymous nodes
+            dataset_graph["contact_point"] = {
+                "name": contact_point_graph["vcard:fn"]["@value"],
+                "email": contact_point_graph["vcard:hasEmail"]["@id"],
+            }
+            dataset_graph["temporal_coverage"] = {
+                "start": temporal_coverage_graph["dcat:endDate"]["@value"],
+                "end": temporal_coverage_graph["dcat:startDate"]["@value"],
+            }
 
-        # Use a remote context
-        dataset_graph["@context"] = "https://data.ons.gov.uk/ns#"
+            # Use a remote context
+            dataset_graph["@context"] = "https://data.ons.gov.uk/ns#"
 
-        return dataset_graph
+            return dataset_graph
+        else:
+            return None
 
     def get_editions(self, dataset_id: str) -> Optional[Dict]:  # pragma: no cover
         """

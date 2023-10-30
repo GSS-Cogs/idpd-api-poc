@@ -7,6 +7,7 @@ from constants import CSV, JSONLD
 import schemas
 from store import OxigraphMetadataStore, StubCsvStore, StubMetadataStore
 
+
 from custom_logging import logger
 from middleware import logging_middleware
 
@@ -89,7 +90,7 @@ def get_dataset_by_id(
     request: Request,
     response: Response,
     dataset_id: str,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: OxigraphMetadataStore = Depends(OxigraphMetadataStore),
 ):
     """
     Retrieve information about a specific dataset by ID.
