@@ -7,6 +7,7 @@ from enum import Enum
 from typing import List, Literal, Optional, Union
 
 from pydantic import BaseModel, Field
+from typing import Literal, Optional, Union, List
 
 
 class Frequency(Enum):
