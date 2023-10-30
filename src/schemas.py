@@ -5,7 +5,7 @@ validate the structure of the data returned by the API.
 
 from enum import Enum
 from pydantic import BaseModel, Field
-from typing import Dict, Literal, Optional, Union, List
+from typing import Literal, Optional, Union, List
 
 
 class Frequency(Enum):
