@@ -76,7 +76,7 @@
             "spatial_coverage": "K02000001",
             "temporal_coverage": {
               "start": "2022-09-01T00:00:00Z",
-              "end": "2022-09-01T00:00:00Z"
+              "end": "2022-09-30T23:59:00Z"
             },
             "editions_url": "https://staging.idpd.uk/datasets/4gc/editions",
             "editions": [
