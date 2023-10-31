@@ -76,16 +76,6 @@ def populate(oxigraph_url=None, write_to_db=True):
     # ------------------
 
     # Load from disk
-<<<<<<< HEAD
-    # Load from disk
-    datasets_source_path = Path(
-        subbed_metadata_store_content_path / "datasets"
-    )
-    # Validate then add to graph
-    schema = schemas.Datasets
-    process_json_files(g, datasets_source_path, context_file, schema)
-
-=======
     datasets_source_path = Path(subbed_metadata_store_content_path / "datasets.json")
     with open(datasets_source_path) as f:
         datasets_source_dict = json.load(f)
@@ -95,7 +85,6 @@ def populate(oxigraph_url=None, write_to_db=True):
             data=json.dumps(set_context(datasets_source_dict)),
             format="json-ld",
         )
->>>>>>> main
 
     # ------------------
     # Editions resources
@@ -109,11 +98,7 @@ def populate(oxigraph_url=None, write_to_db=True):
     )
     # Validate then add to graph
     schema = schemas.Editions
-<<<<<<< HEAD
-    process_json_files(g, editions_source_path, context_file, schema)
-=======
-    process_json_files(g, editions_source_dict, schema)
->>>>>>> main
+    process_json_files(g, editions_source_path, schema)
 
     # ------------------
     # Versions resources
@@ -126,11 +111,7 @@ def populate(oxigraph_url=None, write_to_db=True):
 
     # Validate then add to graph
     schema = schemas.Versions
-<<<<<<< HEAD
-    process_json_files(g, versions_source_path, context_file, schema)
-=======
-    process_json_files(g, versions_source_dict, schema)
->>>>>>> main
+    process_json_files(g, versions_source_path, schema)
 
     # ------------------
     # Topics resources
@@ -141,7 +122,7 @@ def populate(oxigraph_url=None, write_to_db=True):
     )   
     # Validate then add to graph
     schema = schemas.Topics
-    process_json_files(g, topics_source_path, context_file, schema)
+    process_json_files(g, topics_source_path, schema)
 
     # --------------------
     # Publishers resources
@@ -153,13 +134,9 @@ def populate(oxigraph_url=None, write_to_db=True):
 
     # Validate then add to graph
     schema = schemas.Publishers
-    process_json_files(g, publishers_source_path, context_file, schema)
+    process_json_files(g, publishers_source_path, schema)
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
     out_path = Path("out/seed.ttl")
     g.serialize(out_path, format="ttl")
 
