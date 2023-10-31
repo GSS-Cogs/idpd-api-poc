@@ -1,12 +1,6 @@
 import logging
 import sys
-from typing import Union
 import structlog
-import uvicorn
-from fastapi import FastAPI
-from fastapi.responses import PlainTextResponse
-from starlette.requests import Request
-from starlette.responses import Response
 
 
 logger = structlog.stdlib.get_logger()
