@@ -12,7 +12,7 @@ sys.path.append(str(repo_root.absolute()))
 
 import data
 
-# TODO - uncomment when we reimplement graph usage
+
 
 @pytest.fixture(scope="session", autouse=True)
 def setup_before_all_tests():

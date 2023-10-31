@@ -23,9 +23,8 @@ class OxigraphMetadataStore(BaseMetadataStore):
         oxigraph_url = os.environ.get("GRAPH_DB_URL", None)
         assert oxigraph_url is not None, (
             "The env var 'GRAPH_DB_URL' must be set to use "
-            "the OxigraphMetadataStore store."
+            "the OxigraphMetadataStore store."   
         )
-
         configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
         self.db = Dataset(store=SPARQLUpdateStore(*configuration))
 
@@ -80,7 +79,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         )
 
         # Compact and embed anonymous nodes
-        # TODO - we'll want to make sure these fields exist
+        #  we'll want to make sure these fields exist
         # to avoid key errors.
         if dataset_graph and contact_point_graph and temporal_coverage_graph:
             # Compact and embed anonymous nodes
