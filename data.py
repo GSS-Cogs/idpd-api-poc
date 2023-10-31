@@ -21,7 +21,7 @@ from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore, _node_to_sparql
 from src import schemas
 
 
-def process_json_files(g, dir_path, context_file, schema):
+def process_json_files(g, dir_path, schema):
     """
     Process JSON files in a directory, apply context, and add to an RDF graph.
     """
@@ -31,24 +31,20 @@ def process_json_files(g, dir_path, context_file, schema):
             #  add schema validation
             schema(**resource_dict)
 
-        # Apply context
-        resource_dict["@context"] = context_file
-
         # Parse the JSON-LD and add to the graph
         g += Graph().parse(
-            data=json.dumps(set_context(resource_dict, context_file)), format="json-ld"
+            data=json.dumps(set_context(resource_dict)), format="json-ld"
         )
 
 
 # TODO - will need updating when the details are worked out.
-def set_context(resource_item, context_file):
+with open(Path("src/store/metadata/context.json")) as f:
+    context = json.load(f)
+def set_context(resource_item,):
     """
     Set a specific context location to inform the RDF created
     from the jsonld samples.
     """
-    with open(context_file) as f:
-        context = json.load(f)
-
     resource_item["@context"] = context
     return resource_item
 
@@ -75,9 +71,7 @@ def populate(oxigraph_url=None, write_to_db=True):
         shutil.rmtree(out_dir)
     out_dir.mkdir()
 
-    # Load context file
-    context_file = Path("src/store/metadata/context.json")
-
+    # ------------------
     # Datasets resources
     # ------------------
 
@@ -88,7 +82,7 @@ def populate(oxigraph_url=None, write_to_db=True):
         # Validate then add to graph
         schemas.Datasets(**datasets_source_dict)
         g = Graph().parse(
-            data=json.dumps(set_context(datasets_source_dict, context_file)),
+            data=json.dumps(set_context(datasets_source_dict)),
             format="json-ld",
         )
 
@@ -103,7 +97,7 @@ def populate(oxigraph_url=None, write_to_db=True):
 
     # Validate then add to graph
     schema = schemas.Editions
-    process_json_files(g, editions_source_dict, context_file, schema)
+    process_json_files(g, editions_source_dict, schema)
 
     # ------------------
     # Versions resources
@@ -116,7 +110,7 @@ def populate(oxigraph_url=None, write_to_db=True):
 
     # Validate then add to graph
     schema = schemas.Versions
-    process_json_files(g, versions_source_dict, context_file, schema)
+    process_json_files(g, versions_source_dict, schema)
 
     # ------------------
     # Topics resources
@@ -132,7 +126,6 @@ def populate(oxigraph_url=None, write_to_db=True):
         data=json.dumps(set_context(topics_source_dict)), format="json-ld"
     )
 
-
     # --------------------
     # Publishers resources
     # --------------------
@@ -147,11 +140,6 @@ def populate(oxigraph_url=None, write_to_db=True):
     schemas.Publishers(**publishers_source_dict)
     g += Graph().parse(
         data=json.dumps(set_context(publishers_source_dict)), format="json-ld"
-    )
-
-    # TODO - add schema validation
-    g += Graph().parse(
-        data=json.dumps(set_context(topics_source_dict)), format="json-ld"
     )
 
     out_path = Path("out/seed.ttl")
