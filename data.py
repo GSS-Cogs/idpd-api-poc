@@ -36,11 +36,7 @@ def process_json_files(g, dir_path, schema):
             data=json.dumps(set_context(resource_dict)), format="json-ld"
         )
 
-
-# TODO - will need updating when the details are worked out.
-with open(Path("src/store/metadata/context.json")) as f:
-    context = json.load(f)
-def set_context(resource_item,):
+def set_context(resource_item, context):
     """
     Set a specific context location to inform the RDF created
     from the jsonld samples.
@@ -71,6 +67,10 @@ def populate(oxigraph_url=None, write_to_db=True):
         shutil.rmtree(out_dir)
     out_dir.mkdir()
 
+    # Load the context file
+    with open(Path("src/store/metadata/context.json")) as f:
+        context = json.load(f)
+
     # ------------------
     # Datasets resources
     # ------------------
@@ -82,15 +82,13 @@ def populate(oxigraph_url=None, write_to_db=True):
         # Validate then add to graph
         schemas.Datasets(**datasets_source_dict)
         g = Graph().parse(
-            data=json.dumps(set_context(datasets_source_dict)),
+            data=json.dumps(set_context(datasets_source_dict, context)),
             format="json-ld",
         )
 
     # ------------------
     # Editions resources
     # ------------------
-
-    # TODO - need to iterate all files in ./edtions not just the one
 
     # Load from disk
     editions_source_path = Path(
@@ -104,7 +102,6 @@ def populate(oxigraph_url=None, write_to_db=True):
     # Versions resources
     # ------------------
 
-    # TODO - need to iterate all files in ./editions/versions not just the one
     versions_source_path = Path(
         subbed_metadata_store_content_path / "editions/versions"
     )
@@ -116,25 +113,31 @@ def populate(oxigraph_url=None, write_to_db=True):
     # ------------------
     # Topics resources
     # ------------------
+    
 
-    topics_source_path = Path(
-        subbed_metadata_store_content_path / "topics"
-    )   
-    # Validate then add to graph
-    schema = schemas.Topics
-    process_json_files(g, topics_source_path, schema)
+    topics_source_path = Path(subbed_metadata_store_content_path / "topics.json")
+    with open(topics_source_path) as f:
+        topics_source_dict = json.load(f)
+        # Validate then add to graph
+        schemas.Topics(**topics_source_dict)
+        g = Graph().parse(
+            data=json.dumps(set_context(topics_source_dict, context)),
+            format="json-ld",
+        )
 
     # --------------------
     # Publishers resources
     # --------------------
 
-    publishers_source_path = Path(
-        subbed_metadata_store_content_path / "publishers"
-    )
-
-    # Validate then add to graph
-    schema = schemas.Publishers
-    process_json_files(g, publishers_source_path, schema)
+    publishers_source_path = Path(subbed_metadata_store_content_path / "publishers.json")
+    with open(publishers_source_path) as f:
+        publishers_source_dict = json.load(f)
+        # Validate then add to graph
+        schemas.Publishers(**publishers_source_dict)
+        g = Graph().parse(
+            data=json.dumps(set_context(publishers_source_dict, context)),
+            format="json-ld",
+        )
 
 
     out_path = Path("out/seed.ttl")
