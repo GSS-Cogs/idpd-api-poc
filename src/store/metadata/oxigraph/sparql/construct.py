@@ -86,3 +86,19 @@ def construct_dataset_temporal_coverage(graph: Graph) -> Graph:
     results_graph = graph.query(query).graph
     result = results_graph if results_graph else Graph()
     return result
+
+def construct_publisher(graph: Graph, publisher_id: str) -> Graph:
+    query = """
+            PREFIX dc: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            CONSTRUCT WHERE {{
+                <https://staging.idpd.uk/publishers/{publisher_id}> a dcat:publisher;
+      				dcterms:title ?title;
+                    dcterms:description ?description;
+    				dcat:landingPage ?landingpage .
+        }}
+        """.format(publisher_id=publisher_id)
+    results_graph = graph.query(query).graph
+    result = results_graph if results_graph else Graph()
+    return result

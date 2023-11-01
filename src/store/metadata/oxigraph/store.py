@@ -14,6 +14,7 @@ from .sparql.construct import (
     construct_dataset_themes,
     construct_dataset_contact_point,
     construct_dataset_temporal_coverage,
+    construct_publisher
 )
 from .. import constants
 
@@ -41,9 +42,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
 
         # Specify the named graph from which we are fetching data
-        graph = self.db.get_context(
-            URIRef(f"https://data.ons.gov.uk/datasets/{dataset_id}/record")
-        )
+        graph = self.db
 
         # Use the construct wrappers to pull the raw RDF triples
         # (as one rdflib.Graph() for each function) and add them
@@ -137,7 +136,29 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Get a specific publisher
         """
-        raise NotImplementedError
+                # Specify the named graph from which we are fetching data
+        graph = self.db
+        
+        # Use the construct wrappers to pull the raw RDF triples
+        # (as one rdflib.Graph() for each function) and add them
+        # together to create a sinlge Graph of the
+        # data we need.
+        result: Graph = (
+            construct_publisher(graph, publisher_id)
+        )
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "dcat:publisher"}
+        )
+
+        # Use a remote context
+        data["@context"] = "https://data.ons.gov.uk/ns#"
+
+        return data
 
     def get_topics(self) -> Optional[Dict]:  # pragma: no cover
         """
