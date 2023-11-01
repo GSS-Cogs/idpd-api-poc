@@ -21,6 +21,18 @@ from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore, _node_to_sparql
 from src import schemas
 
 
+# Load the context file
+with open(Path("src/store/metadata/context.json")) as f:
+    context = json.load(f)
+def set_context(resource_item):
+    """
+    Set a specific context location to inform the RDF created
+    from the jsonld samples.
+    """
+    resource_item["@context"] = context
+    return resource_item
+
+
 def process_json_files(g, dir_path, schema):
     """
     Process JSON files in a directory, apply context, and add to an RDF graph.
@@ -35,15 +47,6 @@ def process_json_files(g, dir_path, schema):
         g += Graph().parse(
             data=json.dumps(set_context(resource_dict)), format="json-ld"
         )
-
-def set_context(resource_item, context):
-    """
-    Set a specific context location to inform the RDF created
-    from the jsonld samples.
-    """
-    resource_item["@context"] = context
-    return resource_item
-
 
 def populate(oxigraph_url=None, write_to_db=True):
     this_dir = Path(__file__).parent
@@ -67,10 +70,6 @@ def populate(oxigraph_url=None, write_to_db=True):
         shutil.rmtree(out_dir)
     out_dir.mkdir()
 
-    # Load the context file
-    with open(Path("src/store/metadata/context.json")) as f:
-        context = json.load(f)
-
     # ------------------
     # Datasets resources
     # ------------------
@@ -81,8 +80,8 @@ def populate(oxigraph_url=None, write_to_db=True):
         datasets_source_dict = json.load(f)
         # Validate then add to graph
         schemas.Datasets(**datasets_source_dict)
-        g = Graph().parse(
-            data=json.dumps(set_context(datasets_source_dict, context)),
+        g += Graph().parse(
+            data=json.dumps(set_context(datasets_source_dict)),
             format="json-ld",
         )
 
@@ -120,8 +119,8 @@ def populate(oxigraph_url=None, write_to_db=True):
         topics_source_dict = json.load(f)
         # Validate then add to graph
         schemas.Topics(**topics_source_dict)
-        g = Graph().parse(
-            data=json.dumps(set_context(topics_source_dict, context)),
+        g += Graph().parse(
+            data=json.dumps(set_context(topics_source_dict)),
             format="json-ld",
         )
 
@@ -134,8 +133,8 @@ def populate(oxigraph_url=None, write_to_db=True):
         publishers_source_dict = json.load(f)
         # Validate then add to graph
         schemas.Publishers(**publishers_source_dict)
-        g = Graph().parse(
-            data=json.dumps(set_context(publishers_source_dict, context)),
+        g += Graph().parse(
+            data=json.dumps(set_context(publishers_source_dict)),
             format="json-ld",
         )
 
