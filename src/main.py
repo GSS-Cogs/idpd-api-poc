@@ -355,7 +355,7 @@ def get_publisher_by_id(
     request: Request,
     response: Response,
     publisher_id: str,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: OxigraphMetadataStore = Depends(OxigraphMetadataStore),
 ):
     """
     Retrieve information about a specific publisher by ID.
