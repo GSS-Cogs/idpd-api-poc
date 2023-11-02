@@ -441,7 +441,7 @@ def get_topic_by_id(
     request: Request,
     response: Response,
     topic_id: str,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: OxigraphMetadataStore = Depends(OxigraphMetadataStore),
 ):
     """
     Retrieve information about a specific topic by ID.
