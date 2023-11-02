@@ -10,18 +10,15 @@
     "skos": "http://www.w3.org/2004/02/skos/core#",
     "creator": {
         "@id": "dcterms:creator",
-        "@type": "@id",
         "@context": {
             "@base": "https://www.gov.uk/government/organisations/"
         }
     },
     "contact_point": {
         "@id": "dcat:contactPoint",
-        "@type": "@id",
         "@context": {
             "email": {
-                "@id": "vcard:hasEmail",
-                "@type": "@id"
+                "@id": "vcard:hasEmail"
             },
             "name": {
                 "@id": "vcard:fn",
@@ -34,12 +31,10 @@
         "@language": "en"
     },
     "distribution": {
-        "@id": "dcat:distribution",
-        "@type": "@id"
+        "@id": "dcat:distribution"
     },
     "frequency": {
         "@id": "dcterms:accrualPeriodicity",
-        "@type": "@id",
         "@context": {
             "@base": "http://purl.org/cld/freq/"
         }
@@ -48,8 +43,7 @@
         "@id": "dcterms:identifier"
     },
     "in_series": {
-        "@id": "dcat:inSeries",
-        "@type": "@id"
+        "@id": "dcat:inSeries"
     },
     "issued": {
         "@id": "dcterms:issued",
@@ -60,28 +54,20 @@
         "@language": "en"
     },
     "landing_page": {
-        "@id": "dcat:landingPage",
-        "@type": "@id"
+        "@id": "dcat:landingPage"
     },
     "licence": {
-        "@id": "dcterms:license",
-        "@type": "@id"
+        "@id": "dcterms:license"
     },
     "next_release": {
         "@id": "ons:nextRelease",
         "@type": "xsd:dateTime"
     },
     "publisher": {
-        "@id": "dcterms:publisher",
-        "@type": "@id",
-        "@context": {
-            "@base": "https://www.gov.uk/government/organisations/",
-            "@version": 1.1
-        }
+        "@id": "dcterms:publisher"
     },
     "spatial_coverage": {
         "@id": "dcterms:spatial",
-        "@type": "@id",
         "@context": {
             "@base": "http://statistics.data.gov.uk/id/statistical-geography/"
         }
@@ -92,7 +78,6 @@
     },
     "temporal_coverage": {
         "@id": "dcterms:temporal",
-        "@type": "@id",
         "@context": {
             "end": {
                 "@id": "dcat:endDate",
@@ -109,8 +94,7 @@
         "@type": "xsd:duration"
     },
     "theme": {
-        "@id": "dcat:theme",
-        "@type": "@id"
+        "@id": "dcat:theme"
     },
     "title": {
         "@id": "dcterms:title",
@@ -120,20 +104,16 @@
     "count": "hydra:totalitems",
     "datasets": {
         "@id": "dcat:DatasetSeries",
-        "@type": "@id",
         "@container": "@set"
       },
     "editions": {
-        "@id": "hydra:member",
-        "@type": "@id"
+        "@id": "hydra:member"
       },
     "editions_url": {
-        "@id": "hydra:collection",
-        "@type": "@id"
+        "@id": "hydra:collection"
       },
     "versions": {
-        "@id": "hydra:member",
-        "@type": "@id"
+        "@id": "hydra:member"
       },
     "versions_url": {
         "@id": "hydra:collection",
@@ -141,27 +121,22 @@
       },
     "columns": {
         "@id": "csvw:column",
-        "@type": "@id",
         "@container": "@set"
       },
     "topics": {
         "@id": "dcat:theme",
-        "type": "@id",
         "@container": "@set"
       },
     "publishers": {
         "@id": "dcat:publisher",
-        "type": "@id",
         "@container": "@set"
     },
     "sub_topics": {
         "@id": "skos:narrower",
-        "type": "@id",
         "@container": "@set"
     },
     "parent_topics": {
         "@id": "skos:broader",
-        "type": "@id",
         "@container": "@set"
     },
     "download_url": "dcat:downloadUrl",
