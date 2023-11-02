@@ -22,17 +22,13 @@ app = FastAPI(
     version="0.0.1",
 )
 
-origins = [
-    "https://staging.idpd.uk"
-]
-
 # Add the logging middleware to the app
 app.middleware("http")(logging_middleware)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origin_regex="https://.*\.idpd(\.onsdigital)?\.uk",
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET"],
     allow_headers=["*"],
 )
 
