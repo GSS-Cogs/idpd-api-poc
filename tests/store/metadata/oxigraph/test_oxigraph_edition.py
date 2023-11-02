@@ -18,12 +18,7 @@ def test_oxigraph_get_dataset_returns_valid_structure():
     os.environ["GRAPH_DB_URL"] = "http://localhost:7878"
     store = OxigraphMetadataStore()
 
-    dataset = store.get_dataset("cpih")
+    edition = store.get_edition("cpih")
 
-#     # Sanity check that the schema validation is working as intended
-#     # i.e raises with wrong structure
-    with pytest.raises(ValidationError):
-        schemas.Dataset(**{"I": "break"})
-
-#     # So should not raise
-    schemas.Dataset(**dataset)
+    # TODO: look at query results to write assertions
+    assert

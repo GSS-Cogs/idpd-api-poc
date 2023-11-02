@@ -40,7 +40,11 @@ def process_json_files(g, dir_path, schema):
 # TODO - will need updating when the details are worked out.
 with open(Path("src/store/metadata/context.json")) as f:
     context = json.load(f)
-def set_context(resource_item,):
+
+
+def set_context(
+    resource_item,
+):
     """
     Set a specific context location to inform the RDF created
     from the jsonld samples.

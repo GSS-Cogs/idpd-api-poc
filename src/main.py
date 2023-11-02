@@ -54,7 +54,7 @@ app.add_middleware(
 def get_all_datasets(
     request: Request,
     response: Response,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: OxigraphMetadataStore = Depends(OxigraphMetadataStore),
 ):
     """
     Retrieve all the datasets.
