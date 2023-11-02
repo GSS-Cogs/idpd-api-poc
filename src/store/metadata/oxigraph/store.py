@@ -40,7 +40,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
 
         # Specify the named graph from which we are fetching data
-        graph = self.db.get_context()
+        graph = self.db
 
         # Use the construct wrappers to pull the raw RDF triples
         # (as one rdflib.Graph() for each function) and add them
