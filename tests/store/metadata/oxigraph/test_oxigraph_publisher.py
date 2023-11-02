@@ -26,4 +26,4 @@ def test_oxigraph_get_publisher_returns_valid_structure():
          #schemas.Dataset(**{"I": "break"})
 
      # So should not raise
-     schemas.Publisher(**publisher)
+     schemas.Publisher(**publisher["@graph"][0])

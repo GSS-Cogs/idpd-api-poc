@@ -129,6 +129,7 @@
       },
     "publishers": {
         "@id": "dcat:publisher",
+        "@type": "dcat:publisher",
         "@container": "@set"
     },
     "sub_topics": {
