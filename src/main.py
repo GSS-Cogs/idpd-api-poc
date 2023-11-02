@@ -2,6 +2,7 @@ import os
 from typing import Optional
 
 from fastapi import Depends, FastAPI, Request, Response, status
+from fastapi.middleware.cors import CORSMiddleware
 
 from constants import CSV, JSONLD
 import schemas
@@ -21,8 +22,19 @@ app = FastAPI(
     version="0.0.1",
 )
 
+origins = [
+    "https://staging.idpd.uk"
+]
+
 # Add the logging middleware to the app
 app.middleware("http")(logging_middleware)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get(
@@ -95,7 +107,8 @@ def get_dataset_by_id(
     Retrieve information about a specific dataset by ID.
     This endpoint returns detailed information about a dataset based on its unique identifier.
     """
-    logger.info("Received request for dataset with ID", data={"dataset_id": dataset_id})
+    logger.info("Received request for dataset with ID",
+                data={"dataset_id": dataset_id})
 
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         dataset = metadata_store.get_dataset(dataset_id)
@@ -272,7 +285,8 @@ def get_dataset_edition_version_by_id(
     This endpoint returns detailed information about a specific version of a dataset based on its unique identifier.
     """
     if request.headers["Accept"] == JSONLD or BROWSABLE:
-        version = metadata_store.get_version(dataset_id, edition_id, version_id)
+        version = metadata_store.get_version(
+            dataset_id, edition_id, version_id)
         if version is not None:
             response.status_code = status.HTTP_200_OK
             return version
@@ -318,7 +332,8 @@ def get_all_publishers(
     Retrieve all the publishers.
     This endpoint returns all the publishers available in the system.
     """
-    logger.info("Received request for publishers", data={"request_type": "publishers"})
+    logger.info("Received request for publishers",
+                data={"request_type": "publishers"})
 
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
@@ -447,7 +462,8 @@ def get_topic_by_id(
     Retrieve information about a specific topic by ID.
     This endpoint returns detailed information about a specific topic based on its unique identifier.
     """
-    logger.info("Received request for topic with ID", data={"topic_id": topic_id})
+    logger.info("Received request for topic with ID",
+                data={"topic_id": topic_id})
 
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         topic = metadata_store.get_topic(topic_id)
