@@ -14,6 +14,10 @@ from .sparql.construct import (
     construct_dataset_themes,
     construct_dataset_contact_point,
     construct_dataset_temporal_coverage,
+    construct_edition_core,
+    construct_edition_contact_point,
+    construct_edition_keywords,
+    construct_edition_themes
 )
 from .. import constants
 
@@ -41,9 +45,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
 
         # Specify the named graph from which we are fetching data
-        graph = self.db.get_context(
-            URIRef(f"https://data.ons.gov.uk/datasets/{dataset_id}/record")
-        )
+        graph = self.db
 
         # Use the construct wrappers to pull the raw RDF triples
         # (as one rdflib.Graph() for each function) and add them
@@ -110,7 +112,41 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets a specific edition of a specific dataset
         """
-        raise NotImplementedError
+        # Populate the graph from the database
+        graph = self.db.get_context(
+            URIRef(f"https://data.ons.gov.uk/datasets/{dataset_id}/editions/{edition_id}")
+        )
+
+        # Use the construct wrappers to pull the raw RDF triples
+        # (as one rdflib.Graph() for each function) and add them
+        # together to create a single Graph of the
+        # data we need.
+        result: Graph = (
+            construct_edition_core(graph, edition_id)
+            + construct_edition_contact_point
+            + construct_edition_themes(graph, edition_id)
+            + construct_edition_keywords(graph, edition_id)
+        )
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "dcat:theme"}
+        )
+
+        edition_graph = next((x for x in data["@graph"] if "@type" in x.keys()), None)
+        contact_point_graph = next(
+            (x for x in data["@graph"] if "vcard:fn" in x.keys()), None
+        )
+
+        edition_graph["contact_point"] = {
+            "name": contact_point_graph["vcard:fn"]["@value"],
+            "email": contact_point_graph["vcard:hasEmail"]["@id"],
+        }
+
+        return edition_graph
 
     def get_versions(
         self, dataset_id: str, edition_id: str

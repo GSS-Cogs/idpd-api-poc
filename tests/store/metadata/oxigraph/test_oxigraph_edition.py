@@ -6,19 +6,18 @@ from pydantic import ValidationError
 from src.store.metadata.oxigraph.store import OxigraphMetadataStore
 from src import schemas
 
-# TODO - reimplenet as part of graph work
-
-def test_oxigraph_get_dataset_returns_valid_structure():
+def test_oxigraph_get_edition_returns_valid_structure():
 #     """
-#     Confirm that the OxigrapgMetadataStore.get_dataset()
-#     function returns a dataset that matches the dataset
+#     Confirm that the OxigrapgMetadataStore.get_edition()
+#     function returns an edition that matches the edition
 #     schema.
 #     """
 
     os.environ["GRAPH_DB_URL"] = "http://localhost:7878"
     store = OxigraphMetadataStore()
 
-    edition = store.get_edition("cpih")
+    edition = store.get_edition("cpih", "2022-01")
+    edition_schema = schemas.Edition(**edition)
 
-    # TODO: look at query results to write assertions
-    assert
+    # TODO: Once the query construct/get functions are fully working, look at query results to write assertions
+    assert edition_schema
