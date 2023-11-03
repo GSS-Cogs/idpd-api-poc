@@ -19,7 +19,7 @@ class Frequency(Enum):
     monthly = "monthly"
     semimonthly = "semimonthly"
     biweekly = "biweekly"
-    threeTimesAMonth = "three_times_a_week"
+    threeTimesAMonth = "three_times_a_month"
     weekly = "weekly"
     semiweekly = "semiweekly"
     threeTimesAWeek = "three_times_a_week"
@@ -203,8 +203,8 @@ class Topic(BaseModel):
     identifier: str
     title: str = Field(max_length=90)
     description: str = Field(max_length=250)
-    sub_topics: Union[List[str], None]
-    parent_topics: Union[List[str], None]
+    sub_topics: Union[List[str], None] = Field(default_factory=list)
+    parent_topics: Union[List[str], None] = Field(default_factory=list)
 
 
 class Topics(BaseModel):
