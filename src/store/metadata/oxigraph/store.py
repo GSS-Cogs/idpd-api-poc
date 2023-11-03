@@ -145,7 +145,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         raise NotImplementedError
 
-    def get_topic(self, topic_id: str) -> Optional[Dict]:  # pragma: no cover
+    def get_topic(self, topic_id: str) -> Optional[Dict]:
         """
         Get a specific topic by topic_id
         """
@@ -169,9 +169,6 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "dcat:theme"}
         )
-
-        # Use a remote context
-        data["@context"] = "https://data.ons.gov.uk/ns#"
 
         # Workaround to replace `themes` with `dcat:theme` in `@type`
         data["@graph"][0]["@type"] = "dcat:theme"
