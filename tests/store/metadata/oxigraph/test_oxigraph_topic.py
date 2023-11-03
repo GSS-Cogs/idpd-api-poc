@@ -14,7 +14,6 @@ def test_oxigraph_get_topic_with_subtopic_returns_valid_structure():
     schema.
     """
 
-    os.environ["GRAPH_DB_URL"] = "http://localhost:7878"
     store = OxigraphMetadataStore()
 
     topic = store.get_topic("economy")
@@ -33,7 +32,6 @@ def test_oxigraph_get_topic_with_parent_topic_returns_valid_structure():
     function returns a topic with parent topic that matches the topic
     schema.
     """
-    os.environ["GRAPH_DB_URL"] = "http://localhost:7878"
     store = OxigraphMetadataStore()
 
     topic = store.get_topic("prices")
