@@ -21,7 +21,7 @@
             "topics": [
               "https://staging.idpd.uk/topics/economy"
             ],
-            "frequency": "yearly",
+            "frequency": "annual",
             "keywords": ["money",
             "spending",
             "saving",
@@ -30,20 +30,20 @@
             "subnational"],
             "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
             "issued": "2023-03-31T12:12:48Z",
-            "modified": "2023-11-02T14:26Z",
+            "modified": "2023-11-02T14:26:00Z",
             "spatial_resolution":["N09", "S12", "W06", "E92", "K02"],
             "spatial_coverage": "K02000001",
             "temporal_resolution": ["P1Y"],
             "temporal_coverage": {
-              "start": "1997-01-01:09:00:00Z",
-            "end":  "1997-01-01:09:00:00Z"
+              "start": "1997-01-01T09:00:00Z",
+              "end":  "2021-01-01T09:00:00Z"
             },
             "versions_url": "https://staging.idpd.uk/datasets/gdhi/editions/2023-03/versions",
             "versions": [
               {
                 "@id": "https://staging.idpd.uk/datasets/gdhi/editions/2023-03/versions/1",
                 "issued": "2023-03-31T12:12:48Z",
-              "modified": "2023-11-02T14:26:99Z"
+                "modified": "2023-11-02T14:26:00Z"
               }
             ],
             "next_release": "2024-03-31T12:00:00Z",
