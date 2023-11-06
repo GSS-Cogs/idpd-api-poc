@@ -2,9 +2,12 @@ import os
 from typing import Optional
 
 from fastapi import Depends, FastAPI, Request, Response, status
+from fastapi.middleware.cors import CORSMiddleware
 
 import schemas
 from constants import CSV, JSONLD
+from store import StubCsvStore, StubMetadataStore
+
 from custom_logging import logger
 from middleware import logging_middleware
 from store import StubCsvStore, StubMetadataStore
@@ -22,6 +25,13 @@ app = FastAPI(
 
 # Add the logging middleware to the app
 app.middleware("http")(logging_middleware)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origin_regex="https://.*\.idpd(\.onsdigital)?\.uk",
+    allow_credentials=True,
+    allow_methods=["GET"],
+    allow_headers=["*"],
+)
 
 
 @app.get(

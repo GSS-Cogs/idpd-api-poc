@@ -12,7 +12,7 @@
             "sub_topics": [
                 "https://staging.idpd.uk/topics/prices"
             ],
-            "parent_topics": null
+            "parent_topics": []
         },
         {
             "@id": "https://staging.idpd.uk/topics/prices",
@@ -20,7 +20,7 @@
             "identifier": "prices",
             "title": "Prices",
             "description": "something describing prices",
-            "sub_topics": null,
+            "sub_topics": [],
             "parent_topics": [
                 "https://staging.idpd.uk/topics/economy"
             ]

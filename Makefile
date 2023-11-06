@@ -12,7 +12,7 @@ lint: ## Run the ruff python linter (auto triggered on pre-commit)
 	pipenv run ruff ./src/*
 
 test: ## Run pytest and check test coverage (auto triggered on pre-push)
-	pipenv run pytest --cov-report term-missing --cov=src --cov-config=./tests/coverage.rc ./tests/
+	pipenv run pytest --cov-report term-missing --cov=src --cov-config=./tests/coverage.rc
 
 populate: ## Populate an oxigraph DB (that/if/when) one is running on localhost:7878
 	pipenv run python3 ./data.py
