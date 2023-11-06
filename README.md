@@ -9,7 +9,7 @@ This application uses [pipenv](https://pypi.org/project/pipenv/) to manage depen
 
 Install dependencies via `pipenv sync --dev`
 
-Run the server via `make run`
+Run the server via `make start`
 
 If you want to browse the api content in your web browser (while developing only) then
 

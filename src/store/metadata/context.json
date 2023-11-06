@@ -59,6 +59,10 @@
     "licence": {
         "@id": "dcterms:license"
     },
+    "modified": {
+        "@id": "dcterms:modified",
+        "@type": "xsd:dateTime"
+    },
     "next_release": {
         "@id": "ons:nextRelease",
         "@type": "xsd:dateTime"
@@ -70,6 +74,13 @@
         "@id": "dcterms:spatial",
         "@context": {
             "@base": "http://statistics.data.gov.uk/id/statistical-geography/"
+        }
+    },
+    "spatial_resolution": {
+        "@type": "@id",
+        "@id": "ons:spatialResolution",
+        "@context": {
+            "@base": "http://statistics.data.gov.uk/id/statistical-entity/"
         }
     },
     "summary": {

@@ -13,6 +13,8 @@ from .sparql.construct import (
     construct_dataset_keywords,
     construct_dataset_parent_topics_by_id,
     construct_dataset_subtopics_by_id,
+    construct_dataset_parent_topics_by_id,
+    construct_dataset_subtopics_by_id,
     construct_dataset_topics,
     construct_dataset_contact_point,
     construct_dataset_temporal_coverage,
