@@ -85,7 +85,7 @@
           "editions_url": "https://staging.idpd.uk/datasets/4gc/editions",
           "editions": [
             {
-              "@id": "https://staging.idpd.uk/datasets/4gc/editions/2022-09",
+              "@id": "https://staging.idpd.uk/datasets/4gc/editions/2023-09",
               "issued": "2023-08-24T09:30:00Z",
               "modified": "2023-08-24T09:30:00Z"
             }
