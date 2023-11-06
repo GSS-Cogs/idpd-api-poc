@@ -161,6 +161,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             topic_id = topic["@id"].split("/")[-1]
             data["@graph"][0]["topics"][idx] = self.get_topic(topic_id)
 
+        # TODO Update @context so it's not hardcoded
         data["@graph"][0]["@context"] = "https://staging.idpd.uk/#ns"
         result = data["@graph"][0]
         return result
