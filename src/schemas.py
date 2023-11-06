@@ -142,7 +142,9 @@ class Dataset(BaseModel):
     frequency: Frequency
     keywords: list[str]
     licence: str
+    spatial_resolution: list[str]
     spatial_coverage: str = Field(pattern=r"^[EJKLMNSW]{1}\d{8}$")
+    temporal_resolution: list[str]
     temporal_coverage: PeriodOfTime
     editions: List[Union[Edition, SummarisedEdition]]
     editions_url: str
