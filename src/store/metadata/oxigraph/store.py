@@ -14,6 +14,7 @@ from .sparql.construct import (
     construct_dataset_themes,
     construct_dataset_contact_point,
     construct_dataset_temporal_coverage,
+    construct_dataset_version,
 )
 from .. import constants
 
@@ -41,9 +42,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
 
         # Specify the named graph from which we are fetching data
-        graph = self.db.get_context(
-            URIRef(f"https://data.ons.gov.uk/datasets/{dataset_id}/record")
-        )
+        graph = self.db
 
         # Use the construct wrappers to pull the raw RDF triples
         # (as one rdflib.Graph() for each function) and add them
@@ -125,7 +124,57 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets a specific version of a specific edition of a specific dataset
         """
-        raise NotImplementedError
+        # Specify the named graph from which we are fetching data
+        graph = self.db
+
+        # Use the construct wrappers to pull the raw RDF triples
+        # (as one rdflib.Graph() for each function) and add them
+        # together to create a sinlge Graph of the
+        # data we need.
+        result: Graph = (
+            construct_dataset_version(graph, dataset_id, edition_id, version_id)
+        )
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "dcat:DatasetSeries"}
+        )
+
+        # At this point our jonsld has a "@graph" list field with three entries in it
+        #
+        # - the dataset graph in compact form
+        # - an anonymous (blank root node) graph of contacts in long form
+        # - an anonymous (blank root node) graph of temporal coverage in long form
+        #
+        # The user doesnt need to know about blank RDF nodes so we need
+        # to flatten and embed the latter two graphs in the dataset graph.
+        dataset_graph = next((x for x in data["@graph"] if "@type" in x.keys()), None)
+        contact_point_graph = next(
+            (x for x in data["@graph"] if "vcard:fn" in x.keys()), None
+        )
+        temporal_coverage_graph = next(
+            (x for x in data["@graph"] if "dcat:endDate" in x.keys()), None
+        )
+
+        # Compact and embed anonymous nodes
+        # TODO - we'll want to make sure these fields exist
+        # to avoid key errors.
+        dataset_graph["contact_point"] = {
+            "name": contact_point_graph["vcard:fn"]["@value"],
+            "email": contact_point_graph["vcard:hasEmail"]["@id"],
+        }
+        dataset_graph["temporal_coverage"] = {
+            "start": temporal_coverage_graph["dcat:endDate"]["@value"],
+            "end": temporal_coverage_graph["dcat:startDate"]["@value"],
+        }
+
+        # Use a remote context
+        dataset_graph["@context"] = "https://data.ons.gov.uk/ns#"
+
+        return dataset_graph
 
     def get_publishers(self) -> Optional[Dict]:  # pragma: no cover
         """

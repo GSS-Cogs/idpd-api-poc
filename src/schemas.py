@@ -19,7 +19,7 @@ class Frequency(Enum):
     monthly = "monthly"
     semimonthly = "semimonthly"
     biweekly = "biweekly"
-    threeTimesAMonth = "three_times_a_week"
+    threeTimesAMonth = "three_times_a_month"
     weekly = "weekly"
     semiweekly = "semiweekly"
     threeTimesAWeek = "three_times_a_week"
