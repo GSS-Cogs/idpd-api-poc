@@ -12,21 +12,23 @@ sys.path.append(str(repo_root.absolute()))
 
 import data
 
-# TODO - uncomment when we reimplement graph usage
+mp = pytest.MonkeyPatch()
+mp.setenv("GRAPH_DB_URL", "http://localhost:7878")
+mp.delenv("LOCAL_BROWSE_API", False)
 
 
 @pytest.fixture(scope="session", autouse=True)
 def setup_before_all_tests():
-    #     """
-    #     Spins up oxigraph for testing and populates
-    #     it via the default script in /devdata
-    #     """
+    """
+    Spins up oxigraph for testing and populates
+    it via the default script in /devdata
+    """
 
     docker_client: DockerClient = docker.from_env()
 
-    #     # Run shutdown first, as this can quite easily get tangled
-    #     # try catch as otherwise it'll error if there's no
-    #     # container to shut down and delete.
+    # Run shutdown first, as this can quite easily get tangled
+    # try catch as otherwise it'll error if there's no
+    # container to shut down and delete.
     try:
         docker_client.containers.get("oxigraph_test").stop()
     except:
@@ -49,10 +51,10 @@ def setup_before_all_tests():
 
     data.populate(oxigraph_url="http://localhost:7878")
 
-    #     # Yield control to the tests
+    # Yield control to the tests
     yield
 
-    #     # Once the tests have ran
-    #     # ...stop the test oxigraph container
+    # Once the tests have ran
+    # ...stop the test oxigraph container
     docker_client.containers.get("oxigraph_test").stop()
     docker_client.containers.get("oxigraph_test").remove()

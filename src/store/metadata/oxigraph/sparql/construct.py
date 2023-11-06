@@ -40,6 +40,56 @@ def construct_dataset_themes(graph: Graph) -> Graph:
     return result
 
 
+def construct_dataset_topic_by_id(graph: Graph, topic_id: str) -> Graph:
+    query = """
+        PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX dcterms: <http://purl.org/dc/terms/>
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        CONSTRUCT WHERE {{
+            <https://staging.idpd.uk/topics/{topic_id}> a dcat:theme ;
+            dcterms:identifier ?identifier ;
+            dcterms:title ?title ;
+            dcterms:description ?description .
+        }}
+        """.format(
+        topic_id=topic_id
+    )
+
+    results_graph = graph.query(query).graph
+    result = results_graph if results_graph else Graph()
+    return result
+
+
+def construct_dataset_subtopics_by_id(graph: Graph, topic_id: str) -> Graph:
+    query = """
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        CONSTRUCT WHERE {{
+            <https://staging.idpd.uk/topics/{topic_id}> skos:narrower ?sub_topics .
+        }}
+        """.format(
+        topic_id=topic_id
+    )
+
+    results_graph = graph.query(query).graph
+    result = results_graph if results_graph else Graph()
+    return result
+
+
+def construct_dataset_parent_topics_by_id(graph: Graph, topic_id: str) -> Graph:
+    query = """
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        CONSTRUCT WHERE {{
+            <https://staging.idpd.uk/topics/{topic_id}> skos:broader ?parent_topics .
+        }}
+        """.format(
+        topic_id=topic_id
+    )
+
+    results_graph = graph.query(query).graph
+    result = results_graph if results_graph else Graph()
+    return result
+
+
 def construct_dataset_keywords(graph: Graph) -> Graph:
     query = """
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
