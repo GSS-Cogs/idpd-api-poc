@@ -1,7 +1,7 @@
 {
     "@context": "https://staging.idpd.uk/#ns",
     "@type": ["dcat:Catalog", "hydra:Collection"],
-    "@id": "http://localhost:8000/datasets",
+    "@id": "https://staging.idpd.uk/datasets",
     "datasets": [
         {
             "@id": "https://staging.idpd.uk/datasets/cpih",
