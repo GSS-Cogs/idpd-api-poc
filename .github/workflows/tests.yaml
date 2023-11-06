@@ -1,0 +1,24 @@
+name: Python Unit Tests
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install pipenv
+        run: pip install pipenv
+
+      - name: Install test dependencies
+        run: pipenv sync --dev
+
+      - name: Run Pytest
+        run: pipenv run pytest --cov-report term-missing --cov=src --cov-config=./tests/coverage.rc ./tests/

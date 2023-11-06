@@ -1,23 +1,28 @@
 from unittest.mock import MagicMock
 
+import pytest
+
 from fastapi import status
 from fastapi.testclient import TestClient
+from fastapi.exceptions import ResponseValidationError
 
 from constants import JSONLD
+from fixtures.publishers import publisher_test_data
 from main import app, StubMetadataStore
 
 # Devnotes:
 
-# In this code we just want to test that certain mimetypes
-# result in certains store methods being called and certain
+# In this code, we want to test that certain MIME types
+# result in certain store methods being called and certain
 # status codes being returned.
 # We should NOT care what the stores actually do - that's
 # what the /store tests are for, so we mock a store.
+# Mock data representing the expected response structure for /publishers/{id}
 
 ENDPOINT = "/publishers/some-publisher-id"
 
 
-def test_publisher_200():
+def test_publisher_valid_structure_200(publisher_test_data):
     """
     Confirms that:
 
@@ -27,10 +32,8 @@ def test_publisher_200():
     - Status code 200 is returned.
     """
 
-    # Create a mock store with a callable mocked get_publisher() method
     mock_metadata_store = MagicMock()
-    # Note: returning a populated list to simulate id is found
-    mock_metadata_store.get_publisher = MagicMock(return_value=["foo"])
+    mock_metadata_store.get_publisher = MagicMock(return_value=publisher_test_data)
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
@@ -38,9 +41,35 @@ def test_publisher_200():
     response = client.get(ENDPOINT, headers={"Accept": JSONLD})
 
     # Assertions
-    assert response.json() == ["foo"]
     assert response.status_code == status.HTTP_200_OK
     mock_metadata_store.get_publisher.assert_called_once()
+
+
+def test_publisher_invalid_structure_raises():
+    """
+    Confirms that:
+
+    - Where we have an "accept: application/json+ld" header.
+    - Then store.get_publisher() is called exactly once.
+    - And if store.get_publisher() returns data that does not
+      match the response schema.
+    - A ResponseValidationError is raised.
+    """
+
+    mock_metadata_store = MagicMock()
+    mock_metadata_store.get_publisher = MagicMock(
+        return_value={
+            "publishers": [{"invalid_field": "Invalid publisher"}],
+            "offset": 0,
+        }
+    )
+    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
+
+    # Create a TestClient for your FastAPI app
+    client = TestClient(app)
+
+    with pytest.raises(ResponseValidationError):
+        client.get(ENDPOINT, headers={"Accept": JSONLD})
 
 
 def test_publisher_404():
@@ -72,17 +101,17 @@ def test_publisher_by_id_406():
     """
     Confirms that:
 
-    - Where we have an "accept: application/json+ld" header.
+    - Where we do not have an "accept: application/json+ld" header.
     - Then store.get_publisher() is not called.
     - Status code 406 is returned.
     """
-
     # Create a mock store with a callable mocked get_publisher() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
-    mock_metadata_store.get_publisher = MagicMock(return_value="irrelevant")
+    mock_metadata_store.get_publisher = MagicMock(return_value={})
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
+    # Override the stub_store dependency with the mock_metadata_store
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
     response = client.get(ENDPOINT, headers={"Accept": "foo"})

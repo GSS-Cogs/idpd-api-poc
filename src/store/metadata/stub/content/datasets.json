@@ -1,8 +1,7 @@
 {
     "@context": "https://staging.idpd.uk/#ns",
     "@type": ["dcat:Catalog", "hydra:Collection"],
-    "@id": "http://localhost:8000/datasets",
-    "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
+    "@id": "https://staging.idpd.uk/datasets",
     "datasets": [
         {
             "@id": "https://staging.idpd.uk/datasets/cpih",
@@ -33,7 +32,9 @@
               "consumer price index including owner occupiers' housing costs"
             ],
             "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-            "spatial_coverage": "K02000001",
+            "spatial_resolution":["E01", "E92"],
+            "spatial_coverage": "E92000001",
+            "temporal_resolution": ["P1M","P3M","P1Y"],
             "temporal_coverage": {
               "start": "2005-01-01T00:00:00Z",
               "end": "2019-03-01T00:00:00Z"
