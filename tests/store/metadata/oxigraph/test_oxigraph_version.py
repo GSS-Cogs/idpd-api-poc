@@ -17,38 +17,38 @@ def test_oxigraph_get_version_returns_valid_structure():
     os.environ["GRAPH_DB_URL"] = "http://localhost:7878"
     store = OxigraphMetadataStore()
 
-    version = store.get_version(dataset_id="?", edition_id="?", version_id="economy")
+    version = store.get_version(dataset_id="cpih", edition_id="2022-01", version_id="1")
     version_schema = schemas.Version(**version)
     
-    # id: str = Field(alias="@id")
-    # assert version_schema.id == "https://staging.idpd.uk/topics/economy"
-    assert version_schema.id == "http://staging.idpd.uk/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}"
-    
-    # type: List[str] = Field(alias="@type")
-    assert version_schema.type == "dcat:theme"
-
-    # identifier: str
-    assert version_schema.identifier == "economy"
-
-    # title: str = Field(max_length=90)
-    assert version_schema.title == "Economy"
-    
-    # issued: str = Field(
-    #     pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
-    # )
-    assert version_schema.issued == ""
-    
-    # summary: str = Field(max_length=200)
-    assert version_schema.summary == ""
-
-    # description: str = Field(max_length=250)
-    assert version_schema.description == ""
-
-    # download_url: str
-    assert version_schema.download_url == ""
-
-    # media_type: str
-    assert version_schema.media_type == ""
-
-    # table_schema: TableSchema
-    assert version_schema.table_schema == ""
+    assert version_schema.id == "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1"
+    assert "dcat:Distribution" in version_schema.type
+    assert "csvw:Table" in version_schema.type
+    assert version_schema.identifier == "1"
+    assert version_schema.title == "Consumer Prices Index including owner occupiers' housing costs (CPIH)"
+    assert version_schema.issued == "2017-01-01T00:00:00"
+    assert version_schema.summary == "he Consumer Prices Index including owner occupiers' housing costs (CPIH) is a..."
+    assert version_schema.description == "The Consumer Prices Index..."
+    assert version_schema.download_url == "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1.csv"
+    # assert version_schema.media_type == "text/csv"
+    assert version_schema.table_schema == {
+                "columns": [
+                    {
+                    "name": "geography",
+                    "datatype": "string",
+                    "titles": "Geography",
+                    "description": "The geography associated with the observation."
+                    },
+                    {
+                    "name": "time_period",
+                    "datatype": "string",
+                    "titles": "Time period",
+                    "description": "The time period associated with the observation."
+                    },
+                    {
+                    "name": "cpih",
+                    "datatype": "number",
+                    "titles": "Consumer price index",
+                    "description": "The consumer price index for the given time period."
+                    }
+                ]
+            }
