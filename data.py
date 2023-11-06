@@ -24,6 +24,8 @@ from src import schemas
 # Load the context file
 with open(Path("src/store/metadata/context.json")) as f:
     context = json.load(f)
+
+
 def set_context(resource_item):
     """
     Set a specific context location to inform the RDF created
@@ -47,6 +49,7 @@ def process_json_files(g, dir_path, schema):
         g += Graph().parse(
             data=json.dumps(set_context(resource_dict)), format="json-ld"
         )
+
 
 def populate(oxigraph_url=None, write_to_db=True):
     this_dir = Path(__file__).parent
@@ -90,9 +93,7 @@ def populate(oxigraph_url=None, write_to_db=True):
     # ------------------
 
     # Load from disk
-    editions_source_path = Path(
-        subbed_metadata_store_content_path / "editions"
-    )
+    editions_source_path = Path(subbed_metadata_store_content_path / "editions")
     # Validate then add to graph
     schema = schemas.Editions
     process_json_files(g, editions_source_path, schema)
@@ -112,7 +113,6 @@ def populate(oxigraph_url=None, write_to_db=True):
     # ------------------
     # Topics resources
     # ------------------
-    
 
     topics_source_path = Path(subbed_metadata_store_content_path / "topics.json")
     with open(topics_source_path) as f:
@@ -128,7 +128,9 @@ def populate(oxigraph_url=None, write_to_db=True):
     # Publishers resources
     # --------------------
 
-    publishers_source_path = Path(subbed_metadata_store_content_path / "publishers.json")
+    publishers_source_path = Path(
+        subbed_metadata_store_content_path / "publishers.json"
+    )
     with open(publishers_source_path) as f:
         publishers_source_dict = json.load(f)
         # Validate then add to graph
@@ -137,7 +139,6 @@ def populate(oxigraph_url=None, write_to_db=True):
             data=json.dumps(set_context(publishers_source_dict)),
             format="json-ld",
         )
-
 
     out_path = Path("out/seed.ttl")
     g.serialize(out_path, format="ttl")
