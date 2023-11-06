@@ -1,15 +1,10 @@
 import time
-from pathlib import Path
-import pytest
-import sys
 
 import docker
 from docker import DockerClient
+import pytest
 
 import data
-
-repo_root = Path(__file__).parent.parent
-sys.path.append(str(repo_root.absolute()))
 
 mp = pytest.MonkeyPatch()
 mp.setenv("GRAPH_DB_URL", "http://localhost:7878")
