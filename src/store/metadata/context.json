@@ -72,6 +72,13 @@
             "@base": "http://statistics.data.gov.uk/id/statistical-geography/"
         }
     },
+    "spatial_resolution": {
+        "@type": "@id",
+        "@id": "ons:spatialResolution",
+        "@context": {
+            "@base": "http://statistics.data.gov.uk/id/statistical-entity/"
+        }
+    },
     "summary": {
         "@id": "dcterms:abstract",
         "@language": "en"
