@@ -30,8 +30,8 @@
 				"OOH"
 			],
 			"licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-			"issued": "2022-02-16",
-			"modified": "2022-02-16",
+			"issued": "2022-02-16T00:00:00",
+			"modified": "2022-02-16T00:00:00",
 			"spatial_resolution": [
 				"K02"
 			],
@@ -40,8 +40,8 @@
 				"P1M"
 			],
 			"temporal_coverage": {
-				"start": "2012-01-01",
-				"end": "2022-01-31"
+				"start": "2012-01-01T00:00:00",
+				"end": "2022-01-31T00:00:00"
 			},
 			"versions_url": "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions",
 			"versions": [
