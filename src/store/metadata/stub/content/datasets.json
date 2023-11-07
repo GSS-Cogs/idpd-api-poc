@@ -1,54 +1,95 @@
 {
-    "@context": "https://staging.idpd.uk/#ns",
-    "@type": ["dcat:Catalog", "hydra:Collection"],
-    "@id": "https://staging.idpd.uk/datasets",
-    "datasets": [
-        {
-            "@id": "https://staging.idpd.uk/datasets/cpih",
-            "@type": "dcat:DatasetSeries",
-            "identifier": "cpih",
-            "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
-            "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
-            "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
-            "issued": "2017-01-01T00:00:00",
-            "modified": "2017-01-01T00:00:00",
-            "next_release": "2019-04-19T09:30:00Z",
-            "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-            "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-            "contact_point": {
-              "name": "Consumer Price Inflation Enquiries",
-              "email": "mailto:cpih@ons.gov.uk"
-            },
-            "topics": [
-              "https://staging.idpd.uk/topics/economy",
-              "https://staging.idpd.uk/topics/prices"],
-            "frequency": "monthly",
-            "keywords": [
-              "inflation",
-              "consumer price inflation",
-              "cpi",
-              "cpih",
-              "consumer price index",
-              "consumer price index including owner occupiers' housing costs"
-            ],
-            "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-            "spatial_resolution":["E01", "E92"],
-            "spatial_coverage": "E92000001",
-            "temporal_resolution": ["P1M","P3M","P1Y"],
-            "temporal_coverage": {
-              "start": "2005-01-01T00:00:00Z",
-              "end": "2019-03-01T00:00:00Z"
-            },
-            "editions_url": "https://staging.idpd.uk/datasets/cpih/editions",
-            "editions": [
-              {
-                "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01",
-                "issued": "2017-02-21T09:30:00Z",
-                "modified": "2017-02-21T09:30:00Z"
-              }
-            ]
-        }
-      ],
-    "offset": 0,
-    "count": 1
+  "@context": "https://staging.idpd.uk/#ns",
+  "@type": ["dcat:Catalog", "hydra:Collection"],
+  "@id": "https://staging.idpd.uk/datasets",
+  "datasets": [
+      {
+          "@id": "https://staging.idpd.uk/datasets/cpih",
+          "@type": "dcat:DatasetSeries",
+          "identifier": "cpih",
+          "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
+          "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
+          "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
+          "issued": "2017-01-01T00:00:00",
+          "modified": "2017-01-01T00:00:00",
+          "next_release": "2019-04-19T09:30:00Z",
+          "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+          "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+          "contact_point": {
+            "name": "Consumer Price Inflation Enquiries",
+            "email": "mailto:cpih@ons.gov.uk"
+          },
+          "topics": [
+            "https://staging.idpd.uk/topics/economy",
+            "https://staging.idpd.uk/topics/prices"],
+          "frequency": "monthly",
+          "keywords": [
+            "inflation",
+            "consumer price inflation",
+            "cpi",
+            "cpih",
+            "consumer price index",
+            "consumer price index including owner occupiers' housing costs"
+          ],
+          "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+          "spatial_resolution":["E01", "E92"],
+          "spatial_coverage": "E92000001",
+          "temporal_resolution": ["P1M","P3M","P1Y"],
+          "temporal_coverage": {
+            "start": "2005-01-01T00:00:00Z",
+            "end": "2019-03-01T00:00:00Z"
+          },
+          "editions_url": "https://staging.idpd.uk/datasets/cpih/editions",
+          "editions": [
+            {
+              "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01",
+              "issued": "2017-02-21T09:30:00Z",
+              "modified": "2017-02-21T09:30:00Z"
+            }
+          ]
+      },
+      {
+        "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions",
+        "@type": "dcat:DatasetSeries",
+        "identifier": "beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions",
+        "title": "2005 to 2019 local authority carbon dioxide (CO2) emissions",
+        "summary": "These statistics provide the most reliable and consistent breakdown of CO2 emissions across the country, using nationally available data sets going back to 2005.\n\nThe main data sources are the UK National Atmospheric Emissions Inventory and the BEIS National Statistics of energy consumption for local authority areas. All emissions included in the national inventory are covered, except aviation, shipping and military transport, for which there is no obvious basis for allocation to local areas.",
+        "description": "These statistics provide the most reliable and consistent breakdown of CO2 emissions across the country, using nationally available data sets going back to 2005.\n\nThe main data sources are the UK National Atmospheric Emissions Inventory and the BEIS National Statistics of energy consumption for local authority areas. All emissions included in the national inventory are covered, except aviation, shipping and military transport, for which there is no obvious basis for allocation to local areas.",
+        "issued": "2021-06-24T08:30:00",
+        "modified": "2022-08-18T10:51:00",
+        "next_release": "2024-04-19T09:30:00Z",
+        "publisher": "https://staging.idpd.uk/publishers/department-for-business-energy-and-industrial-strategy",
+        "creator": "https://staging.idpd.uk/publishers/department-for-business-energy-and-industrial-strategy",
+        "contact_point": {
+          "name": "Department for Business, Energy & Industrial Strategy",
+          "email": "Climatechange.Statistics@beis.gov.uk"
+        },
+        "topics": [
+          "https://staging.idpd.uk/topics/climatechange",
+          "https://staging.idpd.uk/topics/carbonemissions"],
+        "frequency": "Onetime",
+        "keywords": [
+          "carbon",
+          "emissions",
+          "local authority",
+          "beis"
+        ],
+        "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+        "spatial_coverage": "K02000001",
+        "temporal_coverage": {
+          "start": "2005-01-01T00:00:00Z",
+          "end": "2019-12-31T00:00:00Z"
+        },
+        "editions_url": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions",
+        "editions": [
+          {
+            "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions/placeholder",
+            "issued": "2021-06-24T08:30:00Z",
+            "modified": "2022-08-18T10:51:00Z"
+          }
+        ]
+    }
+    ],
+  "offset": 0,
+  "count": 1
 }
