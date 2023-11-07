@@ -117,18 +117,20 @@
         "@id": "dcat:DatasetSeries",
         "@container": "@set"
     },
+    "versions": {
+        "@id": "hydra:member",
+        "@type": "@id",
+        "@container": "@set"
+    },
+    "versions_url": {
+        "@id": "hydra:Collection",
+        "@type": "@id"
+    },
     "editions": {
         "@id": "hydra:member"
     },
     "editions_url": {
-        "@id": "hydra:collection"
-    },
-    "versions": {
-        "@id": "hydra:member"
-    },
-    "versions_url": {
-        "@id": "hydra:collection",
-        "@type": "@id"
+        "@id": "hydra:Collection"
     },
     "columns": {
         "@id": "csvw:column",
