@@ -13,17 +13,17 @@
             "identifier": "1",
             "issued": "2017-01-01T00:00:00",
             "title": "Consumer Prices Index including owner occupiers' housing costs (CPIH)",
-            "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a...",
-            "description": "The Consumer Prices Index...",
+            "summary": "The Consumer Prices Index (CPI), Consumer Prices Index including owner occupiers' housing costs (CPIH), and owner occupiers' housing costs (OOH) inflation.",
+            "description": "CPIH is the most comprehensive measure of inflation. It extends Consumer Prices Index to include a measure of the costs associated with owning, maintaining and living in one's own home, known as owner occupiers' housing costs (OOH), along with council tax. This dataset provides CPI, CPIH, and OOH time series (2012 to latest published month).\n\nThe observations show the change in inflation (the percentage change in the index) over the same month in the previous year. For example, the observation for January 2015 shows the change in inflation between January 2015 and January 2014.",
             "download_url": "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1.csv",
             "media_type": "text/csv",
             "table_schema": {
                 "columns": [
                     {
-                        "name": "Period",
-                        "datatype": "xsd:datetime",
-                        "titles": "Time period",
-                        "description": "The time period associated with the observation."
+                        "name": "date",
+                        "datatype": "xsd:gYearMonth",
+                        "titles": "The date of the observation",
+                        "description": "The date associated with the observation."
                     },
                     {
                         "name": "CPIH",
