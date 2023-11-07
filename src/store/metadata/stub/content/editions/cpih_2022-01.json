@@ -45,22 +45,28 @@
             "table_schema": {
               "columns": [
                   {
-                  "name": "geography",
-                  "datatype": "string",
-                  "titles": "Geography",
-                  "description": "The geography associated with the observation."
-                  },
-                  {
-                  "name": "time_period",
-                  "datatype": "string",
+                  "name": "Period",
+                  "datatype": "xsd:datetime",
                   "titles": "Time period",
                   "description": "The time period associated with the observation."
                   },
                   {
-                  "name": "cpih",
-                  "datatype": "number",
-                  "titles": "Consumer price index",
-                  "description": "The consumer price index for the given time period."
+                  "name": "CPIH",
+                  "datatype": "xsd:decimal",
+                  "titles": ["Consumer Price Index including Housing (CPIH)", "CPIH"],
+                  "description": "The consumer price index including housing for the given time period."
+                  },
+                  {
+                  "name": "CPI",
+                  "datatype": "xsd:decimal",
+                  "titles": ["Consumer Price Index (CPI)", "CPI"],
+                  "description": "The consumer price index including for the given time period."
+                  },
+                  {
+                  "name": "OOH",
+                  "datatype": "xsd:decimal",
+                  "titles": ["Owner occupiers’ housing costs", "OOH"],
+                  "description": "An index of owner occupiers' housing costs for the given time period."
                   }
               ]
           }
