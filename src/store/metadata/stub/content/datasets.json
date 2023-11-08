@@ -65,8 +65,8 @@
             "email": "mailto:labour.market@ons.gov.uk"
           },
           "topics": [
-            "https://staging.idpd.uk/topics/economy",
-            "https://staging.idpd.uk/topics/employment"],
+            "https://staging.idpd.uk/topics/employment",
+            "https://staging.idpd.uk/topics/labour-market-and-welfare"],
           "frequency": "annual",
           "keywords": [
             "subnational",
