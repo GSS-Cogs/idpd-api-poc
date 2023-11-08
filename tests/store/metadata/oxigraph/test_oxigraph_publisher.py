@@ -15,18 +15,10 @@ def test_oxigraph_get_publisher_returns_valid_structure():
      schema.
      """
 
-     os.environ["GRAPH_DB_URL"] = "http://localhost:7878"
      store = OxigraphMetadataStore()
 
      publisher = store.get_publisher("office-for-national-statistics")
-
-     # Sanity check that the schema validation is working as intended
-     # i.e raises with wrong structure
-     #with pytest.raises(ValidationError):
-         #schemas.Dataset(**{"I": "break"})
-
-     # So should not raise
-     schemas.Publisher(**publisher["@graph"][0])
+     schemas.Publisher(**publisher)
 
 
 def test_oxigraph_get_publisher_returns_invalid_structure():
@@ -36,7 +28,6 @@ def test_oxigraph_get_publisher_returns_invalid_structure():
      schema.
      """
 
-     os.environ["GRAPH_DB_URL"] = "http://localhost:7878"
      store = OxigraphMetadataStore()
 
      publisher = store.get_publisher("office-for-national-statistics")
@@ -44,4 +35,4 @@ def test_oxigraph_get_publisher_returns_invalid_structure():
      # Sanity check that the schema validation is working as intended
      # i.e raises with wrong structure
      with pytest.raises(ValidationError):
-        schemas.Dataset(**{"I": "break"})
+        schemas.Publisher(**{"I": "break"})

@@ -12,7 +12,9 @@ sys.path.append(str(repo_root.absolute()))
 
 import data
 
-# TODO - uncomment when we reimplement graph usage
+mp = pytest.MonkeyPatch()
+mp.setenv("GRAPH_DB_URL", "http://localhost:7878")
+mp.delenv("LOCAL_BROWSE_API", False)
 
 @pytest.fixture(scope="session", autouse=True)
 def setup_before_all_tests():

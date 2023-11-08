@@ -2,10 +2,11 @@ import os
 from typing import Optional
 
 from fastapi import Depends, FastAPI, Request, Response, status
+from fastapi.middleware.cors import CORSMiddleware
 
 from constants import CSV, JSONLD
 import schemas
-from store import OxigraphMetadataStore, StubCsvStore, StubMetadataStore
+from store import StubCsvStore, StubMetadataStore
 
 from custom_logging import logger
 from middleware import logging_middleware
@@ -23,6 +24,13 @@ app = FastAPI(
 
 # Add the logging middleware to the app
 app.middleware("http")(logging_middleware)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origin_regex="https://.*\.idpd(\.onsdigital)?\.uk",
+    allow_credentials=True,
+    allow_methods=["GET"],
+    allow_headers=["*"],
+)
 
 
 @app.get(
@@ -355,7 +363,7 @@ def get_publisher_by_id(
     request: Request,
     response: Response,
     publisher_id: str,
-    metadata_store: OxigraphMetadataStore = Depends(OxigraphMetadataStore),
+    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
     """
     Retrieve information about a specific publisher by ID.
