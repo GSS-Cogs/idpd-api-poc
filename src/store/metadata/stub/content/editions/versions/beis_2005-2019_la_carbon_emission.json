@@ -1,0 +1,102 @@
+{
+    "@context": "https://staging.idpd.uk/#ns",
+    "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions/2005-2019/versions",
+    "@type": "hydra:Collection",
+    "title": "2005 to 2019 local authority carbon dioxide (CO2) emissions",
+    "versions": [
+        {
+            "@type": ["dcat:Distribution", "csvw:Table"],
+            "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions/2005-2019/versions/1",
+            "identifier": "1",
+            "issued": "2021-06-24T08:30:00",
+            "title": "2005 to 2019 local authority carbon dioxide (CO2) emissions",
+            "summary": "These statistics provide the most reliable and consistent breakdown of CO2 emissions across the country, using nationally available data sets going back to 2005.\n\nThe main data sources are the UK National Atmospheric Emissions Inventory and the BEIS National Statistics of energy consumption for local authority areas. All emissions included in the national inventory are covered, except aviation, shipping and military transport, for which there is no obvious basis for allocation to local areas.",
+            "description": "These statistics provide the most reliable and consistent breakdown of CO2 emissions across the country, using nationally available data sets going back to 2005.\n\nThe main data sources are the UK National Atmospheric Emissions Inventory and the BEIS National Statistics of energy consumption for local authority areas. All emissions included in the national inventory are covered, except aviation, shipping and military transport, for which there is no obvious basis for allocation to local areas.",
+            "download_url": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions/2005-2019/versions/1.csv",
+            "media_type": "text/csv",
+            "table_schema": {
+                "columns": [
+                    {
+                        "name": "year",
+                        "datatype": "number",
+                        "titles": "Year",
+                        "description": "The year associated with the observation."
+                      
+                      },
+                      {
+                        "name": "country",
+                        "datatype": "string",
+                        "titles": "Country",
+                        "description": "The country associated with the observation."
+                      
+                      },
+                      {
+                        "name": "local authority",
+                        "datatype": "string",
+                        "titles": "Local Authority",
+                        "description": "The local authority associated with the observation."
+                      
+                      },
+                      {
+                        "name": "local authority code",
+                        "datatype": "string",
+                        "titles": "Local Authority Code",
+                        "description": "The code representing the local authority area"
+                      
+                      },
+                      {
+                        "name": "LA CO2 Sector",
+                        "datatype": "string",
+                        "titles": "LA CO2 Sector",
+                        "description": "LA CO2 Sector"
+                      
+                      },
+                      {
+                        "name": "LA CO2 Sub-sector",
+                        "datatype": "string",
+                        "titles": "LA CO2 Sub-sector",
+                        "description": "LA CO2 Sub-sector"
+                      
+                      },
+                      {
+                        "name": "territorial emissions per area",
+                        "datatype": "number",
+                        "titles": "Territorial emissions per area",
+                        "description": "Territorial emissions per area"
+                      
+                      },
+                      {
+                        "name": "Emissions within the scope of influence of LAs",
+                        "datatype": "number",
+                        "titles": "Emissions within the scope of influence of LAs",
+                        "description": "Emissions within the scope of influence of LAs"
+                      
+                      },
+                      {
+                        "name": "Territorial emissions per capita",
+                        "datatype": "number",
+                        "titles": "Territorial emissions per capita",
+                        "description": "Territorial emissions per capita"
+                      
+                      },
+                      {
+                        "name": "Territorial emissions",
+                        "datatype": "number",
+                        "titles": "Territorial emissions",
+                        "description": "Territorial emissions"
+                      
+                      },
+                      {
+                        "name": "Unit of Measure",
+                        "datatype": "string",
+                        "titles": "Unit of Measure",
+                        "description": "Unit of Measure"
+                      
+                      }
+                ]
+            }
+        }
+    ],
+    "count": 1,
+    "offset": 0
+}
