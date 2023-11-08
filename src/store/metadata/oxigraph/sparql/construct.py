@@ -27,12 +27,15 @@ def construct_dataset_core(graph: Graph) -> Graph:
     return result
 
 
-def construct_dataset_themes(graph: Graph) -> Graph:
+def construct_dataset_topics(graph: Graph) -> Graph:
     query = """
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
         CONSTRUCT WHERE {
-            ?ds a dcat:DatasetSeries ;
-                dcat:theme ?theme .
+        <https://staging.idpd.uk/topics> a hydra:Collection ;
+	        dcat:theme ?topic ;
+            hydra:offset ?offset ;
+            hydra:totalitems ?count .
         }
         """
     results_graph = graph.query(query).graph
