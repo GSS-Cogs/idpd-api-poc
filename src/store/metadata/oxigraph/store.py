@@ -161,7 +161,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # Use a remote context
         data["@context"] = "https://data.ons.gov.uk/ns#"
 
-        return data
+        return data["@graph"][0]
 
     def get_topics(self) -> Optional[Dict]:  # pragma: no cover
         """
