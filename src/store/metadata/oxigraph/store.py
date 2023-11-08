@@ -131,6 +131,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             + construct_edition_keywords(graph, dataset_id, edition_id)
             + construct_edition_temporal_coverage(graph, dataset_id, edition_id)
             + construct_edition_table_schema(graph, dataset_id, edition_id)
+            + construct_edition_versions(graph, dataset_id, edition_id)
         )
 
         # Serialize the graph into jsonld
@@ -153,6 +154,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         )
         columns_graph = [x for x in data["@graph"] if "datatype" in x.keys()]
 
+        versions_graph = next((x for x in data["@graph"]))
         # Populate table_schema_graph.columns with column definitions and delete table_schema_graph.column blank node @id
         for column in table_schema_graph["columns"]:
             for col in columns_graph:
@@ -173,6 +175,14 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # Populate editions_graph.table_schema.columns with column definitions and delete editions_graph.table_schema blank node @id
         edition_graph["table_schema"]["columns"] = table_schema_graph["columns"]
         del edition_graph["table_schema"]["@id"]
+
+        # Expand version to include issued and modified fields
+        for idx, version in enumerate(edition_graph["versions"]):
+            edition_graph["versions"][idx] = {"@id": version}
+            for node in data["@graph"]:
+                if node["@id"] == edition_graph["versions"][idx]["@id"]:
+                    edition_graph["versions"][idx]["issued"] = node["issued"]
+                    edition_graph["versions"][idx]["modified"] = node["modified"]
         return edition_graph
 
     def get_versions(

@@ -59,10 +59,13 @@ def test_oxigraph_get_edition_returns_valid_structure():
     )
     assert edition_schema.topics[0] == "https://staging.idpd.uk/topics/economy"
     assert edition_schema.type == "dcat:Dataset"
+    assert isinstance(edition_schema.versions[0], schemas.SummarisedVersion)
     assert (
-        edition_schema.versions[0]
+        edition_schema.versions[0].id
         == "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1"
     )
+    assert edition_schema.versions[0].issued == "2017-01-01T00:00:00"
+    assert edition_schema.versions[0].modified == "2017-01-01T00:00:00"
     assert (
         edition_schema.versions_url
         == "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions"
