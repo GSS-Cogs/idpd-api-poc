@@ -54,7 +54,7 @@
           "identifier": "a16mu",
           "title": "Modelled unemployment rate aged 16 years and over",
           "summary": "Modelled unemployment rate for people aged 16 years and over, Great Britain, 07/2004-06/2005 to 07/2022-06/2023.",
-          "description": "This dataset shows modelled-based estimates for the proportion of people aged 16 years and over without a job who have been actively seeking work within the last four weeks and are available to start work within the next two weeks, in Great Britain, for periods 07/2004-06/2005 to 07/2022-06/2023.",
+          "description": "This dataset shows modelled-based estimates for the proportion of people aged 16 years and over without a job who have been actively seeking work within the last four weeks and are available to start work within the next two weeks",
           "issued": "2023-11-06T12:25:28",
           "modified": "2023-11-06T12:25:28",
           "next_release": "2024-11-06T12:00:00",
