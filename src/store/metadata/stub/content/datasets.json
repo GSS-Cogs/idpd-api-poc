@@ -83,7 +83,7 @@
           "temporal_resolution": ["P1Y"],
           "temporal_coverage": {
             "start": "2004-07-01T00:00:00Z",
-            "end": "2023-06-31T23:59:59Z"
+            "end": "2023-06-3T23:59:59Z"
           },
           "editions_url": "https://staging.idpd.uk/datasets/a16mu/editions",
           "editions": [
