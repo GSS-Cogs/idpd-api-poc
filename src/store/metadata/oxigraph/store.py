@@ -148,6 +148,20 @@ class OxigraphMetadataStore(BaseMetadataStore):
         temporal_coverage_graph = next(
             (x for x in data["@graph"] if "dcat:endDate" in x.keys()), None
         )
+        table_schema_graph = next(
+            (x for x in data["@graph"] if "columns" in x.keys()), None
+        )
+        columns_graph = [x for x in data["@graph"] if "datatype" in x.keys()]
+
+        # Populate table_schema_graph.columns with column definitions and delete table_schema_graph.column blank node @id
+        for column in table_schema_graph["columns"]:
+            for col in columns_graph:
+                if column["@id"] == col["@id"]:
+                    column["description"] = col["description"]
+                    column["datatype"] = col["datatype"]
+                    column["name"] = col["name"]
+            del column["@id"]
+
         edition_graph["contact_point"] = {
             "name": contact_point_graph["vcard:fn"]["@value"],
             "email": contact_point_graph["vcard:hasEmail"],
@@ -156,8 +170,9 @@ class OxigraphMetadataStore(BaseMetadataStore):
             "start": temporal_coverage_graph["dcat:startDate"]["@value"],
             "end": temporal_coverage_graph["dcat:endDate"]["@value"],
         }
-        edition_graph["versions_url"] = edition_graph.pop("editions_url")
-        edition_graph["versions"] = edition_graph.pop("editions")
+        # Populate editions_graph.table_schema.columns with column definitions and delete editions_graph.table_schema blank node @id
+        edition_graph["table_schema"]["columns"] = table_schema_graph["columns"]
+        del edition_graph["table_schema"]["@id"]
         return edition_graph
 
     def get_versions(
