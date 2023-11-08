@@ -5,7 +5,7 @@ validate the structure of the data returned by the API.
 
 from enum import Enum
 from pydantic import BaseModel, Field
-from typing import Dict, Literal, Optional, Union, List
+from typing import Literal, Optional, Union, List
 
 
 class Frequency(Enum):
@@ -19,7 +19,7 @@ class Frequency(Enum):
     monthly = "monthly"
     semimonthly = "semimonthly"
     biweekly = "biweekly"
-    threeTimesAMonth = "three_times_a_week"
+    threeTimesAMonth = "three_times_a_month"
     weekly = "weekly"
     semiweekly = "semiweekly"
     threeTimesAWeek = "three_times_a_week"
@@ -81,8 +81,10 @@ class Edition(BaseModel):
     modified: str = Field(
         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
     )
+    spatial_resolution: list[str]
     spatial_coverage: str = Field(pattern=r"^[EJKLMNSW]{1}\d{8}$")
-    temporal_coverage: str
+    temporal_resolution: list[str]
+    temporal_coverage: PeriodOfTime
     next_release: str = Field(
         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",
     )
@@ -140,7 +142,9 @@ class Dataset(BaseModel):
     frequency: Frequency
     keywords: list[str]
     licence: str
+    spatial_resolution: list[str]
     spatial_coverage: str = Field(pattern=r"^[EJKLMNSW]{1}\d{8}$")
+    temporal_resolution: list[str]
     temporal_coverage: PeriodOfTime
     editions: List[Union[Edition, SummarisedEdition]]
     editions_url: str
@@ -203,8 +207,8 @@ class Topic(BaseModel):
     identifier: str
     title: str = Field(max_length=90)
     description: str = Field(max_length=250)
-    sub_topics: Union[List[str], None]
-    parent_topics: Union[List[str], None]
+    sub_topics: Union[List[str], None] = Field(default_factory=list)
+    parent_topics: Union[List[str], None] = Field(default_factory=list)
 
 
 class Topics(BaseModel):

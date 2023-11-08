@@ -11,9 +11,13 @@ from ..base import BaseMetadataStore
 from .sparql.construct import (
     construct_dataset_core,
     construct_dataset_keywords,
-    construct_dataset_themes,
+    construct_dataset_parent_topics_by_id,
+    construct_dataset_subtopics_by_id,
+    construct_dataset_topics,
     construct_dataset_contact_point,
     construct_dataset_temporal_coverage,
+    construct_dataset_topic_by_id,
+    construct_dataset_topics,
 )
 from .. import constants
 
@@ -41,9 +45,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
 
         # Specify the named graph from which we are fetching data
-        graph = self.db.get_context(
-            URIRef(f"https://data.ons.gov.uk/datasets/{dataset_id}/record")
-        )
+        graph = self.db
 
         # Use the construct wrappers to pull the raw RDF triples
         # (as one rdflib.Graph() for each function) and add them
@@ -52,7 +54,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         result: Graph = (
             construct_dataset_core(graph)
             + construct_dataset_keywords(graph)
-            + construct_dataset_themes(graph)
+            + construct_dataset_topics(graph)
             + construct_dataset_contact_point(graph)
             + construct_dataset_temporal_coverage(graph)
         )
@@ -64,7 +66,6 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "dcat:DatasetSeries"}
         )
-
         # At this point our jonsld has a "@graph" list field with three entries in it
         #
         # - the dataset graph in compact form
@@ -86,7 +87,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # to avoid key errors.
         dataset_graph["contact_point"] = {
             "name": contact_point_graph["vcard:fn"]["@value"],
-            "email": contact_point_graph["vcard:hasEmail"]["@id"],
+            "email": contact_point_graph["vcard:hasEmail"],
         }
         dataset_graph["temporal_coverage"] = {
             "start": temporal_coverage_graph["dcat:endDate"]["@value"],
@@ -143,13 +144,56 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Get all topics
         """
-        raise NotImplementedError
+        graph = self.db
 
-    def get_topic(self) -> Optional[Dict]:  # pragma: no cover
+        result: Graph = construct_dataset_topics(graph)
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
+        )
+
+        for idx, topic in enumerate(data["@graph"][0]["topics"]):
+            topic_id = topic["@id"].split("/")[-1]
+            data["@graph"][0]["topics"][idx] = self.get_topic(topic_id)
+
+        # TODO Update @context so it's not hardcoded
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/#ns"
+        result = data["@graph"][0]
+        return result
+
+    def get_topic(self, topic_id: str) -> Optional[Dict]:
         """
-        Get a specific topic
+        Get a specific topic by topic_id
         """
-        raise NotImplementedError
+        # Populate the graph from the database
+        graph = self.db
+
+        # Use the construct wrappers to pull the raw RDF triples
+        # (as one rdflib.Graph() for each function) and add them
+        # together to create a single Graph of the
+        # data we need.
+        result: Graph = (
+            construct_dataset_topic_by_id(graph, topic_id)
+            + construct_dataset_subtopics_by_id(graph, topic_id)
+            + construct_dataset_parent_topics_by_id(graph, topic_id)
+        )
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "dcat:theme"}
+        )
+
+        # Workaround to replace `themes` with `dcat:theme` in `@type`
+        data["@graph"][0]["@type"] = "dcat:theme"
+        result = data["@graph"][0]
+        return result
 
     def get_sub_topics(self, topic_id: str) -> Optional[Dict]:  # pragma: no cover
         """
