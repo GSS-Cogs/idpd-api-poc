@@ -18,7 +18,7 @@ def test_oxigraph_get_publisher_returns_valid_structure():
      store = OxigraphMetadataStore()
 
      publisher = store.get_publisher("office-for-national-statistics")
-     schemas.Publisher(**publisher)
+     assert schemas.Publisher(**publisher).id == "https://staging.idpd.uk/publishers/office-for-national-statistics"
 
 
 def test_oxigraph_get_publisher_returns_invalid_structure():

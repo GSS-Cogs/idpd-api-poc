@@ -142,7 +142,6 @@ def construct_dataset_temporal_coverage(graph: Graph) -> Graph:
 
 def construct_publisher(graph: Graph, publisher_id: str) -> Graph:
     query = """
-            PREFIX dc: <http://purl.org/dc/elements/1.1/>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
             PREFIX dcterms: <http://purl.org/dc/terms/>
             CONSTRUCT WHERE {{
