@@ -25,7 +25,7 @@ app = FastAPI(
 app.middleware("http")(logging_middleware)
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex="https://.*\.idpd(\.onsdigital)?\.uk",
+    allow_origin_regex=r"https://.*\.idpd(\.onsdigital)?\.uk",
     allow_credentials=True,
     allow_methods=["GET"],
     allow_headers=["*"],

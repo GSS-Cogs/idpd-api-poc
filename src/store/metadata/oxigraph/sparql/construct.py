@@ -27,12 +27,15 @@ def construct_dataset_core(graph: Graph) -> Graph:
     return result
 
 
-def construct_dataset_themes(graph: Graph) -> Graph:
+def construct_dataset_topics(graph: Graph) -> Graph:
     query = """
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
         CONSTRUCT WHERE {
-            ?ds a dcat:DatasetSeries ;
-                dcat:theme ?theme .
+        <https://staging.idpd.uk/topics> a hydra:Collection ;
+	        dcat:theme ?topic ;
+            hydra:offset ?offset ;
+            hydra:totalitems ?count .
         }
         """
     results_graph = graph.query(query).graph
@@ -133,6 +136,21 @@ def construct_dataset_temporal_coverage(graph: Graph) -> Graph:
                 dcat:endDate ?end_date .
         }
         """
+    results_graph = graph.query(query).graph
+    result = results_graph if results_graph else Graph()
+    return result
+
+def construct_publisher(graph: Graph, publisher_id: str) -> Graph:
+    query = """
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            CONSTRUCT WHERE {{
+                <https://staging.idpd.uk/publishers/{publisher_id}> a dcat:publisher;
+      				dcterms:title ?title;
+                    dcterms:description ?description;
+    				dcat:landingPage ?landingpage .
+        }}
+        """.format(publisher_id=publisher_id)
     results_graph = graph.query(query).graph
     result = results_graph if results_graph else Graph()
     return result

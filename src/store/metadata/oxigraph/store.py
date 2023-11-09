@@ -14,9 +14,12 @@ from .sparql.construct import (
     construct_dataset_keywords,
     construct_dataset_parent_topics_by_id,
     construct_dataset_subtopics_by_id,
+    construct_dataset_topics,
+    construct_dataset_contact_point,
     construct_dataset_temporal_coverage,
-    construct_dataset_themes,
     construct_dataset_topic_by_id,
+    construct_dataset_topics,
+    construct_publisher
 )
 
 
@@ -52,7 +55,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         result: Graph = (
             construct_dataset_core(graph)
             + construct_dataset_keywords(graph)
-            + construct_dataset_themes(graph)
+            + construct_dataset_topics(graph)
             + construct_dataset_contact_point(graph)
             + construct_dataset_temporal_coverage(graph)
         )
@@ -136,13 +139,51 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Get a specific publisher
         """
-        raise NotImplementedError
+                # Specify the named graph from which we are fetching data
+        graph = self.db
+        
+        # Use the construct wrappers to pull the raw RDF triples
+        # (as one rdflib.Graph() for each function) and add them
+        # together to create a sinlge Graph of the
+        # data we need.
+        result: Graph = (
+            construct_publisher(graph, publisher_id)
+        )
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "dcat:publisher"}
+        )
+
+        return data["@graph"][0]
 
     def get_topics(self) -> Optional[Dict]:  # pragma: no cover
         """
         Get all topics
         """
-        raise NotImplementedError
+        graph = self.db
+
+        result: Graph = construct_dataset_topics(graph)
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
+        )
+
+        for idx, topic in enumerate(data["@graph"][0]["topics"]):
+            topic_id = topic["@id"].split("/")[-1]
+            data["@graph"][0]["topics"][idx] = self.get_topic(topic_id)
+
+        # TODO Update @context so it's not hardcoded
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/#ns"
+        result = data["@graph"][0]
+        return result
 
     def get_topic(self, topic_id: str) -> Optional[Dict]:
         """
