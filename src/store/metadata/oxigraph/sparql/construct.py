@@ -144,7 +144,6 @@ def construct_edition_core(graph: Graph, dataset_id: str, edition_id: str) -> Gr
         PREFIX dcterms: <http://purl.org/dc/terms/>
         PREFIX ons: <https://data.ons.gov.uk/ns#>
         PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
-        PREFIX csvw: <https://www.w3.org/ns/csvw#>
         CONSTRUCT WHERE {{
             <https://staging.idpd.uk/datasets/{dataset_id}/editions/{edition_id}> a dcat:Dataset ;
                 dcat:inSeries ?in_series ;
@@ -180,8 +179,6 @@ def construct_edition_table_schema(
     query = """
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
         PREFIX dcterms: <http://purl.org/dc/terms/>
-        PREFIX ons: <https://data.ons.gov.uk/ns#>
-        PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
         PREFIX csvw: <https://www.w3.org/ns/csvw#>
         CONSTRUCT WHERE {{
             <https://staging.idpd.uk/datasets/{dataset_id}/editions/{edition_id}> a dcat:Dataset ;
@@ -219,11 +216,9 @@ def construct_edition_versions(graph: Graph, dataset_id: str, edition_id: str) -
     return result
 
 
-# I do not know if these functions need to be separate from the core construct function, but I am taking guidance from the existing dataset functions.
 def construct_edition_contact_point(
     graph: Graph, dataset_id: str, edition_id: str
 ) -> Graph:
-    # dataset_id = graph.identifier
     query = """
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
         PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
@@ -243,8 +238,7 @@ def construct_edition_contact_point(
     return result
 
 
-def construct_edition_themes(graph: Graph, dataset_id: str, edition_id: str) -> Graph:
-    # dataset_id = graph.identifier
+def construct_edition_topics(graph: Graph, dataset_id: str, edition_id: str) -> Graph:
     query = """
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
         CONSTRUCT WHERE {{
@@ -261,7 +255,6 @@ def construct_edition_themes(graph: Graph, dataset_id: str, edition_id: str) -> 
 
 
 def construct_edition_keywords(graph: Graph, dataset_id: str, edition_id: str) -> Graph:
-    # dataset_id = graph.identifier
     query = """
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
         CONSTRUCT WHERE {{

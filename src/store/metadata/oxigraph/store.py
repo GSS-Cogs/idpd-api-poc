@@ -21,7 +21,7 @@ from .sparql.construct import (
     construct_edition_keywords,
     construct_edition_table_schema,
     construct_edition_temporal_coverage,
-    construct_edition_themes,
+    construct_edition_topics,
     construct_dataset_topic_by_id,
     construct_edition_versions,
 )
@@ -128,7 +128,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         result: Graph = (
             construct_edition_core(graph, dataset_id, edition_id)
             + construct_edition_contact_point(graph, dataset_id, edition_id)
-            + construct_edition_themes(graph, dataset_id, edition_id)
+            + construct_edition_topics(graph, dataset_id, edition_id)
             + construct_edition_keywords(graph, dataset_id, edition_id)
             + construct_edition_temporal_coverage(graph, dataset_id, edition_id)
             + construct_edition_table_schema(graph, dataset_id, edition_id)
