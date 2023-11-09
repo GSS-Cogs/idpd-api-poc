@@ -1,26 +1,24 @@
-import os
 import json
+import os
 from typing import Dict, Optional
 
 from pyld import jsonld
 from rdflib import Dataset, Graph
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore
-from rdflib import URIRef
 
+from .. import constants
 from ..base import BaseMetadataStore
 from .sparql.construct import (
+    construct_dataset_contact_point,
     construct_dataset_core,
     construct_dataset_keywords,
     construct_dataset_parent_topics_by_id,
     construct_dataset_subtopics_by_id,
-    construct_dataset_topics,
-    construct_dataset_contact_point,
     construct_dataset_temporal_coverage,
     construct_dataset_topic_by_id,
     construct_dataset_topics,
-    construct_publisher
+    construct_publisher,
 )
-from .. import constants
 
 
 class OxigraphMetadataStore(BaseMetadataStore):
@@ -139,16 +137,14 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Get a specific publisher
         """
-                # Specify the named graph from which we are fetching data
+        # Specify the named graph from which we are fetching data
         graph = self.db
-        
+
         # Use the construct wrappers to pull the raw RDF triples
         # (as one rdflib.Graph() for each function) and add them
         # together to create a sinlge Graph of the
         # data we need.
-        result: Graph = (
-            construct_publisher(graph, publisher_id)
-        )
+        result: Graph = construct_publisher(graph, publisher_id)
 
         # Serialize the graph into jsonld
         data = json.loads(result.serialize(format="json-ld"))
