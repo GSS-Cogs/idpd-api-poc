@@ -12,7 +12,6 @@ structlog = "*"
 pyld = "*"
 google-cloud-storage = "*"
 
-
 [dev-packages]
 pytest = "*"
 pytest-vcr = "*"
