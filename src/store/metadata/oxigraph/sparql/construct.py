@@ -140,6 +140,7 @@ def construct_dataset_temporal_coverage(graph: Graph) -> Graph:
     result = results_graph if results_graph else Graph()
     return result
 
+
 def construct_publisher(graph: Graph, publisher_id: str) -> Graph:
     query = """
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -150,7 +151,9 @@ def construct_publisher(graph: Graph, publisher_id: str) -> Graph:
                     dcterms:description ?description;
     				dcat:landingPage ?landingpage .
         }}
-        """.format(publisher_id=publisher_id)
+        """.format(
+        publisher_id=publisher_id
+    )
     results_graph = graph.query(query).graph
     result = results_graph if results_graph else Graph()
     return result
