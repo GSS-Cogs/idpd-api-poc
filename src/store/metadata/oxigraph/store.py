@@ -1,7 +1,7 @@
 import os
 import json
+import re
 from typing import Dict, Optional
-
 from pyld import jsonld
 from rdflib import Dataset, Graph
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore
@@ -26,6 +26,7 @@ from .sparql.construct import (
     construct_edition_versions,
 )
 from .. import constants
+from custom_logging import logger
 
 
 class OxigraphMetadataStore(BaseMetadataStore):
@@ -142,27 +143,16 @@ class OxigraphMetadataStore(BaseMetadataStore):
             data, {"@context": constants.CONTEXT, "@type": "dcat:Dataset"}
         )
 
-        edition_graph = next((x for x in data["@graph"] if "@type" in x.keys()), None)
-        contact_point_graph = next(
-            (x for x in data["@graph"] if "vcard:fn" in x.keys()), None
-        )
-        temporal_coverage_graph = next(
-            (x for x in data["@graph"] if "dcat:endDate" in x.keys()), None
-        )
-        table_schema_graph = next(
-            (x for x in data["@graph"] if "columns" in x.keys()), None
-        )
+        edition_graph = _get_single_graph_for_field(data, "@type")
+        contact_point_graph = _get_single_graph_for_field(data, "vcard:fn")
+        temporal_coverage_graph = _get_single_graph_for_field(data, "dcat:endDate")
         columns_graph = [x for x in data["@graph"] if "datatype" in x.keys()]
 
-        versions_graph = next((x for x in data["@graph"]))
-        # Populate table_schema_graph.columns with column definitions and delete table_schema_graph.column blank node @id
-        for column in table_schema_graph["columns"]:
-            for col in columns_graph:
-                if column["@id"] == col["@id"]:
-                    column["description"] = col["description"]
-                    column["datatype"] = col["datatype"]
-                    column["name"] = col["name"]
+        # Populate editions_graph.table_schema.columns with column definitions (without @id) and delete editions_graph.table_schema blank node @id
+        for column in columns_graph:
             del column["@id"]
+        edition_graph["table_schema"]["columns"] = columns_graph
+        del edition_graph["table_schema"]["@id"]
 
         edition_graph["contact_point"] = {
             "name": contact_point_graph["vcard:fn"]["@value"],
@@ -172,17 +162,15 @@ class OxigraphMetadataStore(BaseMetadataStore):
             "start": temporal_coverage_graph["dcat:startDate"]["@value"],
             "end": temporal_coverage_graph["dcat:endDate"]["@value"],
         }
-        # Populate editions_graph.table_schema.columns with column definitions and delete editions_graph.table_schema blank node @id
-        edition_graph["table_schema"]["columns"] = table_schema_graph["columns"]
-        del edition_graph["table_schema"]["@id"]
 
-        # Expand version to include issued and modified fields
-        for idx, version in enumerate(edition_graph["versions"]):
-            edition_graph["versions"][idx] = {"@id": version}
-            for node in data["@graph"]:
-                if node["@id"] == edition_graph["versions"][idx]["@id"]:
-                    edition_graph["versions"][idx]["issued"] = node["issued"]
-                    edition_graph["versions"][idx]["modified"] = node["modified"]
+        # Add `issued` and `modified` fields to each version in `versions`
+        versions_graph = [
+            x
+            for x in data["@graph"]
+            if "@id" in x.keys() and re.search("/versions/", x["@id"])
+        ]
+        edition_graph["versions"] = versions_graph
+
         return edition_graph
 
     def get_versions(
@@ -261,3 +249,18 @@ class OxigraphMetadataStore(BaseMetadataStore):
         Get a specific sub-topic for a specific topic
         """
         raise NotImplementedError
+
+
+def _get_single_graph_for_field(data: Dict, field: str) -> Optional[Dict]:
+    """
+    Utility function to get the dictionary corresponding to the `field` key provided. Only for SPARQL queries that should return one result.
+    """
+    node = [x for x in data["@graph"] if field in x.keys()]
+    if len(node) == 1:
+        return node[0]
+    elif len(node) == 0:
+        logger.error("No node for field defined", data={"field": field})
+        return None
+    else:
+        logger.error("More than one node for field defined", data={"field": field})
+        return None

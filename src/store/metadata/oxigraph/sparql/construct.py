@@ -139,7 +139,6 @@ def construct_dataset_temporal_coverage(graph: Graph) -> Graph:
 
 
 def construct_edition_core(graph: Graph, dataset_id: str, edition_id: str) -> Graph:
-    # dataset_id = graph.identifier
     query = """
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
         PREFIX dcterms: <http://purl.org/dc/terms/>
@@ -190,7 +189,8 @@ def construct_edition_table_schema(
             ?table_schema csvw:column ?columns .
             ?columns csvw:name ?name ;
                 csvw:datatype ?datatype ;
-                dcterms:description ?description .
+                dcterms:description ?description ;
+                csvw:titles ?titles .
         }}
         """.format(
         dataset_id=dataset_id, edition_id=edition_id

@@ -152,6 +152,10 @@
         "@id": "skos:broader",
         "@container": "@set"
     },
+    "titles": {
+        "@id": "csvw:titles",
+        "@language": "en"
+    },
     "download_url": "dcat:downloadUrl",
     "table_schema": "csvw:schema",
     "datatype": "csvw:datatype",
