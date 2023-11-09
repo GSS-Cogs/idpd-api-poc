@@ -1,9 +1,9 @@
 import json
 import os
 from typing import Dict, Optional
-import time
+
 from pyld import jsonld
-from rdflib import Dataset, Graph, URIRef
+from rdflib import Dataset, Graph
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore
 
 from .. import constants
@@ -14,9 +14,8 @@ from .sparql.construct import (
     construct_dataset_keywords,
     construct_dataset_parent_topics_by_id,
     construct_dataset_subtopics_by_id,
-    construct_dataset_themes,
-    construct_dataset_contact_point,
     construct_dataset_temporal_coverage,
+    construct_dataset_themes,
     construct_dataset_topic_by_id,
 )
 
