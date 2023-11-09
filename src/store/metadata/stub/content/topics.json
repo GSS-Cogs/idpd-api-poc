@@ -24,30 +24,8 @@
             "parent_topics": [
                 "https://staging.idpd.uk/topics/economy"
             ]
-        },
-        {
-            "@id": "https://staging.idpd.uk/topics/employment",
-            "@type": "dcat:theme",
-            "identifier": "employment",
-            "title": "Employment",
-            "description": "something describing employment",
-            "sub_topics": [],
-            "parent_topics": [
-                "https://staging.idpd.uk/topics/labour-market-and-welfare"
-            ]
-        },
-        {
-            "@id": "https://staging.idpd.uk/topics/labour-market-and-welfare",
-            "@type": "dcat:theme",
-            "identifier": "labour-market-and-welfare",
-            "title": "Labour Market and Welfare",
-            "description": "something describing labour-market-and-welfare",
-            "sub_topics": [
-                "https://staging.idpd.uk/topics/employment"
-            ],
-            "parent_topics": []
         }
     ],
-    "count": 4,
+    "count": 2,
     "offset": 0
 }
