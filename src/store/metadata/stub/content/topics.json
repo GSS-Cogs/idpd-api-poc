@@ -42,10 +42,10 @@
             "identifier": "labour-market-and-welfare",
             "title": "Labour Market and Welfare",
             "description": "something describing labour-market-and-welfare",
-            "sub_topics": [],
-            "parent_topics": [
+            "sub_topics": [
                 "https://staging.idpd.uk/topics/employment"
-            ]
+            ],
+            "parent_topics": []
         }
     ],
     "count": 4,
