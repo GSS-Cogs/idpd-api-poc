@@ -159,8 +159,9 @@ def construct_publishers(graph: Graph) -> Graph:
     query = """
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
             PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
             CONSTRUCT WHERE {{
-                <https://staging.idpd.uk/publishers> a dcat:publisher;
+                <https://staging.idpd.uk/publishers> a hydra:Collection;
       				dcterms:title ?title;
                     dcterms:description ?description;
     				dcat:landingPage ?landingpage .
