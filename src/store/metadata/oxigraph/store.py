@@ -151,7 +151,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
 
         # Use a context file to shape our jsonld, removing long form references
         data = jsonld.flatten(
-            data, {"@context": constants.CONTEXT, "@type": "dcat:publisher"}
+            data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
         )
 
         for idx, publisher in enumerate(data["@graph"][0]["publishers"]):
