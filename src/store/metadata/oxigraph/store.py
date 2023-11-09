@@ -18,7 +18,8 @@ from .sparql.construct import (
     construct_dataset_temporal_coverage,
     construct_dataset_topic_by_id,
     construct_dataset_topics,
-    construct_publisher
+    construct_publisher,
+    construct_publishers
 )
 from .. import constants
 
@@ -133,13 +134,40 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets all publishers
         """
-        raise NotImplementedError
+
+        # Specify the named graph from which we are fetching data
+        graph = self.db
+        
+        # Use the construct wrappers to pull the raw RDF triples
+        # (as one rdflib.Graph() for each function) and add them
+        # together to create a sinlge Graph of the
+        # data we need.
+        result: Graph = (
+            construct_publishers(graph)
+        )
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "dcat:publisher"}
+        )
+
+        for idx, publisher in enumerate(data["@graph"][0]["publishers"]):
+            publisher_id = publisher["@id"].split("/")[-1]
+            data["@graph"][0]["publishers"][idx] = self.get_publisher(publisher_id)
+        
+        result = data["@graph"][0]
+        
+        return result
 
     def get_publisher(self, publisher_id: str) -> Optional[Dict]:  # pragma: no cover
         """
         Get a specific publisher
         """
-                # Specify the named graph from which we are fetching data
+        
+        # Specify the named graph from which we are fetching data
         graph = self.db
         
         # Use the construct wrappers to pull the raw RDF triples

@@ -154,3 +154,18 @@ def construct_publisher(graph: Graph, publisher_id: str) -> Graph:
     results_graph = graph.query(query).graph
     result = results_graph if results_graph else Graph()
     return result
+
+def construct_publishers(graph: Graph) -> Graph:
+    query = """
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            CONSTRUCT WHERE {{
+                <https://staging.idpd.uk/publishers> a dcat:publisher;
+      				dcterms:title ?title;
+                    dcterms:description ?description;
+    				dcat:landingPage ?landingpage .
+        }}
+        """
+    results_graph = graph.query(query).graph
+    result = results_graph if results_graph else Graph()
+    return result
