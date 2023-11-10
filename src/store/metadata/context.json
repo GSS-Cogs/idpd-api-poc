@@ -49,6 +49,10 @@
         "@id": "dcterms:issued",
         "@type": "xsd:dateTime"
     },
+    "modified": {
+        "@id": "dcterms:modified",
+        "@type": "xsd:dateTime"
+    },
     "keywords": {
         "@id": "dcat:keyword",
         "@language": "en"
@@ -104,6 +108,7 @@
     "count": "hydra:totalitems",
     "datasets": {
         "@id": "dcat:DatasetSeries",
+        "@type": "dcat:DatasetSeries",
         "@container": "@set"
       },
     "editions": {
