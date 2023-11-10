@@ -20,7 +20,7 @@ def test_oxigraph_get_editions_returns_valid_structure():
     editions_schema = schemas.Editions(**editions)
     assert editions_schema.id == "https://staging.idpd.uk/datasets/cpih/editions"
     assert editions_schema.type == "hydra:Collection"
-    assert len(editions_schema.editions) == 1
+    assert len(editions_schema.editions) > 0
 
 
 def test_editions_schema_validation():

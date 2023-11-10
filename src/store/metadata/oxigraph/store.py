@@ -129,14 +129,17 @@ class OxigraphMetadataStore(BaseMetadataStore):
             data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
         )
         editions_graph = _get_single_graph_for_field(data, "@type")
+        if editions_graph is None:
+            return None
 
         # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url` and `editions` to `versions`
         editions_graph["@type"] = "hydra:Collection"
         editions_graph["editions"] = editions_graph.pop("versions")
 
-        for idx, edition in enumerate(editions_graph["editions"]):
-            edition_id = edition.split("/")[-1]
-            editions_graph["editions"][idx] = self.get_edition(dataset_id, edition_id)
+        editions_graph["editions"] = [
+            self.get_edition(dataset_id, x.split("/")[-1])
+            for x in editions_graph["editions"]
+        ]
         editions_graph["@context"] = "https://staging.idpd.uk/#ns"
         return editions_graph
 

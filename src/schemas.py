@@ -64,7 +64,7 @@ class Distribution(BaseModel):
 class SummarisedVersion(BaseModel):
     """
     A short form schema for Version as presented
-    at the /datasets level
+    at the /editions level
     """
 
     id: str = Field(alias="@id")
