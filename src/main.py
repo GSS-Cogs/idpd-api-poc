@@ -11,7 +11,6 @@ from store import StubCsvStore, StubMetadataStore
 from constants import CSV, JSONLD
 from custom_logging import logger
 from middleware import logging_middleware
-from store import StubCsvStore, StubMetadataStore
 
 # Simple env var flag to allow local browsing of api responses
 # while developing.

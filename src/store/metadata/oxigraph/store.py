@@ -1,5 +1,6 @@
 import json
 import os
+import re
 from typing import Dict, Optional
 from custom_logging import logger
 
@@ -83,7 +84,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         if None in [dataset_graph, contact_point_graph,temporal_coverage_graph]:
             return None
 
-        # Add `issued` and `modified` fields to each version in `versions`
+        # Add `issued` and `modified` fields to each edition in `editions`
         edition_graphs = [
             x
             for x in data["@graph"]
