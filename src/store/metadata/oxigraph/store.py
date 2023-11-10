@@ -147,6 +147,8 @@ class OxigraphMetadataStore(BaseMetadataStore):
         contact_point_graph = _get_single_graph_for_field(data, "vcard:fn")
         temporal_coverage_graph = _get_single_graph_for_field(data, "dcat:endDate")
         columns_graph = [x for x in data["@graph"] if "datatype" in x.keys()]
+        if None in [edition_graph, contact_point_graph, temporal_coverage_graph]:
+            return None
 
         # Populate editions_graph.table_schema.columns with column definitions (without @id) and delete editions_graph.table_schema blank node @id
         for column in columns_graph:
@@ -163,13 +165,12 @@ class OxigraphMetadataStore(BaseMetadataStore):
             "end": temporal_coverage_graph["dcat:endDate"]["@value"],
         }
 
-        # Add `issued` and `modified` fields to each version in `versions`
-        versions_graph = [
+        version_graphs = [
             x
             for x in data["@graph"]
             if "@id" in x.keys() and re.search("/versions/", x["@id"])
         ]
-        edition_graph["versions"] = versions_graph
+        edition_graph["versions"] = version_graphs
 
         return edition_graph
 
