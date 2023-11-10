@@ -7,7 +7,7 @@
         {
             "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions/2022-07",
             "@type": "dcat:Dataset",
-            "in_series": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions",
+            "in_series": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions",
             "identifier": "2022-07",
             "title": "Local authority greenhouse gas emissions",
             "summary": "UK local authority estimates of greenhouse gas emissions",

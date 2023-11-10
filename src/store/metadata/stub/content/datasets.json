@@ -82,7 +82,7 @@
           "temporal_resolution": ["P1Y"],
           "temporal_coverage": {
             "start": "2004-07-01T00:00:00Z",
-            "end": "2023-06-3T23:59:59Z"
+            "end": "2023-06-04T00:00:00Z"
           },
           "editions_url": "https://staging.idpd.uk/datasets/a16mu/editions",
           "editions": [
@@ -235,8 +235,8 @@
           "issued": "2021-06-24T08:30:00",
           "modified": "2022-08-18T10:51:00",
           "next_release": "2024-04-19T09:30:00Z",
-          "publisher": "https://staging.idpd.uk/publishers/department-for-business-energy-and-industrial-strategy",
-          "creator": "https://staging.idpd.uk/publishers/department-for-business-energy-and-industrial-strategy",
+          "publisher": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
+          "creator": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
           "contact_point": {
             "name": "Department for Business, Energy & Industrial Strategy",
             "email": "mailto:Climatechange.Statistics@beis.gov.uk"
