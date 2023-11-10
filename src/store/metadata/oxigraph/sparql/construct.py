@@ -159,6 +159,25 @@ def construct_publisher(graph: Graph, publisher_id: str) -> Graph:
     return result
 
 
+def construct_editions(graph: Graph, dataset_id: str) -> Graph:
+    query = """
+        PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX dcterms: <http://purl.org/dc/terms/>
+        PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+        CONSTRUCT WHERE {{
+        <https://staging.idpd.uk/datasets/{dataset_id}/editions> a hydra:Collection ;
+	        dcterms:title ?title ;
+            hydra:member ?editions .
+        }}
+        """.format(
+        dataset_id=dataset_id
+    )
+
+    results_graph = graph.query(query).graph
+    result = results_graph if results_graph else Graph()
+    return result
+
+
 def construct_edition_core(graph: Graph, dataset_id: str, edition_id: str) -> Graph:
     query = """
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
