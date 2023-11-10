@@ -24,7 +24,16 @@
             "parent_topics": [
                 "https://staging.idpd.uk/topics/economy"
             ]
-        }
+        },
+        {
+            "@id": "https://staging.idpd.uk/topics/labour-market-and-welfare",  
+            "@type": "dcat:theme",  
+            "identifier": "labour-market-and-welfare",  
+            "title": "Labour Market and Welfare",  
+            "description": "something describing Labour Market and Welfare",  
+            "sub_topics": [],  
+            "parent_topics": []  
+        } 
     ],
     "count": 2,
     "offset": 0
