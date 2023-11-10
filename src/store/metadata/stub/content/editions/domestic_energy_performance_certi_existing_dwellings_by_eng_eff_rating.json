@@ -50,8 +50,58 @@
             ],
             "next_release": "2025-01-25T09:30:00Z",
             "table_schema": {
-
+                "columns": [
+                    {
+                    "name": "Period",
+                    "datatype": "string",
+                    "titles": "Period",
+                    "description": "The time period associated with the observation."
+                    },
+                    {
+                    "name": "Location",
+                    "datatype": "string",
+                    "titles": "Location",
+                    "description": "The name associated with The geography code "
+                    },
+                    {
+                    "name": "Lodgements",
+                    "datatype": "string",
+                    "titles": "Lodgements",
+                    "description": "Lodgements of EPC is the process of validating the EPC. Here it is the number of lodgements"
+                    },
+                    {
+                    "name": "Efficiency Rating",
+                    "datatype": "string",
+                    "titles": "Efficiency Rating",
+                    "description": "The scale of energy efficiency rating on a scale of A to G with A being the most efficient and G being the least efficient"
+                    },
+                    {
+                    "name": "Total Floor Area (m2)",
+                    "datatype": "string",
+                    "titles": "Total Floor Area (m2)",
+                    "description": "Measure of total floor area"
+                    },
+                    {
+                    "name": "Unit",
+                    "datatype": "string",
+                    "titles": "Unit",
+                    "description": "Unit Type of the Observational Value"
+                    },
+                    {
+                    "name": "Value",
+                    "datatype": "decimal",
+                    "titles": "count of energy performance certificate",
+                    "description": "Observational Value"
+                    },
+                    {
+                    "name": "Measure",
+                    "datatype": "string",
+                    "titles": "Measure Type",
+                    "description": "Measure Type of the Observational Value"
+                    }
+            ]
             }
-        }
+        }  
+        
     ]
 }
