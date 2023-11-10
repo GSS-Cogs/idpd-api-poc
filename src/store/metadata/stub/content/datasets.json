@@ -32,7 +32,9 @@
               "consumer price index including owner occupiers' housing costs"
             ],
             "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-            "spatial_coverage": "K02000001",
+            "spatial_resolution": ["E01", "E92"],
+            "spatial_coverage": "E92000001",
+            "temporal_resolution": ["P1M", "P3M", "P1Y"],
             "temporal_coverage": {
               "start": "2005-01-01T00:00:00Z",
               "end": "2019-03-01T00:00:00Z"
@@ -61,7 +63,7 @@
           "theme": "http://gss-data.org.uk/def/gdp#climate-change",
           "contact_point": {
             "name": "UK local authority and regional estimates of greenhouse gas emissions",
-            "email": "GreenhouseGas.Statistics@energysecurity.gov.uk"
+            "email": "mailto:GreenhouseGas.Statistics@energysecurity.gov.uk"
           },
           "topics": [
             "https://staging.idpd.uk/topics/emissions",
@@ -75,7 +77,9 @@
             "country"
           ],
           "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-          "spatial_coverage": "K02000001",
+          "spatial_resolution": ["E01", "E92"],
+          "spatial_coverage": "E92000001",
+          "temporal_resolution": ["P1M", "P3M", "P1Y"],
           "temporal_coverage": {
             "start": "2005-01-01T00:00:00Z",
             "end": "2022-07-01T00:00:00Z"
