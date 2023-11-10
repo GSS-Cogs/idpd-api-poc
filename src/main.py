@@ -278,14 +278,8 @@ def get_dataset_edition_version_by_id(
     Retrieve information about a specific version of a dataset.
     This endpoint returns detailed information about a specific version of a dataset based on its unique identifier.
     """
-    if request.headers["Accept"] == JSONLD or BROWSABLE:
-        version = metadata_store.get_version(dataset_id, edition_id, version_id)
-        if version is not None:
-            response.status_code = status.HTTP_200_OK
-            return version
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return
-    elif request.headers["Accept"] == CSV:
+
+    if request.headers["Accept"] == CSV:
         csv_data = csv_store.get_version(dataset_id, edition_id, version_id)
         if csv_data is not None:
             response.status_code = status.HTTP_200_OK
@@ -293,6 +287,15 @@ def get_dataset_edition_version_by_id(
         else:
             response.status_code = status.HTTP_404_NOT_FOUND
             return
+
+    elif request.headers["Accept"] == JSONLD or BROWSABLE:
+        version = metadata_store.get_version(dataset_id, edition_id, version_id)
+        if version is not None:
+            response.status_code = status.HTTP_200_OK
+            return version
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return
+
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
