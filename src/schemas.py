@@ -61,6 +61,21 @@ class Distribution(BaseModel):
     table_schema: TableSchema
 
 
+class SummarisedVersion(BaseModel):
+    """
+    A short form schema for Version as presented
+    at the /datasets level
+    """
+
+    id: str = Field(alias="@id")
+    issued: str = Field(
+        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
+    )
+    modified: str = Field(
+        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
+    )
+
+
 class Edition(BaseModel):
     id: str = Field(alias="@id")
     type: Literal["dcat:Dataset"] = Field(alias="@type")
@@ -90,7 +105,7 @@ class Edition(BaseModel):
         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",
     )
     versions_url: str
-    versions: List
+    versions: List[SummarisedVersion]
     table_schema: TableSchema
 
 
