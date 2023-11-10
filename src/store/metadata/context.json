@@ -63,6 +63,10 @@
     "licence": {
         "@id": "dcterms:license"
     },
+    "modified": {
+        "@id": "dcterms:modified",
+        "@type": "xsd:dateTime"
+    },
     "next_release": {
         "@id": "ons:nextRelease",
         "@type": "xsd:dateTime"
@@ -74,6 +78,13 @@
         "@id": "dcterms:spatial",
         "@context": {
             "@base": "http://statistics.data.gov.uk/id/statistical-geography/"
+        }
+    },
+    "spatial_resolution": {
+        "@type": "@id",
+        "@id": "ons:spatialResolution",
+        "@context": {
+            "@base": "http://statistics.data.gov.uk/id/statistical-entity/"
         }
     },
     "summary": {
@@ -110,30 +121,31 @@
         "@id": "dcat:DatasetSeries",
         "@type": "dcat:DatasetSeries",
         "@container": "@set"
-      },
+    },
     "editions": {
         "@id": "hydra:member"
-      },
+    },
     "editions_url": {
         "@id": "hydra:collection"
-      },
+    },
     "versions": {
         "@id": "hydra:member"
-      },
+    },
     "versions_url": {
         "@id": "hydra:collection",
         "@type": "@id"
-      },
+    },
     "columns": {
         "@id": "csvw:column",
         "@container": "@set"
-      },
+    },
     "topics": {
         "@id": "dcat:theme",
         "@container": "@set"
-      },
+    },
     "publishers": {
         "@id": "dcat:publisher",
+        "@type": "dcat:publisher",
         "@container": "@set"
     },
     "sub_topics": {

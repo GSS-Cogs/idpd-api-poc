@@ -2,14 +2,16 @@ import os
 from typing import Optional
 
 from fastapi import Depends, FastAPI, Request, Response, status
+from fastapi.middleware.cors import CORSMiddleware
 
-from constants import CSV, JSONLD
 import schemas
 from store import StubCsvStore, StubMetadataStore
 
 
+from constants import CSV, JSONLD
 from custom_logging import logger
 from middleware import logging_middleware
+from store import StubCsvStore, StubMetadataStore
 
 # Simple env var flag to allow local browsing of api responses
 # while developing.
@@ -24,6 +26,13 @@ app = FastAPI(
 
 # Add the logging middleware to the app
 app.middleware("http")(logging_middleware)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origin_regex=r"https://.*\.idpd(\.onsdigital)?\.uk",
+    allow_credentials=True,
+    allow_methods=["GET"],
+    allow_headers=["*"],
+)
 
 
 @app.get(

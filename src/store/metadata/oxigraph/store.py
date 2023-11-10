@@ -1,24 +1,34 @@
+<<<<<<< HEAD
 import os
 import re
+=======
+>>>>>>> main
 import json
+import os
 from typing import Dict, Optional
 from custom_logging import logger
 
 from pyld import jsonld
 from rdflib import Dataset, Graph
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore
-from rdflib import URIRef
 
+from .. import constants
 from ..base import BaseMetadataStore
 from .sparql.construct import (
+    construct_dataset_contact_point,
     construct_dataset_core,
     construct_dataset_keywords,
-    construct_dataset_themes,
-    construct_dataset_contact_point,
+    construct_dataset_parent_topics_by_id,
+    construct_dataset_subtopics_by_id,
     construct_dataset_temporal_coverage,
+<<<<<<< HEAD
     construct_dataset_editions,
+=======
+    construct_dataset_topic_by_id,
+    construct_dataset_topics,
+    construct_publisher,
+>>>>>>> main
 )
-from .. import constants
 
 
 class OxigraphMetadataStore(BaseMetadataStore):
@@ -50,12 +60,20 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # together to create a sinlge Graph of the
         # data we need.
         result: Graph = (
+<<<<<<< HEAD
             construct_dataset_core(graph,dataset_id)
             + construct_dataset_keywords(graph,dataset_id)
             + construct_dataset_themes(graph,dataset_id)
             + construct_dataset_contact_point(graph,dataset_id)
             + construct_dataset_temporal_coverage(graph,dataset_id)
             + construct_dataset_editions(graph, dataset_id)
+=======
+            construct_dataset_core(graph)
+            + construct_dataset_keywords(graph)
+            + construct_dataset_topics(graph)
+            + construct_dataset_contact_point(graph)
+            + construct_dataset_temporal_coverage(graph)
+>>>>>>> main
         )
 
         # Serialize the graph into jsonld
@@ -65,7 +83,6 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "dcat:DatasetSeries"}
         )
-
         # At this point our jonsld has a "@graph" list field with three entries in it
         #
         # - the dataset graph in compact form
@@ -140,19 +157,79 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Get a specific publisher
         """
-        raise NotImplementedError
+        # Specify the named graph from which we are fetching data
+        graph = self.db
+
+        # Use the construct wrappers to pull the raw RDF triples
+        # (as one rdflib.Graph() for each function) and add them
+        # together to create a sinlge Graph of the
+        # data we need.
+        result: Graph = construct_publisher(graph, publisher_id)
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "dcat:publisher"}
+        )
+
+        return data["@graph"][0]
 
     def get_topics(self) -> Optional[Dict]:  # pragma: no cover
         """
         Get all topics
         """
-        raise NotImplementedError
+        graph = self.db
 
-    def get_topic(self) -> Optional[Dict]:  # pragma: no cover
+        result: Graph = construct_dataset_topics(graph)
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
+        )
+
+        for idx, topic in enumerate(data["@graph"][0]["topics"]):
+            topic_id = topic["@id"].split("/")[-1]
+            data["@graph"][0]["topics"][idx] = self.get_topic(topic_id)
+
+        # TODO Update @context so it's not hardcoded
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/#ns"
+        result = data["@graph"][0]
+        return result
+
+    def get_topic(self, topic_id: str) -> Optional[Dict]:
         """
-        Get a specific topic
+        Get a specific topic by topic_id
         """
-        raise NotImplementedError
+        # Populate the graph from the database
+        graph = self.db
+
+        # Use the construct wrappers to pull the raw RDF triples
+        # (as one rdflib.Graph() for each function) and add them
+        # together to create a single Graph of the
+        # data we need.
+        result: Graph = (
+            construct_dataset_topic_by_id(graph, topic_id)
+            + construct_dataset_subtopics_by_id(graph, topic_id)
+            + construct_dataset_parent_topics_by_id(graph, topic_id)
+        )
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "dcat:theme"}
+        )
+
+        # Workaround to replace `themes` with `dcat:theme` in `@type`
+        data["@graph"][0]["@type"] = "dcat:theme"
+        result = data["@graph"][0]
+        return result
 
     def get_sub_topics(self, topic_id: str) -> Optional[Dict]:  # pragma: no cover
         """

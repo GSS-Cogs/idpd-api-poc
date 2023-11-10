@@ -1,3 +1,4 @@
+import glob
 import json
 import os
 from pathlib import Path
@@ -57,26 +58,35 @@ class StubMetadataStore(BaseMetadataStore):
         """
         content_dir = Path(Path(__file__).parent / "content")
 
+        # get specific stubbed resources into memory on application startup
         with open(Path(content_dir / "datasets.json").absolute()) as f:
             self.datasets = json.load(f)
-
-        # TODO - grep the whole folder for editions json's, use dataset_id and
-        # edition_id as key in data holding dict
-        with open(Path(content_dir / "editions/cpih_2022-01.json").absolute()) as f:
-            self.editions = {"cpih_2022-01": json.load(f)}
-
-        # TODO - grep the whole folder for editions json's, use dataset_id and
-        # edition_id as key in data holding dict
-        with open(
-            Path(content_dir / "editions/versions/cpih_2022-01.json").absolute()
-        ) as f:
-            self.versions = {"cpih_2022-01": json.load(f)}
 
         with open(Path(content_dir / "publishers.json").absolute()) as f:
             self.publishers = json.load(f)
 
         with open(Path(content_dir / "topics.json").absolute()) as f:
             self.topics = json.load(f)
+
+        # for editions and versions we glob the directories in question
+        # and scoop up all jsons. We use the naming conventions of
+        # <dataset_id>_<edition_id> to populate the keys so we can get
+        # them back out
+        editions_dir = Path(content_dir / "editions")
+        self.editions = {}
+        for edition_json_file in glob.glob(os.path.join(editions_dir, "*.json")):
+            with open(edition_json_file) as f:
+                self.editions[
+                    edition_json_file.split("/")[-1].rstrip(".json")
+                ] = json.load(f)
+
+        versions_dir = Path(editions_dir / "versions")
+        self.versions = {}
+        for version_json_file in glob.glob(os.path.join(versions_dir, "*.json")):
+            with open(version_json_file) as f:
+                self.versions[
+                    version_json_file.split("/")[-1].rstrip(".json")
+                ] = json.load(f)
 
     def get_datasets(self) -> Dict:
         return contextualise(self.datasets)

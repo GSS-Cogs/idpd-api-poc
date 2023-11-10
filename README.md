@@ -9,7 +9,7 @@ This application uses [pipenv](https://pypi.org/project/pipenv/) to manage depen
 
 Install dependencies via `pipenv sync --dev`
 
-Run the server via `make run`
+Run the server via `make start`
 
 If you want to browse the api content in your web browser (while developing only) then
 
@@ -27,11 +27,23 @@ There is a `Makefile` with some useful development helpers:
 - `make fmt` to format and lint your code.
 - `make data` to create `./out/seed.ttl` with data for the graph.
 - `make populate` to populate a local oxigraph where one is running.
+- `make configure_dev` to enable client side git hooks for code quality (see following section).
 - `make start` to start the api.
 
 You can also just use a naked `make` to see your options.
 
 **Note:** - with `make test` you'll need to first shut down any local oxigraph container you have running first as the tests currently spin one up using that same port.
+
+### Git Hooks
+
+This respisitory comes with two _client side_ git hooks for code quality:
+
+- pre-commit - runs black, isort and the ruff linter on your code
+- pre-push - runs unit tests before pushing code to a remote branch
+
+You can enable these via `make configure_dev`, you need to do this once (per fresh clone of this repo).
+
+PR's to this codebase are required to have correct formatting and have passing unit tests, so if you don't use git hooks be sure to run these processes manually.
 
 ### Oxigraph
 
