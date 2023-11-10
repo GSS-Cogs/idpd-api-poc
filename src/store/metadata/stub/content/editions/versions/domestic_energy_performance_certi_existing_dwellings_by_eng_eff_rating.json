@@ -1,0 +1,74 @@
+{
+    "@context": "https://staging.idpd.uk/#ns",
+    "@id": "https://staging.idpd.uk/datasets/mhclg/editions/2023-10/versions",
+    "@type": "dcat:DatasetSeries",
+    "title": "Domestic Energy Performance Certificates for existing dwellings by energy efficiency rating",
+    "versions": [
+        {
+            "@type": "dcat:Dataset",
+            "@id": "https://staging.idpd.uk/datasets/mhclg/editions/2023-10",
+            "identifier": "1",
+            "issued": "2023-10-26T09:30:00Z",
+            "title": "Table EB1: domestic Energy Performance Certificates for existing dwellings by energy efficiency rating",
+            "summary": "Data from certificates for existing domestic properties lodged on the Energy Performance of Buildings Registers, by average energy efficiency rating",
+            "description": "This data relates to the Energy Performance of Buildings Certificates published alongside the Energy Performance of Buildings Certificates Statistical release July to September 2023.",
+            "download_url": "https://staging.idpd.uk/datasets/mhclg/editions/2023-03/versions/1.csv",
+            "media_type": "text/csv",
+            "table_schema": {
+                "columns": [
+                    {
+                    "name": "Period",
+                    "datatype": "string",
+                    "titles": "Period",
+                    "description": "The time period associated with the observation."
+                    },
+                    {
+                    "name": "Location",
+                    "datatype": "string",
+                    "titles": "Location",
+                    "description": "The name associated with The geography code "
+                    },
+                    {
+                    "name": "Lodgements",
+                    "datatype": "string",
+                    "titles": "Lodgements",
+                    "description": "Lodgements of EPC is the process of validating the EPC. Here it is the number of lodgements"
+                    },
+                    {
+                    "name": "Efficiency Rating",
+                    "datatype": "string",
+                    "titles": "Efficiency Rating",
+                    "description": "The scale of energy efficiency rating on a scale of A to G with A being the most efficient and G being the least efficient"
+                    },
+                    {
+                    "name": "Total Floor Area (m2)",
+                    "datatype": "string",
+                    "titles": "Total Floor Area (m2)",
+                    "description": "Measure of total floor area"
+                    },
+                    {
+                    "name": "Unit",
+                    "datatype": "string",
+                    "titles": "Unit",
+                    "description": "Unit Type of the Observational Value"
+                    },
+                    {
+                    "name": "Value",
+                    "datatype": "decimal",
+                    "titles": "count of energy performance certificate",
+                    "description": "Observational Value"
+                    },
+                    {
+                    "name": "Measure",
+                    "datatype": "string",
+                    "titles": "Measure Type",
+                    "description": "Measure Type of the Observational Value"
+                    }
+            ]
+            }
+        }  
+        
+    ],
+    "count": 1,
+    "offset": 0
+}
