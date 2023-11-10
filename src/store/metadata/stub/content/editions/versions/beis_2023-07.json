@@ -18,56 +18,56 @@
                 "columns": [
                     {
                         "name": "year",
-                        "datatype": "string",
+                        "datatype": "xsd:datetime",
                         "titles": "Year",
                         "description": "The year associated with the observation."
-                        },
-                        {
+                    },
+                    {
                         "name": "country",
-                        "datatype": "string",
+                        "datatype": "xsd:decimal",
                         "titles": "Country",
                         "description": "The country associated with the observation."
-                        },
-                        {
-                        "name": "local authority",
-                        "datatype": "string",
+                    },
+                    {
+                        "name": "LA",
+                        "datatype": "xsd:decimal",
                         "titles": "Local Authority",
                         "description": "The local authority associated with the observation."
-                        },
-                        {
+                    },
+                    {
                         "name": "sub sector",
-                        "datatype": "string",
+                        "datatype": "xsd:decimal",
                         "titles": "Sub Sector",
                         "description": "The sub sector associated with the observation."
-                        },
-                        {
-                        "name": "greenhouse gas",
-                        "datatype": "string",
+                    },
+                    {
+                        "name": "GHG",
+                        "datatype": "xsd:decimal",
                         "titles": "Greenhouse Gas",
                         "description": "The greenhouse gas associated with the observation."
-                        },
-                        {
+                    },
+                    {
                         "name": "measure",
-                        "datatype": "string",
+                        "datatype": "xsd:decimal",
                         "titles": "Measure",
                         "description": "The measure associated with the observation."
-                        },
-                        {
+                    },
+                    {
                         "name": "unit",
-                        "datatype": "string",
+                        "datatype": "xsd:decimal",
                         "titles": "Unit",
                         "description": "The unit associated with the observation."
-                        },
-                        {
+                    },
+                    {
                         "name": "value",
-                        "datatype": "number",
+                        "datatype": "xsd:decimal",
                         "titles": "Value",
                         "description": "The value for the given year."
-                        }
+                    }
                 ]
             }
-        }
-    ],
-    "count": 1,
-    "offset": 0
-}
+          }
+      ],
+      "count": 1,
+      "offset": 0
+  }
