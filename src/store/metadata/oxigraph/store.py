@@ -18,6 +18,7 @@ from .sparql.construct import (
     construct_dataset_topic_by_id,
     construct_dataset_topics,
     construct_publisher,
+    construct_datasets,
 )
 
 
@@ -36,7 +37,26 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets all datasets
         """
-        raise NotImplementedError
+        graph = self.db
+
+        result: Graph = construct_datasets(graph)
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
+        )
+
+        for idx, topic in enumerate(data["@graph"][0]["topics"]):
+            topic_id = topic["@id"].split("/")[-1]
+            data["@graph"][0]["topics"][idx] = self.get_topic(topic_id)
+
+        # TODO Update @context so it's not hardcoded
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/#ns"
+        result = data["@graph"][0]
+        return result
 
     def get_dataset(self, dataset_id: str) -> Optional[Dict]:
         """
