@@ -2,16 +2,16 @@
     "@context": "https://staging.idpd.uk/#ns",
     "@id": "https://staging.idpd.uk/datasets/mhclg/editions",
     "@type": "dcat:DatasetSeries",
-    "title": "Table EB1: domestic Energy Performance Certificates for existing dwellings by energy efficiency rating",
+    "title": "Domestic Energy Performance Certificates for existing dwellings by energy efficiency rating",
     "editions": [
         {
             "@id": "https://staging.idpd.uk/datasets/mhclg/editions/2023-10",
             "@type": "dcat:Dataset",
             "in_series": "https://staging.idpd.uk/datasets/mhclg",
             "identifier": "2023-10",
-            "title": "Table EB1: domestic Energy Performance Certificates for existing dwellings by energy efficiency rating",
+            "title": "Domestic Energy Performance Certificates for existing dwellings by energy efficiency rating",
             "summary": "Data from certificates for existing domestic properties lodged on the Energy Performance of Buildings Registers, by average energy efficiency rating",
-            "description": "Data from certificates for existing domestic properties lodged on the Energy Performance of Buildings Registers, by average energy efficiency rating",
+            "description": "This data relates to the Energy Performance of Buildings Certificates published alongside the Energy Performance of Buildings Certificates Statistical release July to September 2023.",
             "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
             "creator": "office-for-national-statistics",
             "contact_point": {
@@ -103,5 +103,7 @@
             }
         }  
         
-    ]
+    ],
+    "count": 1,
+    "offset": 0
 }
