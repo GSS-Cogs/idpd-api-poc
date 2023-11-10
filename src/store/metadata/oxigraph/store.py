@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import os
-import re
-=======
->>>>>>> main
 import json
 import os
 from typing import Dict, Optional
@@ -18,16 +13,14 @@ from .sparql.construct import (
     construct_dataset_contact_point,
     construct_dataset_core,
     construct_dataset_keywords,
+    construct_dataset_themes,
     construct_dataset_parent_topics_by_id,
     construct_dataset_subtopics_by_id,
     construct_dataset_temporal_coverage,
-<<<<<<< HEAD
     construct_dataset_editions,
-=======
     construct_dataset_topic_by_id,
     construct_dataset_topics,
     construct_publisher,
->>>>>>> main
 )
 
 
@@ -60,20 +53,12 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # together to create a sinlge Graph of the
         # data we need.
         result: Graph = (
-<<<<<<< HEAD
             construct_dataset_core(graph,dataset_id)
             + construct_dataset_keywords(graph,dataset_id)
             + construct_dataset_themes(graph,dataset_id)
             + construct_dataset_contact_point(graph,dataset_id)
             + construct_dataset_temporal_coverage(graph,dataset_id)
             + construct_dataset_editions(graph, dataset_id)
-=======
-            construct_dataset_core(graph)
-            + construct_dataset_keywords(graph)
-            + construct_dataset_topics(graph)
-            + construct_dataset_contact_point(graph)
-            + construct_dataset_temporal_coverage(graph)
->>>>>>> main
         )
 
         # Serialize the graph into jsonld
