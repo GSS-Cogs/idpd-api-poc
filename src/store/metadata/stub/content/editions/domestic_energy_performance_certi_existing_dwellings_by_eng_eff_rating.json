@@ -1,0 +1,57 @@
+{
+    "@context": "https://staging.idpd.uk/#ns",
+    "@id": "https://staging.idpd.uk/datasets/mhclg/editions",
+    "@type": "dcat:DatasetSeries",
+    "title": "Table EB1: domestic Energy Performance Certificates for existing dwellings by energy efficiency rating",
+    "editions": [
+        {
+            "@id": "https://staging.idpd.uk/datasets/mhclg/editions/2023-10",
+            "@type": "dcat:Dataset",
+            "in_series": "https://staging.idpd.uk/datasets/mhclg",
+            "identifier": "2023-10",
+            "title": "Table EB1: domestic Energy Performance Certificates for existing dwellings by energy efficiency rating",
+            "summary": "Data from certificates for existing domestic properties lodged on the Energy Performance of Buildings Registers, by average energy efficiency rating",
+            "description": "Data from certificates for existing domestic properties lodged on the Energy Performance of Buildings Registers, by average energy efficiency rating",
+            "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+            "creator": "office-for-national-statistics",
+            "contact_point": {
+                "name": "Claire Smith",
+                "email": "EPBStats@levellingup.gov.uk"
+              },
+            "topics": [
+              "https://staging.idpd.uk/topics/climate-change"
+            ],
+            "frequency": "quarterly",
+            "keywords": [
+                "Energy Performance",
+                "certificates",
+                "Energy efficiency",
+                "Ratings",
+                "Existing dwellings",
+                "average energy efficiency rating"
+              ],
+            "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "issued": "2023-10-26T09:30:00Z",
+            "modified": "2023-10-26T09:30:00Z",
+            "spatial_resolution":["E12", "E92", "E07", "E06", "K04"],
+            "spatial_coverage": "K04000001",
+            "temporal_resolution": ["P1Q", "P1Y"],
+            "temporal_coverage": {
+              "start": "2014-07-30T00:00:00Z",
+              "end": "2014-07-30T00:00:00Z"
+            },
+            "versions_url": "https://staging.idpd.uk/datasets/gdhi/editions/2023-03/versions",
+            "versions": [
+              {
+                "@id": "https://staging.idpd.uk/datasets/gdhi/editions/2023-10/versions/1",
+                "issued": "2023-10-26T09:30:00Z",
+                "modified": "2023-10-26T09:30:00Z"
+              }
+            ],
+            "next_release": "2025-01-25T09:30:00Z",
+            "table_schema": {
+
+            }
+        }
+    ]
+}
