@@ -287,7 +287,7 @@ def get_dataset_edition_version_by_id(
         else:
             response.status_code = status.HTTP_404_NOT_FOUND
             return
-        
+
     elif request.headers["Accept"] == JSONLD or BROWSABLE:
         version = metadata_store.get_version(dataset_id, edition_id, version_id)
         if version is not None:
