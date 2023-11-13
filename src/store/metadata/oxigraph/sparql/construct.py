@@ -137,26 +137,27 @@ def construct_dataset_temporal_coverage(graph: Graph) -> Graph:
     result = results_graph if results_graph else Graph()
     return result
 
-def construct_dataset_version(graph: Graph, dataset_id: str, edition_id: str, version_id: str) -> Graph:
+
+def construct_dataset_version(
+    graph: Graph, dataset_id: str, edition_id: str, version_id: str
+) -> Graph:
     query = """
-        PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
-        PREFIX csvw: <http://www.w3.org/ns/csvw#>
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
         PREFIX dcterms: <http://purl.org/dc/terms/>
+        PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+        PREFIX csvw: <https://www.w3.org/ns/csvw#>
         CONSTRUCT WHERE {{
-        <http://staging.idpd.uk/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}> a hydra:member ;
+        <https://staging.idpd.uk/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}> a ?type ;
         dcterms:identifier ?identifier ;
         dcterms:title ?title ;
         dcterms:description ?description ;
         dcterms:abstract ?summary ;
         dcterms:issued ?release_date ;
-        dcat:download_url ?download_url ;
+        dcat:downloadUrl ?download_url ;
         csvw:schema ?table_schema .
         }}
         """.format(
-        dataset_id=dataset_id,
-        edition_id=edition_id,
-        version_id=version_id
+        dataset_id=dataset_id, edition_id=edition_id, version_id=version_id
     )
 
     results_graph = graph.query(query).graph

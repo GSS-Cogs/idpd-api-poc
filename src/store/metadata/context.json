@@ -121,13 +121,15 @@
         "@id": "hydra:member"
     },
     "editions_url": {
-        "@id": "hydra:collection"
+        "@id": "hydra:Collection"
     },
     "versions": {
-        "@id": "hydra:member"
+        "@id": "hydra:member",
+        "@type": "@id",
+        "@container": "@set"
     },
     "versions_url": {
-        "@id": "hydra:collection",
+        "@id": "hydra:Collection",
         "@type": "@id"
     },
     "columns": {

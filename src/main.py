@@ -10,6 +10,7 @@ from store import StubCsvStore, StubMetadataStore
 
 from custom_logging import logger
 from middleware import logging_middleware
+from store.metadata.oxigraph.store import OxigraphMetadataStore
 
 # Simple env var flag to allow local browsing of api responses
 # while developing.
@@ -54,7 +55,7 @@ app.add_middleware(
 def get_all_datasets(
     request: Request,
     response: Response,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: OxigraphMetadataStore = Depends(OxigraphMetadataStore),
 ):
     """
     Retrieve all the datasets.
