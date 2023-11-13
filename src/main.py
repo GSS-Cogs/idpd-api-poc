@@ -1,4 +1,6 @@
+import json
 import os
+import pathlib
 from typing import Optional
 
 from fastapi import Depends, FastAPI, Request, Response, status
@@ -30,6 +32,39 @@ app.add_middleware(
     allow_methods=["GET"],
     allow_headers=["*"],
 )
+
+
+@app.get(
+    "/",
+    responses={
+        status.HTTP_200_OK: {"description": "Successful response. Returns a context."},
+        status.HTTP_404_NOT_FOUND: {"description": "Not Found. No context found."},
+        status.HTTP_406_NOT_ACCEPTABLE: {
+            "description": "Not Acceptable. The requested format is not supported."
+        },
+    },
+)
+def get_context(
+    request: Request,
+    response: Response,
+    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+):
+    """
+    Retrieve the context.
+    This endpoint returns information on the context.
+    """
+
+    logger.info("Received request for context")
+    if request.headers["Accept"] == JSONLD or BROWSABLE:
+        context = metadata_store.get_context()
+        if context is not None:
+            response.status_code = status.HTTP_200_OK
+            return context
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return
+    else:
+        response.status_code = status.HTTP_406_NOT_ACCEPTABLE
+        return
 
 
 @app.get(

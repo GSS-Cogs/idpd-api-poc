@@ -57,6 +57,7 @@ class StubMetadataStore(BaseMetadataStore):
         using the contents of ./content
         """
         content_dir = Path(Path(__file__).parent / "content")
+        context_dir = Path(Path(__file__).parent.parent)
 
         # get specific stubbed resources into memory on application startup
         with open(Path(content_dir / "datasets.json").absolute()) as f:
@@ -87,6 +88,12 @@ class StubMetadataStore(BaseMetadataStore):
                 self.versions[
                     version_json_file.split("/")[-1].rstrip(".json")
                 ] = json.load(f)
+
+        with open(Path(context_dir / "context.json").absolute(), "r") as json_file:
+            self.context = json.load(json_file)
+
+    def get_context(self) -> Dict:
+        return self.context
 
     def get_datasets(self) -> Dict:
         return contextualise(self.datasets)
