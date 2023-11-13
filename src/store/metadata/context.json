@@ -63,10 +63,6 @@
     "licence": {
         "@id": "dcterms:license"
     },
-    "modified": {
-        "@id": "dcterms:modified",
-        "@type": "xsd:dateTime"
-    },
     "next_release": {
         "@id": "ons:nextRelease",
         "@type": "xsd:dateTime"
@@ -126,13 +122,15 @@
         "@id": "hydra:member"
     },
     "editions_url": {
-        "@id": "hydra:collection"
+        "@id": "hydra:Collection"
     },
     "versions": {
-        "@id": "hydra:member"
+        "@id": "hydra:member",
+        "@type": "@id",
+        "@container": "@set"
     },
     "versions_url": {
-        "@id": "hydra:collection",
+        "@id": "hydra:Collection",
         "@type": "@id"
     },
     "columns": {
@@ -159,5 +157,9 @@
     "download_url": "dcat:downloadUrl",
     "table_schema": "csvw:schema",
     "datatype": "csvw:datatype",
-    "name": "csvw:name"
+    "name": "csvw:name",
+    "titles": {
+        "@id": "csvw:titles",
+        "@language": "en"
+    }
 }

@@ -13,7 +13,7 @@ def test_oxigraph_get_dataset_returns_valid_structure():
      schema.
      """
 
-     os.environ["GRAPH_DB_URL"] = "http://localhost:7878"
+
      store = OxigraphMetadataStore()
 
      dataset = store.get_dataset("cpih")
@@ -34,7 +34,6 @@ def test_oxigraph_get_dataset_returns_invalid_structure():
      schema.
      """
 
-     os.environ["GRAPH_DB_URL"] = "http://localhost:7878"
      store = OxigraphMetadataStore()
 
      dataset = store.get_dataset("cpih")

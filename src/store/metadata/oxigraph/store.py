@@ -21,8 +21,17 @@ from .sparql.construct import (
     construct_dataset_editions,
     construct_dataset_topic_by_id,
     construct_dataset_topics,
+    construct_edition_contact_point,
+    construct_edition_core,
+    construct_edition_keywords,
+    construct_edition_table_schema,
+    construct_edition_temporal_coverage,
+    construct_edition_topics,
+    construct_edition_versions,
+    construct_editions,
     construct_publisher,
 )
+from custom_logging import logger
 
 
 class OxigraphMetadataStore(BaseMetadataStore):
@@ -108,7 +117,36 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets all editions of a specific dataset
         """
-        raise NotImplementedError
+        # Populate the graph from the database
+        graph = self.db
+
+        # Use the construct wrappers to pull the raw RDF triples
+        # (as one rdflib.Graph() for each function) and add them
+        # together to create a single Graph of the
+        # data we need.
+        result: Graph = construct_editions(graph, dataset_id)
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
+        )
+        editions_graph = _get_single_graph_for_field(data, "@type")
+        if editions_graph is None:
+            return None
+
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url` and `editions` to `versions`
+        editions_graph["@type"] = "hydra:Collection"
+        editions_graph["editions"] = editions_graph.pop("versions")
+
+        editions_graph["editions"] = [
+            self.get_edition(dataset_id, x.split("/")[-1])
+            for x in editions_graph["editions"]
+        ]
+        editions_graph["@context"] = "https://staging.idpd.uk/#ns"
+        return editions_graph
 
     def get_edition(
         self, dataset_id: str, edition_id: str
@@ -116,7 +154,61 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets a specific edition of a specific dataset
         """
-        raise NotImplementedError
+        # Populate the graph from the database
+        graph = self.db
+
+        # Use the construct wrappers to pull the raw RDF triples
+        # (as one rdflib.Graph() for each function) and add them
+        # together to create a single Graph of the
+        # data we need.
+        result: Graph = (
+            construct_edition_core(graph, dataset_id, edition_id)
+            + construct_edition_contact_point(graph, dataset_id, edition_id)
+            + construct_edition_topics(graph, dataset_id, edition_id)
+            + construct_edition_keywords(graph, dataset_id, edition_id)
+            + construct_edition_temporal_coverage(graph, dataset_id, edition_id)
+            + construct_edition_table_schema(graph, dataset_id, edition_id)
+            + construct_edition_versions(graph, dataset_id, edition_id)
+        )
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "dcat:Dataset"}
+        )
+
+        edition_graph = _get_single_graph_for_field(data, "@type")
+        contact_point_graph = _get_single_graph_for_field(data, "vcard:fn")
+        temporal_coverage_graph = _get_single_graph_for_field(data, "dcat:endDate")
+        columns_graph = [x for x in data["@graph"] if "datatype" in x.keys()]
+        if None in [edition_graph, contact_point_graph, temporal_coverage_graph]:
+            return None
+
+        # Populate editions_graph.table_schema.columns with column definitions (without @id) and delete editions_graph.table_schema blank node @id
+        for column in columns_graph:
+            del column["@id"]
+        edition_graph["table_schema"]["columns"] = columns_graph
+        del edition_graph["table_schema"]["@id"]
+
+        edition_graph["contact_point"] = {
+            "name": contact_point_graph["vcard:fn"]["@value"],
+            "email": contact_point_graph["vcard:hasEmail"],
+        }
+        edition_graph["temporal_coverage"] = {
+            "start": temporal_coverage_graph["dcat:startDate"]["@value"],
+            "end": temporal_coverage_graph["dcat:endDate"]["@value"],
+        }
+
+        version_graphs = [
+            x
+            for x in data["@graph"]
+            if "@id" in x.keys() and re.search("/versions/", x["@id"])
+        ]
+        edition_graph["versions"] = version_graphs
+
+        return edition_graph
 
     def get_versions(
         self, dataset_id: str, edition_id: str
@@ -177,6 +269,8 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
         )
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url`
+        data["@graph"][0]["@type"] = "hydra:Collection"
 
         for idx, topic in enumerate(data["@graph"][0]["topics"]):
             topic_id = topic["@id"].split("/")[-1]
