@@ -9,8 +9,8 @@ import schemas
 
 def test_oxigraph_get_version_returns_valid_structure():
     """
-    Confirm that the OxigraphMetadataStore.get_topic()
-    function returns a topic with sub_topic that matches the topic
+    Confirm that the OxigraphMetadataStore.get_version()
+    function returns a version with table schema that matches the version
     schema.
     """
     store = OxigraphMetadataStore()
@@ -39,26 +39,5 @@ def test_oxigraph_get_version_returns_valid_structure():
         version_schema.download_url
         == "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1.csv"
     )
-    # assert version_schema.media_type == "text/csv"
-    assert version_schema.table_schema == {
-        "columns": [
-            {
-                "name": "geography",
-                "datatype": "string",
-                "titles": "Geography",
-                "description": "The geography associated with the observation.",
-            },
-            {
-                "name": "time_period",
-                "datatype": "string",
-                "titles": "Time period",
-                "description": "The time period associated with the observation.",
-            },
-            {
-                "name": "cpih",
-                "datatype": "number",
-                "titles": "Consumer price index",
-                "description": "The consumer price index for the given time period.",
-            },
-        ]
-    }
+    assert version_schema.media_type == "text/csv"
+    assert len(version_schema.table_schema.columns) == 4

@@ -170,7 +170,7 @@ class Version(BaseModel):
     summary: str = Field(max_length=200)
     description: str = Field(max_length=250)
     download_url: str
-    # media_type: str
+    media_type: str
     table_schema: TableSchema
 
 

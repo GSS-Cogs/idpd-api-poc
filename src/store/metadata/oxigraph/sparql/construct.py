@@ -178,7 +178,8 @@ def construct_dataset_version(
         dcterms:description ?description ;
         dcterms:abstract ?summary ;
         dcterms:issued ?release_date ;
-        dcat:downloadUrl ?download_url .
+        dcat:downloadUrl ?download_url ;
+        dcterms:MediaType ?mediatype .
         }}
         """.format(dataset_id=dataset_id, edition_id=edition_id, version_id=version_id
     )
@@ -187,7 +188,7 @@ def construct_dataset_version(
     result = results_graph if results_graph else Graph()
     return result
 
-def construct_version_table_schema(
+def construct_dataset_version_table_schema(
     graph: Graph, dataset_id: str, edition_id: str, version_id: str
 ) -> Graph:
     query = """
@@ -195,12 +196,12 @@ def construct_version_table_schema(
         PREFIX csvw: <https://www.w3.org/ns/csvw#>
         CONSTRUCT WHERE {{
             <https://staging.idpd.uk/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}> a ?type  ;
-                csvw:schema ?table_schema .
+        csvw:schema ?table_schema .
             ?table_schema csvw:column ?columns .
             ?columns csvw:name ?name ;
-                csvw:datatype ?datatype ;
-                dcterms:description ?description ;
-                csvw:titles ?titles .
+                    csvw:datatype ?datatype ;
+                    dcterms:description ?description ;
+                    csvw:titles ?titles .
         }}
         """.format(
         dataset_id=dataset_id, edition_id=edition_id, version_id=version_id

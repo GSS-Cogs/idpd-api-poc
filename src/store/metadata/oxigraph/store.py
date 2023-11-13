@@ -18,7 +18,7 @@ from .sparql.construct import (
     construct_dataset_temporal_coverage,
     construct_dataset_version,
     construct_dataset_topic_by_id,
-    construct_version_table_schema,
+    construct_dataset_version_table_schema,
 )
 from .. import constants
 from custom_logging import logger
@@ -136,33 +136,25 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # data we need.
         result: Graph = (
             construct_dataset_version(graph, dataset_id, edition_id, version_id)
-            + construct_version_table_schema(graph, dataset_id, edition_id, version_id)
+            + construct_dataset_version_table_schema(graph, dataset_id, edition_id, version_id)
         )
 
         # Serialize the graph into jsonld
         data = json.loads(result.serialize(format="json-ld"))
-        with open("data.jsonld", "w") as f:
-            json.dump(data, f, indent=4)
 
         # Use a context file to shape our jsonld, removing long form references
         data = jsonld.flatten(
-            data, {"@context": constants.CONTEXT, "@type": "dcat:Distribution"}
+            data, {"@context": constants.CONTEXT, "@type": ["csvw:Table","dcat:Distribution"]}
         )
-        with open("data2.jsonld", "w") as f:
-            json.dump(data, f, indent=4)
 
-        edition_graph = _get_single_graph_for_field(data, "@type")
+        version_graph = _get_single_graph_for_field(data, "@type")
         columns_graph = [x for x in data["@graph"] if "datatype" in x.keys()]
         for column in columns_graph:
             del column["@id"]
-        edition_graph["table_schema"]["columns"] = columns_graph
-        del edition_graph["table_schema"]["@id"]
+        version_graph["table_schema"]["columns"] = columns_graph
+        del version_graph["table_schema"]["@id"]
 
-        with open("data3.jsonld", "w") as f:
-            json.dump(edition_graph, f, indent=4)
-
-        result = data["@graph"][0]
-        return edition_graph
+        return version_graph
 
     def get_publishers(self) -> Optional[Dict]:  # pragma: no cover
         """
