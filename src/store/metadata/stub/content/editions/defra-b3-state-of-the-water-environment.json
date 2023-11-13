@@ -1,0 +1,135 @@
+{
+    "@context": "https://staging.idpd.uk/#ns",
+    "@id": "https://staging.idpd.uk/datasets/defra-b3-state-of-the-water-environment/editions",
+    "@type": "hydra:Collection",
+    "title": "B3: State of the water environment",
+    "editions": [
+        {
+            "@id": "https://staging.idpd.uk/datasets/defra-b3-state-of-the-water-environment/editions/2019-2022",
+            "@type": "dcat:Dataset",
+            "in_series": "https://staging.idpd.uk/datasets/defra-b3-state-of-the-water-environment",
+            "identifier": "2019-2022",
+            "title": "B3: State of the water environment",
+            "summary": "B3: State of the water environment",
+            "description": "B3: State of the water environment",
+            "issued": "2021-06-11T00:00:00",
+            "modified": "2022-11-02T15:18:00",
+            "publisher": "https://staging.idpd.uk/publishers/department-for-environment-food-and-rural-affairs",
+            "creator": "office-for-national-statistics",
+            "contact_point": {
+                "name": "Department for Environment, Food & Rural Affairs",
+                "email": "25YEPindicators@defra.gov.uk"
+              },
+            "topics": [
+            "https://staging.idpd.uk/topics/environment",
+            "https://staging.idpd.uk/topics/water-quality"],
+            "frequency": "Onetime",
+            "keywords": [
+            "environment",
+            "water quality",
+            "defra"
+            ],
+            "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "spatial_resolution": [
+              "E01",
+              "E92"
+            ],
+            "spatial_coverage": "K02000001",
+            "temporal_resolution": [
+              "P1M",
+              "P3M",
+              "P1Y"
+            ],
+            "temporal_coverage": {
+              "start": "2019-01-01T00:00:00Z",
+              "end": "2022-12-31T00:00:00Z"
+            },
+            "versions_url": "https://staging.idpd.uk/datasets/defra-b3-state-of-the-water-environment/editions/2019-2022/versions",
+            "versions": [
+              {
+                "@id": "https://staging.idpd.uk/datasets/defra-b3-state-of-the-water-environment/editions/2019-2022/versions/1",
+                "issued": "2021-06-24T08:30:00",
+                "modified": "2022-08-18T10:51:00"
+              }
+            ],
+            "next_release": "2024-03-11T09:30:00Z",
+            "table_schema": {
+              "columns": [
+                {
+                  "name": "Period",
+                  "datatype": "number",
+                  "titles": "Period",
+                  "description": "The period associated with the observation."
+                
+                },
+                {
+                  "name": "Environment Surveyed",
+                  "datatype": "string",
+                  "titles": "Environment Surveyed",
+                  "description": "Environment Surveyed"
+                
+                },
+                {
+                  "name": "Region",
+                  "datatype": "string",
+                  "titles": "Region",
+                  "description": "Region"
+                
+                },
+                {
+                  "name": "Survey Status",
+                  "datatype": "string",
+                  "titles": "Survey Status",
+                  "description": "Survey Status"
+                
+                },
+                {
+                  "name": "Survey Type",
+                  "datatype": "string",
+                  "titles": "Survey Type",
+                  "description": "Survey Type"
+                
+                },
+                {
+                  "name": "Status of Ground Waters",
+                  "datatype": "string",
+                  "titles": "Status of Ground Waters",
+                  "description": "Status of Ground Waters"
+                
+                },
+                {
+                  "name": "Status of Surface Waters",
+                  "datatype": "number",
+                  "titles": "Status of Surface Waters",
+                  "description": "Status of Surface Waters"
+                
+                },
+                {
+                  "name": "Status of Waters Specially Protected for Specific Uses",
+                  "datatype": "number",
+                  "titles": "Status of Waters Specially Protected for Specific Uses",
+                  "description": "Status of Waters Specially Protected for Specific Uses"
+                
+                },
+                {
+                  "name": "Measure type",
+                  "datatype": "string",
+                  "titles": "Measure type",
+                  "description": "Measure type"
+                
+                },
+                {
+                  "name": "Unit of Measure",
+                  "datatype": "string",
+                  "titles": "Unit of Measure",
+                  "description": "Unit of Measure"
+                
+                }
+
+              ]
+          }
+        }
+    ],
+    "count": 1,
+    "offset": 0
+}
