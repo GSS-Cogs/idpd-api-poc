@@ -11,6 +11,7 @@ httpx = "*"
 structlog = "*"
 pyld = "*"
 
+
 [dev-packages]
 pytest = "*"
 pytest-vcr = "*"
@@ -20,7 +21,6 @@ ruff = "*"
 pytz = "*"
 docker = "*"
 requests = "*"
-isort = "*"
 
 [requires]
 python_version = "3.9"

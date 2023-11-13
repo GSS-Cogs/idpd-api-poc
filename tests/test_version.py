@@ -4,7 +4,7 @@ from fastapi import status
 from fastapi.testclient import TestClient
 
 from constants import CSV
-from tests.fixtures.versions import version_test_data
+from fixtures.versions import version_test_data
 from main import app, StubCsvStore
 
 

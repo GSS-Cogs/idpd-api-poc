@@ -1,9 +1,7 @@
 import time
-
-import structlog
 from fastapi import Request, Response
+import structlog
 from structlog.contextvars import bind_contextvars, clear_contextvars
-
 from custom_logging import configure_logger, logger
 
 configure_logger()
