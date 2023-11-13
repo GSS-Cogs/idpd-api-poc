@@ -9,6 +9,7 @@
         "-s",
         ".",
         "-p",
-        "*test.py"
-    ]
+        "test_*.py"
+    ],
+    "python.analysis.typeCheckingMode": "off"
 }

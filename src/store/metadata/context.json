@@ -142,6 +142,7 @@
     },
     "publishers": {
         "@id": "dcat:publisher",
+        "@type": "dcat:publisher",
         "@container": "@set"
     },
     "sub_topics": {
@@ -155,5 +156,9 @@
     "download_url": "dcat:downloadUrl",
     "table_schema": "csvw:schema",
     "datatype": "csvw:datatype",
-    "name": "csvw:name"
+    "name": "csvw:name",
+    "titles": {
+        "@id": "csvw:titles",
+        "@language": "en"
+    }
 }

@@ -4,13 +4,12 @@ from typing import Optional
 from fastapi import Depends, FastAPI, Request, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 
-from constants import CSV, JSONLD
 import schemas
-from store import StubCsvStore, StubMetadataStore
-
+from constants import CSV, JSONLD
 from custom_logging import logger
 from middleware import logging_middleware
 from store.metadata.oxigraph.store import OxigraphMetadataStore
+from store import StubCsvStore, StubMetadataStore
 
 # Simple env var flag to allow local browsing of api responses
 # while developing.
@@ -27,7 +26,7 @@ app = FastAPI(
 app.middleware("http")(logging_middleware)
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex="https://.*\.idpd(\.onsdigital)?\.uk",
+    allow_origin_regex=r"https://.*\.idpd(\.onsdigital)?\.uk",
     allow_credentials=True,
     allow_methods=["GET"],
     allow_headers=["*"],
@@ -280,14 +279,8 @@ def get_dataset_edition_version_by_id(
     Retrieve information about a specific version of a dataset.
     This endpoint returns detailed information about a specific version of a dataset based on its unique identifier.
     """
-    if request.headers["Accept"] == JSONLD or BROWSABLE:
-        version = metadata_store.get_version(dataset_id, edition_id, version_id)
-        if version is not None:
-            response.status_code = status.HTTP_200_OK
-            return version
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return
-    elif request.headers["Accept"] == CSV:
+
+    if request.headers["Accept"] == CSV:
         csv_data = csv_store.get_version(dataset_id, edition_id, version_id)
         if csv_data is not None:
             response.status_code = status.HTTP_200_OK
@@ -295,6 +288,15 @@ def get_dataset_edition_version_by_id(
         else:
             response.status_code = status.HTTP_404_NOT_FOUND
             return
+
+    elif request.headers["Accept"] == JSONLD or BROWSABLE:
+        version = metadata_store.get_version(dataset_id, edition_id, version_id)
+        if version is not None:
+            response.status_code = status.HTTP_200_OK
+            return version
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return
+
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
