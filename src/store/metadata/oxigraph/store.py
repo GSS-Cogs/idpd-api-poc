@@ -18,9 +18,10 @@ from .sparql.construct import (
     construct_dataset_temporal_coverage,
     construct_dataset_version,
     construct_dataset_topic_by_id,
+    construct_version_table_schema,
 )
 from .. import constants
-
+from custom_logging import logger
 
 class OxigraphMetadataStore(BaseMetadataStore):
     def setup(self):
@@ -133,8 +134,9 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # (as one rdflib.Graph() for each function) and add them
         # together to create a sinlge Graph of the
         # data we need.
-        result: Graph = construct_dataset_version(
-            graph, dataset_id, edition_id, version_id
+        result: Graph = (
+            construct_dataset_version(graph, dataset_id, edition_id, version_id)
+            + construct_version_table_schema(graph, dataset_id, edition_id, version_id)
         )
 
         # Serialize the graph into jsonld
@@ -149,8 +151,18 @@ class OxigraphMetadataStore(BaseMetadataStore):
         with open("data2.jsonld", "w") as f:
             json.dump(data, f, indent=4)
 
+        edition_graph = _get_single_graph_for_field(data, "@type")
+        columns_graph = [x for x in data["@graph"] if "datatype" in x.keys()]
+        for column in columns_graph:
+            del column["@id"]
+        edition_graph["table_schema"]["columns"] = columns_graph
+        del edition_graph["table_schema"]["@id"]
+
+        with open("data3.jsonld", "w") as f:
+            json.dump(edition_graph, f, indent=4)
+
         result = data["@graph"][0]
-        return result
+        return edition_graph
 
     def get_publishers(self) -> Optional[Dict]:  # pragma: no cover
         """
@@ -213,3 +225,17 @@ class OxigraphMetadataStore(BaseMetadataStore):
         Get a specific sub-topic for a specific topic
         """
         raise NotImplementedError
+    
+def _get_single_graph_for_field(data: Dict, field: str) -> Optional[Dict]:
+    """
+    Utility function to get the dictionary corresponding to the `field` key provided. Only for SPARQL queries that should return one result.
+    """
+    node = [x for x in data["@graph"] if field in x.keys()]
+    if len(node) == 1:
+        return node[0]
+    elif len(node) == 0:
+        logger.error("No node for field defined", data={"field": field})
+        return None
+    else:
+        logger.error("More than one node for field defined", data={"field": field})
+        return None
