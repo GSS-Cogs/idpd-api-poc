@@ -64,9 +64,10 @@
           "name": "Department for Environment, Food & Rural Affairs",
           "email": "25YEPindicators@defra.gov.uk"
         },
-        "topics": [
-          "https://staging.idpd.uk/topics/environment",
-          "https://staging.idpd.uk/topics/water-quality"],
+        "sub_topics": [
+        
+        ],
+        "parent_topics": [ "https://staging.idpd.uk/topics/climatechange"],
         "frequency": "Onetime",
         "keywords": [
           "environment",
