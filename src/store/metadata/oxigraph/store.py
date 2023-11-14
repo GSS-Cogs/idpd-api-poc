@@ -2,6 +2,7 @@ import json
 import os
 import re
 from typing import Dict, Optional
+from custom_logging import logger
 
 from pyld import jsonld
 from rdflib import Dataset, Graph
@@ -13,9 +14,11 @@ from .sparql.construct import (
     construct_dataset_contact_point,
     construct_dataset_core,
     construct_dataset_keywords,
+    construct_dataset_themes,
     construct_dataset_parent_topics_by_id,
     construct_dataset_subtopics_by_id,
     construct_dataset_temporal_coverage,
+    construct_dataset_editions,
     construct_dataset_topic_by_id,
     construct_dataset_topics,
     construct_edition_contact_point,
@@ -36,9 +39,8 @@ class OxigraphMetadataStore(BaseMetadataStore):
         oxigraph_url = os.environ.get("GRAPH_DB_URL", None)
         assert oxigraph_url is not None, (
             "The env var 'GRAPH_DB_URL' must be set to use "
-            "the OxigraphMetadataStore store."
+            "the OxigraphMetadataStore store."   
         )
-
         configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
         self.db = Dataset(store=SPARQLUpdateStore(*configuration))
 
@@ -61,11 +63,12 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # together to create a sinlge Graph of the
         # data we need.
         result: Graph = (
-            construct_dataset_core(graph)
-            + construct_dataset_keywords(graph)
-            + construct_dataset_topics(graph)
-            + construct_dataset_contact_point(graph)
-            + construct_dataset_temporal_coverage(graph)
+            construct_dataset_core(graph,dataset_id)
+            + construct_dataset_keywords(graph,dataset_id)
+            + construct_dataset_themes(graph,dataset_id)
+            + construct_dataset_contact_point(graph,dataset_id)
+            + construct_dataset_temporal_coverage(graph,dataset_id)
+            + construct_dataset_editions(graph, dataset_id)
         )
 
         # Serialize the graph into jsonld
@@ -83,18 +86,23 @@ class OxigraphMetadataStore(BaseMetadataStore):
         #
         # The user doesnt need to know about blank RDF nodes so we need
         # to flatten and embed the latter two graphs in the dataset graph.
-        dataset_graph = next((x for x in data["@graph"] if "@type" in x.keys()), None)
-        contact_point_graph = next(
-            (x for x in data["@graph"] if "vcard:fn" in x.keys()), None
-        )
-        temporal_coverage_graph = next(
-            (x for x in data["@graph"] if "dcat:endDate" in x.keys()), None
-        )
+        dataset_graph =  _get_single_graph_for_field(data, "@type")
+        contact_point_graph = _get_single_graph_for_field(data, "vcard:fn") 
+        temporal_coverage_graph = _get_single_graph_for_field(data, "dcat:endDate")
+        
+        if None in [dataset_graph, contact_point_graph,temporal_coverage_graph]:
+            return None
+
+        # Add `issued` and `modified` fields to each edition in `editions`
+        edition_graphs = [
+            x
+            for x in data["@graph"]
+            if "@id" in x.keys() and re.search("/editions/", x["@id"])
+        ]
+        dataset_graph["editions"] = edition_graphs
 
         # Compact and embed anonymous nodes
-        # TODO - we'll want to make sure these fields exist
-        # to avoid key errors.
-        dataset_graph["contact_point"] = {
+        dataset_graph["contact_point"] = {   
             "name": contact_point_graph["vcard:fn"]["@value"],
             "email": contact_point_graph["vcard:hasEmail"],
         }
@@ -102,11 +110,8 @@ class OxigraphMetadataStore(BaseMetadataStore):
             "start": temporal_coverage_graph["dcat:endDate"]["@value"],
             "end": temporal_coverage_graph["dcat:startDate"]["@value"],
         }
-
-        # Use a remote context
-        dataset_graph["@context"] = "https://data.ons.gov.uk/ns#"
-
         return dataset_graph
+
 
     def get_editions(self, dataset_id: str) -> Optional[Dict]:  # pragma: no cover
         """
@@ -319,7 +324,6 @@ class OxigraphMetadataStore(BaseMetadataStore):
         Get a specific sub-topic for a specific topic
         """
         raise NotImplementedError
-
 
 def _get_single_graph_for_field(data: Dict, field: str) -> Optional[Dict]:
     """
