@@ -20,7 +20,7 @@ async def _file_stream(file_url: str):
                 yield chunk
 
 
-def download_exists(download_url: str):
+def _download_exists(download_url: str):
     """
     Helper to make sure a csv download url exists before we try
     and download it from GCP
@@ -69,7 +69,7 @@ class CloudStorageCsvStore(BaseCsvStore):
         """
         Provides a filename and async download generator as a Tuple.
         Also uses an options request to check the file in question
-        exists on GCP.
+        exists on GCP beforehand.
 
         The check_exists kwarg can be used to toggle this
         check off (for test purposes primarily).
@@ -93,7 +93,7 @@ class CloudStorageCsvStore(BaseCsvStore):
         logger.info("Received request for csv", data=logging_data)
 
         if check_exists:
-            if download_exists(download_url) is False:
+            if not _download_exists(download_url):
                 return None, None
 
         filename_for_download = f"{dataset_id}_{edition_id}_{version_id}.csv"

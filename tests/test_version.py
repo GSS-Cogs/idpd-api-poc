@@ -5,7 +5,8 @@ from fastapi.exceptions import ResponseValidationError
 from fastapi.testclient import TestClient
 import pytest
 
-from constants import CSV, JSONLD
+from constants import JSONLD
+from store.metadata.stub.store import StubMetadataStore
 from tests.fixtures.versions import version_test_data
 from main import app, StubMetadataStore
 

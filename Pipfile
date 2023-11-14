@@ -11,7 +11,6 @@ httpx = "*"
 structlog = "*"
 pyld = "*"
 aiohttp = "*"
-requests = "*"
 
 [dev-packages]
 pytest = "*"
@@ -22,7 +21,6 @@ ruff = "*"
 pytz = "*"
 docker = "*"
 isort = "*"
-aiofiles = "*"
 pytest-asyncio = "*"
 vcrpy = "*"
 

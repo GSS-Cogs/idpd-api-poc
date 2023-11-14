@@ -26,6 +26,7 @@ def monkeypath_file_stream_working(monkeypatch):
     yield mock_file_stream
     monkeypatch.undo()
 
+
 @pytest.fixture
 def monkeypath_download_does_not_exist(monkeypatch):
     """
@@ -36,7 +37,7 @@ def monkeypath_download_does_not_exist(monkeypatch):
     def download_exists(_):
         return False  
 
-    monkeypatch.setattr(csvstore, "download_exists", download_exists)
+    monkeypatch.setattr(csvstore, "_download_exists", download_exists)
     yield download_exists
     monkeypatch.undo()
 
@@ -48,8 +49,8 @@ def test_download_csv_googlecloudstorage_returns_success(monkeypath_file_stream_
     """
 
     store = CloudStorageCsvStore()
-    # Note: check_exists=False otherwise it'll reach out to GCP which we don't
-    # want our tests to be doing.
+    # Note: check_exists=False otherwise it'll reach out to GCP to see if
+    # the file exist which we don't want our tests to be doing.
     filename, file_stream = store.get_version("gdhi", "2023-03", "1", check_exists=False)
 
     assert filename == "gdhi_2023-03_1.csv"
@@ -63,6 +64,8 @@ def test_download_csv_googlecloudstorage_returns_failure(monkeypath_download_doe
     """
 
     store = CloudStorageCsvStore()
+    # Note: we don't need `check_exists=False` in this instance as we're directly patching
+    # the function download_exists that does the "does it exist" call to GCP
     filename, file_stream = store.get_version("gdhi", "2023-03", "1")
 
     assert filename is None
