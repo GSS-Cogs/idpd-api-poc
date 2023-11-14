@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from constants import CSV, JSONLD
 import schemas
-from store import OxigraphMetadataStore, StubCsvStore, StubMetadataStore, CloudStorageCsvStore
+from store import StubMetadataStore, CloudStorageCsvStore
 
 from custom_logging import logger
 from middleware import logging_middleware
@@ -478,14 +478,7 @@ def version(
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
     csv_store: CloudStorageCsvStore = Depends(CloudStorageCsvStore)
 ):
-    # if request.headers["Accept"] == JSONLD or BROWSABLE:
-    #     version = metadata_store.get_version(dataset_id, edition_id, version_id)
-    #     if version is not None:
-    #         response.status_code = status.HTTP_200_OK
-    #         return version
-    #     response.status_code = status.HTTP_404_NOT_FOUND
-    #     return
-    if request.headers["Accept"] == CSV or BROWSABLE:
+    if request.headers["Accept"] == CSV:
         csv_data = csv_store.get_version(dataset_id, edition_id, version_id)
         if csv_data is not None:
             response.status_code = status.HTTP_200_OK
@@ -493,26 +486,13 @@ def version(
         else:
             response.status_code = status.HTTP_404_NOT_FOUND
             return
+    elif request.headers["Accept"] == JSONLD or BROWSABLE:
+        version = metadata_store.get_version(dataset_id, edition_id, version_id)
+        if version is not None:
+            response.status_code = status.HTTP_200_OK
+            return version
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
-
-
-# note: download only for now, needs expanding
-"""@app.get("/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}")
-def version(
-    request: Request,
-    response: Response,
-    dataset_id: str,
-    edition_id: str,
-    version_id: str,
-    csv_store: StubCsvStore = Depends(StubCsvStore),
-):
-    csv_data = csv_store.get_version(dataset_id, edition_id, version_id)
-    if csv_data is not None:
-        response.status_code = status.HTTP_200_OK
-        return csv_data
-    else:
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return"""
-
