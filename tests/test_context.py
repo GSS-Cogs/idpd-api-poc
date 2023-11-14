@@ -4,9 +4,8 @@ from fastapi import status
 from fastapi.testclient import TestClient
 
 from constants import JSONLD
-from store.metadata.base import ContextStore
 from tests.fixtures.context import context_test_data
-from main import app, StubMetadataStore
+from main import app, ContextStore
 
 ENDPOINT = "/ns"
 
