@@ -62,13 +62,10 @@
         "creator": "https://staging.idpd.uk/publishers/department-for-environment-food-and-rural-affairs",
         "contact_point": {
           "name": "Department for Environment, Food & Rural Affairs",
-          "email": "25YEPindicators@defra.gov.uk"
+          "email": "mailto:25YEPindicators@defra.gov.uk"
         },
-        "sub_topics": [
-        
-        ],
-        "parent_topics": [ "https://staging.idpd.uk/topics/climatechange"],
-        "frequency": "Onetime",
+        "topics":["https://staging.idpd.uk/topics/climatechange"],
+        "frequency": "irregular",
         "keywords": [
           "environment",
           "water quality",
