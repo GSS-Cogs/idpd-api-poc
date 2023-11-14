@@ -1,15 +1,18 @@
 {
     "@context": "https://staging.idpd.uk/#ns",
     "@id": "https://staging.idpd.uk/datasets/mhclg/editions/2023-10/versions",
-    "@type": "dcat:DatasetSeries",
-    "title": "Domestic Energy Performance Certificates for existing dwellings by energy efficiency rating",
+    "@type": "hydra:Collection",
+    "title": "Domestic Energy Performance Certificates for existing dwellings",
     "versions": [
         {
-            "@type": "dcat:Dataset",
-            "@id": "https://staging.idpd.uk/datasets/mhclg/editions/2023-10",
-            "identifier": "1",
+            "@type": [
+                "dcat:Distribution",
+                "csvw:Table"
+            ],
+            "@id": "https://staging.idpd.uk/datasets/editions/2023-10",
+            "identifier": "existing_dwellings_data",
             "issued": "2023-10-26T09:30:00Z",
-            "title": "Table EB1: domestic Energy Performance Certificates for existing dwellings by energy efficiency rating",
+            "title": "Table EB1: domestic Energy Performance Certificates for existing dwellings",
             "summary": "Data from certificates for existing domestic properties lodged on the Energy Performance of Buildings Registers, by average energy efficiency rating",
             "description": "This data relates to the Energy Performance of Buildings Certificates published alongside the Energy Performance of Buildings Certificates Statistical release July to September 2023.",
             "download_url": "https://staging.idpd.uk/datasets/mhclg/editions/2023-03/versions/1.csv",
@@ -30,7 +33,7 @@
                     },
                     {
                     "name": "Lodgements",
-                    "datatype": "string",
+                    "datatype": "decimal",
                     "titles": "Lodgements",
                     "description": "Lodgements of EPC is the process of validating the EPC. Here it is the number of lodgements"
                     },
@@ -42,7 +45,7 @@
                     },
                     {
                     "name": "Total Floor Area (m2)",
-                    "datatype": "string",
+                    "datatype": "decimal",
                     "titles": "Total Floor Area (m2)",
                     "description": "Measure of total floor area"
                     },
