@@ -49,6 +49,10 @@
         "@id": "dcterms:issued",
         "@type": "xsd:dateTime"
     },
+    "modified": {
+        "@id": "dcterms:modified",
+        "@type": "xsd:dateTime"
+    },
     "keywords": {
         "@id": "dcat:keyword",
         "@language": "en"
@@ -58,10 +62,6 @@
     },
     "licence": {
         "@id": "dcterms:license"
-    },
-    "modified": {
-        "@id": "dcterms:modified",
-        "@type": "xsd:dateTime"
     },
     "next_release": {
         "@id": "ons:nextRelease",
@@ -115,19 +115,22 @@
     "count": "hydra:totalitems",
     "datasets": {
         "@id": "dcat:DatasetSeries",
+        "@type": "dcat:DatasetSeries",
         "@container": "@set"
     },
     "editions": {
         "@id": "hydra:member"
     },
     "editions_url": {
-        "@id": "hydra:collection"
+        "@id": "hydra:Collection"
     },
     "versions": {
-        "@id": "hydra:member"
+        "@id": "hydra:member",
+        "@type": "@id",
+        "@container": "@set"
     },
     "versions_url": {
-        "@id": "hydra:collection",
+        "@id": "hydra:Collection",
         "@type": "@id"
     },
     "columns": {
@@ -140,6 +143,7 @@
     },
     "publishers": {
         "@id": "dcat:publisher",
+        "@type": "dcat:publisher",
         "@container": "@set"
     },
     "sub_topics": {
@@ -153,5 +157,9 @@
     "download_url": "dcat:downloadUrl",
     "table_schema": "csvw:schema",
     "datatype": "csvw:datatype",
-    "name": "csvw:name"
+    "name": "csvw:name",
+    "titles": {
+        "@id": "csvw:titles",
+        "@language": "en"
+    }
 }

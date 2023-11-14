@@ -1,7 +1,7 @@
 import logging
 import sys
-import structlog
 
+import structlog
 
 logger = structlog.stdlib.get_logger()
 
