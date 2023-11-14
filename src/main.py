@@ -5,12 +5,12 @@ from fastapi import Depends, FastAPI, Request, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 
 import schemas
-from store import StubCsvStore, StubMetadataStore
-
 
 from constants import CSV, JSONLD
 from custom_logging import logger
 from middleware import logging_middleware
+from store import StubCsvStore, StubMetadataStore
+from store.metadata.context import ContextStore
 
 # Simple env var flag to allow local browsing of api responses
 # while developing.
@@ -32,6 +32,40 @@ app.add_middleware(
     allow_methods=["GET"],
     allow_headers=["*"],
 )
+
+
+@app.get(
+    "/ns",
+    responses={
+        status.HTTP_200_OK: {"description": "Successful response. Returns a context."},
+        status.HTTP_404_NOT_FOUND: {"description": "Not Found. No context found."},
+        status.HTTP_406_NOT_ACCEPTABLE: {
+            "description": "Not Acceptable. The requested format is not supported."
+        },
+    },
+)
+def get_context(
+    request: Request,
+    response: Response,
+    context_store: ContextStore = Depends(ContextStore),
+):
+    """
+    Retrieve the context.
+    This endpoint returns information on the context.
+    """
+
+    logger.info("Received request for context")
+    if request.headers["Accept"] == JSONLD or BROWSABLE:
+        context = context_store.get_context()
+        if context is not None:
+            response.status_code = status.HTTP_200_OK
+            return context
+        response.status_code = status.HTTP_404_NOT_FOUND
+        logger.error("Context not found")
+        return
+    else:
+        response.status_code = status.HTTP_406_NOT_ACCEPTABLE
+        return
 
 
 @app.get(
@@ -70,6 +104,7 @@ def get_all_datasets(
             response.status_code = status.HTTP_200_OK
             return datasets
         response.status_code = status.HTTP_404_NOT_FOUND
+        logger.error("Datasets not found")
         return
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
@@ -339,6 +374,7 @@ def get_all_publishers(
             response.status_code = status.HTTP_200_OK
             return publishers
         response.status_code = status.HTTP_404_NOT_FOUND
+        logger.error("Publishers not found")
         return
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
@@ -425,6 +461,7 @@ def get_all_topics(
             response.status_code = status.HTTP_200_OK
             return topics
         response.status_code = status.HTTP_404_NOT_FOUND
+        logger.error("Topics not found")
         return
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
