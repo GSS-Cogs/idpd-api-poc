@@ -10,7 +10,6 @@ from main import app
 
 ENDPOINT = "/datasets/some-dataset-id/editions/some-edition-id/versions/some-version-id"
 
-@pytest.mark.asyncio
 def test_version_csv_200():
     """
     Confirms that:

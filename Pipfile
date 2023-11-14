@@ -21,7 +21,6 @@ ruff = "*"
 pytz = "*"
 docker = "*"
 isort = "*"
-pytest-asyncio = "*"
 vcrpy = "*"
 
 [requires]

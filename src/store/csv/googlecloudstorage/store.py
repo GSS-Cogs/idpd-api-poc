@@ -54,6 +54,7 @@ def _download_exists(download_url: str):
             )
             return False
 
+
 class CloudStorageCsvStore(BaseCsvStore):
     """
     Returns the requested csv from a PUBLIC google
@@ -64,7 +65,7 @@ class CloudStorageCsvStore(BaseCsvStore):
         self.bucket_base_path = "https://storage.googleapis.com/idpd-poc-api"
 
     def get_version(
-        self, dataset_id: str, edition_id: str, version_id: str, check_exists = True
+        self, dataset_id: str, edition_id: str, version_id: str, check_exists=True
     ) -> Tuple[str, AsyncGenerator[bytes, None]]:
         """
         Provides a filename and async download generator as a Tuple.
