@@ -1,6 +1,4 @@
-import json
 import os
-import pathlib
 from typing import Optional
 
 from fastapi import Depends, FastAPI, Request, Response, status
@@ -11,6 +9,7 @@ from constants import CSV, JSONLD
 from custom_logging import logger
 from middleware import logging_middleware
 from store import StubCsvStore, StubMetadataStore
+from store.metadata.base import ContextStore
 
 # Simple env var flag to allow local browsing of api responses
 # while developing.
@@ -35,7 +34,7 @@ app.add_middleware(
 
 
 @app.get(
-    "/",
+    "/ns",
     responses={
         status.HTTP_200_OK: {"description": "Successful response. Returns a context."},
         status.HTTP_404_NOT_FOUND: {"description": "Not Found. No context found."},
@@ -47,7 +46,7 @@ app.add_middleware(
 def get_context(
     request: Request,
     response: Response,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    context_store: ContextStore = Depends(ContextStore),
 ):
     """
     Retrieve the context.
@@ -56,11 +55,12 @@ def get_context(
 
     logger.info("Received request for context")
     if request.headers["Accept"] == JSONLD or BROWSABLE:
-        context = metadata_store.get_context()
+        context = context_store.get_context()
         if context is not None:
             response.status_code = status.HTTP_200_OK
             return context
         response.status_code = status.HTTP_404_NOT_FOUND
+        logger.error("Context not found")
         return
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
@@ -103,6 +103,7 @@ def get_all_datasets(
             response.status_code = status.HTTP_200_OK
             return datasets
         response.status_code = status.HTTP_404_NOT_FOUND
+        logger.error("Datasets not found")
         return
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
@@ -372,6 +373,7 @@ def get_all_publishers(
             response.status_code = status.HTTP_200_OK
             return publishers
         response.status_code = status.HTTP_404_NOT_FOUND
+        logger.error("Publishers not found")
         return
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
@@ -458,6 +460,7 @@ def get_all_topics(
             response.status_code = status.HTTP_200_OK
             return topics
         response.status_code = status.HTTP_404_NOT_FOUND
+        logger.error("Topics not found")
         return
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE

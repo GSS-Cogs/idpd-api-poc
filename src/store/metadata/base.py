@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+import json
+from pathlib import Path
 from typing import Dict, Optional
 
 
@@ -86,3 +88,12 @@ class BaseMetadataStore(ABC):
         """
         Get a specific sub-topic for a specific topic
         """
+
+
+class ContextStore(ABC):
+    def __init__(self):
+        with open(Path("src/store/metadata/context.json").absolute(), "r") as json_file:
+            self.context = json.load(json_file)
+
+    def get_context(self):
+        return self.context

@@ -1,22 +1,20 @@
 from unittest.mock import MagicMock
 
-import pytest
-
 from fastapi import status
 from fastapi.testclient import TestClient
-from fastapi.exceptions import ResponseValidationError
 
 from constants import JSONLD
+from store.metadata.base import ContextStore
 from tests.fixtures.context import context_test_data
 from main import app, StubMetadataStore
 
-ENDPOINT = "/"
+ENDPOINT = "/ns"
 
 
 def test_context_valid_structure_200(context_test_data):
     mock_context = MagicMock()
     mock_context.get_context = MagicMock(return_value=context_test_data)
-    app.dependency_overrides[StubMetadataStore] = lambda: mock_context
+    app.dependency_overrides[ContextStore] = lambda: mock_context
     client = TestClient(app)
     response = client.get(ENDPOINT, headers={"Accept": JSONLD})
 
@@ -27,7 +25,7 @@ def test_context_valid_structure_200(context_test_data):
 def test_context_404():
     mock_context = MagicMock()
     mock_context.get_context = MagicMock(return_value=None)
-    app.dependency_overrides[StubMetadataStore] = lambda: mock_context
+    app.dependency_overrides[ContextStore] = lambda: mock_context
     client = TestClient(app)
     response = client.get(ENDPOINT, headers={"Accept": JSONLD})
 
@@ -38,7 +36,7 @@ def test_context_404():
 def test_context_406():
     mock_context = MagicMock()
     mock_context.get_context = MagicMock(return_value="irrelevant")
-    app.dependency_overrides[StubMetadataStore] = lambda: mock_context
+    app.dependency_overrides[ContextStore] = lambda: mock_context
     client = TestClient(app)
     response = client.get(ENDPOINT, headers={"Accept": "foo"})
 
