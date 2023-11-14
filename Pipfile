@@ -14,14 +14,12 @@ aiohttp = "*"
 
 [dev-packages]
 pytest = "*"
-pytest-vcr = "*"
 black = "*"
 pytest-cov = "*"
 ruff = "*"
 pytz = "*"
 docker = "*"
 isort = "*"
-vcrpy = "*"
 
 [requires]
 python_version = "3.9"
