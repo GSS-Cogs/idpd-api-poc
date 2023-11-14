@@ -9,8 +9,22 @@
             "title": "The Office for National Statistics",
             "description": "A description of ONS",
             "landing_page": "https://www.ons.gov.uk/"
+        },
+        {
+            "@id": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
+            "@type": "dcat:publisher",
+            "title": "The Department for Business, Energy & Industrial Strategy",
+            "description": "A description of BEIS",
+            "landing_page": "https://www.gov.uk/government/organisations/department-for-energy-security-and-net-zero/"
+        },
+        {
+            "@id": "https://staging.idpd.uk/publishers/ofcom",
+            "@type": "dcat:publisher",
+            "title": "The Office of Communications",
+            "description": "A description of OFCOM",
+            "landing_page": "https://www.ofcom.org.uk/"
         }
     ],
-    "count": 1,
+    "count": 3,
     "offset": 0
 }

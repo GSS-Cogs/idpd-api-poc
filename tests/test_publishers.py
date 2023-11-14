@@ -7,7 +7,7 @@ import pytest
 
 from constants import JSONLD
 from main import app, StubMetadataStore
-from fixtures.publishers import publishers_test_data
+from tests.fixtures.publishers import publishers_test_data
 
 # Devnotes:
 

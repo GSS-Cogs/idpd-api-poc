@@ -1,14 +1,8 @@
 import time
-import pytest
 
 import docker
 from docker import DockerClient
-
-from pathlib import Path
-import sys
-
-repo_root = Path(__file__).parent.parent
-sys.path.append(str(repo_root.absolute()))
+import pytest
 
 import data
 
@@ -20,7 +14,7 @@ mp.delenv("LOCAL_BROWSE_API", False)
 def setup_before_all_tests():
     """
     Spins up oxigraph for testing and populates
-    it via the default script in /devdata
+    it via the populate command in data.py
     """
 
     docker_client: DockerClient = docker.from_env()

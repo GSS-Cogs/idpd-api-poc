@@ -10,7 +10,8 @@ uvicorn = "*"
 httpx = "*"
 structlog = "*"
 pyld = "*"
-google-cloud-storage = "*"
+aiohttp = "*"
+requests = "*"
 
 [dev-packages]
 pytest = "*"
@@ -20,7 +21,10 @@ pytest-cov = "*"
 ruff = "*"
 pytz = "*"
 docker = "*"
-requests = "*"
+isort = "*"
+aiofiles = "*"
+pytest-asyncio = "*"
+vcrpy = "*"
 
 [requires]
 python_version = "3.9"

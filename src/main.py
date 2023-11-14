@@ -3,13 +3,13 @@ from typing import Optional
 
 from fastapi import Depends, FastAPI, Request, Response, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 
-from constants import CSV, JSONLD
 import schemas
-from store import StubMetadataStore, CloudStorageCsvStore
-
+from constants import CSV, JSONLD
 from custom_logging import logger
 from middleware import logging_middleware
+from store import CloudStorageCsvStore, StubMetadataStore
 
 # Simple env var flag to allow local browsing of api responses
 # while developing.
@@ -273,27 +273,35 @@ def get_dataset_edition_version_by_id(
     edition_id: str,
     version_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
-    csv_store: StubCsvStore = Depends(StubCsvStore),
+    csv_store: CloudStorageCsvStore = Depends(CloudStorageCsvStore),
 ):
     """
     Retrieve information about a specific version of a dataset.
     This endpoint returns detailed information about a specific version of a dataset based on its unique identifier.
     """
-    if request.headers["Accept"] == JSONLD or BROWSABLE:
+
+    if request.headers["Accept"] == CSV:
+        csv_file_name, data_stream = csv_store.get_version(
+            dataset_id, edition_id, version_id
+        )
+        if None in [csv_file_name, data_stream]:
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return
+        response = StreamingResponse(data_stream, media_type="application/octet-stream")
+        response.headers[
+            "Content-Disposition"
+        ] = f'attachment; filename="{csv_file_name}"'
+        response.status_code = status.HTTP_200_OK
+        return response
+
+    elif request.headers["Accept"] == JSONLD or BROWSABLE:
         version = metadata_store.get_version(dataset_id, edition_id, version_id)
         if version is not None:
             response.status_code = status.HTTP_200_OK
             return version
         response.status_code = status.HTTP_404_NOT_FOUND
         return
-    elif request.headers["Accept"] == CSV:
-        csv_data = csv_store.get_version(dataset_id, edition_id, version_id)
-        if csv_data is not None:
-            response.status_code = status.HTTP_200_OK
-            return csv_data
-        else:
-            response.status_code = status.HTTP_404_NOT_FOUND
-            return
+
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
@@ -462,35 +470,6 @@ def get_topic_by_id(
         if topic is not None:
             response.status_code = status.HTTP_200_OK
             return topic
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return
-    else:
-        response.status_code = status.HTTP_406_NOT_ACCEPTABLE
-        return
-
-@app.get("/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}")
-def version(
-    request: Request,
-    response: Response,
-    dataset_id: str,
-    edition_id: str,
-    version_id: str,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
-    csv_store: CloudStorageCsvStore = Depends(CloudStorageCsvStore)
-):
-    if request.headers["Accept"] == CSV:
-        csv_data = csv_store.get_version(dataset_id, edition_id, version_id)
-        if csv_data is not None:
-            response.status_code = status.HTTP_200_OK
-            return csv_data
-        else:
-            response.status_code = status.HTTP_404_NOT_FOUND
-            return
-    elif request.headers["Accept"] == JSONLD or BROWSABLE:
-        version = metadata_store.get_version(dataset_id, edition_id, version_id)
-        if version is not None:
-            response.status_code = status.HTTP_200_OK
-            return version
         response.status_code = status.HTTP_404_NOT_FOUND
         return
     else:

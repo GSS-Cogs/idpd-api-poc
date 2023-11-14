@@ -1,11 +1,10 @@
-from logging import exception
 import glob
 from pathlib import Path
-from google.cloud import storage
 
 from fastapi.responses import FileResponse
 
 from custom_logging import logger
+
 from ..base import BaseCsvStore
 
 
@@ -19,11 +18,10 @@ class StubCsvStore(BaseCsvStore):
         self.datasets = {}
 
         content_dir = Path(Path(__file__).parent / "content").absolute()
-        csv_file_paths = glob.glob(f'{content_dir}/**/**/*.csv', recursive=True)
+        csv_file_paths = glob.glob(f"{content_dir}/**/**/*.csv", recursive=True)
 
         # set as glob'ing multiple wildcard dirs can result in multiple hits for a single file
         for csv_file_path in set(csv_file_paths):
-
             # Create a key of dataset_id/edition_id/verion_id
             csv_key = "/".join(csv_file_path.split("/")[-3:]).rstrip(".csv")
 
@@ -56,23 +54,3 @@ class StubCsvStore(BaseCsvStore):
         )
 
         return FileResponse(csv_path) if csv_path else None
-
-class CloudStorageCsvStore(BaseCsvStore):
-    """
-    stub of a google clouds storage(bucket)
-    that returns a csvfile
-    """
-
-    #create the client in setup
-    def setup(self):
-        self.client = storage.Client.create_anonymous_client()
-        self.bucket = self.client.lookup_bucket("idpd-poc-api")
-    
-    def get_version(self, dataset_id: str, edition_id: str, version_id: str):
-        file_path = f"{dataset_id}/{edition_id}/{version_id}"
-        if not file_path.endswith(".csv"):
-            file_path = file_path + ".csv"
-        blop = self.bucket.blob(file_path)
-        the_url = f"gs://idpd-poc-api/{file_path}"
-        #the_url = f"https://storage.googleapis.com/idpd-poc-api/{blop.name}/{file_path}"
-        return FileResponse(Path(the_url))
