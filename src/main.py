@@ -43,7 +43,7 @@ app.add_middleware(
         },
     },
 )
-def get_context(
+def get_jsonld_context(
     request: Request,
     response: Response,
     context_store: ContextStore = Depends(ContextStore),

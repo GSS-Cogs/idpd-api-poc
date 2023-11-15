@@ -8,7 +8,7 @@ import pytest
 from constants import JSONLD
 from store.metadata.stub.store import StubMetadataStore
 from tests.fixtures.versions import version_test_data
-from main import app, StubMetadataStore
+from main import app
 
 
 # Devnotes:
