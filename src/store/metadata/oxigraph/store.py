@@ -41,7 +41,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         oxigraph_url = os.environ.get("GRAPH_DB_URL", None)
         assert oxigraph_url is not None, (
             "The env var 'GRAPH_DB_URL' must be set to use "
-            "the OxigraphMetadataStore store."   
+            "the OxigraphMetadataStore store."
         )
         configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
         self.db = Dataset(store=SPARQLUpdateStore(*configuration))
@@ -65,11 +65,11 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # together to create a sinlge Graph of the
         # data we need.
         result: Graph = (
-            construct_dataset_core(graph,dataset_id)
-            + construct_dataset_keywords(graph,dataset_id)
-            + construct_dataset_themes(graph,dataset_id)
-            + construct_dataset_contact_point(graph,dataset_id)
-            + construct_dataset_temporal_coverage(graph,dataset_id)
+            construct_dataset_core(graph, dataset_id)
+            + construct_dataset_keywords(graph, dataset_id)
+            + construct_dataset_themes(graph, dataset_id)
+            + construct_dataset_contact_point(graph, dataset_id)
+            + construct_dataset_temporal_coverage(graph, dataset_id)
             + construct_dataset_editions(graph, dataset_id)
         )
 
@@ -88,11 +88,11 @@ class OxigraphMetadataStore(BaseMetadataStore):
         #
         # The user doesnt need to know about blank RDF nodes so we need
         # to flatten and embed the latter two graphs in the dataset graph.
-        dataset_graph =  _get_single_graph_for_field(data, "@type")
-        contact_point_graph = _get_single_graph_for_field(data, "vcard:fn") 
+        dataset_graph = _get_single_graph_for_field(data, "@type")
+        contact_point_graph = _get_single_graph_for_field(data, "vcard:fn")
         temporal_coverage_graph = _get_single_graph_for_field(data, "dcat:endDate")
-        
-        if None in [dataset_graph, contact_point_graph,temporal_coverage_graph]:
+
+        if None in [dataset_graph, contact_point_graph, temporal_coverage_graph]:
             return None
 
         # Add `issued` and `modified` fields to each edition in `editions`
@@ -104,7 +104,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         dataset_graph["editions"] = edition_graphs
 
         # Compact and embed anonymous nodes
-        dataset_graph["contact_point"] = {   
+        dataset_graph["contact_point"] = {
             "name": contact_point_graph["vcard:fn"]["@value"],
             "email": contact_point_graph["vcard:hasEmail"],
         }
@@ -113,7 +113,6 @@ class OxigraphMetadataStore(BaseMetadataStore):
             "end": temporal_coverage_graph["dcat:startDate"]["@value"],
         }
         return dataset_graph
-
 
     def get_editions(self, dataset_id: str) -> Optional[Dict]:  # pragma: no cover
         """
@@ -232,9 +231,10 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # (as one rdflib.Graph() for each function) and add them
         # together to create a sinlge Graph of the
         # data we need.
-        result: Graph = (
-            construct_dataset_version(graph, dataset_id, edition_id, version_id)
-            + construct_dataset_version_table_schema(graph, dataset_id, edition_id, version_id)
+        result: Graph = construct_dataset_version(
+            graph, dataset_id, edition_id, version_id
+        ) + construct_dataset_version_table_schema(
+            graph, dataset_id, edition_id, version_id
         )
 
         # Serialize the graph into jsonld
@@ -242,7 +242,11 @@ class OxigraphMetadataStore(BaseMetadataStore):
 
         # Use a context file to shape our jsonld, removing long form references
         data = jsonld.flatten(
-            data, {"@context": constants.CONTEXT, "@type": ["csvw:Table","dcat:Distribution"]}
+            data,
+            {
+                "@context": constants.CONTEXT,
+                "@type": ["csvw:Table", "dcat:Distribution"],
+            },
         )
 
         version_graph = _get_single_graph_for_field(data, "@type")
@@ -344,7 +348,27 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Get all sub-topics for a specific topic
         """
-        raise NotImplementedError
+
+        # Populate the graph from the database
+        graph = self.db
+
+        # Use the construct wrappers to pull the raw RDF triples
+        # (as one rdflib.Graph() for each function) and add them
+        # together to create a single Graph of the
+        # data we need.
+        result: Graph = construct_dataset_topic_by_id(
+            graph, topic_id
+        ) + construct_dataset_subtopics_by_id(graph, topic_id)
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "dcat:theme"}
+        )
+        result = data["@graph"][0]
+        return result
 
     def get_sub_topic(
         self, topic_id: str, sub_topic_id: str
@@ -353,6 +377,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         Get a specific sub-topic for a specific topic
         """
         raise NotImplementedError
+
 
 def _get_single_graph_for_field(data: Dict, field: str) -> Optional[Dict]:
     """
