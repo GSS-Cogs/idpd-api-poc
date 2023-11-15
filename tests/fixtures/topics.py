@@ -2,8 +2,6 @@ import json
 import pathlib
 import pytest
 
-from store.metadata.stub.store import StubMetadataStore
-
 
 @pytest.fixture
 def topic_test_data():
