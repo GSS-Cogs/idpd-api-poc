@@ -1,5 +1,5 @@
 {
-  "@context": "https://staging.idpd.uk/#ns",
+  "@context": "https://staging.idpd.uk/ns#",
   "@id": "https://staging.idpd.uk/datasets/cpih/editions",
   "@type": "hydra:Collection",
   "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
