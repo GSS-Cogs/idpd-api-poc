@@ -1,52 +1,99 @@
 {
-    "@context": "https://staging.idpd.uk/#ns",
-    "@type": ["dcat:Catalog", "hydra:Collection"],
-    "@id": "https://staging.idpd.uk/datasets",
-    "datasets": [
+  "@context": "https://staging.idpd.uk/#ns",
+  "@type": ["dcat:Catalog", "hydra:Collection"],
+  "@id": "https://staging.idpd.uk/datasets",
+  "datasets": [
+      {
+          "@id": "https://staging.idpd.uk/datasets/cpih",
+          "@type": "dcat:DatasetSeries",
+          "identifier": "cpih",
+          "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
+          "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
+          "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
+          "issued": "2017-01-01T00:00:00",
+          "modified": "2017-01-01T00:00:00",
+          "next_release": "2019-04-19T09:30:00Z",
+          "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+          "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+          "contact_point": {
+            "name": "Consumer Price Inflation Enquiries",
+            "email": "mailto:cpih@ons.gov.uk"
+          },
+          "topics": [
+            "https://staging.idpd.uk/topics/economy",
+            "https://staging.idpd.uk/topics/prices"],
+          "frequency": "monthly",
+          "keywords": [
+            "inflation",
+            "consumer price inflation",
+            "cpi",
+            "cpih",
+            "consumer price index",
+            "consumer price index including owner occupiers' housing costs"
+          ],
+          "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+          "spatial_resolution":["E01", "E92"],
+          "spatial_coverage": "E92000001",
+          "temporal_resolution": ["P1M","P3M","P1Y"],
+          "temporal_coverage": {
+            "start": "2005-01-01T00:00:00Z",
+            "end": "2019-03-01T00:00:00Z"
+          },
+          "editions_url": "https://staging.idpd.uk/datasets/cpih/editions",
+          "editions": [
+            {
+              "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01",
+              "issued": "2017-02-21T09:30:00Z",
+              "modified": "2017-02-21T09:30:00Z"
+            }
+          ]
+        },
         {
-            "@id": "https://staging.idpd.uk/datasets/cpih",
-            "@type": "dcat:DatasetSeries",
-            "identifier": "cpih",
-            "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
-            "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
-            "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
-            "issued": "2017-01-01T00:00:00",
-            "modified": "2017-01-01T00:00:00",
-            "next_release": "2019-04-19T09:30:00Z",
-            "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-            "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-            "contact_point": {
-              "name": "Consumer Price Inflation Enquiries",
-              "email": "mailto:cpih@ons.gov.uk"
-            },
-            "topics": [
-              "https://staging.idpd.uk/topics/economy",
-              "https://staging.idpd.uk/topics/prices"],
-            "frequency": "monthly",
-            "keywords": [
-              "inflation",
-              "consumer price inflation",
-              "cpi",
-              "cpih",
-              "consumer price index",
-              "consumer price index including owner occupiers' housing costs"
-            ],
-            "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-            "spatial_resolution":["E01", "E92"],
-            "spatial_coverage": "E92000001",
-            "temporal_resolution": ["P1M","P3M","P1Y"],
-            "temporal_coverage": {
-              "start": "2005-01-01T00:00:00Z",
-              "end": "2019-03-01T00:00:00Z"
-            },
-            "editions_url": "https://staging.idpd.uk/datasets/cpih/editions",
-            "editions": [
-              {
-                "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01",
-                "issued": "2017-02-21T09:30:00Z",
-                "modified": "2017-02-21T09:30:00Z"
-              }
-            ]
+          "@id": "https://staging.idpd.uk/datasets/defra-b3-state-of-the-water-environment",
+          "@type": "dcat:DatasetSeries",
+          "identifier": "defra-b3-state-of-the-water-environment",
+          "title": "B3: State of the water environment",
+          "summary": "B3: State of the water environment",
+          "description": "B3: State of the water environment",
+          "issued": "2021-06-11T00:00:00",
+          "modified": "2022-11-02T15:18:00",
+          "next_release": "2024-04-19T09:30:00Z",
+          "publisher": "https://staging.idpd.uk/publishers/department-for-environment-food-and-rural-affairs",
+          "creator": "https://staging.idpd.uk/publishers/department-for-environment-food-and-rural-affairs",
+          "contact_point": {
+            "name": "Department for Environment, Food & Rural Affairs",
+            "email": "mailto:25YEPindicators@defra.gov.uk"
+          },
+          "topics":["https://staging.idpd.uk/topics/climatechange"],
+          "frequency": "irregular",
+          "keywords": [
+            "environment",
+            "water quality",
+            "defra"
+          ],
+          "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+          "spatial_resolution": [
+            "E01",
+            "E92"
+          ],
+          "spatial_coverage": "K02000001",
+          "temporal_resolution": [
+            "P1M",
+            "P3M",
+            "P1Y"
+          ],
+          "temporal_coverage": {
+            "start": "2005-01-01T00:00:00Z",
+            "end": "2019-12-31T00:00:00Z"
+          },
+          "editions_url": "https://staging.idpd.uk/datasets/defra-b3-state-of-the-water-environment/editions",
+          "editions": [
+            {
+              "@id": "https://staging.idpd.uk/datasets/defra-b3-state-of-the-water-environment/editions/2019-2022",
+              "issued": "2021-06-11T00:00:00",
+              "modified": "2022-11-02T15:18:00Z"
+            }
+          ]
         },
         {
           "@id": "https://staging.idpd.uk/datasets/a16mu",

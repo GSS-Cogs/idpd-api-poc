@@ -1,0 +1,95 @@
+{
+    "@context": "https://staging.idpd.uk/#ns",
+    "@id": "https://staging.idpd.uk/datasets/defra-b3-state-of-the-water-environment/editions/2019-2022/versions",
+    "@type": "hydra:Collection",
+    "title": "B3: State of the water environment",
+    "versions": [
+        {
+            "@type": ["dcat:Distribution", "csvw:Table"],
+            "@id": "https://staging.idpd.uk/datasets/defra-b3-state-of-the-water-environment/editions/2019-2022/versions/1",
+            "identifier": "1",
+            "issued": "2021-06-11T00:00:00",
+            "title": "B3: State of the water environment",
+            "summary": "B3: State of the water environment",
+            "description": "B3: State of the water environment",
+            "download_url": "https://staging.idpd.uk/datasets/defra-b3-state-of-the-water-environment/editions/2019-2022/versions/1.csv",
+            "media_type": "text/csv",
+            "table_schema": {
+                "columns": [
+                  {
+                    "name": "Period",
+                    "datatype": "number",
+                    "titles": "Period",
+                    "description": "The period associated with the observation."
+                  
+                  },
+                  {
+                    "name": "Environment Surveyed",
+                    "datatype": "string",
+                    "titles": "Environment Surveyed",
+                    "description": "Environment Surveyed"
+                  
+                  },
+                  {
+                    "name": "Region",
+                    "datatype": "string",
+                    "titles": "Region",
+                    "description": "Region"
+                  
+                  },
+                  {
+                    "name": "Survey Status",
+                    "datatype": "string",
+                    "titles": "Survey Status",
+                    "description": "Survey Status"
+                  
+                  },
+                  {
+                    "name": "Survey Type",
+                    "datatype": "string",
+                    "titles": "Survey Type",
+                    "description": "Survey Type"
+                  
+                  },
+                  {
+                    "name": "Status of Ground Waters",
+                    "datatype": "string",
+                    "titles": "Status of Ground Waters",
+                    "description": "Status of Ground Waters"
+                  
+                  },
+                  {
+                    "name": "Status of Surface Waters",
+                    "datatype": "number",
+                    "titles": "Status of Surface Waters",
+                    "description": "Status of Surface Waters"
+                  
+                  },
+                  {
+                    "name": "Status of Waters Specially Protected for Specific Uses",
+                    "datatype": "number",
+                    "titles": "Status of Waters Specially Protected for Specific Uses",
+                    "description": "Status of Waters Specially Protected for Specific Uses"
+                  
+                  },
+                  {
+                    "name": "Measure type",
+                    "datatype": "string",
+                    "titles": "Measure type",
+                    "description": "Measure type"
+                  
+                  },
+                  {
+                    "name": "Unit of Measure",
+                    "datatype": "string",
+                    "titles": "Unit of Measure",
+                    "description": "Unit of Measure"
+                  
+                  }
+                  ]
+            }
+        }
+    ],
+    "count": 1,
+    "offset": 0
+}
