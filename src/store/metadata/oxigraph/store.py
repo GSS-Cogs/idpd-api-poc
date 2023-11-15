@@ -146,7 +146,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             self.get_edition(dataset_id, x.split("/")[-1])
             for x in editions_graph["editions"]
         ]
-        editions_graph["@context"] = "https://staging.idpd.uk/#ns"
+        editions_graph["@context"] = "https://staging.idpd.uk/ns#"
         return editions_graph
 
     def get_edition(
@@ -310,7 +310,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             data["@graph"][0]["topics"][idx] = self.get_topic(topic_id)
 
         # TODO Update @context so it's not hardcoded
-        data["@graph"][0]["@context"] = "https://staging.idpd.uk/#ns"
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
         result = data["@graph"][0]
         return result
 
