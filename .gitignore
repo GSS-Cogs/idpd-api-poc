@@ -1,4 +1,6 @@
 __pycache__
 data
 out
-.coverage
+./.coverage
+launch.json
+.DS_Store

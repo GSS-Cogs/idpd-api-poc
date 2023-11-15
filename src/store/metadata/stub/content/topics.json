@@ -1,5 +1,5 @@
 {
-    "@context": "https://staging.idpd.uk/#ns",
+    "@context": "https://staging.idpd.uk/ns#",
     "@id": "https://staging.idpd.uk/topics",
     "@type": "hydra:Collection",
     "topics": [
@@ -24,8 +24,83 @@
             "parent_topics": [
                 "https://staging.idpd.uk/topics/economy"
             ]
+        },
+        {
+            "@id": "https://staging.idpd.uk/topics/labour-market-and-welfare",
+            "@type": "dcat:theme",
+            "identifier": "labour-market-and-welfare",
+            "title": "Labour Market and Welfare",
+            "description": "something describing Labour Market and Welfare",
+            "sub_topics": [],
+            "parent_topics": []
+        },
+        {
+            "@id": "https://staging.idpd.uk/topics/emissions",
+            "@type": "dcat:theme",
+            "identifier": "emissions",
+            "title": "Emissions",
+            "description": "something describing emissions",
+            "sub_topics": [
+                "https://staging.idpd.uk/topics/greenhouse-gas"
+            ],
+            "parent_topics": []
+        },
+        {
+            "@id": "https://staging.idpd.uk/topics/greenhouse-gas",
+            "@type": "dcat:theme",
+            "identifier": "greenhouse-gas",
+            "title": "Greenhouse Gas",
+            "description": "something describing greenhouse-gas",
+            "sub_topics": [],
+            "parent_topics": [
+                "https://staging.idpd.uk/topics/emissions"
+            ]
+        },
+        {
+            "@id": "https://staging.idpd.uk/topics/communication",
+            "@type": "dcat:theme",
+            "identifier": "communication",
+            "title": "Communication",
+            "description": "something describing communication",
+            "sub_topics": [],
+            "parent_topics": [
+                "https://staging.idpd.uk/topics/itandinternetindustry"
+            ]
+        },
+        {
+            "@id": "https://staging.idpd.uk/topics/itandinternetindustry",
+            "@type": "dcat:theme",
+            "identifier": "itandinternetindustry",
+            "title": "IT and Internet Industry",
+            "description": "something describing IT and Internet Industry",
+            "sub_topics": [
+                "https://staging.idpd.uk/topics/communication"
+            ],
+            "parent_topics": []
+        },
+        {
+            "@id": "https://staging.idpd.uk/topics/climatechange",
+            "@type": "dcat:theme",
+            "identifier": "climatechange",
+            "title": "IT and Internet Industry",
+            "description": "something describing climate change",
+            "sub_topics": [
+                "https://staging.idpd.uk/topics/carbonemissions"
+            ],
+            "parent_topics": []
+        },
+        {
+            "@id": "https://staging.idpd.uk/topics/carbonemissions",
+            "@type": "dcat:theme",
+            "identifier": "carbonemissions",
+            "title": "IT and Internet Industry",
+            "description": "something describing carbon emissions",
+            "sub_topics": [],
+            "parent_topics": [
+                "https://staging.idpd.uk/topics/climatechange"
+            ]
         }
     ],
-    "count": 2,
+    "count": 9,
     "offset": 0
 }

@@ -1,8 +1,8 @@
 # Note: differentiating between "data_constants" and "constants"
 # as this file is likely to get quite complicated.
 
-from pathlib import Path
 import json
+from pathlib import Path
 
 this_dir = Path(__file__).parent
 
