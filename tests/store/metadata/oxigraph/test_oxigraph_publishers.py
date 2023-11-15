@@ -16,7 +16,7 @@ def test_oxigraph_get_publishers_valid_return():
     store = OxigraphMetadataStore()
     publishers = store.get_publishers()
     publishers_schema = schemas.Publishers(**publishers)
-    assert publishers_schema.id == "https://staging.idpd.uk/publishers"
+    assert publishers_schema.id == "https://staging.idpd.uk/publishers/"
     assert publishers_schema.type == "hydra:Collection"
 
 
