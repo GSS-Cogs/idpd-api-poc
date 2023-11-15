@@ -1,5 +1,5 @@
 {
-    "@context": "https://staging.idpd.uk/#ns",
+    "@context": "https://staging.idpd.uk/ns#",
     "@type": ["dcat:Catalog", "hydra:Collection"],
     "@id": "https://staging.idpd.uk/datasets",
     "datasets": [
