@@ -369,10 +369,10 @@ def construct_publishers(graph: Graph) -> Graph:
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
         PREFIX dcterms: <http://purl.org/dc/terms/>
         PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
-        CONSTRUCT WHERE {{
+        CONSTRUCT WHERE {
             <https://staging.idpd.uk/publishers> a hydra:Collection ;
                 dcat:publisher ?publishers .
-        }}
+        }
         """
     results_graph = graph.query(query).graph
     result = results_graph if results_graph else Graph()
