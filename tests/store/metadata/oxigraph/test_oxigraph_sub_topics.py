@@ -7,5 +7,7 @@ def test_oxigraph_get_sub_topics_returns_valid_structure():
 
     topics = store.get_topics()
     sub_topics = store.get_sub_topics("economy")
-    topic_schema = schemas.Topic(**sub_topics)
-    assert True
+    sub_topics_schema = schemas.Topics(**sub_topics)
+    assert sub_topics_schema.id == "https://staging.idpd.uk/topics/economy/subtopics"
+    assert sub_topics_schema.topics[0].id == "https://staging.idpd.uk/topics/prices"
+    assert len(sub_topics_schema.topics) > 0

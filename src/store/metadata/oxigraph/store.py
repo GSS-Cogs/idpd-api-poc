@@ -339,7 +339,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             data, {"@context": constants.CONTEXT, "@type": "dcat:theme"}
         )
 
-        # Workaround to replace `themes` with `dcat:theme` in `@type`
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `themes`
         data["@graph"][0]["@type"] = "dcat:theme"
         result = data["@graph"][0]
         return result
@@ -365,9 +365,26 @@ class OxigraphMetadataStore(BaseMetadataStore):
 
         # Use a context file to shape our jsonld, removing long form references
         data = jsonld.flatten(
-            data, {"@context": constants.CONTEXT, "@type": "dcat:theme"}
+            data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
         )
         result = data["@graph"][0]
+
+        result["@context"] = "https://staging.idpd.uk/ns#"
+        result["@id"] = result["@id"] + "/subtopics"
+
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `topics`
+        result["@type"] = "hydra:Collection"
+
+        for idx, topic in enumerate(result["sub_topics"]):
+            result["sub_topics"][idx] = self.get_topic(topic.split("/")[-1])
+        result["topics"] = result.pop("sub_topics")
+
+        result["count"] = len(result["topics"])
+        result["offset"] = 0
+
+        del result["description"]
+        del result["identifier"]
+        del result["title"]
         return result
 
     def get_sub_topic(
