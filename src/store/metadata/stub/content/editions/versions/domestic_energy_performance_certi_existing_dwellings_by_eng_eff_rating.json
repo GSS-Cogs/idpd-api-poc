@@ -1,6 +1,6 @@
 {
     "@context": "https://staging.idpd.uk/#ns",
-    "@id": "https://staging.idpd.uk/datasets/mhclg/editions/2023-10/versions",
+    "@id": "https://staging.idpd.uk/datasets/domestic_energy_performance_certi_existing_dwellings_by_eng_eff_rating/editions/2023-07/versions",
     "@type": "hydra:Collection",
     "title": "Domestic Energy Performance Certificates for existing dwellings",
     "versions": [
@@ -9,13 +9,13 @@
                 "dcat:Distribution",
                 "csvw:Table"
             ],
-            "@id": "https://staging.idpd.uk/datasets/editions/2023-10",
+            "@id": "https://staging.idpd.uk/datasets/domestic_energy_performance_certi_existing_dwellings_by_eng_eff_rating/editions/2023-07",
             "identifier": "existing_dwellings_data",
-            "issued": "2023-10-26T09:30:00Z",
-            "title": "Table EB1: domestic Energy Performance Certificates for existing dwellings",
+            "issued": "2023-07-27T09:30:00Z",
+            "title": "Domestic Energy Performance Certificates for existing dwellings",
             "summary": "Data from certificates for existing domestic properties lodged on the Energy Performance of Buildings Registers, by average energy efficiency rating",
-            "description": "This data relates to the Energy Performance of Buildings Certificates published alongside the Energy Performance of Buildings Certificates Statistical release July to September 2023.",
-            "download_url": "https://staging.idpd.uk/datasets/mhclg/editions/2023-03/versions/1.csv",
+            "description": "This data relates to the Energy Performance of Buildings Certificates published alongside the Energy Performance of Buildings Certificates Statistical release May to July 2023.",
+            "download_url": "https://staging.idpd.uk/datasets/domestic_energy_performance_certi_existing_dwellings_by_eng_eff_rating/editions/2023-07/versions/existing_dwellings_data.csv",
             "media_type": "text/csv",
             "table_schema": {
                 "columns": [
@@ -32,22 +32,10 @@
                     "description": "The name associated with The geography code "
                     },
                     {
-                    "name": "Lodgements",
-                    "datatype": "decimal",
-                    "titles": "Lodgements",
-                    "description": "Lodgements of EPC is the process of validating the EPC. Here it is the number of lodgements"
-                    },
-                    {
                     "name": "Efficiency Rating",
                     "datatype": "string",
                     "titles": "Efficiency Rating",
                     "description": "The scale of energy efficiency rating on a scale of A to G with A being the most efficient and G being the least efficient"
-                    },
-                    {
-                    "name": "Total Floor Area (m2)",
-                    "datatype": "decimal",
-                    "titles": "Total Floor Area (m2)",
-                    "description": "Measure of total floor area"
                     },
                     {
                     "name": "Unit",

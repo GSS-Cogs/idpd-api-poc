@@ -49,20 +49,20 @@
             ]
         },
         {
-          "@id": "https://staging.idpd.uk/datasets/mhclg",
+          "@id": "https://staging.idpd.uk/datasets/DLUHC",
           "@type": "dcat:DatasetSeries",
-          "identifier": "MHCLG",
+          "identifier": "existing_dwellings_data",
           "title": "Table EB1: domestic Energy Performance Certificates for existing dwellings",
           "summary": "Data from certificates for existing domestic properties lodged on the Energy Performance of Buildings Registers, by average energy efficiency rating",
           "description": "Data from certificates for existing domestic properties lodged on the Energy Performance of Buildings Registers, by average energy efficiency rating",
-          "issued": "2023-10-26T09:30:00Z",
-          "modified": "2023-10-26T09:30:00Z",
-          "next_release": "2025-01-25T09:30:00Z",
+          "issued": "2023-07-27T09:30:00Z",
+          "modified": "2023-07-27T09:30:00Z",
+          "next_release": "2024-01-26T09:30:00Z",
           "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
           "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
           "contact_point": {
             "name": "Claire Smith",
-            "email": "EPBStats@levellingup.gov.uk"
+            "email": "mailto:EPBStats@levellingup.gov.uk"
           },
           "topics": [
             "https://staging.idpd.uk/topics/economy",
@@ -84,12 +84,12 @@
             "start": "2014-07-30T00:00:00Z",
             "end": "2014-07-30T00:00:00Z"
           },
-          "editions_url": "https://staging.idpd.uk/datasets/mhclg/editions",
+          "editions_url": "https://staging.idpd.uk/datasets/DLUHC/editions",
           "editions": [
             {
-              "@id": "https://staging.idpd.uk/datasets/mhclg/editions/2022-01",
-              "issued": "2023-10-26T09:30:00Z",
-              "modified": "2023-10-26T09:30:00Z"
+              "@id": "https://staging.idpd.uk/datasets/DLUHC/editions/2023-07",
+              "issued": "2023-07-27T09:30:00Z",
+              "modified": "2023-07-27T09:30:00Z"
             }
           ]
       }
