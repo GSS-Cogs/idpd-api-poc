@@ -4,6 +4,7 @@ from pathlib import Path
 from fastapi.responses import FileResponse
 
 from custom_logging import logger
+
 from ..base import BaseCsvStore
 
 
@@ -17,11 +18,10 @@ class StubCsvStore(BaseCsvStore):
         self.datasets = {}
 
         content_dir = Path(Path(__file__).parent / "content").absolute()
-        csv_file_paths = glob.glob(f'{content_dir}/**/**/*.csv', recursive=True)
+        csv_file_paths = glob.glob(f"{content_dir}/**/**/*.csv", recursive=True)
 
         # set as glob'ing multiple wildcard dirs can result in multiple hits for a single file
         for csv_file_path in set(csv_file_paths):
-
             # Create a key of dataset_id/edition_id/verion_id
             csv_key = "/".join(csv_file_path.split("/")[-3:]).rstrip(".csv")
 

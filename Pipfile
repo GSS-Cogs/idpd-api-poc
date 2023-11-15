@@ -20,6 +20,7 @@ ruff = "*"
 pytz = "*"
 docker = "*"
 requests = "*"
+isort = "*"
 
 [requires]
 python_version = "3.9"
