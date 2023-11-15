@@ -190,7 +190,7 @@ class StubMetadataStore(BaseMetadataStore):
             return None
         return contextualise(
             {
-                "@id": "https://staging.idpd.uk/topics",
+                "@id": f"https://staging.idpd.uk/topics/{topic_id}/subtopics",
                 "@type": "hydra:Collection",
                 "topics": sub_topics,
                 "count": len(sub_topics),

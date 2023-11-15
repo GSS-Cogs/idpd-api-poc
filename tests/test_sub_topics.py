@@ -6,7 +6,7 @@ from fastapi.testclient import TestClient
 import pytest
 
 from constants import JSONLD
-from tests.fixtures.topics import sub_topic_test_data
+from tests.fixtures.topics import topics_test_data
 from main import app, StubMetadataStore
 
 # Devnotes:
@@ -20,7 +20,7 @@ from main import app, StubMetadataStore
 ENDPOINT = "/topics/some-topic-id/subtopics"
 
 
-def test_sub_topics_valid_structure_200(sub_topic_test_data):
+def test_sub_topics_valid_structure_200(topics_test_data):
     """
     Confirms that:
 
@@ -33,7 +33,7 @@ def test_sub_topics_valid_structure_200(sub_topic_test_data):
     # Create a mock store with a callable mocked get_sub_topics() method
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
-    mock_metadata_store.get_sub_topics = MagicMock(return_value=sub_topic_test_data)
+    mock_metadata_store.get_sub_topics = MagicMock(return_value=topics_test_data)
     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
