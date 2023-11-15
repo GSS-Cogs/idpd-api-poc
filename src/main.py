@@ -471,3 +471,48 @@ def get_topic_by_id(
     else:
         response.status_code = status.HTTP_406_NOT_ACCEPTABLE
         return
+
+
+@app.get(
+    "/topics/{topic_id}/subtopics",
+    response_model=Optional[schemas.Topics],
+    responses={
+        status.HTTP_200_OK: {
+            "description": "Successful response. Returns all of the subtopics available in the system.",
+            "model": schemas.Topics,
+        },
+        status.HTTP_404_NOT_FOUND: {
+            "description": "Not Found. No subtopics are found.",
+            "model": None,
+        },
+        status.HTTP_406_NOT_ACCEPTABLE: {
+            "description": "Not Acceptable. The requested format is not supported.",
+            "model": None,
+        },
+    },
+)
+def get_sub_topics(
+    request: Request,
+    response: Response,
+    topic_id: str,
+    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+):
+    """
+    Retrieve subtopics.
+    This endpoint returns all of the subtopics available in the system for the given topic ID.
+    """
+    logger.info(
+        "Received request for subtopics for topic ID", data={"topic_id": topic_id}
+    )
+
+    if request.headers["Accept"] == JSONLD or BROWSABLE:
+        response.status_code = status.HTTP_200_OK
+        topics = metadata_store.get_sub_topics(topic_id)
+        if topics is not None:
+            response.status_code = status.HTTP_200_OK
+            return topics
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return
+    else:
+        response.status_code = status.HTTP_406_NOT_ACCEPTABLE
+        return
