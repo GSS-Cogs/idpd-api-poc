@@ -3,3 +3,4 @@ data
 out
 ./.coverage
 launch.json
+.DS_Store
