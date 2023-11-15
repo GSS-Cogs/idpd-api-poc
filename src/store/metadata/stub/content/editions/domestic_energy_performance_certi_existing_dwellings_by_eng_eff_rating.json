@@ -5,7 +5,7 @@
     "title": "Domestic Energy Performance Certificates for existing dwellings",
     "editions": [
         {
-            "@id": "https://staging.idpd.uk/datasets/domestic_energy_performance_certi_existing_dwellings_by_eng_eff_rating/editions/2023-10",
+            "@id": "https://staging.idpd.uk/datasets/domestic_energy_performance_certi_existing_dwellings_by_eng_eff_rating_2023_07/editions/2023-10",
             "@type": "dcat:Dataset",
             "in_series": "https://staging.idpd.uk/datasets/domestic_energy_performance_certi_existing_dwellings_by_eng_eff_rating",
             "identifier": "2023-07",
@@ -40,10 +40,10 @@
               "start": "2014-07-30T00:00:00Z",
               "end": "2014-07-30T00:00:00Z"
             },
-            "versions_url": "https://staging.idpd.uk/datasets/domestic_energy_performance_certi_existing_dwellings_by_eng_eff_rating/editions/2023-10/versions",
+            "versions_url": "https://staging.idpd.uk/datasets/domestic_energy_performance_certi_existing_dwellings_by_eng_eff_rating_2023_07/editions/2023-10/versions",
             "versions": [
               {
-                "@id": "https://staging.idpd.uk/datasets/domestic_energy_performance_certi_existing_dwellings_by_eng_eff_rating/editions/2023-10/versions/1",
+                "@id": "https://staging.idpd.uk/datasets/domestic_energy_performance_certi_existing_dwellings_by_eng_eff_rating_2023_07/editions/2023-10/versions/1",
                 "issued": "2023-07-27T09:30:00Z",
                 "modified": "2023-07-27T09:30:00Z"
               }

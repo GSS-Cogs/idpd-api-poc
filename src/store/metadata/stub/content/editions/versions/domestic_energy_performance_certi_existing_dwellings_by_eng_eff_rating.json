@@ -1,6 +1,6 @@
 {
     "@context": "https://staging.idpd.uk/#ns",
-    "@id": "https://staging.idpd.uk/datasets/domestic_energy_performance_certi_existing_dwellings_by_eng_eff_rating/editions/2023-07/versions",
+    "@id": "https://staging.idpd.uk/datasets/domestic_energy_performance_certi_existing_dwellings_by_eng_eff_rating_2023_07/editions/2023-07/versions",
     "@type": "hydra:Collection",
     "title": "Domestic Energy Performance Certificates for existing dwellings",
     "versions": [
@@ -9,13 +9,13 @@
                 "dcat:Distribution",
                 "csvw:Table"
             ],
-            "@id": "https://staging.idpd.uk/datasets/domestic_energy_performance_certi_existing_dwellings_by_eng_eff_rating/editions/2023-07",
+            "@id": "https://staging.idpd.uk/datasets/domestic_energy_performance_certi_existing_dwellings_by_eng_eff_rating_2023_07/editions/2023-07",
             "identifier": "existing_dwellings_data",
             "issued": "2023-07-27T09:30:00Z",
             "title": "Domestic Energy Performance Certificates for existing dwellings",
             "summary": "Data from certificates for existing domestic properties lodged on the Energy Performance of Buildings Registers, by average energy efficiency rating",
             "description": "This data relates to the Energy Performance of Buildings Certificates published alongside the Energy Performance of Buildings Certificates Statistical release May to July 2023.",
-            "download_url": "https://staging.idpd.uk/datasets/domestic_energy_performance_certi_existing_dwellings_by_eng_eff_rating/editions/2023-07/versions/existing_dwellings_data.csv",
+            "download_url": "https://staging.idpd.uk/datasets/domestic_energy_performance_certi_existing_dwellings_by_eng_eff_rating_2023_07/editions/2023-07/versions/existing_dwellings_data.csv",
             "media_type": "text/csv",
             "table_schema": {
                 "columns": [
