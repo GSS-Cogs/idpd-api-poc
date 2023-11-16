@@ -1,0 +1,100 @@
+{
+  "@context": "https://staging.idpd.uk/#ns",
+  "@id": "https://staging.idpd.uk/datasets/energy-use-fossil-fuels-by-fuel-type-and-industry/editions",
+  "@type": "hydra:Collection",
+  "title": "Energy use: fossil fuels by fuel type and industry",
+  "editions": [
+    {
+      "@id": "https://staging.idpd.uk/datasets/energy-use-fossil-fuels-by-fuel-type-and-industry/editions/2023-06",
+      "@type": "dcat:Dataset",
+      "in_series": "https://staging.idpd.uk/datasets/energy-use-fossil-fuels-by-fuel-type-and-industry",
+      "identifier": "2023-06",
+      "title": "Energy use: fossil fuels by fuel type and industry",
+      "summary": "The UK's fuel use by industry (SIC 2007 group - around 130 categories) and type (coal, natural gas, petrol, diesel oil for road vehicles (DERV), fuel oil, gas oil, aviation fuel and other), 1990 to 2021. The dataset excludes biofuels and waste.",
+      "description": "The UK's fuel use by industry (SIC 2007 group - around 130 categories) and type (coal, natural gas, petrol, diesel oil for road vehicles (DERV), fuel oil, gas oil, aviation fuel and other), 1990 to 2021. The dataset excludes biofuels and waste.",
+      "publisher": "https://staging.idpd.uk/office-for-national-statistics",
+      "creator": "office-for-national-statistics",
+      "contact_point": {
+        "name": "Environment Accounts",
+        "email": "mailto:environment.accounts@ons.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/agriculture-energy-and-environment"],
+      "frequency": "annual",
+      "keywords": [
+        "climate",
+        "emissions",
+        "environment",
+        "greenhouse-gas",
+        "pollution"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "issued": "2023-06-05T09:30:00Z",
+      "modified": "2023-06-05T12:55:00Z",
+      "spatial_resolution":["K02"],
+      "spatial_coverage": "K02000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "1990-01-01T00:00:00Z",
+        "end": "2021-12-31T00:00:00Z"
+      },
+      "versions_url": "https://staging.idpd.uk/datasets/energy-use-fossil-fuels-by-fuel-type-and-industry/editions/2023-06/versions",
+      "versions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/energy-use-fossil-fuels-by-fuel-type-and-industry/editions/2023-06/versions/1",
+          "issued": "2023-06-05T09:30:00",
+          "modified": "2023-06-05T12:55:00"
+        }
+      ],
+      "next_release": "2024-06-30T09:30:00Z",
+      "table_schema": {
+        "columns": [
+          {
+            "name": "year",
+            "datatype": "datetime",
+            "titles": "Year",
+            "description": "The time period associated with the observation."
+          },
+          {
+            "name": "section",
+            "datatype": "string",
+            "titles": "Standard Industrial Classification",
+            "description": "The standard industrial activity (or process) related to the energy consumption."
+          },
+          {
+            "name": "fuel",
+            "datatype": "string",
+            "titles": "Fuel",
+            "description": "The fuel type consumed by the SIC."
+          },
+          {
+            "name": "value",
+            "datatype": "decimal",
+            "titles": "Value",
+            "description": "Observation values of energy consumption."
+          },
+          {
+            "name": "measure",
+            "datatype": "string",
+            "titles": "Energy Comsumption",
+            "description": "Measure type asscoiated with the observation values."
+          },
+          {
+            "name": "unit",
+            "datatype": "string",
+            "titles": "Millions of tonnes of oil equivalent",
+            "description": "Unit of measure of energy consumption."
+          },
+          {
+            "name": "marker",
+            "datatype": "string",
+            "titles": "Observation Status",
+            "description": "Observational Attribute."
+          }
+        ]
+      }
+    }
+  ],
+  "count": 1,
+  "offset": 0
+}
