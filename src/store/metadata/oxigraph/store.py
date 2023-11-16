@@ -279,16 +279,18 @@ class OxigraphMetadataStore(BaseMetadataStore):
             data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
         )
 
-        # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url`
-        # also adds dcat: to the publishers
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url`,
+        #  this will needs to be removed later.
         data["@graph"][0]["@type"] = "hydra:Collection"
-        data["@graph"][0]["publishers"] = data["@graph"][0].pop("dcat:publisher")
 
-        for idx, publisher in enumerate(data["@graph"][0]["publishers"]):
-            publisher_id = publisher["@id"].split("/")[-1]
-            data["@graph"][0]["publishers"][idx] = self.get_publisher(publisher_id)
+        data["@graph"][0]["publishers"] = [
+        self.get_publisher(x["@id"].split("/")[-1])
+        for x in data["@graph"]
+        if "landing_page" in x.keys()
+        ]
+        del data["@graph"][0]["dcat:publisher"]
         
-        # TODO Update @context so it's not hardcoded
+        # TODO Update @context due to flatten(), this will need to be removed once flatten() doesn't change it.
         data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
         result = data["@graph"][0]
         
