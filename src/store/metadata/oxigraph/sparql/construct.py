@@ -45,15 +45,19 @@ def construct_dataset_themes(graph: Graph, dataset_id: str) -> Graph:
     result = results_graph if results_graph else Graph()
     return result
 
+
 def construct_datasets(graph: Graph) -> Graph:
     query = """
-        PREFIX dcat: <http://www.w3.org/ns/dcat#>
         PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
-        CONSTRUCT WHERE {
-        <https://staging.idpd.uk/topics> a dcat:DatasetSeries ;
-	        dcat:theme ?topic ;
-            hydra:offset ?offset ;
-            hydra:totalitems ?count .
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX ons: <https://data.ons.gov.uk/ns#>
+                CONSTRUCT WHERE {
+                <https://staging.idpd.uk/datasets> a dcat:Catalog , hydra:Collection ; 
+                    dcat:DatasetSeries ?datasets ;
+                    hydra:offset ?offset ;
+                    hydra:totalitems ?count .
+            
         }
         """
     results_graph = graph.query(query).graph

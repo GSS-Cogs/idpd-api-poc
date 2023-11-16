@@ -44,31 +44,37 @@ class OxigraphMetadataStore(BaseMetadataStore):
         )
         configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
         self.db = Dataset(store=SPARQLUpdateStore(*configuration))
-
+    
     def get_datasets(self) -> Optional[Dict]:  # pragma: no cover
-        """
-        Gets all datasets
-        """
-        graph = self.db
+            """
+            Gets all datasets
+            """
+            graph = self.db
 
-        result: Graph = construct_datasets(graph)
+            result: Graph = construct_datasets(graph)
 
         # Serialize the graph into jsonld
-        data = json.loads(result.serialize(format="json-ld"))
+            data = json.loads(result.serialize(format="json-ld"))
 
-        # Use a context file to shape our jsonld, removing long form references
-        data = jsonld.flatten(
-            data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
-        )
+            # Use a context file to shape our jsonld, removing long form references
+            data = jsonld.flatten(
+                data, {"@context": constants.CONTEXT, "@type": ["dcat:Catalog","hydra:Collection"]}
+            )
+        
+            data["@graph"][0]["@type"] = ["dcat:Catalog","hydra:Collection"]
+            data["@graph"][0]["datasets"] = data["@graph"][0].pop("dcat:DatasetSeries")
 
-        for idx, topic in enumerate(data["@graph"][0]["topics"]):
-            topic_id = topic["@id"].split("/")[-1]
-            data["@graph"][0]["topics"][idx] = self.get_topic(topic_id)
+            for idx, dataset in enumerate(data["@graph"][0]["datasets"]):
+                    dataset_id = dataset["@id"].split("/")[-1]
+                    data["@graph"][0]["datasets"][idx] = self.get_dataset(dataset_id)
 
-        # TODO Update @context so it's not hardcoded
-        data["@graph"][0]["@context"] = "https://staging.idpd.uk/#ns"
-        result = data["@graph"][0]
-        return result
+            # TODO Update @context so it's not hardcoded
+            data["@graph"][0]["@context"] = "https://staging.idpd.uk/#ns"
+            result = data["@graph"][0]
+            return result    
+
+
+
 
     def get_dataset(self, dataset_id: str) -> Optional[Dict]:
         """
