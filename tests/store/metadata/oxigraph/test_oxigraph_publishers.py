@@ -18,6 +18,8 @@ def test_oxigraph_get_publishers_valid_return():
     publishers_schema = schemas.Publishers(**publishers)
     assert publishers_schema.id == "https://staging.idpd.uk/publishers"
     assert publishers_schema.type == "hydra:Collection"
+    assert publishers_schema.count == 3
+    assert publishers_schema.offset == 0
 
 
 def test_topics_schema_validation():
