@@ -1,3 +1,4 @@
+from ensurepip import version
 import os
 from typing import Optional
 
@@ -245,7 +246,7 @@ def get_dataset_edition_by_id(
 
 @app.get(
     "/datasets/{dataset_id}/editions/{edition_id}/versions",
-    response_model=Optional[schemas.Versions],
+    response_model=Optional[schemas.VersionwithContext],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns all the versions for the specified edition of a dataset.",
