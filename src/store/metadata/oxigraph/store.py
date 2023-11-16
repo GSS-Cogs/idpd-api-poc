@@ -30,11 +30,8 @@ from .sparql.construct import (
     construct_edition_versions,
     construct_editions,
     construct_publisher,
-<<<<<<< HEAD
     construct_datasets,
-=======
     construct_publishers,
->>>>>>> main
     construct_dataset_version,
     construct_dataset_version_table_schema,
 )
