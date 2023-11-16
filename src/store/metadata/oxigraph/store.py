@@ -30,6 +30,7 @@ from .sparql.construct import (
     construct_edition_versions,
     construct_editions,
     construct_publisher,
+    construct_publishers,
     construct_dataset_version,
     construct_dataset_version_table_schema,
 )
@@ -262,7 +263,42 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets all publishers
         """
-        raise NotImplementedError
+
+        # Specify the named graph from which we are fetching data
+        graph = self.db
+        
+        # Use the construct wrappers to pull the raw RDF triples
+        # (as one rdflib.Graph() for each function) and add them
+        # together to create a sinlge Graph of the
+        # data we need.
+        result: Graph = (
+            construct_publishers(graph)
+        )
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
+        )
+
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url`,
+        #  this will needs to be removed later.
+        data["@graph"][0]["@type"] = "hydra:Collection"
+
+        data["@graph"][0]["publishers"] = [
+        self.get_publisher(x["@id"].split("/")[-1])
+        for x in data["@graph"]
+        if "landing_page" in x.keys()
+        ]
+        del data["@graph"][0]["dcat:publisher"]
+        
+        # TODO Update @context due to flatten(), this will need to be removed once flatten() doesn't change it.
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
+        result = data["@graph"][0]
+        
+        return result
 
     def get_publisher(self, publisher_id: str) -> Optional[Dict]:  # pragma: no cover
         """

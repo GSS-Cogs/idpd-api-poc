@@ -376,6 +376,28 @@ def construct_edition_temporal_coverage(
     results_graph = graph.query(query).graph
     result = results_graph if results_graph else Graph()
     return result
+  
+def construct_publishers(graph: Graph) -> Graph:
+    query = """
+        PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX dcterms: <http://purl.org/dc/terms/>
+        PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+        CONSTRUCT WHERE {
+            <https://staging.idpd.uk/publishers> a hydra:Collection ;
+                dcat:publisher ?publishers ;
+                hydra:totalitems ?count ;
+    			hydra:offset ?offset .
+
+            ?publishers a dcat:publisher;
+                dcterms:title ?title;
+                dcterms:description ?description;
+    			dcat:landingPage ?landingpage .
+
+        }
+        """
+    results_graph = graph.query(query).graph
+    result = results_graph if results_graph else Graph()
+    return result
 
 
 def construct_dataset_version(
