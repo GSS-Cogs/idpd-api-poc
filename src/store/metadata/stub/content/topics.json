@@ -99,6 +99,28 @@
             "parent_topics": [
                 "https://staging.idpd.uk/topics/climatechange"
             ]
+        },
+        {
+            "@id": "https://staging.idpd.uk/topics/agriculture-energy-and-environment",
+            "@type": "skos:Concept",
+            "identifier": "agriculture-energy-and-environment",
+            "title": "Agriculture, energy and environment",
+            "description": "Food and farming, the natural environment, flooding and water, and environmental quality",
+            "sub_topics": [
+                "https://staging.idpd.uk/topics/climate-change"
+            ],
+            "parent_topics": []
+        },
+        {
+            "@id": "https://staging.idpd.uk/topics/climate-change",
+            "@type": "skos:Concept",
+            "identifier": "climate-change",
+            "title": "Climate change",
+            "description": "Long term shifts in temperature and weather patterns of the environment",
+            "sub_topics": [],
+            "parent_topics": [
+              "https://staging.idpd.uk/topics/agriculture-energy-and-environment"
+            ]
         }
     ],
     "count": 9,
