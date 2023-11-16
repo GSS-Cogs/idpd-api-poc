@@ -1,5 +1,5 @@
 {
-    "@context": "https://staging.idpd.uk/#ns",
+    "@context": "https://staging.idpd.uk/ns#",
     "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions",
     "@type": "hydra:Collection",
     "title": "Local authority greenhouse gas emissions",

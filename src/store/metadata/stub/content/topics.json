@@ -1,5 +1,5 @@
 {
-    "@context": "https://staging.idpd.uk/#ns",
+    "@context": "https://staging.idpd.uk/ns#",
     "@id": "https://staging.idpd.uk/topics",
     "@type": "hydra:Collection",
     "topics": [
@@ -26,13 +26,13 @@
             ]
         },
         {
-            "@id": "https://staging.idpd.uk/topics/labour-market-and-welfare",  
-            "@type": "dcat:theme",  
-            "identifier": "labour-market-and-welfare",  
-            "title": "Labour Market and Welfare",  
-            "description": "something describing Labour Market and Welfare",  
-            "sub_topics": [],  
-            "parent_topics": []  
+            "@id": "https://staging.idpd.uk/topics/labour-market-and-welfare",
+            "@type": "dcat:theme",
+            "identifier": "labour-market-and-welfare",
+            "title": "Labour Market and Welfare",
+            "description": "something describing Labour Market and Welfare",
+            "sub_topics": [],
+            "parent_topics": []
         },
         {
             "@id": "https://staging.idpd.uk/topics/emissions",

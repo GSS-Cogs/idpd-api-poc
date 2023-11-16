@@ -30,7 +30,9 @@ from .sparql.construct import (
     construct_edition_versions,
     construct_editions,
     construct_publisher,
-    construct_publishers
+    construct_publishers,
+    construct_dataset_version,
+    construct_dataset_version_table_schema,
 )
 from custom_logging import logger
 
@@ -146,7 +148,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             self.get_edition(dataset_id, x.split("/")[-1])
             for x in editions_graph["editions"]
         ]
-        editions_graph["@context"] = "https://staging.idpd.uk/#ns"
+        editions_graph["@context"] = "https://staging.idpd.uk/ns#"
         return editions_graph
 
     def get_edition(
@@ -224,7 +226,34 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets a specific version of a specific edition of a specific dataset
         """
-        raise NotImplementedError
+        # Specify the named graph from which we are fetching data
+        graph = self.db
+
+        # Use the construct wrappers to pull the raw RDF triples
+        # (as one rdflib.Graph() for each function) and add them
+        # together to create a sinlge Graph of the
+        # data we need.
+        result: Graph = (
+            construct_dataset_version(graph, dataset_id, edition_id, version_id)
+            + construct_dataset_version_table_schema(graph, dataset_id, edition_id, version_id)
+        )
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": ["csvw:Table","dcat:Distribution"]}
+        )
+
+        version_graph = _get_single_graph_for_field(data, "@type")
+        columns_graph = [x for x in data["@graph"] if "datatype" in x.keys()]
+        for column in columns_graph:
+            del column["@id"]
+        version_graph["table_schema"]["columns"] = columns_graph
+        del version_graph["table_schema"]["@id"]
+
+        return version_graph
 
     def get_publishers(self) -> Optional[Dict]:  # pragma: no cover
         """
@@ -304,7 +333,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             data["@graph"][0]["topics"][idx] = self.get_topic(topic_id)
 
         # TODO Update @context so it's not hardcoded
-        data["@graph"][0]["@context"] = "https://staging.idpd.uk/#ns"
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
         result = data["@graph"][0]
         return result
 

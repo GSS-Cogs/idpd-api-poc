@@ -1,5 +1,5 @@
 {
-  "@context": "https://staging.idpd.uk/#ns",
+  "@context": "https://staging.idpd.uk/ns#",
   "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions/2005-2019/versions",
   "@type": "hydra:Collection",
   "title": "2005 to 2019 local authority carbon dioxide (CO2) emissions",
