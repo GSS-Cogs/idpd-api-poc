@@ -50,8 +50,6 @@ def construct_datasets(graph: Graph) -> Graph:
     query = """
         PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
-                PREFIX dcterms: <http://purl.org/dc/terms/>
-                PREFIX ons: <https://data.ons.gov.uk/ns#>
                 CONSTRUCT WHERE {
                 <https://staging.idpd.uk/datasets> a dcat:Catalog , hydra:Collection ; 
                     dcat:DatasetSeries ?datasets ;

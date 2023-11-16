@@ -62,14 +62,15 @@ class OxigraphMetadataStore(BaseMetadataStore):
             data = jsonld.flatten(
                 data, {"@context": constants.CONTEXT, "@type": ["dcat:Catalog","hydra:Collection"]}
             )
-        
+
+            # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url'
             data["@graph"][0]["@type"] = ["dcat:Catalog","hydra:Collection"]
-            data["@graph"][0]["datasets"] = data["@graph"][0].pop("dcat:DatasetSeries")
 
-            for idx, dataset in enumerate(data["@graph"][0]["datasets"]):
-                    dataset_id = dataset["@id"].split("/")[-1]
-                    data["@graph"][0]["datasets"][idx] = self.get_dataset(dataset_id)
-
+            data["@graph"][0]["datasets"] = [
+                self.get_dataset(dataset["@id"].split("/")[-1]) 
+                for dataset in data["@graph"][0]["dcat:DatasetSeries"]
+            ]
+            del data["@graph"][0]["dcat:DatasetSeries"]
             # TODO Update @context so it's not hardcoded
             data["@graph"][0]["@context"] = "https://staging.idpd.uk/#ns"
             result = data["@graph"][0]
