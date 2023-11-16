@@ -30,6 +30,7 @@ from .sparql.construct import (
     construct_edition_versions,
     construct_editions,
     construct_publisher,
+    construct_datasets,
     construct_publishers,
     construct_dataset_version,
     construct_dataset_version_table_schema,
@@ -46,12 +47,38 @@ class OxigraphMetadataStore(BaseMetadataStore):
         )
         configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
         self.db = Dataset(store=SPARQLUpdateStore(*configuration))
-
+    
     def get_datasets(self) -> Optional[Dict]:  # pragma: no cover
-        """
-        Gets all datasets
-        """
-        raise NotImplementedError
+            """
+            Gets all datasets
+            """
+            graph = self.db
+
+            result: Graph = construct_datasets(graph)
+
+        # Serialize the graph into jsonld
+            data = json.loads(result.serialize(format="json-ld"))
+
+            # Use a context file to shape our jsonld, removing long form references
+            data = jsonld.flatten(
+                data, {"@context": constants.CONTEXT, "@type": ["dcat:Catalog","hydra:Collection"]}
+            )
+
+            # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url'
+            data["@graph"][0]["@type"] = ["dcat:Catalog","hydra:Collection"]
+
+            data["@graph"][0]["datasets"] = [
+                self.get_dataset(dataset["@id"].split("/")[-1]) 
+                for dataset in data["@graph"][0]["dcat:DatasetSeries"]
+            ]
+            del data["@graph"][0]["dcat:DatasetSeries"]
+            # TODO Update @context so it's not hardcoded
+            data["@graph"][0]["@context"] = "https://staging.idpd.uk/#ns"
+            result = data["@graph"][0]
+            return result    
+
+
+
 
     def get_dataset(self, dataset_id: str) -> Optional[Dict]:
         """
