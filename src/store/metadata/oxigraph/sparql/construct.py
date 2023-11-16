@@ -26,7 +26,9 @@ def construct_dataset_core(graph: Graph, dataset_id: str) -> Graph:
             dcterms:temporalResolution ?temporal_resolution ;
             hydra:Collection ?editions_url  .
         }}
-        """.format(dataset_id=dataset_id)
+        """.format(
+        dataset_id=dataset_id
+    )
 
     results_graph = graph.query(query).graph
     result = results_graph if results_graph else Graph()
@@ -40,7 +42,9 @@ def construct_dataset_themes(graph: Graph, dataset_id: str) -> Graph:
             <https://staging.idpd.uk/datasets/{dataset_id}> a dcat:DatasetSeries ;
                 dcat:theme ?theme .
         }}
-        """.format(dataset_id=dataset_id)
+        """.format(
+        dataset_id=dataset_id
+    )
     results_graph = graph.query(query).graph
     result = results_graph if results_graph else Graph()
     return result
@@ -66,7 +70,6 @@ def construct_dataset_topic_by_id(graph: Graph, topic_id: str) -> Graph:
     query = """
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
         PREFIX dcterms: <http://purl.org/dc/terms/>
-        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
         CONSTRUCT WHERE {{
             <https://staging.idpd.uk/topics/{topic_id}> a dcat:theme ;
             dcterms:identifier ?identifier ;
@@ -112,20 +115,22 @@ def construct_dataset_parent_topics_by_id(graph: Graph, topic_id: str) -> Graph:
     return result
 
 
-def construct_dataset_keywords(graph: Graph,dataset_id: str) -> Graph:
+def construct_dataset_keywords(graph: Graph, dataset_id: str) -> Graph:
     query = """
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
         CONSTRUCT WHERE {{
             <https://staging.idpd.uk/datasets/{dataset_id}> a dcat:DatasetSeries ;
                 dcat:keyword ?keyword .
         }}
-        """.format(dataset_id=dataset_id)
+        """.format(
+        dataset_id=dataset_id
+    )
     results_graph = graph.query(query).graph
     result = results_graph if results_graph else Graph()
     return result
 
 
-def construct_dataset_contact_point(graph: Graph, dataset_id:  str) -> Graph:
+def construct_dataset_contact_point(graph: Graph, dataset_id: str) -> Graph:
     query = """
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
         PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
@@ -136,7 +141,9 @@ def construct_dataset_contact_point(graph: Graph, dataset_id:  str) -> Graph:
             ?contact_point vcard:fn ?name ;
                 vcard:hasEmail ?email .
         }}
-        """.format(dataset_id=dataset_id)
+        """.format(
+        dataset_id=dataset_id
+    )
     results_graph = graph.query(query).graph
     result = results_graph if results_graph else Graph()
 
@@ -154,7 +161,9 @@ def construct_dataset_temporal_coverage(graph: Graph, dataset_id: str) -> Graph:
             ?temporal_coverage dcat:startDate ?start_date ;
                 dcat:endDate ?end_date .
         }}
-        """.format(dataset_id=dataset_id)
+        """.format(
+        dataset_id=dataset_id
+    )
     results_graph = graph.query(query).graph
     result = results_graph if results_graph else Graph()
     return result
@@ -171,11 +180,15 @@ def construct_dataset_editions(graph: Graph, dataset_id):
             ?editions dcterms:issued ?issued ;
                 dcterms:modified ?modified .
         }}
-    """.format(dataset_id=dataset_id)
+    """.format(
+        dataset_id=dataset_id
+    )
     results_graph = graph.query(query).graph
     result = results_graph if results_graph else Graph()
 
     return result
+
+
 def construct_publisher(graph: Graph, publisher_id: str) -> Graph:
     query = """
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -364,6 +377,7 @@ def construct_edition_temporal_coverage(
     result = results_graph if results_graph else Graph()
     return result
 
+
 def construct_dataset_version(
     graph: Graph, dataset_id: str, edition_id: str, version_id: str
 ) -> Graph:
@@ -381,12 +395,14 @@ def construct_dataset_version(
         dcat:downloadUrl ?download_url ;
         dcterms:MediaType ?mediatype .
         }}
-        """.format(dataset_id=dataset_id, edition_id=edition_id, version_id=version_id
+        """.format(
+        dataset_id=dataset_id, edition_id=edition_id, version_id=version_id
     )
 
     results_graph = graph.query(query).graph
     result = results_graph if results_graph else Graph()
     return result
+
 
 def construct_dataset_version_table_schema(
     graph: Graph, dataset_id: str, edition_id: str, version_id: str

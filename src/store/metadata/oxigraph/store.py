@@ -367,25 +367,27 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
         )
-        result = data["@graph"][0]
+        sub_topics_graph = data["@graph"][0]
 
-        result["@context"] = "https://staging.idpd.uk/ns#"
-        result["@id"] = result["@id"] + "/subtopics"
+        sub_topics_graph["@context"] = "https://staging.idpd.uk/ns#"
+        sub_topics_graph["@id"] = sub_topics_graph["@id"] + "/subtopics"
 
         # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `topics`
-        result["@type"] = "hydra:Collection"
+        sub_topics_graph["@type"] = "hydra:Collection"
 
-        for idx, topic in enumerate(result["sub_topics"]):
-            result["sub_topics"][idx] = self.get_topic(topic.split("/")[-1])
-        result["topics"] = result.pop("sub_topics")
+        sub_topics_graph["topics"] = [
+            self.get_topic(sub_topic.split("/")[-1])
+            for sub_topic in sub_topics_graph["sub_topics"]
+        ]
 
-        result["count"] = len(result["topics"])
-        result["offset"] = 0
+        sub_topics_graph["count"] = len(sub_topics_graph["topics"])
+        sub_topics_graph["offset"] = 0
 
-        del result["description"]
-        del result["identifier"]
-        del result["title"]
-        return result
+        del sub_topics_graph["description"]
+        del sub_topics_graph["identifier"]
+        del sub_topics_graph["title"]
+        del sub_topics_graph["sub_topics"]
+        return sub_topics_graph
 
     def get_sub_topic(
         self, topic_id: str, sub_topic_id: str
