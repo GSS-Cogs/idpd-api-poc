@@ -189,16 +189,17 @@ class Version(BaseModel):
     media_type: str
     table_schema: TableSchema
 
+#Added the new class
 class VersionwithContext(Version):
     context: str = Field(alias="@context")
 
-
+#changed the context to be optional and return the appropriate value depening on it
 class Versions(BaseModel):
-    context: str = Field(alias="@context")
+    context: Optional[str] = Field(alias="@context")
     id: str = Field(alias="@id")
     type: Literal["hydra:Collection"] = Field(alias="@type")
     title: str = Field(max_length=90)
-    versions: List[Version]
+    versions: Union[List[Version], List[VersionwithContext]]
     count: int
     offset: int
 
