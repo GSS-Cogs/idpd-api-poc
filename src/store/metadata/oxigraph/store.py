@@ -279,6 +279,9 @@ class OxigraphMetadataStore(BaseMetadataStore):
             data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
         )
 
+        data["@graph"][0]["@type"] = "hydra:Collection"
+        data["@graph"][0]["publishers"] = data["@graph"][0].pop("dcat:publisher")
+
         for idx, publisher in enumerate(data["@graph"][0]["publishers"]):
             publisher_id = publisher["@id"].split("/")[-1]
             data["@graph"][0]["publishers"][idx] = self.get_publisher(publisher_id)

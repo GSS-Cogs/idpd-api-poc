@@ -371,7 +371,15 @@ def construct_publishers(graph: Graph) -> Graph:
         PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
         CONSTRUCT WHERE {
             <https://staging.idpd.uk/publishers> a hydra:Collection ;
-                dcat:publisher ?publishers .
+                dcat:publisher ?publishers ;
+                hydra:totalitems ?count ;
+    			hydra:offset ?offset .
+
+            ?publishers a dcat:publisher;
+                dcterms:title ?title;
+                dcterms:description ?description;
+    			dcat:landingPage ?landingpage .
+
         }
         """
     results_graph = graph.query(query).graph
