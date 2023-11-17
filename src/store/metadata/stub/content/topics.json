@@ -64,11 +64,11 @@
             "description": "The imparting or exchanging of information by speaking, writing, or using some other medium.",
             "sub_topics": [],
             "parent_topics": [
-                "https://staging.idpd.uk/topics/itandinternetindustry"
+                "https://staging.idpd.uk/topics/it-and-internet-industry"
             ]
         },
         {
-            "@id": "https://staging.idpd.uk/topics/itandinternetindustry",
+            "@id": "https://staging.idpd.uk/topics/it-and-internet-industry",
             "@type": "dcat:theme",
             "identifier": "itandinternetindustry",
             "title": "IT and Internet Industry",
@@ -79,25 +79,25 @@
             "parent_topics": []
         },
         {
-            "@id": "https://staging.idpd.uk/topics/climatechange",
+            "@id": "https://staging.idpd.uk/topics/climate-change",
             "@type": "dcat:theme",
             "identifier": "climatechange",
             "title": "Climate Change",
             "description": "Climate change refers to long-term shifts in temperatures and weather patterns. Such shifts can be natural, due to changes in the sun’s activity or large volcanic eruptions. But since the 1800s, human activities have been the main driver of climate change, primarily due to the burning of fossil fuels like coal, oil and gas.",
             "sub_topics": [
-                "https://staging.idpd.uk/topics/carbonemissions"
+                "https://staging.idpd.uk/topics/carbon-emissions"
             ],
             "parent_topics": []
         },
         {
-            "@id": "https://staging.idpd.uk/topics/carbonemissions",
+            "@id": "https://staging.idpd.uk/topics/carbon-emissions",
             "@type": "dcat:theme",
             "identifier": "carbonemissions",
             "title": "Carbon Emissions",
             "description": "Carbon dioxide emissions or CO2 emissions are emissions stemming from the burning of fossil fuels and the manufacture of cement; they include carbon dioxide produced during consumption of solid, liquid, and gas fuels as well as gas flaring.",
             "sub_topics": [],
             "parent_topics": [
-                "https://staging.idpd.uk/topics/climatechange"
+                "https://staging.idpd.uk/topics/climate-change"
             ]
         }
     ],
