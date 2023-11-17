@@ -6,9 +6,8 @@ from fastapi.testclient import TestClient
 import pytest
 
 from constants import CSV, JSONLD
-from store.metadata.stub.store import StubMetadataStore
 from tests.fixtures.versions import version_test_data
-from main import app, StubCsvStore
+from main import app, StubCsvStore, OxigraphMetadataStore
 
 
 # Devnotes:
@@ -35,7 +34,7 @@ def test_version_valid_structure_200(version_test_data):
 
     mock_metadata_store = MagicMock()
     mock_metadata_store.get_version = MagicMock(return_value=version_test_data)
-    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
+    app.dependency_overrides[OxigraphMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
@@ -61,7 +60,7 @@ def test_version_invalid_structure_raises():
     mock_metadata_store.get_version = MagicMock(
         return_value={"items": [{"invalid_field": "Invalid version"}]}
     )
-    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
+    app.dependency_overrides[OxigraphMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
@@ -83,7 +82,7 @@ def test_version_404():
     mock_metadata_store = MagicMock()
     # Note: returning an empty list to simulate "id is not found"
     mock_metadata_store.get_version = MagicMock(return_value=None)
-    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
+    app.dependency_overrides[OxigraphMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
@@ -107,7 +106,7 @@ def test_version_406():
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_version = MagicMock(return_value="irrelevant")
-    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
+    app.dependency_overrides[OxigraphMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)

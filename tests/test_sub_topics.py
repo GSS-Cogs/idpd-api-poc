@@ -7,7 +7,7 @@ import pytest
 
 from constants import JSONLD
 from tests.fixtures.topics import topics_test_data
-from main import app, StubMetadataStore
+from main import app, OxigraphMetadataStore
 
 # Devnotes:
 
@@ -34,7 +34,7 @@ def test_sub_topics_valid_structure_200(topics_test_data):
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_sub_topics = MagicMock(return_value=topics_test_data)
-    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
+    app.dependency_overrides[OxigraphMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
@@ -60,7 +60,7 @@ def test_sub_topics_invalid_structure_raises():
     mock_metadata_store.get_sub_topics = MagicMock(
         return_value={"topics": [{"invalid_field": "Invalid topic"}], "offset": 0}
     )
-    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
+    app.dependency_overrides[OxigraphMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
@@ -83,7 +83,7 @@ def test_sub_topics_404():
     mock_metadata_store = MagicMock()
     # Note: returning an empty list to simulate "id is not found"
     mock_metadata_store.get_sub_topics = MagicMock(return_value=None)
-    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
+    app.dependency_overrides[OxigraphMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
@@ -105,7 +105,7 @@ def test_sub_topics_406():
     mock_metadata_store = MagicMock()
     # Note: returning a populated list to simulate id is found
     mock_metadata_store.get_sub_topics = MagicMock(return_value={})
-    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
+    app.dependency_overrides[OxigraphMetadataStore] = lambda: mock_metadata_store
 
     # Override the stub_store dependency with the mock_metadata_store
     # Create a TestClient for your FastAPI app

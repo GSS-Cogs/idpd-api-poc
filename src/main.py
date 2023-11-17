@@ -8,7 +8,7 @@ import schemas
 from constants import CSV, JSONLD
 from custom_logging import logger
 from middleware import logging_middleware
-from store import OxigraphMetadataStore, StubCsvStore, StubMetadataStore
+from store import OxigraphMetadataStore, StubMetadataStore, StubCsvStore
 from store.metadata.context import ContextStore
 
 # Simple env var flag to allow local browsing of api responses
@@ -88,7 +88,7 @@ def get_context(
 def get_all_datasets(
     request: Request,
     response: Response,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: OxigraphMetadataStore = Depends(OxigraphMetadataStore),
 ):
     """
     Retrieve all the datasets.
@@ -132,7 +132,7 @@ def get_dataset_by_id(
     request: Request,
     response: Response,
     dataset_id: str,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: OxigraphMetadataStore = Depends(OxigraphMetadataStore),
 ):
     """
     Retrieve information about a specific dataset by ID.
@@ -174,7 +174,7 @@ def get_dataset_editions(
     request: Request,
     response: Response,
     dataset_id: str,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: OxigraphMetadataStore = Depends(OxigraphMetadataStore),
 ):
     """
     Retrieve all the editions for a specific dataset.
@@ -219,7 +219,7 @@ def get_dataset_edition_by_id(
     response: Response,
     dataset_id: str,
     edition_id: str,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: OxigraphMetadataStore = Depends(OxigraphMetadataStore),
 ):
     """
     Retrieve information about a specific edition of a dataset.
@@ -307,7 +307,7 @@ def get_dataset_edition_version_by_id(
     dataset_id: str,
     edition_id: str,
     version_id: str,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: OxigraphMetadataStore = Depends(OxigraphMetadataStore),
     csv_store: StubCsvStore = Depends(StubCsvStore),
 ):
     """
@@ -358,7 +358,7 @@ def get_dataset_edition_version_by_id(
 def get_all_publishers(
     request: Request,
     response: Response,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: OxigraphMetadataStore = Depends(OxigraphMetadataStore),
 ):
     """
     Retrieve all the publishers.
@@ -402,7 +402,7 @@ def get_publisher_by_id(
     request: Request,
     response: Response,
     publisher_id: str,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: OxigraphMetadataStore = Depends(OxigraphMetadataStore),
 ):
     """
     Retrieve information about a specific publisher by ID.
@@ -531,7 +531,7 @@ def get_sub_topics(
     request: Request,
     response: Response,
     topic_id: str,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: OxigraphMetadataStore = Depends(OxigraphMetadataStore),
 ):
     """
     Retrieve subtopics.
