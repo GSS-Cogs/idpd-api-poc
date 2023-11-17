@@ -52,8 +52,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets all datasets
         """
-        logger.info(
-            "Constructing get_datasets() response from graph")
+        logger.info("Constructing get_datasets() response from graph")
         graph = self.db
 
         result: Graph = construct_datasets(graph)

@@ -8,7 +8,7 @@ import schemas
 from constants import CSV, JSONLD
 from custom_logging import logger
 from middleware import logging_middleware
-from store import OxigraphMetadataStore, StubMetadataStore, StubCsvStore
+from store import OxigraphMetadataStore, StubCsvStore, StubMetadataStore
 from store.metadata.context import ContextStore
 
 # Simple env var flag to allow local browsing of api responses
