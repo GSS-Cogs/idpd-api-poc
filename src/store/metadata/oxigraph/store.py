@@ -2,25 +2,29 @@ import json
 import os
 import re
 from typing import Dict, Optional
-from custom_logging import logger
 
 from pyld import jsonld
 from rdflib import Dataset, Graph
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore
+
+from custom_logging import logger
 
 from .. import constants
 from ..base import BaseMetadataStore
 from .sparql.construct import (
     construct_dataset_contact_point,
     construct_dataset_core,
+    construct_dataset_editions,
     construct_dataset_keywords,
-    construct_dataset_themes,
     construct_dataset_parent_topics_by_id,
     construct_dataset_subtopics_by_id,
     construct_dataset_temporal_coverage,
-    construct_dataset_editions,
+    construct_dataset_themes,
     construct_dataset_topic_by_id,
     construct_dataset_topics,
+    construct_dataset_version,
+    construct_dataset_version_table_schema,
+    construct_datasets,
     construct_edition_contact_point,
     construct_edition_core,
     construct_edition_keywords,
@@ -30,12 +34,8 @@ from .sparql.construct import (
     construct_edition_versions,
     construct_editions,
     construct_publisher,
-    construct_datasets,
     construct_publishers,
-    construct_dataset_version,
-    construct_dataset_version_table_schema,
 )
-from custom_logging import logger
 
 
 class OxigraphMetadataStore(BaseMetadataStore):
@@ -47,41 +47,48 @@ class OxigraphMetadataStore(BaseMetadataStore):
         )
         configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
         self.db = Dataset(store=SPARQLUpdateStore(*configuration))
-    
-    def get_datasets(self) -> Optional[Dict]:  # pragma: no cover
-            """
-            Gets all datasets
-            """
-            graph = self.db
 
-            result: Graph = construct_datasets(graph)
+    def get_datasets(self) -> Optional[Dict]:  # pragma: no cover
+        """
+        Gets all datasets
+        """
+        graph = self.db
+
+        result: Graph = construct_datasets(graph)
 
         # Serialize the graph into jsonld
-            data = json.loads(result.serialize(format="json-ld"))
+        data = json.loads(result.serialize(format="json-ld"))
 
-            # Use a context file to shape our jsonld, removing long form references
-            data = jsonld.flatten(
-                data, {"@context": constants.CONTEXT, "@type": ["dcat:Catalog","hydra:Collection"]}
-            )
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data,
+            {
+                "@context": constants.CONTEXT,
+                "@type": ["dcat:Catalog", "hydra:Collection"],
+            },
+        )
 
-            # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url'
-            data["@graph"][0]["@type"] = ["dcat:Catalog","hydra:Collection"]
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url'
+        data["@graph"][0]["@type"] = ["dcat:Catalog", "hydra:Collection"]
 
-            data["@graph"][0]["datasets"] = [
-                self.get_dataset(dataset["@id"].split("/")[-1]) 
-                for dataset in data["@graph"][0]["dcat:DatasetSeries"]
-            ]
-            del data["@graph"][0]["dcat:DatasetSeries"]
-            # TODO Update @context so it's not hardcoded
-            data["@graph"][0]["@context"] = "https://staging.idpd.uk/#ns"
-            result = data["@graph"][0]
-            return result    
+        data["@graph"][0]["datasets"] = [
+            self.get_dataset(dataset["@id"].split("/")[-1])
+            for dataset in data["@graph"][0]["dcat:DatasetSeries"]
+        ]
+        del data["@graph"][0]["dcat:DatasetSeries"]
+        # TODO Update @context so it's not hardcoded
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/#ns"
+        result = data["@graph"][0]
+        return result
 
     def get_dataset(self, dataset_id: str) -> Optional[Dict]:
         """
         Get a dataset by its ID and return its metadata as a JSON-LD dict.
         """
-        logger.info("Constructing get_dataset() response from graph", data={"dataset_id": dataset_id})
+        logger.info(
+            "Constructing get_dataset() response from graph",
+            data={"dataset_id": dataset_id},
+        )
 
         # Specify the named graph from which we are fetching data
         graph = self.db
@@ -144,7 +151,10 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets all editions of a specific dataset
         """
-        logger.info("Constructing get_editions() response from graph", data={"dataset_id": dataset_id})
+        logger.info(
+            "Constructing get_editions() response from graph",
+            data={"dataset_id": dataset_id},
+        )
 
         # Populate the graph from the database
         graph = self.db
@@ -183,7 +193,10 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets a specific edition of a specific dataset
         """
-        logger.info("Constructing get_edition() response from graph", data={"dataset_id": dataset_id, "edition_id": edition_id})
+        logger.info(
+            "Constructing get_edition() response from graph",
+            data={"dataset_id": dataset_id, "edition_id": edition_id},
+        )
 
         # Populate the graph from the database
         graph = self.db
@@ -241,9 +254,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
 
         return edition_graph
 
-    def get_versions(
-        self, dataset_id: str, edition_id: str
-    ) -> Optional[Dict]:
+    def get_versions(self, dataset_id: str, edition_id: str) -> Optional[Dict]:
         """
         Gets all versions of a specific edition of a specific dataset
         """
@@ -254,7 +265,14 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets a specific version of a specific edition of a specific dataset
         """
-        logger.info("Constructing get_version() response from graph", data={"dataset_id": dataset_id, "edition_id": edition_id, "version_id": version_id})
+        logger.info(
+            "Constructing get_version() response from graph",
+            data={
+                "dataset_id": dataset_id,
+                "edition_id": edition_id,
+                "version_id": version_id,
+            },
+        )
 
         # Specify the named graph from which we are fetching data
         graph = self.db
@@ -298,14 +316,12 @@ class OxigraphMetadataStore(BaseMetadataStore):
 
         # Specify the named graph from which we are fetching data
         graph = self.db
-        
+
         # Use the construct wrappers to pull the raw RDF triples
         # (as one rdflib.Graph() for each function) and add them
         # together to create a sinlge Graph of the
         # data we need.
-        result: Graph = (
-            construct_publishers(graph)
-        )
+        result: Graph = construct_publishers(graph)
 
         # Serialize the graph into jsonld
         data = json.loads(result.serialize(format="json-ld"))
@@ -320,23 +336,26 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data["@graph"][0]["@type"] = "hydra:Collection"
 
         data["@graph"][0]["publishers"] = [
-        self.get_publisher(x["@id"].split("/")[-1])
-        for x in data["@graph"]
-        if "landing_page" in x.keys()
+            self.get_publisher(x["@id"].split("/")[-1])
+            for x in data["@graph"]
+            if "landing_page" in x.keys()
         ]
         del data["@graph"][0]["dcat:publisher"]
-        
+
         # TODO Update @context due to flatten(), this will need to be removed once flatten() doesn't change it.
         data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
         result = data["@graph"][0]
-        
+
         return result
 
     def get_publisher(self, publisher_id: str) -> Optional[Dict]:
         """
         Get a specific publisher
         """
-        logger.info("Constructing get_publisher() response from graph", data={"publisher_id": publisher_id})
+        logger.info(
+            "Constructing get_publisher() response from graph",
+            data={"publisher_id": publisher_id},
+        )
 
         # Specify the named graph from which we are fetching data
         graph = self.db
@@ -390,7 +409,9 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Get a specific topic by topic_id
         """
-        logger.info("Constructing get_topic() response from graph", data={"topic_id": topic_id})
+        logger.info(
+            "Constructing get_topic() response from graph", data={"topic_id": topic_id}
+        )
 
         # Populate the graph from the database
         graph = self.db
@@ -422,7 +443,10 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Get all sub-topics for a specific topic
         """
-        logger.info("Constructing get_sub_topics() response from graph", data={"topic_id": topic_id})
+        logger.info(
+            "Constructing get_sub_topics() response from graph",
+            data={"topic_id": topic_id},
+        )
 
         all_topics = self.get_topics()
         topics_with_parents = [
@@ -460,5 +484,8 @@ def _get_single_graph_for_field(data: Dict, field: str) -> Optional[Dict]:
         logger.error("No node for field defined", data={"field": field, "jsonld": data})
         return None
     else:
-        logger.error("More than one node for field defined", data={"field": field, "jsonld": data})
+        logger.error(
+            "More than one node for field defined",
+            data={"field": field, "jsonld": data},
+        )
         return None
