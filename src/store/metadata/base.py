@@ -82,9 +82,3 @@ class BaseMetadataStore(ABC):
         """
         Get all sub-topics for a specific topic
         """
-
-    @abstractmethod
-    def get_sub_topic(self, topic_id: str, sub_topic_id: str) -> Optional[Dict]:
-        """
-        Get a specific sub-topic for a specific topic
-        """

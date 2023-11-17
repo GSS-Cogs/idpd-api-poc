@@ -77,20 +77,18 @@ class OxigraphMetadataStore(BaseMetadataStore):
             result = data["@graph"][0]
             return result    
 
-
-
-
     def get_dataset(self, dataset_id: str) -> Optional[Dict]:
         """
         Get a dataset by its ID and return its metadata as a JSON-LD dict.
         """
+        logger.info("Constructing get_dataset() response from graph", data={"dataset_id": dataset_id})
 
         # Specify the named graph from which we are fetching data
         graph = self.db
 
         # Use the construct wrappers to pull the raw RDF triples
         # (as one rdflib.Graph() for each function) and add them
-        # together to create a sinlge Graph of the
+        # together to create a single Graph of the
         # data we need.
         result: Graph = (
             construct_dataset_core(graph, dataset_id)
@@ -142,10 +140,12 @@ class OxigraphMetadataStore(BaseMetadataStore):
         }
         return dataset_graph
 
-    def get_editions(self, dataset_id: str) -> Optional[Dict]:  # pragma: no cover
+    def get_editions(self, dataset_id: str) -> Optional[Dict]:
         """
         Gets all editions of a specific dataset
         """
+        logger.info("Constructing get_editions() response from graph", data={"dataset_id": dataset_id})
+
         # Populate the graph from the database
         graph = self.db
 
@@ -183,6 +183,8 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets a specific edition of a specific dataset
         """
+        logger.info("Constructing get_edition() response from graph", data={"dataset_id": dataset_id, "edition_id": edition_id})
+
         # Populate the graph from the database
         graph = self.db
 
@@ -241,7 +243,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
 
     def get_versions(
         self, dataset_id: str, edition_id: str
-    ) -> Optional[Dict]:  # pragma: no cover
+    ) -> Optional[Dict]:
         """
         Gets all versions of a specific edition of a specific dataset
         """
@@ -252,6 +254,8 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets a specific version of a specific edition of a specific dataset
         """
+        logger.info("Constructing get_version() response from graph", data={"dataset_id": dataset_id, "edition_id": edition_id, "version_id": version_id})
+
         # Specify the named graph from which we are fetching data
         graph = self.db
 
@@ -286,10 +290,11 @@ class OxigraphMetadataStore(BaseMetadataStore):
 
         return version_graph
 
-    def get_publishers(self) -> Optional[Dict]:  # pragma: no cover
+    def get_publishers(self) -> Optional[Dict]:
         """
         Gets all publishers
         """
+        logger.info("Constructing get_publishers() response from graph")
 
         # Specify the named graph from which we are fetching data
         graph = self.db
@@ -327,10 +332,12 @@ class OxigraphMetadataStore(BaseMetadataStore):
         
         return result
 
-    def get_publisher(self, publisher_id: str) -> Optional[Dict]:  # pragma: no cover
+    def get_publisher(self, publisher_id: str) -> Optional[Dict]:
         """
         Get a specific publisher
         """
+        logger.info("Constructing get_publisher() response from graph", data={"publisher_id": publisher_id})
+
         # Specify the named graph from which we are fetching data
         graph = self.db
 
@@ -350,10 +357,12 @@ class OxigraphMetadataStore(BaseMetadataStore):
 
         return data["@graph"][0]
 
-    def get_topics(self) -> Optional[Dict]:  # pragma: no cover
+    def get_topics(self) -> Optional[Dict]:
         """
         Get all topics
         """
+        logger.info("Constructing get_topics() response from graph")
+
         graph = self.db
 
         result: Graph = construct_dataset_topics(graph)
@@ -381,6 +390,8 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Get a specific topic by topic_id
         """
+        logger.info("Constructing get_topic() response from graph", data={"topic_id": topic_id})
+
         # Populate the graph from the database
         graph = self.db
 
@@ -407,10 +418,12 @@ class OxigraphMetadataStore(BaseMetadataStore):
         result = data["@graph"][0]
         return result
 
-    def get_sub_topics(self, topic_id: str) -> Optional[Dict]:  # pragma: no cover
+    def get_sub_topics(self, topic_id: str) -> Optional[Dict]:
         """
         Get all sub-topics for a specific topic
         """
+        logger.info("Constructing get_sub_topics() response from graph", data={"topic_id": topic_id})
+
         all_topics = self.get_topics()
         topics_with_parents = [
             topic
@@ -435,14 +448,6 @@ class OxigraphMetadataStore(BaseMetadataStore):
             "offset": 0,
         }
 
-    def get_sub_topic(
-        self, topic_id: str, sub_topic_id: str
-    ) -> Optional[Dict]:  # pragma: no cover
-        """
-        Get a specific sub-topic for a specific topic
-        """
-        raise NotImplementedError
-
 
 def _get_single_graph_for_field(data: Dict, field: str) -> Optional[Dict]:
     """
@@ -452,8 +457,8 @@ def _get_single_graph_for_field(data: Dict, field: str) -> Optional[Dict]:
     if len(node) == 1:
         return node[0]
     elif len(node) == 0:
-        logger.error("No node for field defined", data={"field": field})
+        logger.error("No node for field defined", data={"field": field, "jsonld": data})
         return None
     else:
-        logger.error("More than one node for field defined", data={"field": field})
+        logger.error("More than one node for field defined", data={"field": field, "jsonld": data})
         return None
