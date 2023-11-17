@@ -48,10 +48,12 @@ class OxigraphMetadataStore(BaseMetadataStore):
         configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
         self.db = Dataset(store=SPARQLUpdateStore(*configuration))
 
-    def get_datasets(self) -> Optional[Dict]:  # pragma: no cover
+    def get_datasets(self) -> Optional[Dict]:
         """
         Gets all datasets
         """
+        logger.info(
+            "Constructing get_datasets() response from graph")
         graph = self.db
 
         result: Graph = construct_datasets(graph)
