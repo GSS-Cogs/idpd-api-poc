@@ -89,7 +89,7 @@ def get_context(
 def get_all_datasets(
     request: Request,
     response: Response,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: StubMetadataStore= Depends(StubMetadataStore),
 ):
     """
     Retrieve all the datasets.
