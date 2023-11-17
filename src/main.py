@@ -9,7 +9,7 @@ import schemas
 from constants import CSV, JSONLD
 from custom_logging import logger
 from middleware import logging_middleware
-from store import StubCsvStore, StubMetadataStore
+from store import OxigraphMetadataStore, StubCsvStore, StubMetadataStore
 from store.metadata.context import ContextStore
 
 # Simple env var flag to allow local browsing of api responses
@@ -490,7 +490,7 @@ def get_topic_by_id(
     request: Request,
     response: Response,
     topic_id: str,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: OxigraphMetadataStore = Depends(OxigraphMetadataStore),
 ):
     """
     Retrieve information about a specific topic by ID.
