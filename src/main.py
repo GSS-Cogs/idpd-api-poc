@@ -445,7 +445,7 @@ def get_publisher_by_id(
 def get_all_topics(
     request: Request,
     response: Response,
-    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    metadata_store: OxigraphMetadataStore = Depends(OxigraphMetadataStore),
 ):
     """
     Retrieve all the topics.
