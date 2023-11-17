@@ -66,6 +66,7 @@ def construct_datasets(graph: Graph) -> Graph:
     result = results_graph if results_graph else Graph()
     return result
 
+
 def construct_dataset_topics(graph: Graph) -> Graph:
     query = """
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -392,7 +393,8 @@ def construct_edition_temporal_coverage(
     results_graph = graph.query(query).graph
     result = results_graph if results_graph else Graph()
     return result
-  
+
+
 def construct_publishers(graph: Graph) -> Graph:
     query = """
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
