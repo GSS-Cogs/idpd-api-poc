@@ -115,7 +115,7 @@
             "@id": "https://staging.idpd.uk/topics/climate-change",
             "@type": "dcat:theme",
             "identifier": "climate-change",
-            "title": "Climate change",
+            "title": "Climate Change",
             "description": "Long term shifts in temperature and weather patterns of the environment",
             "sub_topics": [],
             "parent_topics": [
