@@ -6,22 +6,22 @@
         {
             "@id": "https://staging.idpd.uk/publishers/office-for-national-statistics",
             "@type": "dcat:publisher",
-            "title": "The Office for National Statistics",
-            "description": "A description of ONS",
+            "title": "Office for National Statistics",
+            "description": "We are the UK’s largest independent producer of official statistics and its recognised national statistical institute. We are responsible for collecting and publishing statistics related to the economy, population and society at national, regional and local levels.",
             "landing_page": "https://www.ons.gov.uk/"
         },
         {
             "@id": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
             "@type": "dcat:publisher",
-            "title": "The Department for Business, Energy & Industrial Strategy",
-            "description": "A description of BEIS",
+            "title": "Department for Business, Energy & Industrial Strategy",
+            "description": "The Department for Energy Security and Net Zero (DESNZ) is focused on the energy portfolio from the former Department for Business, Energy and Industrial Strategy (BEIS).",
             "landing_page": "https://www.gov.uk/government/organisations/department-for-energy-security-and-net-zero/"
         },
         {
             "@id": "https://staging.idpd.uk/publishers/ofcom",
             "@type": "dcat:publisher",
-            "title": "The Office of Communications",
-            "description": "A description of OFCOM",
+            "title": "Office of Communications",
+            "description": "The Office of Communications, commonly known as Ofcom, is the government-approved regulatory and competition authority for the broadcasting, telecommunications and postal industries of the United Kingdom.",
             "landing_page": "https://www.ofcom.org.uk/"
         }
     ],
