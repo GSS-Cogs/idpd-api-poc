@@ -56,10 +56,16 @@
             "description": "The time period associated with the observation."
           },
           {
-            "name": "section",
+            "name": "section_notation",
             "datatype": "string",
-            "titles": "Standard Industrial Classification",
-            "description": "The standard industrial activity (or process) related to the energy consumption."
+            "titles": "Section Notation",
+            "description": "The standard industrial classification code related to the industry section name."
+          },
+          {
+            "name": "industry_section_name",
+            "datatype": "string",
+            "titles": "Industry Section Name",
+            "description": "The industry section name that resulted to energy consumption."
           },
           {
             "name": "fuel",
