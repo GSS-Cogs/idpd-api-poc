@@ -222,7 +222,13 @@
               "@id": "https://staging.idpd.uk/datasets/4gc/editions/2023-09",
               "issued": "2023-08-24T09:30:00Z",
               "modified": "2023-08-24T09:30:00Z"
+            },
+            {
+              "@id": "https://staging.idpd.uk/datasets/4gc/editions/2023-10",
+              "issued": "2023-09-24T09:30:00Z",
+              "modified": "2023-09-24T09:30:00Z"
             }
+
           ]
         },
         {
