@@ -52,8 +52,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets all datasets
         """
-        logger.info(
-            "Constructing get_datasets() response from graph")
+        logger.info("Constructing get_datasets() response from graph")
         graph = self.db
 
         result: Graph = construct_datasets(graph)
@@ -253,7 +252,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             if "@id" in x.keys() and re.search("/versions/", x["@id"])
         ]
         edition_graph["versions"] = version_graphs
-
+        edition_graph["@context"] = "https://staging.idpd.uk/ns#"
         return edition_graph
 
     def get_versions(self, dataset_id: str, edition_id: str) -> Optional[Dict]:
