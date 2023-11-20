@@ -306,7 +306,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             del column["@id"]
         version_graph["table_schema"]["columns"] = columns_graph
         del version_graph["table_schema"]["@id"]
-
+        version_graph["@context"] = "https://staging.idpd.uk/ns#"
         return version_graph
 
     def get_publishers(self) -> Optional[Dict]:

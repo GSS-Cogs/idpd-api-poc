@@ -193,6 +193,9 @@ class Version(BaseModel):
     media_type: str
     table_schema: TableSchema
 
+class VersionWithContext(Version):
+    context: str = Field(alias="@context")
+
 
 class Versions(BaseModel):
     context: str = Field(alias="@context")

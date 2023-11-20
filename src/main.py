@@ -1,3 +1,4 @@
+from ensurepip import version
 import os
 from typing import Optional
 
@@ -285,11 +286,11 @@ def get_dataset_edition_versions(
 
 @app.get(
     "/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}",
-    response_model=Optional[schemas.Version],
+    response_model=Optional[schemas.VersionWithContext],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns detailed information about the specified version of a dataset.",
-            "model": schemas.Version,
+            "model": schemas.VersionWithContext,
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. The specified version of the dataset is not found.",
