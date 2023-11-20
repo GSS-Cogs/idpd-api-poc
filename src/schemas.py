@@ -135,7 +135,6 @@ class Editions(BaseModel):
 # If we wanted to provide the ability to attach arbitrary RDF we might want to
 # look at https://github.com/pydantic/pydantic/discussions/5853
 class Dataset(BaseModel):
-    # context: Optional[str] = Field(alias="@context")
     id: str = Field(alias="@id")
     type: Literal["dcat:DatasetSeries"] = Field(alias="@type")
     identifier: str
@@ -158,19 +157,23 @@ class Dataset(BaseModel):
     frequency: Frequency
     keywords: list[str]
     licence: str
-    spatial_resolution: list[str]
+    spatial_resolution: Union[str, list[str]]
     spatial_coverage: str = Field(pattern=r"^[EJKLMNSW]{1}\d{8}$")
-    temporal_resolution: list[str]
+    temporal_resolution: Union[str, list[str]]
     temporal_coverage: PeriodOfTime
-    editions: List[Union[Edition, SummarisedEdition]]
+    editions: Union[List[SummarisedEdition], List[Edition]]
     editions_url: str
+
+
+class DatasetWithContext(Dataset):
+    context: str = Field(alias="@context")
 
 
 class Datasets(BaseModel):
     context: str = Field(alias="@context")
     id: str = Field(alias="@id")
     type: List[str] = Field(alias="@type")
-    datasets: List  # TODO - stricter
+    datasets: List[Dataset]  # TODO - stricter
     offset: int
     count: int
 

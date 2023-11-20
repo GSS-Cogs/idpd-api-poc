@@ -47,38 +47,41 @@ class OxigraphMetadataStore(BaseMetadataStore):
         )
         configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
         self.db = Dataset(store=SPARQLUpdateStore(*configuration))
-    
-    def get_datasets(self) -> Optional[Dict]:  # pragma: no cover
-            """
-            Gets all datasets
-            """
-            graph = self.db
 
-            result: Graph = construct_datasets(graph)
+    def get_datasets(self) -> Optional[Dict]:
+        """
+        Gets all datasets
+        """
+        graph = self.db
+
+        result: Graph = construct_datasets(graph)
 
         # Serialize the graph into jsonld
-            data = json.loads(result.serialize(format="json-ld"))
+        data = json.loads(result.serialize(format="json-ld"))
 
-            # Use a context file to shape our jsonld, removing long form references
-            data = jsonld.flatten(
-                data, {"@context": constants.CONTEXT, "@type": ["dcat:Catalog","hydra:Collection"]}
-            )
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data,
+            {
+                "@context": constants.CONTEXT,
+                "@type": ["dcat:Catalog", "hydra:Collection"],
+            },
+        )
 
-            # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url'
-            data["@graph"][0]["@type"] = ["dcat:Catalog","hydra:Collection"]
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url'
+        data["@graph"][0]["@type"] = ["dcat:Catalog", "hydra:Collection"]
 
-            data["@graph"][0]["datasets"] = [
-                self.get_dataset(dataset["@id"].split("/")[-1]) 
-                for dataset in data["@graph"][0]["dcat:DatasetSeries"]
-            ]
-            del data["@graph"][0]["dcat:DatasetSeries"]
-            # TODO Update @context so it's not hardcoded
-            data["@graph"][0]["@context"] = "https://staging.idpd.uk/#ns"
-            result = data["@graph"][0]
-            return result    
+        data["@graph"][0]["datasets"] = [
+            self.get_dataset(dataset["@id"].split("/")[-1])
+            for dataset in data["@graph"][0]["dcat:DatasetSeries"]
+        ]
+        del data["@graph"][0]["dcat:DatasetSeries"]
 
+        # TODO Update @context so it's not hardcoded
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
 
-
+        result = data["@graph"][0]
+        return result
 
     def get_dataset(self, dataset_id: str) -> Optional[Dict]:
         """
@@ -130,7 +133,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             if "@id" in x.keys() and re.search("/editions/", x["@id"])
         ]
         dataset_graph["editions"] = edition_graphs
-
+        del dataset_graph["versions"]
         # Compact and embed anonymous nodes
         dataset_graph["contact_point"] = {
             "name": contact_point_graph["vcard:fn"]["@value"],
@@ -140,6 +143,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             "start": temporal_coverage_graph["dcat:endDate"]["@value"],
             "end": temporal_coverage_graph["dcat:startDate"]["@value"],
         }
+        dataset_graph["@context"] = "https://staging.idpd.uk/ns#"
         return dataset_graph
 
     def get_editions(self, dataset_id: str) -> Optional[Dict]:  # pragma: no cover
@@ -293,14 +297,12 @@ class OxigraphMetadataStore(BaseMetadataStore):
 
         # Specify the named graph from which we are fetching data
         graph = self.db
-        
+
         # Use the construct wrappers to pull the raw RDF triples
         # (as one rdflib.Graph() for each function) and add them
         # together to create a sinlge Graph of the
         # data we need.
-        result: Graph = (
-            construct_publishers(graph)
-        )
+        result: Graph = construct_publishers(graph)
 
         # Serialize the graph into jsonld
         data = json.loads(result.serialize(format="json-ld"))
@@ -315,16 +317,16 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data["@graph"][0]["@type"] = "hydra:Collection"
 
         data["@graph"][0]["publishers"] = [
-        self.get_publisher(x["@id"].split("/")[-1])
-        for x in data["@graph"]
-        if "landing_page" in x.keys()
+            self.get_publisher(x["@id"].split("/")[-1])
+            for x in data["@graph"]
+            if "landing_page" in x.keys()
         ]
         del data["@graph"][0]["dcat:publisher"]
-        
+
         # TODO Update @context due to flatten(), this will need to be removed once flatten() doesn't change it.
         data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
         result = data["@graph"][0]
-        
+
         return result
 
     def get_publisher(self, publisher_id: str) -> Optional[Dict]:  # pragma: no cover
