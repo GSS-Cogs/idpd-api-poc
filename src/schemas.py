@@ -226,6 +226,8 @@ class Topic(BaseModel):
     sub_topics: Union[List[str], None] = Field(default_factory=list)
     parent_topics: Union[List[str], None] = Field(default_factory=list)
 
+class TopicWithContext(Topic):
+    context: str = Field(alias="@context")
 
 class Topics(BaseModel):
     context: str = Field(alias="@context")
