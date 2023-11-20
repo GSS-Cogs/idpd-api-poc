@@ -350,6 +350,8 @@ class OxigraphMetadataStore(BaseMetadataStore):
         #         if re.fullmatch(pattern, issued):
         #             version_graph["issued"] = str(issued)
         #             break
+        if type(version_graph["issued"]) != str:
+            version_graph["issued"] == None
 
         return version_graph
 

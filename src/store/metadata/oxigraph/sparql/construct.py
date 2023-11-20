@@ -408,6 +408,9 @@ def construct_versions(graph: Graph, dataset_id: str, edition_id: str) -> Graph:
         """.format(
         dataset_id=dataset_id, edition_id=edition_id
     )
+    results_graph = graph.query(query).graph
+    result = results_graph if results_graph else Graph()
+    return result
 
 
 def construct_publishers(graph: Graph) -> Graph:
