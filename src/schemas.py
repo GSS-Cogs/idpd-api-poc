@@ -109,6 +109,10 @@ class Edition(BaseModel):
     table_schema: TableSchema
 
 
+class EditionWithContext(Edition):
+    context: str = Field(alias="@context")
+
+
 class SummarisedEdition(BaseModel):
     """
     A short form schema for Edition as presented
