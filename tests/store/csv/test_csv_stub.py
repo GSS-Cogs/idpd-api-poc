@@ -18,7 +18,7 @@ def test_csv_stub_returns_csv_without_file_extentions():
     the ".csv" file extensions.
     """
     csv_store = StubCsvStore()
-    assert isinstance(csv_store.get_version("cpih", "2022-01", "1.csv"), FileResponse)
+    assert isinstance(csv_store.get_version("cpih", "2023-10", "1.csv"), FileResponse)
 
 
 def test_csv_stub_returns_csv_with_file_extentions():
@@ -28,7 +28,7 @@ def test_csv_stub_returns_csv_with_file_extentions():
     the ".csv" file extension.
     """
     csv_store = StubCsvStore()
-    assert isinstance(csv_store.get_version("cpih", "2022-01", "1"), FileResponse)
+    assert isinstance(csv_store.get_version("cpih", "2023-10", "1"), FileResponse)
 
 
 def test_csv_stub_returns_none():

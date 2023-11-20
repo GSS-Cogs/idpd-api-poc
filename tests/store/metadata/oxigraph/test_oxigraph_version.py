@@ -15,13 +15,13 @@ def test_oxigraph_get_version_returns_valid_structure():
     """
     store = OxigraphMetadataStore()
 
-    version = store.get_version("cpih", "2022-01", "1")
+    version = store.get_version("cpih", "2023-10", "1")
     version_schema = schemas.Version(**version)
     version_schema_context = schemas.VersionWithContext(**version)
 
     assert (
         version_schema.id
-        == "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1"
+        == "https://staging.idpd.uk/datasets/cpih/editions/2023-10/versions/1"
     )
     assert "dcat:Distribution" in version_schema.type
     assert "csvw:Table" in version_schema.type
@@ -38,12 +38,13 @@ def test_oxigraph_get_version_returns_valid_structure():
     assert version_schema.description == "The Consumer Prices Index..."
     assert (
         version_schema.download_url
-        == "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1.csv"
+        == "https://staging.idpd.uk/datasets/cpih/editions/2023-10/versions/1.csv"
     )
     assert version_schema.media_type == "text/csv"
     assert len(version_schema.table_schema.columns) == 4
 
     assert version_schema_context.context == "https://staging.idpd.uk/ns#"
+
 
 def test_version_schema_validation():
     """Confirm that the schema validation is working as intended i.e raises ValidationError with wrong structure"""
