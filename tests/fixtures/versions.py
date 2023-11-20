@@ -14,8 +14,9 @@ def version_test_data():
         "src/store/metadata/stub/content/editions/versions/cpih_2022-01.json"
     )
     with open(file_path, "r") as json_file:
-        return json.load(json_file)["versions"][0]
-
+        version = json.load(json_file)["versions"][0]
+        version["@context"] = "https://staging.idpd.uk/ns#"
+        return version
 
 @pytest.fixture
 def versions_test_data():
