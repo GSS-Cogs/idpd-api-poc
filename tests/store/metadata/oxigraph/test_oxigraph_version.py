@@ -16,7 +16,7 @@ def test_oxigraph_get_version_returns_valid_structure():
     store = OxigraphMetadataStore()
 
     version = store.get_version("cpih", "2022-01", "1")
-    version_schema = schemas.Version(**version)
+    version_schema = schemas.VersionWithContext(**version)
 
     assert (
         version_schema.id
@@ -45,4 +45,4 @@ def test_oxigraph_get_version_returns_valid_structure():
 def test_version_schema_validation():
     """Confirm that the schema validation is working as intended i.e raises ValidationError with wrong structure"""
     with pytest.raises(ValidationError):
-        schemas.Version(**{"I": "break"})
+        schemas.VersionWithContext(**{"I": "break"})

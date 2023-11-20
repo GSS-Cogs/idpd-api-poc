@@ -189,7 +189,7 @@ class Version(BaseModel):
     media_type: str
     table_schema: TableSchema
 
-class VersionwithContext(Version):
+class VersionWithContext(Version):
     context: str = Field(alias="@context")
 
 

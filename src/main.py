@@ -246,7 +246,7 @@ def get_dataset_edition_by_id(
 
 @app.get(
     "/datasets/{dataset_id}/editions/{edition_id}/versions",
-    response_model=Optional[schemas.VersionwithContext],
+    response_model=Optional[schemas.Versions],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns all the versions for the specified edition of a dataset.",
@@ -287,11 +287,11 @@ def get_dataset_edition_versions(
 
 @app.get(
     "/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}",
-    response_model=Optional[schemas.Version],
+    response_model=Optional[schemas.VersionWithContext],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns detailed information about the specified version of a dataset.",
-            "model": schemas.Version,
+            "model": schemas.VersionWithContext,
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. The specified version of the dataset is not found.",
