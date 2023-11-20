@@ -8,31 +8,51 @@ from src import schemas
 
 # TODO - reimplenet as part of graph work
 
+
 def test_oxigraph_get_publisher_returns_valid_structure():
-     """
-     Confirm that the OxigrapgMetadataStore.get_dataset()
-     function returns a dataset that matches the dataset
-     schema.
-     """
+    """
+    Confirm that the OxigraphMetadataStore.get_publisher()
+    function returns a publisher that matches the Publisher
+    schema.
+    """
 
-     store = OxigraphMetadataStore()
+    store = OxigraphMetadataStore()
 
-     publisher = store.get_publisher("office-for-national-statistics")
-     assert schemas.Publisher(**publisher).id == "https://staging.idpd.uk/publishers/office-for-national-statistics"
+    publisher = store.get_publisher("office-for-national-statistics")
+    publisher_schema = schemas.Publisher(**publisher)
+    assert (
+        publisher_schema.id
+        == "https://staging.idpd.uk/publishers/office-for-national-statistics"
+    )
+
+
+def test_oxigraph_get_publisher_with_context_returns_valid_structure():
+    """
+    Confirm that the OxigraphMetadataStore.get_publisher()
+    function returns a publisher that matches the PublisherWithContext
+    schema.
+    """
+
+    store = OxigraphMetadataStore()
+
+    publisher = store.get_publisher("office-for-national-statistics")
+    publisher_schema = schemas.PublisherWithContext(**publisher)
+    assert publisher_schema.context == "https://staging.idpd.uk/ns#"
 
 
 def test_oxigraph_get_publisher_returns_invalid_structure():
-     """
-     Confirm that the OxigrapgMetadataStore.get_dataset()
-     function returns a dataset that matches the dataset
-     schema.
-     """
+    """Confirm that the schema validation is working as intended i.e raises ValidationError with wrong structure"""
 
-     store = OxigraphMetadataStore()
-
-     publisher = store.get_publisher("office-for-national-statistics")
-
-     # Sanity check that the schema validation is working as intended
-     # i.e raises with wrong structure
-     with pytest.raises(ValidationError):
+    # Sanity check that the schema validation is working as intended
+    # i.e raises with wrong structure
+    with pytest.raises(ValidationError):
         schemas.Publisher(**{"I": "break"})
+
+
+def test_oxigraph_get_publisher_with_context_returns_invalid_structure():
+    """Confirm that the schema validation is working as intended i.e raises ValidationError with wrong structure"""
+
+    # Sanity check that the schema validation is working as intended
+    # i.e raises with wrong structure
+    with pytest.raises(ValidationError):
+        schemas.PublisherWithContext(**{"I": "break"})

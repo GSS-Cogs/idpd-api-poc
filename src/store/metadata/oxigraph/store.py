@@ -52,8 +52,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets all datasets
         """
-        logger.info(
-            "Constructing get_datasets() response from graph")
+        logger.info("Constructing get_datasets() response from graph")
         graph = self.db
 
         result: Graph = construct_datasets(graph)
@@ -375,7 +374,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "dcat:publisher"}
         )
-
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
         return data["@graph"][0]
 
     def get_topics(self) -> Optional[Dict]:
