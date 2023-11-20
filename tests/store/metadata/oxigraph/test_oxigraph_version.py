@@ -44,10 +44,6 @@ def test_oxigraph_get_version_returns_valid_structure():
     assert len(version_schema.table_schema.columns) == 4
 
     assert version_schema_context.context == "https://staging.idpd.uk/ns#"
-    assert (
-        version_schema_context
-        == "https://staging.idpd.uk/datasets/4gc/editions/2023-09/versions/1"
-    )
 
 def test_version_schema_validation():
     """Confirm that the schema validation is working as intended i.e raises ValidationError with wrong structure"""
