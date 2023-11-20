@@ -16,6 +16,7 @@ def test_oxigraph_get_version_returns_valid_structure():
     store = OxigraphMetadataStore()
 
     version = store.get_version("cpih", "2022-01", "1")
+    version_schema = schemas.Version(**version)
     version_schema = schemas.VersionWithContext(**version)
 
     assert (
