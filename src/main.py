@@ -316,7 +316,7 @@ def get_dataset_edition_version_by_id(
     This endpoint returns detailed information about a specific version of a dataset based on its unique identifier.
     """
 
-    if request.headers["Accept"] == CSV:
+    if request.headers["Accept"] == CSV or BROWSABLE:
         csv_data = csv_store.get_version(dataset_id, edition_id, version_id)
         if csv_data is not None:
             response.status_code = status.HTTP_200_OK
