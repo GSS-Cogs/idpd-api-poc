@@ -35,7 +35,8 @@
       "versions": [
         {
           "@id": "https://staging.idpd.uk/datasets/cpih/editions/2023-10/versions/1",
-          "issued": "2017-01-01T00:00:00"
+          "issued": "2017-01-01T00:00:00",
+          "modified": "2023-11-15T07:00:00Z"
         }
       ],
       "next_release": "2017-03-11T09:30:00Z",
