@@ -240,9 +240,8 @@ class OxigraphMetadataStore(BaseMetadataStore):
         if versions_graph is None:
             return None
 
-        # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url` and `editions` to `versions`
         versions_graph["@type"] = "hydra:Collection"
-        versions_graph["versions"] = versions_graph.pop("versions")
+        # versions_graph["versions"] = versions_graph.pop("versions")
 
         versions_graph["versions"] = [
             self.get_version(dataset_id, edition_id, x.split("/")[-1])
@@ -287,12 +286,12 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # if version_graph["issued"] is a list that contains ["2023-11-06T12:25:28", "2023-11-06T12:25:28+00:00"], 
         # then we want version_graph["issued"] = "2023-11-06T12:25:28" and be of type str,
         # as stated in the Version schema
-        if type(version_graph["issued"]) == list:
-            for issued in version_graph["issued"]:
-                pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}?$"
-                if re.fullmatch(pattern, issued):
-                    version_graph["issued"] = str(issued)
-                    break
+        # if type(version_graph["issued"]) == list:
+        #     for issued in version_graph["issued"]:
+        #         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}?$"
+        #         if re.fullmatch(pattern, issued):
+        #             version_graph["issued"] = str(issued)
+        #             break
 
         return version_graph
 
