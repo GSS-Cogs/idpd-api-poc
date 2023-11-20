@@ -16,4 +16,4 @@ df <- df[-(1:7), ] |>
         TRUE ~ NA
     ))
 
-write_csv(df, "src/store/csv/stub/content/cpih/2022-01/1.csv")
+write_csv(df, "src/store/csv/stub/content/cpih/2023-10/1.csv")
