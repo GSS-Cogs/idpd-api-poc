@@ -17,7 +17,8 @@ def test_oxigraph_get_topic_with_subtopic_returns_valid_structure():
     store = OxigraphMetadataStore()
 
     topic = store.get_topic("economy")
-    topic_schema = schemas.TopicWithContext(**topic)
+    topic_schema_context = schemas.TopicWithContext(**topic)
+    topic_schema = schemas.Topic(**topic)
 
     assert topic_schema.id == "https://staging.idpd.uk/topics/economy"
     assert topic_schema.type == "dcat:theme"
@@ -25,6 +26,7 @@ def test_oxigraph_get_topic_with_subtopic_returns_valid_structure():
     assert topic_schema.title == "Economy"
     assert topic_schema.sub_topics[0] == "https://staging.idpd.uk/topics/prices"
 
+    assert topic_schema_context.context == "https://staging.idpd.uk/ns#"
 
 def test_oxigraph_get_topic_with_parent_topic_returns_valid_structure():
     """
