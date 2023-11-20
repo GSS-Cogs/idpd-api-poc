@@ -1,5 +1,5 @@
-from abc import ABC, abstractmethod
 import json
+from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Dict, Optional
 
@@ -81,10 +81,4 @@ class BaseMetadataStore(ABC):
     def get_sub_topics(self, topic_id: str) -> Optional[Dict]:
         """
         Get all sub-topics for a specific topic
-        """
-
-    @abstractmethod
-    def get_sub_topic(self, topic_id: str, sub_topic_id: str) -> Optional[Dict]:
-        """
-        Get a specific sub-topic for a specific topic
         """
