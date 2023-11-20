@@ -16,6 +16,7 @@ def test_oxigraph_get_versions_returns_valid_structure():
 
     versions = store.get_versions("4gc", "2023-09")
     versions_schema = schemas.Versions(**versions)
+    
     assert len(versions_schema.versions) > 0
 
 def test_versions_schema_validation():
