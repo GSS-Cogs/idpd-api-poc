@@ -90,6 +90,11 @@
               "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11",
               "issued": "2023-11-06T12:25:28Z",
               "modified": "2023-11-06T12:25:28Z"
+            },
+            {
+              "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2022-11",
+              "issued": "2022-11-06T12:25:28Z",
+              "modified": "2022-11-06T12:25:28Z"
             }
           ]
         },
