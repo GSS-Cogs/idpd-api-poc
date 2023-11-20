@@ -54,3 +54,15 @@ def test_oxigraph_get_dataset_returns_invalid_structure():
     # i.e raises with wrong structure
     with pytest.raises(ValidationError):
         schemas.Dataset(**{"I": "break"})
+
+
+def test_oxigraph_get_dataset_with_context_returns_invalid_structure():
+    """
+    Confirm that the OxigrapgMetadataStore.get_dataset()
+    function returns a dataset that matches the dataset
+    schema.
+    """
+    # Sanity check that the schema validation is working as intended
+    # i.e raises with wrong structure
+    with pytest.raises(ValidationError):
+        schemas.DatasetWithContext(**{"I": "break"})
