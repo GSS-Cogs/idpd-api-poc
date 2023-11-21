@@ -1,3 +1,4 @@
+from ensurepip import version
 import os
 from typing import Optional
 
@@ -5,7 +6,6 @@ from fastapi import Depends, FastAPI, Request, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 
 import schemas
-
 from constants import CSV, JSONLD
 from custom_logging import logger
 from middleware import logging_middleware
@@ -89,7 +89,7 @@ def get_context(
 def get_all_datasets(
     request: Request,
     response: Response,
-    metadata_store: StubMetadataStore= Depends(StubMetadataStore),
+    metadata_store: StubMetadataStore = Depends(StubMetadataStore),
 ):
     """
     Retrieve all the datasets.
@@ -199,11 +199,11 @@ def get_dataset_editions(
 
 @app.get(
     "/datasets/{dataset_id}/editions/{edition_id}",
-    response_model=Optional[schemas.Edition],
+    response_model=Optional[schemas.EditionWithContext],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns detailed information about the edition.",
-            "model": schemas.Edition,
+            "model": schemas.EditionWithContext,
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. The edition with the given ID is not found.",
@@ -286,11 +286,11 @@ def get_dataset_edition_versions(
 
 @app.get(
     "/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}",
-    response_model=Optional[schemas.Version],
+    response_model=Optional[schemas.VersionWithContext],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns detailed information about the specified version of a dataset.",
-            "model": schemas.Version,
+            "model": schemas.VersionWithContext,
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. The specified version of the dataset is not found.",
