@@ -99,7 +99,29 @@
             "parent_topics": [
                 "https://staging.idpd.uk/topics/climate-change"
             ]
-        }
+        },
+        {
+            "@id": "https://staging.idpd.uk/topics/agriculture-energy-and-environment",
+            "@type": "skos:Concept",
+            "identifier": "agriculture-energy-and-environment",
+            "title": "Agriculture, energy and environment",
+            "description": "Climate change refers to long-term shifts in temperatures and weather patterns. Such shifts can be natural, due to changes in the sun’s activity or large volcanic eruptions. But since the 1800s, human activities have been the main driver of climate change, primarily due to the burning of fossil fuels like coal, oil and gas.",
+            "sub_topics": [
+                "https://staging.idpd.uk/topics/climate-change"
+            ],
+            "parent_topics": []
+          },
+          {
+            "@id": "https://staging.idpd.uk/topics/climate-change",
+            "@type": "skos:Concept",
+            "identifier": "climate-change",
+            "title": "Climate change",
+            "description": "Climate change refers to long-term shifts in temperatures and weather patterns. Such shifts can be natural, due to changes in the sun’s activity or large volcanic eruptions. But since the 1800s, human activities have been the main driver of climate change, primarily due to the burning of fossil fuels like coal, oil and gas.",
+            "sub_topics": [],
+            "parent_topics": [
+              "https://staging.idpd.uk/topics/agriculture-energy-and-environment"
+            ]
+          }
     ],
     "count": 9,
     "offset": 0
