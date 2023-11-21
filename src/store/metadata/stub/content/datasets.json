@@ -285,10 +285,9 @@
           "email": "mailto:EPBStats@levellingup.gov.uk"
         },
         "topics": [
-          "https://staging.idpd.uk/topics/economy",
-          "https://staging.idpd.uk/topics/prices"
+          "https://staging.idpd.uk/topics/climate-change"
         ],
-        "frequency": "monthly",
+        "frequency": "quarterly",
         "keywords": [
           "Energy Performance",
           "certificates",
