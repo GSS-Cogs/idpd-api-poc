@@ -24,8 +24,7 @@ def test_oxigraph_get_topic_with_subtopic_returns_valid_structure():
     assert topic_schema.identifier == "economy"
     assert topic_schema.title == "Economy"
     assert topic_schema.sub_topics[0] == "https://staging.idpd.uk/topics/prices"
-
-
+    
 def test_oxigraph_get_topic_with_parent_topic_returns_valid_structure():
     """
     Confirm that the OxigraphMetadataStore.get_topic()
