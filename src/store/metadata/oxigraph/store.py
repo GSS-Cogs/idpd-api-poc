@@ -340,18 +340,9 @@ class OxigraphMetadataStore(BaseMetadataStore):
         version_graph["table_schema"]["columns"] = columns_graph
         del version_graph["table_schema"]["@id"]
 
-        # if version_graph["issued"] is a list that contains ["2023-11-06T12:25:28", "2023-11-06T12:25:28+00:00"], 
-        # then we want version_graph["issued"] = "2023-11-06T12:25:28" and be of type str,
-        # as stated in the Version schema
-        # if type(version_graph["issued"]) == list:
-        #     for issued in version_graph["issued"]:
-        #         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}?$"
-        #         if re.fullmatch(pattern, issued):
-        #             version_graph["issued"] = str(issued)
-        #             break
         if type(version_graph["issued"]) != str:
             logger.error("Results for version_graph['issued'] should be a str, not a "+ str(type(version_graph["issued"]))+".")
-            version_graph["issued"] = ""
+            version_graph["issued"] = None
 
         version_graph["@context"] = "https://staging.idpd.uk/ns#"
         return version_graph
