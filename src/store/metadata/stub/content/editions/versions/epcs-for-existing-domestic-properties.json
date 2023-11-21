@@ -1,53 +1,49 @@
 {
-    "@context": "https://staging.idpd.uk/#ns",
-    "@id": "https://staging.idpd.uk/datasets/epcs-for-existing-domestic-properties/editions/2023-07/versions",
-    "@type": "hydra:Collection",
-    "title": "Domestic Energy Performance Certificates for existing dwellings",
-    "versions": [
-        {
-            "@type": [
-                "dcat:Distribution",
-                "csvw:Table"
-            ],
-            "@id": "https://staging.idpd.uk/datasets/epcs-for-existing-domestic-properties/editions/2023-07",
-            "identifier": "existing_dwellings_data",
-            "issued": "2023-07-27T09:30:00Z",
-            "title": "Domestic Energy Performance Certificates for existing dwellings",
-            "summary": "Data from certificates for existing domestic properties lodged on the Energy Performance of Buildings Registers, by average energy efficiency rating",
-            "description": "This data relates to the Energy Performance of Buildings Certificates published alongside the Energy Performance of Buildings Certificates Statistical release May to July 2023.",
-            "download_url": "https://staging.idpd.uk/datasets/epcs-for-existing-domestic-properties/editions/2023-07/versions/existing_dwellings_data.csv",
-            "media_type": "text/csv",
-            "table_schema": {
-                "columns": [
-                    {
-                    "name": "Period",
-                    "datatype": "string",
-                    "titles": "Period",
-                    "description": "The time period associated with the observation."
-                    },
-                    {
-                    "name": "Location",
-                    "datatype": "string",
-                    "titles": "Location",
-                    "description": "The name associated with The geography code."
-                    },
-                    {
-                    "name": "Efficiency Rating",
-                    "datatype": "string",
-                    "titles": "Efficiency Rating",
-                    "description": "The scale of energy efficiency rating on a scale of A to G with A being the most efficient and G being the least efficient."
-                    },
-                    {
-                    "name": "Value",
-                    "datatype": "decimal",
-                    "titles": "count of energy performance certificate",
-                    "description": "Observational Value."
-                    }
-            ]
-            }
-        }  
-        
-    ],
-    "count": 1,
-    "offset": 0
+  "@context": "https://staging.idpd.uk/#ns",
+  "@id": "https://staging.idpd.uk/datasets/epcs-for-existing-domestic-properties/editions/2023-07/versions",
+  "@type": "hydra:Collection",
+  "title": "Domestic Energy Performance Certificates for existing dwellings",
+  "versions": [
+    {
+      "@type": ["dcat:Distribution", "csvw:Table"],
+      "@id": "https://staging.idpd.uk/datasets/epcs-for-existing-domestic-properties/editions/2023-07",
+      "identifier": "existing_dwellings_data",
+      "issued": "2023-07-27T09:30:00Z",
+      "title": "Domestic Energy Performance Certificates for existing dwellings",
+      "summary": "Data from certificates for existing domestic properties lodged on the Energy Performance of Buildings Registers, by average energy efficiency rating",
+      "description": "This data relates to the Energy Performance of Buildings Certificates published alongside the Energy Performance of Buildings Certificates Statistical release May to July 2023.",
+      "download_url": "https://staging.idpd.uk/datasets/epcs-for-existing-domestic-properties/editions/2023-07/versions/existing_dwellings_data.csv",
+      "media_type": "text/csv",
+      "table_schema": {
+        "columns": [
+          {
+            "name": "Period",
+            "datatype": "string",
+            "titles": "Period",
+            "description": "The time period associated with the observation."
+          },
+          {
+            "name": "Location",
+            "datatype": "string",
+            "titles": "Location",
+            "description": "The name associated with The geography code."
+          },
+          {
+            "name": "Efficiency Rating",
+            "datatype": "string",
+            "titles": "Efficiency Rating",
+            "description": "The scale of energy efficiency rating on a scale of A to G with A being the most efficient and G being the least efficient."
+          },
+          {
+            "name": "Value",
+            "datatype": "decimal",
+            "titles": "count of energy performance certificate",
+            "description": "Observational Value."
+          }
+        ]
+      }
+    }
+  ],
+  "count": 1,
+  "offset": 0
 }
