@@ -374,7 +374,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "dcat:publisher"}
         )
-
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
         return data["@graph"][0]
 
     def get_topics(self) -> Optional[Dict]:

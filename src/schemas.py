@@ -215,6 +215,10 @@ class Publisher(BaseModel):
     landing_page: str
 
 
+class PublisherWithContext(Publisher):
+    context: str = Field(alias="@context")
+
+
 class Publishers(BaseModel):
     context: Optional[str] = Field(alias="@context")
     id: str = Field(alias="@id")

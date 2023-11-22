@@ -383,11 +383,11 @@ def get_all_publishers(
 
 @app.get(
     "/publishers/{publisher_id}",
-    response_model=Optional[schemas.Publisher],
+    response_model=Optional[schemas.PublisherWithContext],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns detailed information about the publisher.",
-            "model": schemas.Publisher,
+            "model": schemas.PublisherWithContext,
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. The publisher with the given ID is not found.",
