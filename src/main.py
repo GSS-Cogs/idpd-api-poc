@@ -1,3 +1,4 @@
+from ensurepip import version
 import os
 from typing import Optional
 
@@ -198,11 +199,11 @@ def get_dataset_editions(
 
 @app.get(
     "/datasets/{dataset_id}/editions/{edition_id}",
-    response_model=Optional[schemas.Edition],
+    response_model=Optional[schemas.EditionWithContext],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns detailed information about the edition.",
-            "model": schemas.Edition,
+            "model": schemas.EditionWithContext,
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. The edition with the given ID is not found.",
@@ -285,11 +286,11 @@ def get_dataset_edition_versions(
 
 @app.get(
     "/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}",
-    response_model=Optional[schemas.Version],
+    response_model=Optional[schemas.VersionWithContext],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns detailed information about the specified version of a dataset.",
-            "model": schemas.Version,
+            "model": schemas.VersionWithContext,
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. The specified version of the dataset is not found.",
@@ -382,11 +383,11 @@ def get_all_publishers(
 
 @app.get(
     "/publishers/{publisher_id}",
-    response_model=Optional[schemas.Publisher],
+    response_model=Optional[schemas.PublisherWithContext],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns detailed information about the publisher.",
-            "model": schemas.Publisher,
+            "model": schemas.PublisherWithContext,
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. The publisher with the given ID is not found.",
@@ -469,11 +470,11 @@ def get_all_topics(
 
 @app.get(
     "/topics/{topic_id}",
-    response_model=Optional[schemas.Topic],
+    response_model=Optional[schemas.TopicWithContext],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns detailed information about the topic.",
-            "model": schemas.Topic,
+            "model": schemas.TopicWithContext,
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. The topic with the given ID is not found.",

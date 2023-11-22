@@ -109,6 +109,10 @@ class Edition(BaseModel):
     table_schema: TableSchema
 
 
+class EditionWithContext(Edition):
+    context: str = Field(alias="@context")
+
+
 class SummarisedEdition(BaseModel):
     """
     A short form schema for Edition as presented
@@ -192,6 +196,9 @@ class Version(BaseModel):
     media_type: str
     table_schema: TableSchema
 
+class VersionWithContext(Version):
+    context: str = Field(alias="@context")
+
 
 class Versions(BaseModel):
     context: str = Field(alias="@context")
@@ -209,6 +216,10 @@ class Publisher(BaseModel):
     title: str = Field(max_length=90)
     description: str
     landing_page: str
+
+
+class PublisherWithContext(Publisher):
+    context: str = Field(alias="@context")
 
 
 class Publishers(BaseModel):
@@ -229,6 +240,8 @@ class Topic(BaseModel):
     sub_topics: Union[List[str], None] = Field(default_factory=list)
     parent_topics: Union[List[str], None] = Field(default_factory=list)
 
+class TopicWithContext(Topic):
+    context: str = Field(alias="@context")
 
 class Topics(BaseModel):
     context: str = Field(alias="@context")

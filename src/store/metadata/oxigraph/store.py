@@ -53,8 +53,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         """
         Gets all datasets
         """
-        logger.info(
-            "Constructing get_datasets() response from graph")
+        logger.info("Constructing get_datasets() response from graph")
         graph = self.db
 
         result: Graph = construct_datasets(graph)
@@ -257,7 +256,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             if "@id" in x.keys() and re.search("/versions/", x["@id"])
         ]
         edition_graph["versions"] = version_graphs
-
+        edition_graph["@context"] = "https://staging.idpd.uk/ns#"
         return edition_graph
 
     def get_versions(self, dataset_id: str, edition_id: str) -> Optional[Dict]:
@@ -311,7 +310,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             del column["@id"]
         version_graph["table_schema"]["columns"] = columns_graph
         del version_graph["table_schema"]["@id"]
-
+        version_graph["@context"] = "https://staging.idpd.uk/ns#"
         return version_graph
 
     def get_publishers(self) -> Optional[Dict]:
@@ -379,7 +378,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "dcat:publisher"}
         )
-
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
         return data["@graph"][0]
 
     def get_topics(self) -> Optional[Dict]:
@@ -443,6 +442,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `themes`
         data["@graph"][0]["@type"] = "dcat:theme"
         result = data["@graph"][0]
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
         return result
 
     def get_sub_topics(self, topic_id: str) -> Optional[Dict]:
