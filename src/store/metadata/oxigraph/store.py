@@ -438,6 +438,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `themes`
         data["@graph"][0]["@type"] = "dcat:theme"
         result = data["@graph"][0]
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
         return result
 
     def get_sub_topics(self, topic_id: str) -> Optional[Dict]:
