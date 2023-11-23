@@ -113,11 +113,11 @@ def get_all_datasets(
 
 @app.get(
     "/datasets/{dataset_id}",
-    response_model=Optional[schemas.Dataset],
+    response_model=Optional[schemas.DatasetWithContext],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns detailed information about the dataset.",
-            "model": schemas.Dataset,
+            "model": schemas.DatasetWithContext,
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. The dataset with the given ID is not found.",
