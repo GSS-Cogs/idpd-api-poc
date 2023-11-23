@@ -165,7 +165,7 @@ class Dataset(BaseModel):
     spatial_coverage: str = Field(pattern=r"^[EJKLMNSW]{1}\d{8}$")
     temporal_resolution: Union[str, list[str]]
     temporal_coverage: PeriodOfTime
-    editions: Union[List[SummarisedEdition], List[Edition]]
+    editions: List[SummarisedEdition]
     editions_url: str
 
 
@@ -177,7 +177,7 @@ class Datasets(BaseModel):
     context: str = Field(alias="@context")
     id: str = Field(alias="@id")
     type: List[str] = Field(alias="@type")
-    datasets: List[Dataset]  # TODO - stricter
+    datasets: List[Dataset]
     offset: int
     count: int
 
@@ -195,6 +195,7 @@ class Version(BaseModel):
     download_url: str
     media_type: str
     table_schema: TableSchema
+
 
 class VersionWithContext(Version):
     context: str = Field(alias="@context")
@@ -240,8 +241,10 @@ class Topic(BaseModel):
     sub_topics: Union[List[str], None] = Field(default_factory=list)
     parent_topics: Union[List[str], None] = Field(default_factory=list)
 
+
 class TopicWithContext(Topic):
     context: str = Field(alias="@context")
+
 
 class Topics(BaseModel):
     context: str = Field(alias="@context")
