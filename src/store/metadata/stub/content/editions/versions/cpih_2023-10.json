@@ -1,0 +1,49 @@
+{
+  "@context": "https://staging.idpd.uk/ns#",
+  "@id": "https://staging.idpd.uk/datasets/cpih/editions/2023-10/versions",
+  "@type": "hydra:Collection",
+  "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
+  "versions": [
+    {
+      "@type": ["dcat:Distribution", "csvw:Table"],
+      "@id": "https://staging.idpd.uk/datasets/cpih/editions/2023-10/versions/1",
+      "identifier": "1",
+      "issued": "2023-11-19T07:00:00Z",
+      "title": "Consumer Prices Index including owner occupiers' housing costs (CPIH)",
+      "summary": "The Consumer Prices Index (CPI), Consumer Prices Index including owner occupiers' housing costs (CPIH), and owner occupiers' housing costs (OOH) inflation.",
+      "description": "The Consumer Prices Index (CPI), Consumer Prices Index including owner occupiers' housing costs (CPIH), and owner occupiers' housing costs (OOH) inflation. CPIH is the most comprehensive measure of inflation. It extends Consumer Prices Index to include a measure of the costs associated with owning, maintaining and living in one's own home, known as owner occupiers' housing costs (OOH), along with council tax.",
+      "download_url": "https://staging.idpd.uk/datasets/cpih/editions/2023-10/versions/1.csv",
+      "media_type": "text/csv",
+      "table_schema": {
+        "columns": [
+          {
+            "name": "geography",
+            "datatype": "string",
+            "titles": "geography",
+            "description": "The code associated with the geography."
+          },
+          {
+            "name": "geography_name",
+            "datatype": "string",
+            "titles": "geography_name",
+            "description": "The name associated with the geography."
+          },
+          {
+            "name": "date",
+            "datatype": "gYearMonth",
+            "titles": "date",
+            "description": "The date associated with the observation."
+          },
+          {
+            "name": "cpih_annual_rate",
+            "datatype": "number",
+            "titles": "cpih_annual_rate",
+            "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) percentage change over 12 months."
+          }
+        ]
+      }
+    }
+  ],
+  "count": 1,
+  "offset": 0
+}
