@@ -1,0 +1,9 @@
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+CONSTRUCT WHERE {
+    ?uri_ref a dcat:DatasetSeries ;
+        dcterms:temporal ?temporal_coverage .
+
+    ?temporal_coverage dcat:startDate ?start_date ;
+        dcat:endDate ?end_date .
+}

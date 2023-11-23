@@ -1,30 +1,26 @@
+from enum import Enum
 import json
 import os
+from pathlib import Path
 import re
 from typing import Dict, Optional
 
 from pyld import jsonld
-from rdflib import Dataset, Graph
+from rdflib import Dataset, Graph, Literal, URIRef
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore
+from rdflib.term import Identifier
 
 from custom_logging import logger
 
 from .. import constants
 from ..base import BaseMetadataStore
 from .sparql.construct import (
-    construct_dataset_contact_point,
-    construct_dataset_core,
-    construct_dataset_editions,
-    construct_dataset_keywords,
     construct_dataset_parent_topics_by_id,
     construct_dataset_subtopics_by_id,
-    construct_dataset_temporal_coverage,
-    construct_dataset_themes,
     construct_dataset_topic_by_id,
     construct_dataset_topics,
     construct_dataset_version,
     construct_dataset_version_table_schema,
-    construct_datasets,
     construct_edition_contact_point,
     construct_edition_core,
     construct_edition_keywords,
@@ -37,6 +33,39 @@ from .sparql.construct import (
     construct_publishers,
 )
 
+APP_ROOT_DIR_PATH = Path(__file__).parent.resolve()
+
+
+class SPARQLQueryName(Enum):
+    CONSTRUCT_DATASETS = "construct_datasets"
+    CONSTRUCT_DATASET = "construct_dataset"
+    CONSTRUCT_KEYWORDS = "construct_keywords"
+    CONSTRUCT_TOPICS = "construct_topics"
+    CONSTRUCT_CONTACT_POINT = "construct_contact_point"
+    CONSTRUCT_TEMPORAL_COVERAGE = "construct_temporal_coverage"
+    CONSTRUCT_EDITIONS = "construct_editions"
+
+
+def _get_query_string_from_file(query_type: SPARQLQueryName) -> str:
+    file_path: Path = (
+        APP_ROOT_DIR_PATH / "sparql" / "queries" / (query_type.value + ".sparql")
+    )
+
+    try:
+        with open(
+            file_path,
+            "r",
+        ) as f:
+            return f.read()
+    except Exception as ex:
+        raise Exception(sparql_file_path=file_path.absolute()) from ex
+
+
+def construct(
+    query: str, graph: Graph, init_bindings: Optional[Dict[str, Identifier]] = None
+) -> Graph:
+    return graph.query(query, initBindings=init_bindings).graph
+
 
 class OxigraphMetadataStore(BaseMetadataStore):
     def setup(self):
@@ -48,7 +77,6 @@ class OxigraphMetadataStore(BaseMetadataStore):
         configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
         self.db = Dataset(store=SPARQLUpdateStore(*configuration))
 
-
     def get_datasets(self) -> Optional[Dict]:
         """
         Gets all datasets
@@ -56,8 +84,9 @@ class OxigraphMetadataStore(BaseMetadataStore):
         logger.info("Constructing get_datasets() response from graph")
         graph = self.db
 
-        result: Graph = construct_datasets(graph)
-
+        result = construct(
+            _get_query_string_from_file(SPARQLQueryName.CONSTRUCT_DATASETS), graph
+        )
         # Serialize the graph into jsonld
         data = json.loads(result.serialize(format="json-ld"))
 
@@ -78,7 +107,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             for dataset in data["@graph"][0]["dcat:DatasetSeries"]
         ]
         del data["@graph"][0]["dcat:DatasetSeries"]
-        
+
         # TODO Update @context so it's not hardcoded
         data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
 
@@ -96,20 +125,47 @@ class OxigraphMetadataStore(BaseMetadataStore):
 
         # Specify the named graph from which we are fetching data
         graph = self.db
-
+        init_bindings = {
+            "uri_ref": URIRef(f"https://staging.idpd.uk/datasets/{dataset_id}")
+        }
         # Use the construct wrappers to pull the raw RDF triples
         # (as one rdflib.Graph() for each function) and add them
         # together to create a single Graph of the
         # data we need.
-        result: Graph = (
-            construct_dataset_core(graph, dataset_id)
-            + construct_dataset_keywords(graph, dataset_id)
-            + construct_dataset_themes(graph, dataset_id)
-            + construct_dataset_contact_point(graph, dataset_id)
-            + construct_dataset_temporal_coverage(graph, dataset_id)
-            + construct_dataset_editions(graph, dataset_id)
+        dataset = construct(
+            _get_query_string_from_file(SPARQLQueryName.CONSTRUCT_DATASET),
+            graph,
+            init_bindings,
         )
-
+        # TODO: incorporate `keywords` and `topics` into the `construct_dataset` query?
+        keywords = construct(
+            _get_query_string_from_file(SPARQLQueryName.CONSTRUCT_KEYWORDS),
+            graph,
+            init_bindings,
+        )
+        topics = construct(
+            _get_query_string_from_file(SPARQLQueryName.CONSTRUCT_TOPICS),
+            graph,
+            init_bindings,
+        )
+        contact_point = construct(
+            _get_query_string_from_file(SPARQLQueryName.CONSTRUCT_CONTACT_POINT),
+            graph,
+            init_bindings,
+        )
+        temporal_coverage = construct(
+            _get_query_string_from_file(SPARQLQueryName.CONSTRUCT_TEMPORAL_COVERAGE),
+            graph,
+            init_bindings,
+        )
+        editions = construct(
+            _get_query_string_from_file(SPARQLQueryName.CONSTRUCT_EDITIONS),
+            graph,
+            init_bindings,
+        )
+        result: Graph = (
+            dataset + keywords + topics + contact_point + temporal_coverage + editions
+        )
         # Serialize the graph into jsonld
         data = json.loads(result.serialize(format="json-ld"))
 

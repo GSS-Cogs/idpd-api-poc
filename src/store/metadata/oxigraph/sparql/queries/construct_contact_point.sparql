@@ -1,0 +1,9 @@
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+CONSTRUCT WHERE {
+    ?uri_ref a dcat:DatasetSeries ;
+        dcat:contactPoint ?contact_point .
+
+    ?contact_point vcard:fn ?name ;
+        vcard:hasEmail ?email .
+}
