@@ -51,6 +51,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
         self.db = Dataset(store=SPARQLUpdateStore(*configuration))
 
+
     def get_datasets(self) -> Optional[Dict]:
         """
         Gets all datasets
@@ -80,8 +81,10 @@ class OxigraphMetadataStore(BaseMetadataStore):
             for dataset in data["@graph"][0]["dcat:DatasetSeries"]
         ]
         del data["@graph"][0]["dcat:DatasetSeries"]
+        
         # TODO Update @context so it's not hardcoded
-        data["@graph"][0]["@context"] = "https://staging.idpd.uk/#ns"
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
+
         result = data["@graph"][0]
         return result
 
@@ -139,7 +142,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             if "@id" in x.keys() and re.search("/editions/", x["@id"])
         ]
         dataset_graph["editions"] = edition_graphs
-
+        del dataset_graph["versions"]
         # Compact and embed anonymous nodes
         dataset_graph["contact_point"] = {
             "name": contact_point_graph["vcard:fn"]["@value"],
@@ -149,6 +152,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             "start": temporal_coverage_graph["dcat:endDate"]["@value"],
             "end": temporal_coverage_graph["dcat:startDate"]["@value"],
         }
+        dataset_graph["@context"] = "https://staging.idpd.uk/ns#"
         return dataset_graph
 
     def get_editions(self, dataset_id: str) -> Optional[Dict]:
@@ -412,7 +416,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "dcat:publisher"}
         )
-
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
         return data["@graph"][0]
 
     def get_topics(self) -> Optional[Dict]:
@@ -476,6 +480,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `themes`
         data["@graph"][0]["@type"] = "dcat:theme"
         result = data["@graph"][0]
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
         return result
 
     def get_sub_topics(self, topic_id: str) -> Optional[Dict]:

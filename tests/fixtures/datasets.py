@@ -11,7 +11,9 @@ def dataset_test_data():
     """
     file_path = pathlib.Path("src/store/metadata/stub/content/datasets.json")
     with open(file_path, "r") as json_file:
-        return json.load(json_file)["datasets"][0]
+        dataset = json.load(json_file)["datasets"][0]
+    dataset["@context"] = "https://staging.idpd.uk/ns#"
+    return dataset
 
 
 @pytest.fixture

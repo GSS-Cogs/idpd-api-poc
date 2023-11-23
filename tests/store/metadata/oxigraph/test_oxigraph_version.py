@@ -29,7 +29,7 @@ def test_oxigraph_get_version_returns_valid_structure():
         version_schema.title
         == "Consumer Prices Index including owner occupiers' housing costs (CPIH)"
     )
-    assert version_schema.issued == "2017-01-01T00:00:00"
+    assert version_schema.issued == "2017-01-01T00:00:00+00:00"
     assert (
         version_schema.summary
         == "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a..."
@@ -48,3 +48,4 @@ def test_version_schema_validation():
     """Confirm that the schema validation is working as intended i.e raises ValidationError with wrong structure"""
     with pytest.raises(ValidationError):
         schemas.VersionWithContext(**{"I": "break"})
+
