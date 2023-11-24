@@ -1,16 +1,15 @@
-from enum import Enum
 import json
 import os
-from pathlib import Path
 import re
 from typing import Dict, Optional
 
 from pyld import jsonld
-from rdflib import Dataset, Graph, Literal, URIRef
+from rdflib import Dataset, Graph, URIRef
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore
 from rdflib.term import Identifier
 
 from custom_logging import logger
+from store.metadata.sparql.queries import sparql_queries
 
 from .. import constants
 from ..base import BaseMetadataStore
@@ -21,44 +20,9 @@ from .sparql.construct import (
     construct_dataset_topics,
     construct_dataset_version,
     construct_dataset_version_table_schema,
-    construct_edition_contact_point,
-    construct_edition_core,
-    construct_edition_keywords,
-    construct_edition_table_schema,
-    construct_edition_temporal_coverage,
-    construct_edition_topics,
-    construct_edition_versions,
-    construct_editions,
     construct_publisher,
     construct_publishers,
 )
-
-APP_ROOT_DIR_PATH = Path(__file__).parent.resolve()
-
-
-class SPARQLQueryName(Enum):
-    CONSTRUCT_DATASETS = "construct_datasets"
-    CONSTRUCT_DATASET = "construct_dataset"
-    CONSTRUCT_KEYWORDS = "construct_keywords"
-    CONSTRUCT_TOPICS = "construct_topics"
-    CONSTRUCT_CONTACT_POINT = "construct_contact_point"
-    CONSTRUCT_TEMPORAL_COVERAGE = "construct_temporal_coverage"
-    CONSTRUCT_EDITIONS = "construct_editions"
-
-
-def _get_query_string_from_file(query_type: SPARQLQueryName) -> str:
-    file_path: Path = (
-        APP_ROOT_DIR_PATH / "sparql" / "queries" / (query_type.value + ".sparql")
-    )
-
-    try:
-        with open(
-            file_path,
-            "r",
-        ) as f:
-            return f.read()
-    except Exception as ex:
-        raise Exception(sparql_file_path=file_path.absolute()) from ex
 
 
 def construct(
@@ -82,11 +46,11 @@ class OxigraphMetadataStore(BaseMetadataStore):
         Gets all datasets
         """
         logger.info("Constructing get_datasets() response from graph")
-        graph = self.db
 
-        result = construct(
-            _get_query_string_from_file(SPARQLQueryName.CONSTRUCT_DATASETS), graph
-        )
+        # Populate the graph from the database
+        graph = self.db
+        result: Graph = construct(sparql_queries["datasets"], graph)
+
         # Serialize the graph into jsonld
         data = json.loads(result.serialize(format="json-ld"))
 
@@ -98,21 +62,23 @@ class OxigraphMetadataStore(BaseMetadataStore):
                 "@type": ["dcat:Catalog", "hydra:Collection"],
             },
         )
+        datasets_graph = data["@graph"][0]
 
         # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url'
-        data["@graph"][0]["@type"] = ["dcat:Catalog", "hydra:Collection"]
+        datasets_graph["@type"] = ["dcat:Catalog", "hydra:Collection"]
 
-        data["@graph"][0]["datasets"] = [
+        # Get dataset results for each dataset in datasets
+        datasets_graph["datasets"] = [
             self.get_dataset(dataset["@id"].split("/")[-1])
-            for dataset in data["@graph"][0]["dcat:DatasetSeries"]
+            for dataset in datasets_graph["dcat:DatasetSeries"]
         ]
-        del data["@graph"][0]["dcat:DatasetSeries"]
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing `datasets` to `dcat:DatasetSeries'
+        del datasets_graph["dcat:DatasetSeries"]
 
         # TODO Update @context so it's not hardcoded
-        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
+        datasets_graph["@context"] = "https://staging.idpd.uk/ns#"
 
-        result = data["@graph"][0]
-        return result
+        return datasets_graph
 
     def get_dataset(self, dataset_id: str) -> Optional[Dict]:
         """
@@ -123,48 +89,51 @@ class OxigraphMetadataStore(BaseMetadataStore):
             data={"dataset_id": dataset_id},
         )
 
-        # Specify the named graph from which we are fetching data
+        # Populate the graph from the database
         graph = self.db
+
+        # Define initBindings for SPARQL query
         init_bindings = {
-            "uri_ref": URIRef(f"https://staging.idpd.uk/datasets/{dataset_id}")
+            "subject": URIRef(f"https://staging.idpd.uk/datasets/{dataset_id}"),
+            "type": URIRef("http://www.w3.org/ns/dcat#DatasetSeries"),
         }
+
         # Use the construct wrappers to pull the raw RDF triples
         # (as one rdflib.Graph() for each function) and add them
         # together to create a single Graph of the
         # data we need.
-        dataset = construct(
-            _get_query_string_from_file(SPARQLQueryName.CONSTRUCT_DATASET),
-            graph,
-            init_bindings,
-        )
-        # TODO: incorporate `keywords` and `topics` into the `construct_dataset` query?
-        keywords = construct(
-            _get_query_string_from_file(SPARQLQueryName.CONSTRUCT_KEYWORDS),
-            graph,
-            init_bindings,
-        )
-        topics = construct(
-            _get_query_string_from_file(SPARQLQueryName.CONSTRUCT_TOPICS),
-            graph,
-            init_bindings,
-        )
-        contact_point = construct(
-            _get_query_string_from_file(SPARQLQueryName.CONSTRUCT_CONTACT_POINT),
-            graph,
-            init_bindings,
-        )
-        temporal_coverage = construct(
-            _get_query_string_from_file(SPARQLQueryName.CONSTRUCT_TEMPORAL_COVERAGE),
-            graph,
-            init_bindings,
-        )
-        editions = construct(
-            _get_query_string_from_file(SPARQLQueryName.CONSTRUCT_EDITIONS),
-            graph,
-            init_bindings,
-        )
+        # TODO: incorporate `keywords` and `topics` into the `sparql_queries["dataset"]` query?
         result: Graph = (
-            dataset + keywords + topics + contact_point + temporal_coverage + editions
+            construct(
+                sparql_queries["dataset"],
+                graph,
+                init_bindings,
+            )
+            + construct(
+                sparql_queries["keywords"],
+                graph,
+                init_bindings,
+            )
+            + construct(
+                sparql_queries["topics"],
+                graph,
+                init_bindings,
+            )
+            + construct(
+                sparql_queries["contact_point"],
+                graph,
+                init_bindings,
+            )
+            + construct(
+                sparql_queries["temporal_coverage"],
+                graph,
+                init_bindings,
+            )
+            + construct(
+                sparql_queries["editions"],
+                graph,
+                init_bindings,
+            )
         )
         # Serialize the graph into jsonld
         data = json.loads(result.serialize(format="json-ld"))
@@ -173,14 +142,8 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "dcat:DatasetSeries"}
         )
-        # At this point our jonsld has a "@graph" list field with three entries in it
-        #
-        # - the dataset graph in compact form
-        # - an anonymous (blank root node) graph of contacts in long form
-        # - an anonymous (blank root node) graph of temporal coverage in long form
-        #
-        # The user doesnt need to know about blank RDF nodes so we need
-        # to flatten and embed the latter two graphs in the dataset graph.
+
+        # Extract default graph and blank node graphs from flattened json-ld data
         dataset_graph = _get_single_graph_for_field(data, "@type")
         contact_point_graph = _get_single_graph_for_field(data, "vcard:fn")
         temporal_coverage_graph = _get_single_graph_for_field(data, "dcat:endDate")
@@ -195,8 +158,12 @@ class OxigraphMetadataStore(BaseMetadataStore):
             if "@id" in x.keys() and re.search("/editions/", x["@id"])
         ]
         dataset_graph["editions"] = edition_graphs
+
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing `editions` to `versions'
         del dataset_graph["versions"]
-        # Compact and embed anonymous nodes
+
+        # The user doesnt need to know about blank RDF nodes so we need
+        # to flatten and embed these graphs into the dataset graph.
         dataset_graph["contact_point"] = {
             "name": contact_point_graph["vcard:fn"]["@value"],
             "email": contact_point_graph["vcard:hasEmail"],
@@ -205,12 +172,14 @@ class OxigraphMetadataStore(BaseMetadataStore):
             "start": temporal_coverage_graph["dcat:endDate"]["@value"],
             "end": temporal_coverage_graph["dcat:startDate"]["@value"],
         }
+
+        # TODO Update @context so it's not hardcoded
         dataset_graph["@context"] = "https://staging.idpd.uk/ns#"
         return dataset_graph
 
     def get_editions(self, dataset_id: str) -> Optional[Dict]:
         """
-        Gets all editions of a specific dataset
+        Gets all editions of a specific dataset with ID `dataset_id`
         """
         logger.info(
             "Constructing get_editions() response from graph",
@@ -220,11 +189,19 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # Populate the graph from the database
         graph = self.db
 
+        # Define initBindings for SPARQL query
+        init_bindings = {
+            "subject": URIRef(
+                f"https://staging.idpd.uk/datasets/{dataset_id}/editions"
+            ),
+            "type": URIRef("http://www.w3.org/ns/hydra/core#Collection"),
+        }
+
         # Use the construct wrappers to pull the raw RDF triples
         # (as one rdflib.Graph() for each function) and add them
         # together to create a single Graph of the
         # data we need.
-        result: Graph = construct_editions(graph, dataset_id)
+        result: Graph = construct(sparql_queries["editions"], graph, init_bindings)
 
         # Serialize the graph into jsonld
         data = json.loads(result.serialize(format="json-ld"))
@@ -245,14 +222,14 @@ class OxigraphMetadataStore(BaseMetadataStore):
             self.get_edition(dataset_id, x.split("/")[-1])
             for x in editions_graph["editions"]
         ]
+
+        # TODO Update @context so it's not hardcoded
         editions_graph["@context"] = "https://staging.idpd.uk/ns#"
         return editions_graph
 
-    def get_edition(
-        self, dataset_id: str, edition_id: str
-    ) -> Optional[Dict]:  # pragma: no cover
+    def get_edition(self, dataset_id: str, edition_id: str) -> Optional[Dict]:
         """
-        Gets a specific edition of a specific dataset
+        Gets a specific edition with ID `edition_id` of a specific dataset with ID `dataset_id`
         """
         logger.info(
             "Constructing get_edition() response from graph",
@@ -262,18 +239,26 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # Populate the graph from the database
         graph = self.db
 
+        # Define initBindings for SPARQL query
+        init_bindings = {
+            "subject": URIRef(
+                f"https://staging.idpd.uk/datasets/{dataset_id}/editions/{edition_id}"
+            ),
+            "type": URIRef("http://www.w3.org/ns/dcat#Dataset"),
+        }
+
         # Use the construct wrappers to pull the raw RDF triples
         # (as one rdflib.Graph() for each function) and add them
         # together to create a single Graph of the
         # data we need.
         result: Graph = (
-            construct_edition_core(graph, dataset_id, edition_id)
-            + construct_edition_contact_point(graph, dataset_id, edition_id)
-            + construct_edition_topics(graph, dataset_id, edition_id)
-            + construct_edition_keywords(graph, dataset_id, edition_id)
-            + construct_edition_temporal_coverage(graph, dataset_id, edition_id)
-            + construct_edition_table_schema(graph, dataset_id, edition_id)
-            + construct_edition_versions(graph, dataset_id, edition_id)
+            construct(sparql_queries["edition"], graph, init_bindings)
+            + construct(sparql_queries["contact_point"], graph, init_bindings)
+            + construct(sparql_queries["topics"], graph, init_bindings)
+            + construct(sparql_queries["keywords"], graph, init_bindings)
+            + construct(sparql_queries["temporal_coverage"], graph, init_bindings)
+            + construct(sparql_queries["table_schema"], graph, init_bindings)
+            + construct(sparql_queries["versions"], graph, init_bindings)
         )
 
         # Serialize the graph into jsonld
@@ -284,6 +269,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             data, {"@context": constants.CONTEXT, "@type": "dcat:Dataset"}
         )
 
+        # Extract default graph and blank node graphs from flattened json-ld data
         edition_graph = _get_single_graph_for_field(data, "@type")
         contact_point_graph = _get_single_graph_for_field(data, "vcard:fn")
         temporal_coverage_graph = _get_single_graph_for_field(data, "dcat:endDate")
@@ -297,6 +283,8 @@ class OxigraphMetadataStore(BaseMetadataStore):
         edition_graph["table_schema"]["columns"] = columns_graph
         del edition_graph["table_schema"]["@id"]
 
+        # The user doesnt need to know about blank RDF nodes so we need
+        # to flatten and embed these graphs into the primary graph.
         edition_graph["contact_point"] = {
             "name": contact_point_graph["vcard:fn"]["@value"],
             "email": contact_point_graph["vcard:hasEmail"],
@@ -306,12 +294,15 @@ class OxigraphMetadataStore(BaseMetadataStore):
             "end": temporal_coverage_graph["dcat:endDate"]["@value"],
         }
 
+        # Add `issued` and `modified` fields to each version in `versions`
         version_graphs = [
             x
             for x in data["@graph"]
             if "@id" in x.keys() and re.search("/versions/", x["@id"])
         ]
         edition_graph["versions"] = version_graphs
+
+        # TODO Update @context so it's not hardcoded
         edition_graph["@context"] = "https://staging.idpd.uk/ns#"
         return edition_graph
 
@@ -322,7 +313,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
 
     def get_version(
         self, dataset_id: str, edition_id: str, version_id: str
-    ) -> Optional[Dict]:  # pragma: no cover
+    ) -> Optional[Dict]:
         """
         Gets a specific version of a specific edition of a specific dataset
         """
