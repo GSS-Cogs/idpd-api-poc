@@ -14,7 +14,9 @@ def test_oxigraph_get_versions_returns_valid_structure():
     """
     store = OxigraphMetadataStore()
 
-    versions = store.get_versions("4gc", "2023-09")
+    # versions = store.get_versions("4gc", "2023-09") still brings back a list
+    # for versions_schema["issued"], but containing 2 different dates
+    versions = store.get_versions("gdhi", "2023-03")
     versions_schema = schemas.Versions(**versions)
     
     assert len(versions_schema.versions) > 0

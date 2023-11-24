@@ -288,8 +288,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             return None
 
         versions_graph["@type"] = "hydra:Collection"
-        # versions_graph["versions"] = versions_graph.pop("versions")
-
+        
         versions_graph["versions"] = [
             self.get_version(dataset_id, edition_id, x.split("/")[-1])
             for x in versions_graph["versions"]
@@ -343,10 +342,6 @@ class OxigraphMetadataStore(BaseMetadataStore):
             del column["@id"]
         version_graph["table_schema"]["columns"] = columns_graph
         del version_graph["table_schema"]["@id"]
-
-        if type(version_graph["issued"]) != str:
-            logger.error("Results for version_graph['issued'] should be a str, not a "+ str(type(version_graph["issued"]))+".")
-            version_graph["issued"] = None
 
         version_graph["@context"] = "https://staging.idpd.uk/ns#"
         return version_graph
