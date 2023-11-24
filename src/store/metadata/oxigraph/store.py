@@ -21,6 +21,9 @@ from .sparql.construct import (
     construct_dataset_version,
     construct_dataset_version_table_schema,
     construct_publisher,
+    construct_dataset_version,
+    construct_dataset_version_table_schema,
+    construct_versions,
     construct_publishers,
 )
 
@@ -311,6 +314,35 @@ class OxigraphMetadataStore(BaseMetadataStore):
         Gets all versions of a specific edition of a specific dataset
         """
 
+        # Populate the graph from the database
+        graph = self.db
+
+        # Use the construct wrappers to pull the raw RDF triples
+        # (as one rdflib.Graph() for each function) and add them
+        # together to create a single Graph of the
+        # data we need.
+        result: Graph = construct_versions(graph, dataset_id, edition_id)
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
+        )
+        versions_graph = _get_single_graph_for_field(data, "@type")
+        if versions_graph is None:
+            return None
+
+        versions_graph["@type"] = "hydra:Collection"
+        
+        versions_graph["versions"] = [
+            self.get_version(dataset_id, edition_id, x.split("/")[-1])
+            for x in versions_graph["versions"]
+        ]
+        versions_graph["@context"] = "https://staging.idpd.uk/ns#"
+        return versions_graph
+
     def get_version(
         self, dataset_id: str, edition_id: str, version_id: str
     ) -> Optional[Dict]:
@@ -357,6 +389,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             del column["@id"]
         version_graph["table_schema"]["columns"] = columns_graph
         del version_graph["table_schema"]["@id"]
+
         version_graph["@context"] = "https://staging.idpd.uk/ns#"
         return version_graph
 

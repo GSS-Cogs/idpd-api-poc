@@ -236,6 +236,24 @@ def construct_edition_temporal_coverage(
     result = results_graph if results_graph else Graph()
     return result
 
+def construct_versions(graph: Graph, dataset_id: str, edition_id: str) -> Graph:
+    query = """
+        PREFIX dcterms: <http://purl.org/dc/terms/>
+        PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+        CONSTRUCT WHERE {{
+        <https://staging.idpd.uk/datasets/{dataset_id}/editions/{edition_id}/versions> a hydra:Collection ;
+        dcterms:title ?title ;
+        hydra:member ?versions ;
+        hydra:totalitems ?count ;
+        hydra:offset ?offset .
+        }}
+        """.format(
+        dataset_id=dataset_id, edition_id=edition_id
+    )
+    results_graph = graph.query(query).graph
+    result = results_graph if results_graph else Graph()
+    return result
+
 
 def construct_publishers(graph: Graph) -> Graph:
     query = """
@@ -258,7 +276,6 @@ def construct_publishers(graph: Graph) -> Graph:
     results_graph = graph.query(query).graph
     result = results_graph if results_graph else Graph()
     return result
-
 
 def construct_dataset_version(
     graph: Graph, dataset_id: str, edition_id: str, version_id: str
