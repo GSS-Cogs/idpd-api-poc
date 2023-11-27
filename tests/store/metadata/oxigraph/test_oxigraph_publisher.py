@@ -6,8 +6,6 @@ from pydantic import ValidationError
 from src.store.metadata.oxigraph.store import OxigraphMetadataStore
 from src import schemas
 
-# TODO - reimplenet as part of graph work
-
 
 def test_oxigraph_get_publisher_returns_valid_structure():
     """

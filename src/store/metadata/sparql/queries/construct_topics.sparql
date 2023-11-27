@@ -1,5 +1,0 @@
-PREFIX dcat: <http://www.w3.org/ns/dcat#>
-CONSTRUCT WHERE {
-    ?uri_ref a dcat:DatasetSeries ;
-        dcat:theme ?topic .
-}

@@ -1,8 +1,0 @@
-PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
-PREFIX dcat: <http://www.w3.org/ns/dcat#>
-CONSTRUCT WHERE {
-    <https://staging.idpd.uk/datasets> a dcat:Catalog , hydra:Collection ; 
-        dcat:DatasetSeries ?datasets ;
-        hydra:offset ?offset ;
-        hydra:totalitems ?count .
-}

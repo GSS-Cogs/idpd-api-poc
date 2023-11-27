@@ -27,8 +27,8 @@ def test_oxigraph_get_topic_with_subtopic_returns_valid_structure():
     assert topic_schema.sub_topics[0] == "https://staging.idpd.uk/topics/prices"
 
     assert topic_schema_context.context == "https://staging.idpd.uk/ns#"
-  
-  
+
+
 def test_oxigraph_get_topic_with_parent_topic_returns_valid_structure():
     """
     Confirm that the OxigraphMetadataStore.get_topic()
