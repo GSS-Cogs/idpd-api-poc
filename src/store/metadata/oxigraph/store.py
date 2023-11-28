@@ -67,7 +67,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         del datasets_graph["dcat:DatasetSeries"]
 
         # TODO Update @context so it's not hardcoded
-        datasets_graph["@context"] = "https://staging.idpd.uk/ns#"
+        datasets_graph = {"@context": "https://staging.idpd.uk/ns#", **datasets_graph}
         return datasets_graph
 
     def get_dataset(self, dataset_id: str) -> Optional[Dict]:
@@ -140,7 +140,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         }
 
         # TODO Update @context so it's not hardcoded
-        dataset_graph["@context"] = "https://staging.idpd.uk/ns#"
+        dataset_graph = {"@context": "https://staging.idpd.uk/ns#", **dataset_graph}
         return dataset_graph
 
     def get_editions(self, dataset_id: str) -> Optional[Dict]:
@@ -190,7 +190,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         ]
 
         # TODO Update @context so it's not hardcoded
-        editions_graph["@context"] = "https://staging.idpd.uk/ns#"
+        editions_graph = {"@context": "https://staging.idpd.uk/ns#", **editions_graph}
         return editions_graph
 
     def get_edition(self, dataset_id: str, edition_id: str) -> Optional[Dict]:
@@ -269,7 +269,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         edition_graph["versions"] = version_graphs
 
         # TODO Update @context so it's not hardcoded
-        edition_graph["@context"] = "https://staging.idpd.uk/ns#"
+        edition_graph = {"@context": "https://staging.idpd.uk/ns#", **edition_graph}
         return edition_graph
 
     def get_versions(self, dataset_id: str, edition_id: str) -> Optional[Dict]:
@@ -317,7 +317,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         ]
 
         # TODO Update @context so it's not hardcoded
-        versions_graph["@context"] = "https://staging.idpd.uk/ns#"
+        versions_graph = {"@context": "https://staging.idpd.uk/ns#", **versions_graph}
         return versions_graph
 
     def get_version(
@@ -383,7 +383,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         del version_graph["table_schema"]["@id"]
 
         # TODO Update @context so it's not hardcoded
-        version_graph["@context"] = "https://staging.idpd.uk/ns#"
+        version_graph = {"@context": "https://staging.idpd.uk/ns#", **version_graph}
         return version_graph
 
     def get_publishers(self) -> Optional[Dict]:
@@ -423,7 +423,10 @@ class OxigraphMetadataStore(BaseMetadataStore):
         ]
 
         # TODO Update @context so it's not hardcoded
-        publishers_graph["@context"] = "https://staging.idpd.uk/ns#"
+        publishers_graph = {
+            "@context": "https://staging.idpd.uk/ns#",
+            **publishers_graph,
+        }
         return publishers_graph
 
     def get_publisher(self, publisher_id: str) -> Optional[Dict]:
@@ -461,7 +464,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             return None
 
         # TODO Update @context so it's not hardcoded
-        publisher_graph["@context"] = "https://staging.idpd.uk/ns#"
+        publisher_graph = {"@context": "https://staging.idpd.uk/ns#", **publisher_graph}
         return publisher_graph
 
     def get_topics(self) -> Optional[Dict]:
@@ -505,7 +508,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         ]
 
         # TODO Update @context so it's not hardcoded
-        topics_graph["@context"] = "https://staging.idpd.uk/ns#"
+        topics_graph = {"@context": "https://staging.idpd.uk/ns#", **topics_graph}
         return topics_graph
 
     def get_topic(self, topic_id: str) -> Optional[Dict]:
@@ -550,7 +553,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         topic_graph["@type"] = "dcat:theme"
 
         # TODO Update @context so it's not hardcoded
-        topic_graph["@context"] = "https://staging.idpd.uk/ns#"
+        topic_graph = {"@context": "https://staging.idpd.uk/ns#", **topic_graph}
         return topic_graph
 
     def get_sub_topics(self, topic_id: str) -> Optional[Dict]:

@@ -9,12 +9,15 @@ import schemas
 def test_oxigraph_get_datasets_returns_valid_structure():
     """
     Confirm that the OxigraphMetadataStore.get_datasets()
-    function returns a list of datasets that matches the Datasets
-    schema.
+    function returns a dictionary that matches the Datasets schema.
     """
     store = OxigraphMetadataStore()
     datasets = store.get_datasets()
-    schemas.Datasets(**datasets)
+    datasets_schema = schemas.Datasets(**datasets)
+    assert datasets_schema.id == "https://staging.idpd.uk/datasets"
+    assert "dcat:Catalog" in datasets_schema.type
+    assert "hydra:Collection" in datasets_schema.type
+    assert len(datasets_schema.datasets) == datasets_schema.count
 
 
 def test_datasets_schema_validation():
