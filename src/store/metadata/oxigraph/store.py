@@ -34,6 +34,9 @@ from .sparql.construct import (
     construct_edition_versions,
     construct_editions,
     construct_publisher,
+    construct_dataset_version,
+    construct_dataset_version_table_schema,
+    construct_versions,
     construct_publishers,
 )
 
@@ -47,6 +50,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         )
         configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
         self.db = Dataset(store=SPARQLUpdateStore(*configuration))
+
 
     def get_datasets(self) -> Optional[Dict]:
         """
@@ -77,8 +81,10 @@ class OxigraphMetadataStore(BaseMetadataStore):
             for dataset in data["@graph"][0]["dcat:DatasetSeries"]
         ]
         del data["@graph"][0]["dcat:DatasetSeries"]
+        
         # TODO Update @context so it's not hardcoded
-        data["@graph"][0]["@context"] = "https://staging.idpd.uk/#ns"
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
+
         result = data["@graph"][0]
         return result
 
@@ -136,7 +142,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             if "@id" in x.keys() and re.search("/editions/", x["@id"])
         ]
         dataset_graph["editions"] = edition_graphs
-
+        del dataset_graph["versions"]
         # Compact and embed anonymous nodes
         dataset_graph["contact_point"] = {
             "name": contact_point_graph["vcard:fn"]["@value"],
@@ -146,6 +152,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             "start": temporal_coverage_graph["dcat:endDate"]["@value"],
             "end": temporal_coverage_graph["dcat:startDate"]["@value"],
         }
+        dataset_graph["@context"] = "https://staging.idpd.uk/ns#"
         return dataset_graph
 
     def get_editions(self, dataset_id: str) -> Optional[Dict]:
@@ -260,6 +267,35 @@ class OxigraphMetadataStore(BaseMetadataStore):
         Gets all versions of a specific edition of a specific dataset
         """
 
+        # Populate the graph from the database
+        graph = self.db
+
+        # Use the construct wrappers to pull the raw RDF triples
+        # (as one rdflib.Graph() for each function) and add them
+        # together to create a single Graph of the
+        # data we need.
+        result: Graph = construct_versions(graph, dataset_id, edition_id)
+
+        # Serialize the graph into jsonld
+        data = json.loads(result.serialize(format="json-ld"))
+
+        # Use a context file to shape our jsonld, removing long form references
+        data = jsonld.flatten(
+            data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
+        )
+        versions_graph = _get_single_graph_for_field(data, "@type")
+        if versions_graph is None:
+            return None
+
+        versions_graph["@type"] = "hydra:Collection"
+        
+        versions_graph["versions"] = [
+            self.get_version(dataset_id, edition_id, x.split("/")[-1])
+            for x in versions_graph["versions"]
+        ]
+        versions_graph["@context"] = "https://staging.idpd.uk/ns#"
+        return versions_graph
+
     def get_version(
         self, dataset_id: str, edition_id: str, version_id: str
     ) -> Optional[Dict]:  # pragma: no cover
@@ -306,6 +342,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             del column["@id"]
         version_graph["table_schema"]["columns"] = columns_graph
         del version_graph["table_schema"]["@id"]
+
         version_graph["@context"] = "https://staging.idpd.uk/ns#"
         return version_graph
 
@@ -374,7 +411,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "dcat:publisher"}
         )
-
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
         return data["@graph"][0]
 
     def get_topics(self) -> Optional[Dict]:
@@ -438,6 +475,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `themes`
         data["@graph"][0]["@type"] = "dcat:theme"
         result = data["@graph"][0]
+        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
         return result
 
     def get_sub_topics(self, topic_id: str) -> Optional[Dict]:

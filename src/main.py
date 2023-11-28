@@ -113,11 +113,11 @@ def get_all_datasets(
 
 @app.get(
     "/datasets/{dataset_id}",
-    response_model=Optional[schemas.Dataset],
+    response_model=Optional[schemas.DatasetWithContext],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns detailed information about the dataset.",
-            "model": schemas.Dataset,
+            "model": schemas.DatasetWithContext,
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. The dataset with the given ID is not found.",
@@ -383,11 +383,11 @@ def get_all_publishers(
 
 @app.get(
     "/publishers/{publisher_id}",
-    response_model=Optional[schemas.Publisher],
+    response_model=Optional[schemas.PublisherWithContext],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns detailed information about the publisher.",
-            "model": schemas.Publisher,
+            "model": schemas.PublisherWithContext,
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. The publisher with the given ID is not found.",
@@ -470,11 +470,11 @@ def get_all_topics(
 
 @app.get(
     "/topics/{topic_id}",
-    response_model=Optional[schemas.Topic],
+    response_model=Optional[schemas.TopicWithContext],
     responses={
         status.HTTP_200_OK: {
             "description": "Successful response. Returns detailed information about the topic.",
-            "model": schemas.Topic,
+            "model": schemas.TopicWithContext,
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "Not Found. The topic with the given ID is not found.",
