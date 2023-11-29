@@ -41,6 +41,13 @@ from .sparql.construct import (
 class OxigraphMetadataStore(BaseMetadataStore):
     def setup(self):
         oxigraph_url = os.environ.get("GRAPH_DB_URL", None)
+        if oxigraph_url is None:
+            # Check if running inside Docker container
+            if os.environ.get("RUNNING_IN_DOCKER"):
+                oxigraph_url = "http://oxigraph_test:7878" 
+            else:
+                oxigraph_url = "http://localhost:7879"  
+
         assert oxigraph_url is not None, (
             "The env var 'GRAPH_DB_URL' must be set to use "
             "the OxigraphMetadataStore store."
