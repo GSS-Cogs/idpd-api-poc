@@ -6,6 +6,67 @@ from rdflib.term import Identifier
 from custom_logging import logger
 
 
+class SparqlQueries:
+    def __init__(self, graph: Graph):
+        self.graph = graph
+
+    def datasets(self) -> Graph:
+        return construct(SPARQL_QUERIES["datasets"], self.graph)
+
+    def dataset(self, init_bindings: Dict[str, Identifier]) -> Graph:
+        return construct(SPARQL_QUERIES["dataset"], self.graph, init_bindings)
+
+    def keywords(self, init_bindings: Dict[str, Identifier]) -> Graph:
+        return construct(SPARQL_QUERIES["keywords"], self.graph, init_bindings)
+
+    def topic_uris(self, init_bindings: Dict[str, Identifier]) -> Graph:
+        return construct(SPARQL_QUERIES["topic_uris"], self.graph, init_bindings)
+
+    def contact_point(self, init_bindings: Dict[str, Identifier]) -> Graph:
+        return construct(SPARQL_QUERIES["contact_point"], self.graph, init_bindings)
+
+    def temporal_coverage(self, init_bindings: Dict[str, Identifier]) -> Graph:
+        return construct(SPARQL_QUERIES["temporal_coverage"], self.graph, init_bindings)
+
+    def editions(self, init_bindings: Dict[str, Identifier]) -> Graph:
+        return construct(SPARQL_QUERIES["editions"], self.graph, init_bindings)
+
+    def edition(self, init_bindings: Dict[str, Identifier]) -> Graph:
+        return construct(SPARQL_QUERIES["edition"], self.graph, init_bindings)
+
+    def table_schema(self, init_bindings: Dict[str, Identifier]) -> Graph:
+        return construct(SPARQL_QUERIES["table_schema"], self.graph, init_bindings)
+
+    def summarised_version(self, init_bindings: Dict[str, Identifier]) -> Graph:
+        return construct(
+            SPARQL_QUERIES["summarised_version"], self.graph, init_bindings
+        )
+
+    def versions(self, init_bindings: Dict[str, Identifier]) -> Graph:
+        return construct(SPARQL_QUERIES["versions"], self.graph, init_bindings)
+
+    def version(self, init_bindings: Dict[str, Identifier]) -> Graph:
+        return construct(SPARQL_QUERIES["version"], self.graph, init_bindings)
+
+    def publishers(self) -> Graph:
+        return construct(SPARQL_QUERIES["publishers"], self.graph)
+
+    def publisher(self, init_bindings: Dict[str, Identifier]) -> Graph:
+        return construct(SPARQL_QUERIES["publisher"], self.graph, init_bindings)
+
+    def topics(self, init_bindings: Dict[str, Identifier]) -> Graph:
+        return construct(SPARQL_QUERIES["topics"], self.graph, init_bindings)
+
+    def topic(self, init_bindings: Dict[str, Identifier]) -> Graph:
+        return construct(SPARQL_QUERIES["topic"], self.graph, init_bindings)
+
+    def sub_topic(self, init_bindings: Dict[str, Identifier]) -> Graph:
+        return construct(SPARQL_QUERIES["sub_topic"], self.graph, init_bindings)
+
+    def parent_topic(self, init_bindings: Dict[str, Identifier]) -> Graph:
+        return construct(SPARQL_QUERIES["parent_topic"], self.graph, init_bindings)
+
+
 def construct(
     query: str, graph: Graph, init_bindings: Optional[Dict[str, Identifier]] = None
 ) -> Graph:

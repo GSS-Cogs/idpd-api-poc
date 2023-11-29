@@ -33,7 +33,7 @@ def test_datasets_valid_structure_200(datasets_test_data):
 
     mock_metadata_store = MagicMock()
     mock_metadata_store.get_datasets = MagicMock(return_value=datasets_test_data)
-    app.dependency_overrides[OxigraphMetadataStore] = lambda: mock_metadata_store
+    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
@@ -58,7 +58,7 @@ def test_datasets_invalid_structure_raises():
     mock_metadata_store = MagicMock()
     invalid_response_data = {"datasets": [{"title": "Invalid Dataset"}], "offset": 0}
     mock_metadata_store.get_datasets = MagicMock(return_value=invalid_response_data)
-    app.dependency_overrides[OxigraphMetadataStore] = lambda: mock_metadata_store
+    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
@@ -80,7 +80,7 @@ def test_datasets_404():
     # Create a mock store with a callable mocked get_datasets() method
     mock_metadata_store = MagicMock()
     mock_metadata_store.get_datasets = MagicMock(return_value=None)
-    app.dependency_overrides[OxigraphMetadataStore] = lambda: mock_metadata_store
+    app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
     # Create a TestClient for your FastAPI app
     client = TestClient(app)
