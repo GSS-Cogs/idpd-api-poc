@@ -99,7 +99,7 @@
       "@id": "https://staging.idpd.uk/topics/climate-change",
       "@type": "dcat:theme",
       "identifier": "climate-change",
-      "title": "Climate change",
+      "title": "Climate Change",
       "description": "Climate change refers to long-term shifts in temperatures and weather patterns. Such shifts can be natural, due to changes in the sun’s activity or large volcanic eruptions. But since the 1800s, human activities have been the main driver of climate change, primarily due to the burning of fossil fuels like coal, oil and gas.",
       "sub_topics": [],
       "parent_topics": [
