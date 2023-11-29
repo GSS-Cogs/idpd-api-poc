@@ -5,7 +5,7 @@
   "title": "Domestic Energy Performance Certificates for existing dwellings",
   "editions": [
     {
-      "@id": "https://staging.idpd.uk/datasets/epcs-for-existing-domestic-properties/editions/2023-10",
+      "@id": "https://staging.idpd.uk/datasets/epcs-for-existing-domestic-properties/editions/2023-07",
       "@type": "dcat:Dataset",
       "in_series": "https://staging.idpd.uk/datasets/epcs-for-existing-domestic-properties",
       "identifier": "2023-07",
