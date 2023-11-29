@@ -8,7 +8,7 @@
       "@type": ["dcat:Distribution", "csvw:Table"],
       "@id": "https://staging.idpd.uk/datasets/epcs-for-existing-domestic-properties/editions/2023-07",
       "identifier": "existing_dwellings_data",
-      "issued": "2023-07-27T09:30:00Z",
+      "issued": "2023-07-27T09:30:00",
       "title": "Domestic Energy Performance Certificates for existing dwellings",
       "summary": "Data from certificates for existing domestic properties lodged on the Energy Performance of Buildings Registers, by average energy efficiency rating",
       "description": "This data relates to the Energy Performance of Buildings Certificates published alongside the Energy Performance of Buildings Certificates Statistical release May to July 2023.",
