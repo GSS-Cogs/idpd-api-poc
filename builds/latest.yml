@@ -10,10 +10,10 @@ steps:
     entrypoint: 'python'
     args: ['-m', 'pip', 'install', '--user', 'pipenv']
   - name: 'python'
-    entrypoint: '/usr/local/bin/pipenv'
+    entrypoint: '/builder/home/.local/bin/pipenv'
     args: ['install', '--dev']
   - name: 'python'
-    entrypoint: '/usr/local/bin/pipenv'
+    entrypoint: '/builder/home/.local/bin/pipenv'
     args: ['run', 'pytest']
     # 'pipenv', 'install', 'pytest', '&&',
     # 'pipenv', 'install', 'pytest-vcr', '&&',
