@@ -8,10 +8,13 @@ steps:
     args: ['-m', 'pip', 'install', '--upgrade', 'pip']
   - name: 'python'
     entrypoint: 'python'
-    args: ['-m', 'pip', 'install', '--user', 'pipenv',
-     '&&', 'PATH="/builder/home/.local/bin"',
-     '&&', 'pipenv', 'install', '--dev',
-     '&&', 'pipenv', 'run', 'pytest']
+    args: ['-m', 'pip', 'install', '--user', 'pipenv']
+  - name: 'python'
+    entrypoint: '/usr/local/bin/pipenv'
+    args: ['install', '--dev']
+  - name: 'python'
+    entrypoint: '/usr/local/bin/pipenv'
+    args: ['run', 'pytest']
     # 'pipenv', 'install', 'pytest', '&&',
     # 'pipenv', 'install', 'pytest-vcr', '&&',
     # 'pipenv', 'install', 'black', '&&',
