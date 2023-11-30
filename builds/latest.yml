@@ -2,22 +2,22 @@ steps:
   # install pipenv
   # use pipenv to install dev dependencies
   # run the tests
-  - name: python
-      entrypoint: python
+  - name: 'python'
+      entrypoint: 'python'
       args: ['-m', 'pip', 'install', '--upgrade', 'pip']
       # , '&&', 
       # 'pip', 'install', '--user', 'pipenv', '&&',
       # 'pipenv', 'sync', '--dev', '&&',
       # 'pipenv', 'run', 'pytest']
-  - name: 'python'
-      entrypoint: 'python'
-      args: ['-m', 'pip', 'install', '--user', 'pipenv']
-  - name: 'python'
-      entrypoint: 'python'
-      args: ['-m', 'pipenv', 'sync', '--dev']
-  - name: 'python'
-      entrypoint: 'python'
-      args: ['-m', 'pipenv', 'run', 'pytest']
+  - name: 'pip'
+      entrypoint: 'pip'
+      args: ['install', '--user', 'pipenv']
+  - name: 'pipenv'
+      entrypoint: 'pipenv'
+      args: ['sync', '--dev']
+  - name: 'pipenv'
+      entrypoint: 'pipenv'
+      args: ['run', 'pytest']
 
   # "kaniko" is a build runner whose sole job is to build
   # container images optimised for use on k8s.
