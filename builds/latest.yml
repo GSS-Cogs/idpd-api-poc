@@ -5,8 +5,10 @@ steps:
   # run the tests
   - name: 'python'
     entrypoint: 'python'
-    args: ['-m', 'pip', 'install', '--upgrade', 'pip', '&&', 
-    'pip', 'install', '--user', 'pipenv', '&&',
+    args: ['-m', 'pip', 'install', '--upgrade', 'pip']
+  - name: 'python'
+    entrypoint: 'python'
+    args: ['-m', 'pip', 'install', '--user', 'pipenv']
     # 'pipenv', 'install', 'pytest', '&&',
     # 'pipenv', 'install', 'pytest-vcr', '&&',
     # 'pipenv', 'install', 'black', '&&',
@@ -16,8 +18,12 @@ steps:
     # 'pipenv', 'install', 'docker', '&&',
     # 'pipenv', 'install', 'requests', '&&',
     # 'pipenv', 'install', 'isort', '&&',
-    'pipenv', 'install']
-    # 'pipenv', 'run', 'pytest']
+  - name: 'python'
+    entrypoint: 'python'
+    args: ['-m',  'pipenv', 'install']
+  - name: 'python'
+    entrypoint: 'python'
+    args: ['-m', 'pipenv', 'run', 'pytest']
 
   # "kaniko" is a build runner whose sole job is to build
   # container images optimised for use on k8s.
