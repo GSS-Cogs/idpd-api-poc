@@ -10,11 +10,8 @@ steps:
     entrypoint: 'python'
     args: ['-m', 'pip', 'install', '--user', 'pipenv']
   - name: 'python'
-    entrypoint: '/builder/home/.local/bin/pipenv'
-    args: ['install', '--dev']
-  - name: 'python'
-    entrypoint: '/builder/home/.local/bin/pipenv'
-    args: ['run', 'pytest']
+  entrypoint: 'python'
+  args: ['-m', 'pytest', '--junitxml=${SHORT_SHA}_test_log.xml']
     # 'pipenv', 'install', 'pytest', '&&',
     # 'pipenv', 'install', 'pytest-vcr', '&&',
     # 'pipenv', 'install', 'black', '&&',
