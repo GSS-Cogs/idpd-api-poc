@@ -4,20 +4,18 @@ steps:
   # use pipenv to install dev dependencies
   # run the tests
   - name: 'python'
-    entrypoint: 'python'
+    entrypoint: 'python3'
     args: ['-m', 'pip', 'install', '--upgrade', 'pip', '&&', 
-    'pip', 'install', '--user', 'pipenv']
-  - name: pipenv
-    entrypoint: pipenv
-    args: ['pipenv', 'install', 'pytest', '&&',
-    'pipenv', 'install', 'pytest-vcr', '&&',
-    'pipenv', 'install', 'black', '&&',
-    'pipenv', 'install', 'pytest-cov', '&&',
-    'pipenv', 'install', 'ruff', '&&',
-    'pipenv', 'install', 'pytz', '&&',
-    'pipenv', 'install', 'docker', '&&',
-    'pipenv', 'install', 'requests', '&&',
-    'pipenv', 'install', 'isort', '&&',
+    'pip', 'install', '--user', 'pipenv' '&&',
+    # 'pipenv', 'install', 'pytest', '&&',
+    # 'pipenv', 'install', 'pytest-vcr', '&&',
+    # 'pipenv', 'install', 'black', '&&',
+    # 'pipenv', 'install', 'pytest-cov', '&&',
+    # 'pipenv', 'install', 'ruff', '&&',
+    # 'pipenv', 'install', 'pytz', '&&',
+    # 'pipenv', 'install', 'docker', '&&',
+    # 'pipenv', 'install', 'requests', '&&',
+    # 'pipenv', 'install', 'isort', '&&',
     'pipenv', 'install', '--dev', '&&',
     'pipenv', 'run', 'pytest']
 
