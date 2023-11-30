@@ -11,7 +11,7 @@ steps:
     args: ['-m', 'pip', 'install', '--user', 'pipenv']
   - name: 'python'
     entrypoint: 'python'
-    args: ['-m', 'pytest', '--junitxml=${SHORT_SHA}_test_log.xml']
+    args: ['-m', 'pytest', '--junitxml=test_log.xml']
     # 'pipenv', 'install', 'pytest', '&&',
     # 'pipenv', 'install', 'pytest-vcr', '&&',
     # 'pipenv', 'install', 'black', '&&',
