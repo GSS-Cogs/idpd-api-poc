@@ -13,8 +13,7 @@ steps:
     entrypoint: python
     args: ['-m', 'pip', 'install', 'pipenv']
   - name: 'python'
-    entrypoint: 'python'
-    args: ['-m', 'pipenv', 'install', '--dev']
+    args: ['pipenv', 'install', '--dev']
   # - name: 'python'
   #   entrypoint: 'python'
   #   args: ['-m', 'pytest', '--junitxml=${SHORT_SHA}_test_log.xml']
