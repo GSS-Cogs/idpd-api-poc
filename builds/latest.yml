@@ -6,14 +6,14 @@ steps:
   - name: 'python'
     entrypoint: 'python'
     args: ['-m', 'pip', 'install', '--upgrade', 'pip']
-  - name: 'pip'
-    entrypoint: 'pip'
+  - name: pip
+    entrypoint: pip
     args: ['install', '--user', 'pipenv']
-  - name: 'pipenv'
-    entrypoint: 'pipenv'
+  - name: pipenv
+    entrypoint: pipenv
     args: ['install', '--dev']
-  - name: 'pipenv'
-    entrypoint: 'pipenv'
+  - name: pipenv
+    entrypoint: pipenv
     args: ['run', 'pytest']
   # - name: 'python'
   #   entrypoint: 'python'
