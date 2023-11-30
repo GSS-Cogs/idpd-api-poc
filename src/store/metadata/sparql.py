@@ -69,7 +69,20 @@ class SparqlQueries:
 
 def construct(
     query: str, graph: Graph, init_bindings: Optional[Dict[str, Identifier]] = None
-) -> Graph:
+) -> Optional[Graph]:
+    if init_bindings:
+        if "subject" in init_bindings.keys():
+            maybe_subject = init_bindings["subject"]
+            # TODO Revisit when #167 adaptive URL root domains is implemented
+            if not maybe_subject.startswith("https://staging.idpd.uk/"):
+                logger.info(f"Invalid 'subject' init_binding {maybe_subject}")
+                return None
+        if "type" in init_bindings.keys():
+            maybe_type = init_bindings["type"]
+            # TODO Get prefixes from context?
+            if not maybe_type.startswith("http"):
+                logger.info(f"Invalid 'type' init_binding {maybe_type}")
+                return None
     result = graph.query(query, initBindings=init_bindings).graph
     if len(result) == 0:
         logger.info(
