@@ -6,15 +6,15 @@ steps:
   - name: 'python'
     entrypoint: 'python'
     args: ['-m', 'pip', 'install', '--upgrade', 'pip']
-  - name: 'python'
-    entrypoint: 'python'
-    args: ['-m', 'pip', 'install', 'pipenv', '--user']
+  # - name: 'python'
+  #   entrypoint: 'python'
+  #   args: ['-m', 'pip', 'install', 'pipenv', '--user']
+  - name: python
+    entrypoint: python
+    args: ['-m', 'pip', 'install', 'build', 'pipenv', 'Flask', '--user']
   - name: 'python'
     entrypoint: 'python'
     args: ['-m', 'pipenv', 'install', '--dev']
-  # - name: python
-  #   entrypoint: python
-  #   args: ['-m', 'pip', 'install', 'build', 'pytest', 'Flask', '--user']
   # - name: 'python'
   #   entrypoint: 'python'
   #   args: ['-m', 'pytest', '--junitxml=${SHORT_SHA}_test_log.xml']
