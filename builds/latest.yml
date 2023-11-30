@@ -2,24 +2,24 @@ steps:
   # install pipenv
   # use pipenv to install dev dependencies
   # run the tests
+  # - name: 'python'
+  #   entrypoint: 'python'
+  #   args: ['-m', 'pip', 'install', '--upgrade', 'pip']
+  # - name: 'pip'
+  #   entrypoint: 'pip'
+  #   args: ['install', '--user', 'pipenv']
+  # - name: 'pipenv'
+  #   entrypoint: 'pipenv'
+  #   args: ['sync', '--dev']
+  # - name: 'pipenv'
+  #   entrypoint: 'pipenv'
+  #   args: ['run', 'pytest']
   - name: 'python'
     entrypoint: 'python'
-    args: ['-m', 'pip', 'install', '--upgrade', 'pip']
-  - name: python
-    entrypoint: python
-    args: ['-m', 'pip', 'install', 'build', 'pytest', 'Flask', '--user']
-  # - name: 'python'
-  #     entrypoint: 'python'
-  #     args: ['-m', 'pip', 'install', '--upgrade', 'pip']
-  # - name: 'pip'
-  #     entrypoint: 'pip'
-  #     args: ['install', '--user', 'pipenv']
-  # - name: 'pipenv'
-  #     entrypoint: 'pipenv'
-  #     args: ['sync', '--dev']
-  # - name: 'pipenv'
-  #     entrypoint: 'pipenv'
-  #     args: ['run', 'pytest']
+    args: ['-m', 'pip', 'install', '--upgrade', 'pip', '&&', 
+    '-m', 'pip', 'install', '--user', 'pipenv', '&&',
+    '-m', 'pipenv', 'sync', '--dev', '&&',
+    '-m', 'pipenv', 'run', 'pytest']
 
   # "kaniko" is a build runner whose sole job is to build
   # container images optimised for use on k8s.
