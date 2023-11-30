@@ -11,7 +11,7 @@ steps:
   #   args: ['-m', 'pip', 'install', 'pipenv', '--user']
   - name: python
     entrypoint: python
-    args: ['-m', 'pip', 'install', 'build', 'pipenv', 'Flask', '--user']
+    args: ['-m', 'pip', 'install', 'pipenv']
   - name: 'python'
     entrypoint: 'python'
     args: ['-m', 'pipenv', 'install', '--dev']
