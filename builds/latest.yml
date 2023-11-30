@@ -19,15 +19,16 @@ steps:
     entrypoint: 'python'
     args: ['-m', 'pip', 'install', '--upgrade', 'pip', '&&', 
     'pip', 'install', '--user', 'pipenv', '&&',
-    'pipenv', 'install', '-d', 'pytest', '&&',
-    'pipenv', 'install', '-d', 'pytest-vcr', '&&',
-    'pipenv', 'install', '-d', 'black', '&&',
-    'pipenv', 'install', '-d', 'pytest-cov', '&&',
-    'pipenv', 'install', '-d', 'ruff', '&&',
-    'pipenv', 'install', '-d', 'pytz', '&&',
-    'pipenv', 'install', '-d', 'docker', '&&',
-    'pipenv', 'install', '-d', 'requests', '&&',
-    'pipenv', 'install', '-d', 'isort', '&&',
+    'pipenv', 'install', '--dev', '&&',
+    # 'pipenv', 'install', '-d', 'pytest', '&&',
+    # 'pipenv', 'install', '-d', 'pytest-vcr', '&&',
+    # 'pipenv', 'install', '-d', 'black', '&&',
+    # 'pipenv', 'install', '-d', 'pytest-cov', '&&',
+    # 'pipenv', 'install', '-d', 'ruff', '&&',
+    # 'pipenv', 'install', '-d', 'pytz', '&&',
+    # 'pipenv', 'install', '-d', 'docker', '&&',
+    # 'pipenv', 'install', '-d', 'requests', '&&',
+    # 'pipenv', 'install', '-d', 'isort', '&&',
     'pipenv', 'run', 'pytest']
 
   # "kaniko" is a build runner whose sole job is to build
