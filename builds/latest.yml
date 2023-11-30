@@ -3,32 +3,23 @@ steps:
   # install pipenv
   # use pipenv to install dev dependencies
   # run the tests
-  # - name: 'python'
-  #   entrypoint: 'python'
-  #   args: ['-m', 'pip', 'install', '--upgrade', 'pip', '&&', 
-  #   'pip', 'install', '--user', 'pipenv', '&&',
-  #   'pipenv', 'install', 'pytest', '&&',
-  #   'pipenv', 'install', 'pytest-vcr', '&&',
-  #   'pipenv', 'install', 'black', '&&',
-  #   'pipenv', 'install', 'pytest-cov', '&&',
-  #   'pipenv', 'install', 'ruff', '&&',
-  #   'pipenv', 'install', 'pytz', '&&',
-  #   'pipenv', 'install', 'docker', '&&',
-  #   'pipenv', 'install', 'requests', '&&',
-  #   'pipenv', 'install', 'isort', '&&',
-  #   'pipenv', 'install', '--dev', '&&',
-  #   'pipenv', 'run', 'pytest']
-  - uses: actions/checkout@v1
-  - name: Set up Python 3.10
-    uses: actions/setup-python@v3
-    with:
-      python-version: 3.10
-  - name: Install pipenv
-    run: pip install pipenv
-  - name: Run tests
-    run: |
-      pipenv install --dev
-      pipenv run pytest
+  - name: 'python'
+    entrypoint: 'python'
+    args: ['-m', 'pip', 'install', '--upgrade', 'pip', '&&', 
+    'pip', 'install', '--user', 'pipenv']
+  - name: pipenv
+    entrypoint: pipenv
+    args: ['pipenv', 'install', 'pytest', '&&',
+    'pipenv', 'install', 'pytest-vcr', '&&',
+    'pipenv', 'install', 'black', '&&',
+    'pipenv', 'install', 'pytest-cov', '&&',
+    'pipenv', 'install', 'ruff', '&&',
+    'pipenv', 'install', 'pytz', '&&',
+    'pipenv', 'install', 'docker', '&&',
+    'pipenv', 'install', 'requests', '&&',
+    'pipenv', 'install', 'isort', '&&',
+    'pipenv', 'install', '--dev', '&&',
+    'pipenv', 'run', 'pytest']
 
   # "kaniko" is a build runner whose sole job is to build
   # container images optimised for use on k8s.
