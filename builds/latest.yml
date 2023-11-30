@@ -1,4 +1,5 @@
 steps:
+  # 16-run-pytest-on-build
   # install pipenv
   # use pipenv to install dev dependencies
   # run the tests
@@ -17,9 +18,9 @@ steps:
   - name: 'python'
     entrypoint: 'python'
     args: ['-m', 'pip', 'install', '--upgrade', 'pip', '&&', 
-    '-m', 'pip', 'install', '--user', 'pipenv', '&&',
-    '-m', 'pipenv', 'sync', '--dev', '&&',
-    '-m', 'pipenv', 'run', 'pytest']
+    'pip', 'install', '--user', 'pipenv', '&&',
+    'pipenv', 'sync', '--dev', '&&',
+    'pipenv', 'run', 'pytest']
 
   # "kaniko" is a build runner whose sole job is to build
   # container images optimised for use on k8s.
