@@ -4,7 +4,7 @@ steps:
   # use pipenv to install dev dependencies
   # run the tests
   - name: 'python'
-    entrypoint: 'python3'
+    entrypoint: 'python'
     args: ['-m', 'pip', 'install', '--upgrade', 'pip', '&&', 
     'pip', 'install', '--user', 'pipenv' '&&',
     # 'pipenv', 'install', 'pytest', '&&',
@@ -16,7 +16,7 @@ steps:
     # 'pipenv', 'install', 'docker', '&&',
     # 'pipenv', 'install', 'requests', '&&',
     # 'pipenv', 'install', 'isort', '&&',
-    'pipenv', 'install', '--dev', '&&',
+    'pipenv', 'install', '--deploy', '--dev', '&&',
     'pipenv', 'run', 'pytest']
 
   # "kaniko" is a build runner whose sole job is to build
