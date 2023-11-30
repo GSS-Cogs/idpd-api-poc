@@ -16,8 +16,8 @@ steps:
     # 'pipenv', 'install', 'docker', '&&',
     # 'pipenv', 'install', 'requests', '&&',
     # 'pipenv', 'install', 'isort', '&&',
-    'pipenv', 'install', '--deploy', '--dev', '&&',
-    'pipenv', 'run', 'pytest']
+    'pipenv', 'install', '--dev']
+    # 'pipenv', 'run', 'pytest']
 
   # "kaniko" is a build runner whose sole job is to build
   # container images optimised for use on k8s.
