@@ -16,7 +16,7 @@ steps:
     # 'pipenv', 'install', 'docker', '&&',
     # 'pipenv', 'install', 'requests', '&&',
     # 'pipenv', 'install', 'isort', '&&',
-    'pipenv', 'install', '--dev']
+    'pipenv', 'install']
     # 'pipenv', 'run', 'pytest']
 
   # "kaniko" is a build runner whose sole job is to build
