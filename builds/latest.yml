@@ -7,7 +7,7 @@ steps:
     entrypoint: 'python'
     args: ['-m', 'pip', 'install', '--upgrade', 'pip', '&&', 
     'pip', 'install', '--user', 'pipenv', '&&',
-    'pipenv', 'install', '-dev', '&&',
+    'pipenv', 'install', '-d', 'dev-dependencies', '&&',
     # 'pipenv', 'install', '-d', 'pytest', '&&',
     # 'pipenv', 'install', '-d', 'pytest-vcr', '&&',
     # 'pipenv', 'install', '-d', 'black', '&&',
