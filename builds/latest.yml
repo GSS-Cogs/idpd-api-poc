@@ -7,15 +7,15 @@ steps:
     entrypoint: 'python'
     args: ['-m', 'pip', 'install', '--upgrade', 'pip', '&&', 
     'pip', 'install', '--user', 'pipenv', '&&',
-    'pipenv', 'install', 'pytest', '&&',
-    'pipenv', 'install', 'pytest-vcr', '&&',
-    'pipenv', 'install', 'black', '&&',
-    'pipenv', 'install', 'pytest-cov', '&&',
-    'pipenv', 'install', 'ruff', '&&',
-    'pipenv', 'install', 'pytz', '&&',
-    'pipenv', 'install', 'docker', '&&',
-    'pipenv', 'install', 'requests', '&&',
-    'pipenv', 'install', 'isort', '&&',
+    'pipenv', 'install', 'pytest', '--dev', '&&',
+    # 'pipenv', 'install', 'pytest-vcr', '&&',
+    # 'pipenv', 'install', 'black', '&&',
+    # 'pipenv', 'install', 'pytest-cov', '&&',
+    # 'pipenv', 'install', 'ruff', '&&',
+    # 'pipenv', 'install', 'pytz', '&&',
+    # 'pipenv', 'install', 'docker', '&&',
+    # 'pipenv', 'install', 'requests', '&&',
+    # 'pipenv', 'install', 'isort', '&&',
     'pipenv', 'run', 'pytest']
 
   # "kaniko" is a build runner whose sole job is to build
