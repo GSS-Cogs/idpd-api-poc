@@ -3,8 +3,8 @@ steps:
   # use pipenv to install dev dependencies
   # run the tests
   - name: 'python'
-      entrypoint: 'python'
-      args: ['-m', 'pip', 'install', '--upgrade', 'pip']
+    entrypoint: 'python'
+    args: ['-m', 'pip', 'install', '--upgrade', 'pip']
   - name: python
     entrypoint: python
     args: ['-m', 'pip', 'install', 'build', 'pytest', 'Flask', '--user']
