@@ -24,7 +24,7 @@ steps:
     'pipenv', 'install', '-d', 'black', '&&',
     'pipenv', 'install', '-d', 'pytest-cov', '&&',
     'pipenv', 'install', '-d', 'ruff', '&&',
-    'pipenv', 'install', '-d', 'pytz', '&&'
+    'pipenv', 'install', '-d', 'pytz', '&&',
     'pipenv', 'install', '-d', 'docker', '&&',
     'pipenv', 'install', '-d', 'requests', '&&',
     'pipenv', 'install', '-d', 'isort', '&&',
