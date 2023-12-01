@@ -15,15 +15,21 @@ import os
 import shutil
 import glob
 from pathlib import Path
+from typing import List
 
 from rdflib import ConjunctiveGraph, Dataset, BNode, Graph
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore, _node_to_sparql
-from src import schemas
+import schemas
 
 
 # Load the context file
 with open(Path("src/store/metadata/context.json")) as f:
     context = json.load(f)
+
+
+def _assert_id_equals_identifier(source_list: List):
+    for source in source_list:
+        assert source["@id"].split("/")[-1] == source["identifier"]
 
 
 def set_context(resource_item):
@@ -87,6 +93,9 @@ def populate(oxigraph_url=None, write_to_db=True):
     with open(datasets_source_path) as f:
         datasets_source_dict = json.load(f)
         # Validate then add to graph
+        for dataset in datasets_source_dict["datasets"]:
+            if dataset["@id"].split("/")[-1] != dataset["identifier"]:
+                raise ValueError("Error in `@id` or `identifier`")
         schemas.Datasets(**datasets_source_dict)
         g += Graph().parse(
             data=json.dumps(set_context(datasets_source_dict)),
