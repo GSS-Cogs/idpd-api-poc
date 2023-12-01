@@ -11,6 +11,7 @@ from custom_logging import logger
 from middleware import logging_middleware
 from store import StubCsvStore, StubMetadataStore
 from store.metadata.context import ContextStore
+from store.metadata.oxigraph.store import OxigraphMetadataStore
 
 # Simple env var flag to allow local browsing of api responses
 # while developing.

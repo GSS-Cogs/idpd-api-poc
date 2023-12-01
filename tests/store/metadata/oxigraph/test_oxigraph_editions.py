@@ -9,13 +9,12 @@ import schemas
 
 def test_oxigraph_get_editions_returns_valid_structure():
     """
-    Confirm that the OxigraphMetadataStore.get_edition()
-    function returns an edition that matches the edition
+    Confirm that the OxigraphMetadataStore.get_editions()
+    function returns a dictionary that matches the Editions
     schema.
     """
 
     store = OxigraphMetadataStore()
-
     editions = store.get_editions("cpih")
     editions_schema = schemas.Editions(**editions)
     assert editions_schema.id == "https://staging.idpd.uk/datasets/cpih/editions"

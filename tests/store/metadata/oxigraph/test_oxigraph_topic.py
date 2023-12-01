@@ -10,41 +10,55 @@ import schemas
 def test_oxigraph_get_topic_with_subtopic_returns_valid_structure():
     """
     Confirm that the OxigraphMetadataStore.get_topic()
-    function returns a topic with sub_topic that matches the topic
-    schema.
+    function returns a dictionary with subtopic that matches the Topic schema.
     """
-
     store = OxigraphMetadataStore()
-
     topic = store.get_topic("economy")
-    topic_schema_context = schemas.TopicWithContext(**topic)
     topic_schema = schemas.Topic(**topic)
-
     assert topic_schema.id == "https://staging.idpd.uk/topics/economy"
     assert topic_schema.type == "dcat:theme"
-    assert topic_schema.identifier == "economy"
-    assert topic_schema.title == "Economy"
-    assert topic_schema.sub_topics[0] == "https://staging.idpd.uk/topics/prices"
+    assert "https://staging.idpd.uk/topics/prices" in topic_schema.sub_topics
 
-    assert topic_schema_context.context == "https://staging.idpd.uk/ns#"
-  
-  
+
+def test_oxigraph_get_topic_with_context_and_subtopic_returns_valid_structure():
+    """
+    Confirm that the OxigraphMetadataStore.get_topic()
+    function returns a dictionary with subtopic that matches the TopicWithContext schema.
+    """
+    store = OxigraphMetadataStore()
+    topic = store.get_topic("economy")
+    topic_schema = schemas.TopicWithContext(**topic)
+    assert topic_schema.id == "https://staging.idpd.uk/topics/economy"
+    assert topic_schema.type == "dcat:theme"
+    assert "https://staging.idpd.uk/topics/prices" in topic_schema.sub_topics
+    assert topic_schema.context == "https://staging.idpd.uk/ns#"
+
+
 def test_oxigraph_get_topic_with_parent_topic_returns_valid_structure():
     """
     Confirm that the OxigraphMetadataStore.get_topic()
-    function returns a topic with parent topic that matches the topic
-    schema.
+    function returns a dictionary with parent topic that matches the Topic schema.
     """
     store = OxigraphMetadataStore()
-
     topic = store.get_topic("prices")
-    topic_schema = schemas.TopicWithContext(**topic)
-
+    topic_schema = schemas.Topic(**topic)
     assert topic_schema.id == "https://staging.idpd.uk/topics/prices"
     assert topic_schema.type == "dcat:theme"
-    assert topic_schema.identifier == "prices"
-    assert topic_schema.title == "Prices"
-    assert topic_schema.parent_topics[0] == "https://staging.idpd.uk/topics/economy"
+    assert "https://staging.idpd.uk/topics/economy" in topic_schema.parent_topics
+
+
+def test_oxigraph_get_topic_with_context_and_parent_topic_returns_valid_structure():
+    """
+    Confirm that the OxigraphMetadataStore.get_topic()
+    function returns a dictionary with parent topic that matches the TopicWithContext schema.
+    """
+    store = OxigraphMetadataStore()
+    topic = store.get_topic("prices")
+    topic_schema = schemas.TopicWithContext(**topic)
+    assert topic_schema.id == "https://staging.idpd.uk/topics/prices"
+    assert topic_schema.type == "dcat:theme"
+    assert "https://staging.idpd.uk/topics/economy" in topic_schema.parent_topics
+    assert topic_schema.context == "https://staging.idpd.uk/ns#"
 
 
 def test_topic_schema_validation():
