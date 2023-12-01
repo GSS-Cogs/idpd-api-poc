@@ -10,6 +10,7 @@ mp = pytest.MonkeyPatch()
 mp.setenv("GRAPH_DB_URL", "http://localhost:7879")
 mp.delenv("LOCAL_BROWSE_API", False)
 
+
 @pytest.fixture(scope="session", autouse=True)
 def setup_before_all_tests():
     """
@@ -31,7 +32,7 @@ def setup_before_all_tests():
         docker_client.containers.get("oxigraph_test").remove()
     except:
         pass
-    print("here")
+
     docker_client.containers.run(
         name="oxigraph_test",
         image="ghcr.io/oxigraph/oxigraph:latest",
@@ -47,7 +48,7 @@ def setup_before_all_tests():
     # Yield control to the tests
     yield
 
-     # Once the tests have ran
+    # Once the tests have ran
     # ...stop the test oxigraph container
     docker_client.containers.get("oxigraph_test").stop()
     docker_client.containers.get("oxigraph_test").remove()
