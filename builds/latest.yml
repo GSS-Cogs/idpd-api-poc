@@ -1,39 +1,26 @@
 steps:
-  # # 16-run-pytest-on-build
-  # # install pipenv
-  # # use pipenv to install dev dependencies
-  # # run the tests
+  # 16-run-pytest-on-build
+  # install pipenv
+  # use pipenv to install dev dependencies
+  # run the tests
+  - name: 'python'
+    entrypoint: 'python'
+    args: ['-m', 'pip', 'install', '--upgrade', 'pip',
+    '&&', 'python', -m', 'pip', 'install',  '--user', 'pipenv',
+    '&&', 'pipenv', 'install', '--dev',
+    '&&', 'pipenv', 'run', 'pytest']
   # - name: 'python'
   #   entrypoint: 'python'
-  #   args: ['-m', 'pip', 'install', '--upgrade', 'pip']
-  # # - name: 'python'
-  # #   entrypoint: 'python'
-  # #   args: ['-m', 'pip', 'install', 'pipenv', '--user']
-  # - name: python
-  #   entrypoint: python
-  #   args: ['-m', 'pip', 'install', 'pipenv']
-  # - name: 'python'
-  #   args: ['pipenv', 'install', '--dev']
-  # # - name: 'python'
-  # #   entrypoint: 'python'
-  # #   args: ['-m', 'pytest', '--junitxml=${SHORT_SHA}_test_log.xml']
-  #   # 'pipenv', 'install', 'pytest', '&&',
-  #   # 'pipenv', 'install', 'pytest-vcr', '&&',
-  #   # 'pipenv', 'install', 'black', '&&',
-  #   # 'pipenv', 'install', 'pytest-cov', '&&',
-  #   # 'pipenv', 'install', 'ruff', '&&',
-  #   # 'pipenv', 'install', 'pytz', '&&',
-  #   # 'pipenv', 'install', 'docker', '&&',
-  #   # 'pipenv', 'install', 'requests', '&&',
-  #   # 'pipenv', 'install', 'isort', '&&',
-  - uses: actions/checkout@v4
-  - uses: actions/setup-python@v4
-    with:
-      python-version: ['3.9', '3.10',]
-  - run: python -m pip install --upgrade pip
-  - run: python -m pip install --user pipenv
-  - run: pipenv install --dev
-  - run: pipenv run pytest
+  #   args: ['-m', 'pytest', '--junitxml=${SHORT_SHA}_test_log.xml']
+    # 'pipenv', 'install', 'pytest', '&&',
+    # 'pipenv', 'install', 'pytest-vcr', '&&',
+    # 'pipenv', 'install', 'black', '&&',
+    # 'pipenv', 'install', 'pytest-cov', '&&',
+    # 'pipenv', 'install', 'ruff', '&&',
+    # 'pipenv', 'install', 'pytz', '&&',
+    # 'pipenv', 'install', 'docker', '&&',
+    # 'pipenv', 'install', 'requests', '&&',
+    # 'pipenv', 'install', 'isort', '&&',
 
   # "kaniko" is a build runner whose sole job is to build
   # container images optimised for use on k8s.
