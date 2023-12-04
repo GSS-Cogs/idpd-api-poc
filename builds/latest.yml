@@ -7,6 +7,7 @@ steps:
     entrypoint: 'python'
     args: ['-m', 'pip', 'install', '--upgrade', 'pip',
     '&&', 'pip', 'install',  '--user', 'pipenv',
+    '&&', 'cwd', '&&', 'ls',
     '&&', 'pipenv', 'install', '--dev',
     '&&', 'pipenv', 'run', 'pytest']
   # - name: 'python'
