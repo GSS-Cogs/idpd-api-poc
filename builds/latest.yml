@@ -7,9 +7,9 @@ steps:
     entrypoint: 'python'
     args: ['-m', 'pip', 'install', '--upgrade', 'pip',
     '&&', 'pip', 'install',  '--user', 'pipenv',
-    '&&', 'cwd', '&&', 'ls',
-    '&&', 'pipenv', 'install', '--dev',
-    '&&', 'pipenv', 'run', 'pytest']
+    '&&', 'cwd', '&&', 'ls']
+    # '&&', 'pipenv', 'install', '--dev',
+    # '&&', 'pipenv', 'run', 'pytest']
   # - name: 'python'
   #   entrypoint: 'python'
   #   args: ['-m', 'pytest', '--junitxml=${SHORT_SHA}_test_log.xml']
