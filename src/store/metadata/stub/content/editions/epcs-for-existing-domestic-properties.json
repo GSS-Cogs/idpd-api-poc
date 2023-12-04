@@ -35,8 +35,8 @@
         "spatial_coverage": "K04000001",
         "temporal_resolution": ["P1M", "P1Y"],
         "temporal_coverage": {
-          "start": "2014-07-30T00:00:00",
-          "end": "2014-07-30T00:00:00"
+          "start": "2023-07-27T09:30:00",
+          "end": "2023-07-27T11:30:00"
         },
         "versions_url": "https://staging.idpd.uk/datasets/epcs-for-existing-domestic-properties/editions/2023-10/versions",
         "versions": [
