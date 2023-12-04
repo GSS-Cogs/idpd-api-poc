@@ -8,10 +8,13 @@ steps:
     args: ['-m', 'pip', 'install', '--upgrade', 'pip']
   - name: python
     entrypoint: python
-    args: ['-m', 'pip', 'install', 'pipenv', '--user']
+    args: ['-m', 'pip', 'install', 'build', 'pipenv', '--user']
   - name: python
     entrypoint: python
-    args: ['-m', 'pipenv', 'install', '--dev']
+    args: ['-m', 'pipenv', 'sync', '--dev']
+  - name: python
+    entrypoint: python
+    args: ['-m', 'pipenv', 'run', 'pytest']
     # '&&', 'pipenv', 'install', '--dev',
     # '&&', 'pipenv', 'run', 'pytest']
   # - name: 'python'
