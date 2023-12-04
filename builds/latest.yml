@@ -10,7 +10,7 @@ steps:
     entrypoint: python
     args: ['-m', 'pip', 'install', 'build', 'pipenv', '--user'
     '&&', 'pipenv', 'sync', '--dev',
-    '&&', 'pipenv', 'run', 'pytest',
+    '&&', 'pipenv', 'run', 'pytest'
     ]
   # - name: 'python'
   #   entrypoint: 'python'
