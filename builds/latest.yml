@@ -8,18 +8,13 @@ steps:
     args: ['-m', 'pip', 'install', '--upgrade', 'pip']
   - name: python
     entrypoint: python
-    args: ['-m', 'pip', 'install', 'build', 'pipenv', '--user',
-    '&&', 'pipenv', 'sync', '--dev',
-    '&&', 'pipenv', 'run', 'pytest'
-    ]
-  # - name: 'python'
-  #   entrypoint: 'python'
-  #   args: ['-m', 'pipenv', 'sync', '--dev']
-  # - name: 'python'
-  #   entrypoint: 'python'
-  #   args: ['-m', 'pipenv', 'run', 'pytest']
-    # '&&', 'pipenv', 'install', '--dev',
-    # '&&', 'pipenv', 'run', 'pytest']
+    args: ['-m', 'pip', 'install', 'build', 'pipenv', '--user']
+  - name: 'python'
+    entrypoint: 'pipenv'
+    args: ['sync', '--dev']
+  - name: 'python'
+    entrypoint: 'pipenv'
+    args: ['run', 'pytest']
   # - name: 'python'
   #   entrypoint: 'python'
   #   args: ['-m', 'pytest', '--junitxml=${SHORT_SHA}_test_log.xml']
