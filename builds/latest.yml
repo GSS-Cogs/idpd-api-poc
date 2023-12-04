@@ -3,13 +3,12 @@ steps:
   # install pipenv
   # use pipenv to install dev dependencies
   # run the tests
-   steps:
-    - name: 'python'
-      entrypoint: 'python'
-      args: ['-m', 'pip', 'install', '--upgrade', 'pip']
-    - name: python
-      entrypoint: python
-      args: ['-m', 'pip', 'install', 'pipenv', '--user']
+  - name: 'python'
+    entrypoint: 'python'
+    args: ['-m', 'pip', 'install', '--upgrade', 'pip']
+  - name: python
+    entrypoint: python
+    args: ['-m', 'pip', 'install', 'pipenv', '--user']
     # '&&', 'pipenv', 'install', '--dev',
     # '&&', 'pipenv', 'run', 'pytest']
   # - name: 'python'
