@@ -79,15 +79,28 @@
             "parent_topics": []
         },
         {
+            "@id": "https://staging.idpd.uk/topics/agriculture-energy-and-environment",
+            "@type": "dcat:theme",
+            "identifier": "agriculture-energy-and-environment",
+            "title": "Agriculture, energy and environment",
+            "description": "Food and farming, natural environment, flooding and water, and environmental quality.",
+            "sub_topics": [
+                "https://staging.idpd.uk/topics/climate-change"
+            ],
+            "parent_topics": []
+        },
+        {
             "@id": "https://staging.idpd.uk/topics/climate-change",
             "@type": "dcat:theme",
             "identifier": "climate-change",
             "title": "Climate Change",
-            "description": "Climate change refers to long-term shifts in temperatures and weather patterns. Such shifts can be natural, due to changes in the sun’s activity or large volcanic eruptions. But since the 1800s, human activities have been the main driver of climate change, primarily due to the burning of fossil fuels like coal, oil and gas.",
+            "description": "Long term shifts in temperature and weather patterns of the environment.",
             "sub_topics": [
                 "https://staging.idpd.uk/topics/carbon-emissions"
             ],
-            "parent_topics": []
+            "parent_topics": [
+              "https://staging.idpd.uk/topics/agriculture-energy-and-environment"
+            ]
         },
         {
             "@id": "https://staging.idpd.uk/topics/carbon-emissions",
@@ -98,8 +111,19 @@
             "sub_topics": [],
             "parent_topics": [
                 "https://staging.idpd.uk/topics/climate-change"
+            ]  
+        },
+        {
+            "@id": "https://staging.idpd.uk/topics/greenhouse-gas-emissions",
+            "@type": "dcat:theme",
+            "identifier": "greenhouse-gas-emissions",
+            "title": "Greenhouse Gas Emissions",
+            "description": "Greenhouse gas (GHG) emissions from human and industrial activities.",
+            "sub_topics": [],
+            "parent_topics": [
+                "https://staging.idpd.uk/topics/climate-change"
             ]
-        }
+        } 
     ],
     "count": 9,
     "offset": 0
