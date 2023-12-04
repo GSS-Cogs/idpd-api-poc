@@ -32,7 +32,7 @@ steps:
       python-version: ['3.9', '3.10',]
   - run: |
     python -m pip install --upgrade pip
-    pip install --user pipenv
+    python -m pip install --user pipenv
     pipenv install --dev
     pipenv run pytest
 
