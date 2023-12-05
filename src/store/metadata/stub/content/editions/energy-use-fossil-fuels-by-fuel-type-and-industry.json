@@ -35,8 +35,8 @@
       "spatial_coverage": "K02000001",
       "temporal_resolution": ["P1Y"],
       "temporal_coverage": {
-        "start": "1990-01-01T00:00:00",
-        "end": "2021-12-31T00:00:00"
+        "start": "1990-01-01T12:00:00",
+        "end": "2021-12-31T12:00:00"
       },
       "versions_url": "https://staging.idpd.uk/datasets/energy-use-fossil-fuels-by-fuel-type-and-industry/editions/2023-06/versions",
       "versions": [
