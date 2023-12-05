@@ -1,0 +1,88 @@
+{
+    "@context": "https://staging.idpd.uk/ns#",
+    "@id": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2022-08/versions",
+    "@type": "hydra:Collection",
+    "title": "Pupils at the expected standards at the end of key stage 2",
+    "versions": [
+        {
+            "@type": [
+                "dcat:Distribution",
+                "csvw:Table"
+            ],
+            "@id": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2022-08/versions/1",
+            "identifier": "1",
+            "issued": "2023-03-31T12:15:00Z",
+            "title": "Pupils at the expected standards at the end of key stage 2",
+            "summary": "Percentage of pupils in state-funded schools meeting the expected standard in reading, writing and maths at the end of key stage 2, England (state-funded schools), academic years 2015/16 - 2021/22",
+            "description": "This dataset shows the percentage of pupils in state-funded schools meeting the expected standard in reading, writing and maths at the end of key stage 2, in England state-funded schools, for academic years 2015/16 - 2021/22.\n\n### Coverage \n\nEngland (state-funded schools)\n\n#### Geography definition\n\nCounties and Unitary Authorities,\nRegions,\nNation (England)\n\n### Source\n\n - England: [Department for Education](https://explore-education-statistics.service.gov.uk/find-statistics/key-stage-2-attainment/2021-22) \n\n\n### Source Notes and Caveats \n- All figures include LA maintained schools, academies and free schools. Excludes alternative provision and independent schools.\n- Figures for 2022 are based on revised data.\n- Figures for Isles of Scilly and City of London are based on a single school in each local authority and therefore figures have been suppressed.\n- Users are advised to take care when interpreting writing and science teacher assessment measures and reading, writing and maths (combined) measures for West Sussex, particularly when making comparisons over time or between local authorities.",
+            "download_url": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2022-08/versions/1.csv",
+            "media_type": "text/csv",
+            "table_schema": {
+                "columns": [
+                    {
+                        "name": "Period",
+                        "datatype": "string",
+                        "titles": "Period",
+                        "description": "The time period associated with the observation."
+                    },
+                    {
+                        "name": "AREACD",
+                        "datatype": "string",
+                        "titles": "Statistical Geography",
+                        "description": "The geography code associated with the observation."
+                    },
+                    {
+                        "name": "AREANM",
+                        "datatype": "string",
+                        "titles": "Area Name",
+                        "description": "The name assiciated with The geography code "
+                    },
+                    {
+                        "name": "Geography",
+                        "datatype": "string",
+                        "titles": "Geography Type",
+                        "description": "The categorisation of the geography code"
+                    },
+                    {
+                        "name": "Value",
+                        "datatype": "decimal",
+                        "titles": "Geographic area with percentage of pulpils at expected standards by at least one provider",
+                        "description": "Observational Value"
+                    },
+                    {
+                        "name": "Measure",
+                        "datatype": "string",
+                        "titles": "Measure Type",
+                        "description": "Measure Type of the Observational Value"
+                    },
+                    {
+                        "name": "Unit",
+                        "datatype": "string",
+                        "titles": "Unit",
+                        "description": "Unit Type of the Observational Value"
+                    },
+                    {
+                        "name": "Lower Confidence Interval (95%)",
+                        "datatype": "decimal",
+                        "titles": "Lower Confidence Interval",
+                        "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Lower bound"
+                    },
+                    {
+                        "name": "Upper Confidence Interval (95%)",
+                        "datatype": "decimal",
+                        "titles": "Upper Confidence Interval",
+                        "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Upper bound"
+                    },
+                    {
+                        "name": "Observation Status",
+                        "datatype": "string",
+                        "titles": "Observation Status",
+                        "description": "Additional Context to the Observation if needed"
+                    }
+                ]
+            }
+        }
+    ],
+    "count": 1,
+    "offset": 0
+}
