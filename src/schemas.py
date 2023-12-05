@@ -9,6 +9,10 @@ from typing import List, Literal, Optional, Union
 from pydantic import BaseModel, Field
 
 
+class Context(BaseModel):
+    context: str = Field(alias="@context")
+
+
 class Frequency(Enum):
     triennial = "triennial"
     biennial = "biennial"
@@ -109,6 +113,10 @@ class Edition(BaseModel):
     table_schema: TableSchema
 
 
+class EditionWithContext(Edition, Context):
+    ...
+
+
 class SummarisedEdition(BaseModel):
     """
     A short form schema for Edition as presented
@@ -135,7 +143,6 @@ class Editions(BaseModel):
 # If we wanted to provide the ability to attach arbitrary RDF we might want to
 # look at https://github.com/pydantic/pydantic/discussions/5853
 class Dataset(BaseModel):
-    # context: Optional[str] = Field(alias="@context")
     id: str = Field(alias="@id")
     type: Literal["dcat:DatasetSeries"] = Field(alias="@type")
     identifier: str
@@ -158,19 +165,23 @@ class Dataset(BaseModel):
     frequency: Frequency
     keywords: list[str]
     licence: str
-    spatial_resolution: list[str]
+    spatial_resolution: Union[str, list[str]]
     spatial_coverage: str = Field(pattern=r"^[EJKLMNSW]{1}\d{8}$")
-    temporal_resolution: list[str]
+    temporal_resolution: Union[str, list[str]]
     temporal_coverage: PeriodOfTime
-    editions: List[Union[Edition, SummarisedEdition]]
+    editions: List[SummarisedEdition]
     editions_url: str
+
+
+class DatasetWithContext(Dataset, Context):
+    ...
 
 
 class Datasets(BaseModel):
     context: str = Field(alias="@context")
     id: str = Field(alias="@id")
     type: List[str] = Field(alias="@type")
-    datasets: List  # TODO - stricter
+    datasets: List[Dataset]
     offset: int
     count: int
 
@@ -188,6 +199,10 @@ class Version(BaseModel):
     download_url: str
     media_type: str
     table_schema: TableSchema
+
+
+class VersionWithContext(Version, Context):
+    ...
 
 
 class Versions(BaseModel):
@@ -208,6 +223,10 @@ class Publisher(BaseModel):
     landing_page: str
 
 
+class PublisherWithContext(Publisher, Context):
+    ...
+
+
 class Publishers(BaseModel):
     context: Optional[str] = Field(alias="@context")
     id: str = Field(alias="@id")
@@ -225,6 +244,10 @@ class Topic(BaseModel):
     description: str = Field(max_length=500)
     sub_topics: Union[List[str], None] = Field(default_factory=list)
     parent_topics: Union[List[str], None] = Field(default_factory=list)
+
+
+class TopicWithContext(Topic, Context):
+    ...
 
 
 class Topics(BaseModel):

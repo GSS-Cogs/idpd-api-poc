@@ -39,7 +39,10 @@ def process_json_files(g, dir_path, schema):
     """
     Process JSON files in a directory, apply context, and add to an RDF graph.
     """
-    for json_file in glob.glob(os.path.join(dir_path, "*.json")):
+    json_files = glob.glob(os.path.join(dir_path, "*.json"))
+    assert len(json_files) > 0
+    for json_file in json_files:
+        graph_length = len(g)
         with open(json_file) as f:
             resource_dict = json.load(f)
             #  add schema validation
@@ -49,6 +52,7 @@ def process_json_files(g, dir_path, schema):
         g += Graph().parse(
             data=json.dumps(set_context(resource_dict)), format="json-ld"
         )
+        assert len(g) > graph_length
 
 
 def populate(oxigraph_url=None, write_to_db=True):
@@ -66,6 +70,7 @@ def populate(oxigraph_url=None, write_to_db=True):
     # Conjuctive flavour of graph as in RDF terms each resource
     # is its own invidual named graph of a specific type.
     g = ConjunctiveGraph()
+    graph_length = len(g)
 
     # Remove then recreate any previous out folder
     out_dir = Path("out")
@@ -87,6 +92,8 @@ def populate(oxigraph_url=None, write_to_db=True):
             data=json.dumps(set_context(datasets_source_dict)),
             format="json-ld",
         )
+    assert len(g) > graph_length
+    graph_length = len(g)
 
     # ------------------
     # Editions resources
@@ -123,6 +130,8 @@ def populate(oxigraph_url=None, write_to_db=True):
             data=json.dumps(set_context(topics_source_dict)),
             format="json-ld",
         )
+    assert len(g) > graph_length
+    graph_length = len(g)
 
     # --------------------
     # Publishers resources
@@ -139,6 +148,7 @@ def populate(oxigraph_url=None, write_to_db=True):
             data=json.dumps(set_context(publishers_source_dict)),
             format="json-ld",
         )
+    assert len(g) > graph_length
 
     out_path = Path("out/seed.ttl")
     g.serialize(out_path, format="ttl")

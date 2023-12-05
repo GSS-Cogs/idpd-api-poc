@@ -1,6 +1,9 @@
 {
-  "@context": "https://staging.idpd.uk/#ns",
-  "@type": ["dcat:Catalog", "hydra:Collection"],
+  "@context": "https://staging.idpd.uk/ns#",
+  "@type": [
+    "dcat:Catalog",
+    "hydra:Collection"
+  ],
   "@id": "https://staging.idpd.uk/datasets",
   "datasets": [
     {
@@ -21,7 +24,8 @@
       },
       "topics": [
         "https://staging.idpd.uk/topics/economy",
-        "https://staging.idpd.uk/topics/prices"],
+        "https://staging.idpd.uk/topics/prices"
+      ],
       "frequency": "monthly",
       "keywords": [
         "inflation",
@@ -31,10 +35,17 @@
         "consumer price index",
         "consumer price index including owner occupiers' housing costs"
       ],
-      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-      "spatial_resolution":["E01", "E92"],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",   
+      "spatial_resolution": [
+        "E01",
+        "E92"
+      ],
       "spatial_coverage": "E92000001",
-      "temporal_resolution": ["P1M","P3M","P1Y"],
+      "temporal_resolution": [
+        "P1M",
+        "P3M",
+        "P1Y"
+      ],
       "temporal_coverage": {
         "start": "2005-01-01T00:00:00Z",
         "end": "2019-03-01T00:00:00Z"
