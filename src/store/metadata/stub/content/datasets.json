@@ -53,7 +53,7 @@
       "editions_url": "https://staging.idpd.uk/datasets/cpih/editions",
       "editions": [
         {
-          "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01",
+          "@id": "https://staging.idpd.uk/datasets/cpih/editions/2017-02",
           "issued": "2017-02-21T09:30:00",
           "modified": "2017-02-25T09:30:00"
         }
@@ -67,7 +67,7 @@
       "summary": "Modelled unemployment rate for people aged 16 years and over, Great Britain, 07/2004-06/2005 to 07/2022-06/2023.",
       "description": "This dataset shows modelled-based estimates for the proportion of people aged 16 years and over without a job who have been actively seeking work within the last four weeks and are available to start work within the next two weeks",
       "issued": "2023-11-06T12:25:28",
-      "modified": "2023-11-16T12:25:28",
+      "modified": "2023-11-12T12:25:28",
       "next_release": "2024-11-12T12:00:00",
       "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
       "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
@@ -144,7 +144,7 @@
         {
           "@id": "https://staging.idpd.uk/datasets/gdhi/editions/2023-03",
           "issued": "2023-03-31T12:12:48",
-          "modified": "2023-11-02T10:26:00"
+          "modified": "2023-11-02T11:26:00"
         }
       ]
     },
@@ -187,9 +187,9 @@
       "editions_url": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions",
       "editions": [
         {
-          "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions/2022-07",
-          "issued": "2023-07-06T09:30:00",
-          "modified": "2023-07-12T09:30:00"
+          "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions/2023-06",
+          "issued": "2023-06-29T00:00:00",
+          "modified": "2023-06-30T00:00:00"
         }
       ]
     },
@@ -224,15 +224,15 @@
       "spatial_coverage": "K02000001",
       "temporal_resolution": ["P1M"],
       "temporal_coverage": {
-        "start": "2022-09-01T00:00:00",
+        "start": "2005-09-01T00:00:00",
         "end":  "2022-09-30T23:59:00"
       },
       "editions_url": "https://staging.idpd.uk/datasets/4gc/editions",
       "editions": [
         {
           "@id": "https://staging.idpd.uk/datasets/4gc/editions/2023-09",
-          "issued": "2023-08-24T09:30:00",
-          "modified": "2023-08-31T09:30:00"
+          "issued": "2023-03-31T12:10:00",
+          "modified": "2023-10-23T10:55:00"
         }
       ]
     },
@@ -243,8 +243,8 @@
       "title": "2005 to 2019 local authority carbon dioxide (CO2) emissions",
       "summary": "These statistics provide the most reliable and consistent breakdown of CO2 emissions across the country, using nationally available data sets going back to 2005.\n\nThe main data sources are the UK National Atmospheric Emissions Inventory and the BEIS National Statistics of energy consumption for local authority areas. All emissions included in the national inventory are covered, except aviation, shipping and military transport, for which there is no obvious basis for allocation to local areas.",
       "description": "These statistics provide the most reliable and consistent breakdown of CO2 emissions across the country, using nationally available data sets going back to 2005.\n\nThe main data sources are the UK National Atmospheric Emissions Inventory and the BEIS National Statistics of energy consumption for local authority areas. All emissions included in the national inventory are covered, except aviation, shipping and military transport, for which there is no obvious basis for allocation to local areas.",
-      "issued": "2021-06-24T09:30:00",
-      "modified": "2022-08-18T10:51:00",
+      "issued": "2023-06-24T09:30:00",
+      "modified": "2023-08-18T10:51:00",
       "next_release": "2024-04-19T09:30:00",
       "publisher": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
       "creator": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
@@ -273,9 +273,9 @@
       "editions_url": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions",
       "editions": [
         {
-          "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions/2005-2019",
-          "issued": "2021-06-24T08:30:00",
-          "modified": "2022-08-18T10:51:00"
+          "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions/2023-06",
+          "issued": "2023-06-24T09:30:00",
+          "modified": "2023-08-18T10:51:00"
         }
       ]
     },
@@ -318,7 +318,7 @@
         {
           "@id": "https://staging.idpd.uk/datasets/energy-use-fossil-fuels-by-fuel-type-and-industry/editions/2023-06",
           "issued": "2023-06-05T09:30:00",
-          "modified": "2023-06-30T12:55:00"
+          "modified": "2023-06-05T12:55:00"
         }
       ]
     }
