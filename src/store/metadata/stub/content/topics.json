@@ -35,28 +35,6 @@
             "parent_topics": []
         },
         {
-            "@id": "https://staging.idpd.uk/topics/emissions",
-            "@type": "dcat:theme",
-            "identifier": "emissions",
-            "title": "Emissions",
-            "description": "An amount of a substance that is produced and sent out into the air that is harmful to the environment, especially carbon dioxide",
-            "sub_topics": [
-                "https://staging.idpd.uk/topics/greenhouse-gas"
-            ],
-            "parent_topics": []
-        },
-        {
-            "@id": "https://staging.idpd.uk/topics/greenhouse-gas",
-            "@type": "dcat:theme",
-            "identifier": "greenhouse-gas",
-            "title": "Greenhouse Gas",
-            "description": "Greenhouse gas (GHG) emissions from human activities intensify the greenhouse effect.",
-            "sub_topics": [],
-            "parent_topics": [
-                "https://staging.idpd.uk/topics/emissions"
-            ]
-        },
-        {
             "@id": "https://staging.idpd.uk/topics/communication",
             "@type": "dcat:theme",
             "identifier": "communication",

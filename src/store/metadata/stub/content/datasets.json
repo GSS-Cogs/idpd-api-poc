@@ -166,8 +166,9 @@
         "email": "mailto:GreenhouseGas.Statistics@energysecurity.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/emissions",
-        "https://staging.idpd.uk/topics/greenhouse-gas"],
+        "https://staging.idpd.uk/topics/climate-change",
+        "https://staging.idpd.uk/topics/greenhouse-gas-emissions"
+      ],
       "frequency": "monthly",
       "keywords": [
         "emissions",
@@ -211,7 +212,7 @@
       },
       "topics": [
         "https://staging.idpd.uk/topics/communication",
-        "https://staging.idpd.uk/topics/itandinternetindustry"],
+        "https://staging.idpd.uk/topics/it-and-internet-industry"],
       "frequency": "monthly",
       "keywords": [
         "broadband-mobile-coverage",
