@@ -11,7 +11,7 @@
             ],
             "@id": "https://staging.idpd.uk/datasets/energy-use-fossil-fuels-by-fuel-type-and-industr/editions/2023-06/versions/1",
             "identifier": "1",
-            "issued": "2023-06-05T09:30:00",
+            "issued": "2023-06-05T09:30:00Z",
             "title": "Energy use: fossil fuels by fuel type and industry",
             "summary": "The UK's fuel use by industry (SIC 2007 group - around 130 categories) and type (coal, natural gas, petrol, diesel oil for road vehicles (DERV), fuel oil, gas oil, aviation fuel and other), 1990 to 2021. The dataset excludes biofuels and waste.",
             "description": "The UK's fuel use by industry (SIC 2007 group - around 130 categories) and type (coal, natural gas, petrol, diesel oil for road vehicles (DERV), fuel oil, gas oil, aviation fuel and other), 1990 to 2021. The dataset excludes biofuels and waste.",

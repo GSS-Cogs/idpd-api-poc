@@ -29,24 +29,24 @@
         "pollution"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-      "issued": "2023-06-05T09:30:00",
-      "modified": "2023-06-05T12:55:00",
+      "issued": "2023-06-05T09:30:00Z",
+      "modified": "2023-06-05T12:55:00Z",
       "spatial_resolution":["K02"],
       "spatial_coverage": "K02000001",
       "temporal_resolution": ["P1Y"],
       "temporal_coverage": {
-        "start": "1990-01-01T12:00:00",
-        "end": "2021-12-31T12:00:00"
+        "start": "1990-01-01T12:00:00Z",
+        "end": "2021-12-31T12:00:00Z"
       },
       "versions_url": "https://staging.idpd.uk/datasets/energy-use-fossil-fuels-by-fuel-type-and-industry/editions/2023-06/versions",
       "versions": [
         {
           "@id": "https://staging.idpd.uk/datasets/energy-use-fossil-fuels-by-fuel-type-and-industry/editions/2023-06/versions/1",
-          "issued": "2023-06-05T09:30:00",
-          "modified": "2023-06-05T12:55:00"
+          "issued": "2023-06-05T09:30:00Z",
+          "modified": "2023-06-05T12:55:00Z"
         }
       ],
-      "next_release": "2024-06-30T09:30:00",
+      "next_release": "2024-06-30T09:30:00Z",
       "table_schema": {
         "columns": [
           {
