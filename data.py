@@ -27,11 +27,6 @@ with open(Path("src/store/metadata/context.json")) as f:
     context = json.load(f)
 
 
-def _assert_id_equals_identifier(source_list: List):
-    for source in source_list:
-        assert source["@id"].split("/")[-1] == source["identifier"]
-
-
 def set_context(resource_item):
     """
     Set a specific context location to inform the RDF created
@@ -41,31 +36,42 @@ def set_context(resource_item):
     return resource_item
 
 
-def process_json_files(g, dir_path, schema):
+def process_json_files(dir_path):
     """
-    Process JSON files in a directory, apply context, and add to an RDF graph.
+    Process all JSON files in a given directory
     """
     json_files = glob.glob(os.path.join(dir_path, "*.json"))
     assert len(json_files) > 0
+    resource_dicts = []
     for json_file in json_files:
-        graph_length = len(g)
         with open(json_file) as f:
-            resource_dict = json.load(f)
-            #  add schema validation
-            schema(**resource_dict)
+            resource_dicts.append(json.load(f))
+    return resource_dicts
 
-        # Parse the JSON-LD and add to the graph
-        g += Graph().parse(
-            data=json.dumps(set_context(resource_dict)), format="json-ld"
-        )
-        assert len(g) > graph_length
+
+def validate_and_parse_json(g, schema, resource_dict, resource_type):
+    """
+    Validate resources, apply context, and add to an RDF graph.
+    """
+    graph_length = len(g)
+
+    # Check that `@id` and `identifier` are consistent
+    for resource in resource_dict[resource_type]:
+        assert (
+            resource["@id"].split("/")[-1] == resource["identifier"]
+        ), f"Mismatch between '@id' and 'identifier' fields for {resource['@id']}"
+
+    # Schema validation
+    schema(**resource_dict)
+
+    # Parse the JSON-LD and add to the graph
+    g += Graph().parse(data=json.dumps(set_context(resource_dict)), format="json-ld")
+    assert len(g) > graph_length
 
 
 def populate(oxigraph_url=None, write_to_db=True):
     this_dir = Path(__file__).parent
-    subbed_metadata_store_content_path = Path(
-        "src/store/metadata/stub/content"
-    ).absolute()
+    metadata_stub_content_path = Path("src/store/metadata/stub/content").absolute()
 
     # Clear up any previous
     out = Path(this_dir / "out")
@@ -73,10 +79,9 @@ def populate(oxigraph_url=None, write_to_db=True):
         shutil.rmtree(out.absolute())
     out.mkdir()
 
-    # Conjuctive flavour of graph as in RDF terms each resource
-    # is its own invidual named graph of a specific type.
+    # Create an empty conjunctive graph, as in RDF terms each resource
+    # is its own individual named graph of a specific type.
     g = ConjunctiveGraph()
-    graph_length = len(g)
 
     # Remove then recreate any previous out folder
     out_dir = Path("out")
@@ -84,79 +89,132 @@ def populate(oxigraph_url=None, write_to_db=True):
         shutil.rmtree(out_dir)
     out_dir.mkdir()
 
+    # Specify locations of JSON files
+    datasets_source_path = Path(metadata_stub_content_path / "datasets.json")
+    editions_source_path = Path(metadata_stub_content_path / "editions")
+    versions_source_path = Path(metadata_stub_content_path / "editions" / "versions")
+    topics_source_path = Path(metadata_stub_content_path / "topics.json")
+    publishers_source_path = Path(metadata_stub_content_path / "publishers.json")
+
     # ------------------
     # Datasets resources
     # ------------------
 
-    # Load from disk
-    datasets_source_path = Path(subbed_metadata_store_content_path / "datasets.json")
+    # Load json file from disk
     with open(datasets_source_path) as f:
         datasets_source_dict = json.load(f)
-        # Validate then add to graph
-        for dataset in datasets_source_dict["datasets"]:
-            if dataset["@id"].split("/")[-1] != dataset["identifier"]:
-                raise ValueError("Error in `@id` or `identifier`")
-        schemas.Datasets(**datasets_source_dict)
-        g += Graph().parse(
-            data=json.dumps(set_context(datasets_source_dict)),
-            format="json-ld",
-        )
-    assert len(g) > graph_length
-    graph_length = len(g)
+
+    # Validate data and add to graph
+    validate_and_parse_json(g, schemas.Datasets, datasets_source_dict, "datasets")
+
+    # Extract edition URLs from datasets.json for validation later
+    dataset_editions_urls = [
+        dataset["editions_url"] for dataset in datasets_source_dict["datasets"]
+    ]
+
+    # Extract publishers from datasets.json for validation later
+    dataset_publishers = {
+        dataset["publisher"] for dataset in datasets_source_dict["datasets"]
+    }
 
     # ------------------
     # Editions resources
     # ------------------
 
-    # Load from disk
-    editions_source_path = Path(subbed_metadata_store_content_path / "editions")
-    # Validate then add to graph
-    schema = schemas.Editions
-    process_json_files(g, editions_source_path, schema)
+    # Load json files from disk
+    editions = process_json_files(editions_source_path)
+
+    # Empty dict to hold version data from editions for validation later
+    versions_in_edition = dict()
+    # Empty set to hold topic data from editions for validation later
+    topics_in_editions = set()
+
+    # Validate data and add to graph
+    for edition in editions:
+        assert (
+            edition["@id"] in dataset_editions_urls
+        ), f"Editions URL {edition['@id']} not found in {dataset_editions_urls}"
+        for edn in edition["editions"]:
+            summarised_editions = [
+                {
+                    "@id": edn["@id"],
+                    "issued": edn["issued"],
+                    "modified": edn["modified"],
+                }
+            ]
+            versions_in_edition[edn["versions_url"]] = edn["versions"]
+            assert (
+                edn["publisher"] in dataset_publishers
+            ), f"{edn['publisher']} not in publisher list {dataset_publishers}"
+            topics_in_editions.update(edn["topics"])
+        for dataset in datasets_source_dict["datasets"]:
+            if dataset["editions_url"] == edition["@id"]:
+                for dataset_edition in dataset["editions"]:
+                    assert (
+                        dataset_edition in summarised_editions
+                    ), f"Discrepancy between {dataset_edition} and {summarised_editions}"
+        validate_and_parse_json(g, schemas.Editions, edition, "editions")
 
     # ------------------
     # Versions resources
     # ------------------
 
-    versions_source_path = Path(
-        subbed_metadata_store_content_path / "editions/versions"
-    )
+    # Load json files from disk
+    versions = process_json_files(versions_source_path)
 
-    # Validate then add to graph
-    schema = schemas.Versions
-    process_json_files(g, versions_source_path, schema)
+    # Validate data and add to graph
+    for version in versions:
+        assert (
+            version["@id"] in versions_in_edition.keys()
+        ), f"Versions URL {version['@id']} not found in {versions_in_edition.keys()}"
+        summarised_versions = [
+            {"@id": vsn["@id"], "issued": vsn["issued"]} for vsn in version["versions"]
+        ]
+        for summarised_version in summarised_versions:
+            assert (
+                summarised_version in versions_in_edition[version["@id"]]
+            ), f"Discrepancy between {versions_in_edition} and {summarised_versions}"
+        validate_and_parse_json(g, schemas.Versions, version, "versions")
 
     # ------------------
     # Topics resources
     # ------------------
 
-    topics_source_path = Path(subbed_metadata_store_content_path / "topics.json")
+    # Load json file from disk
     with open(topics_source_path) as f:
         topics_source_dict = json.load(f)
-        # Validate then add to graph
-        schemas.Topics(**topics_source_dict)
-        g += Graph().parse(
-            data=json.dumps(set_context(topics_source_dict)),
-            format="json-ld",
-        )
-    assert len(g) > graph_length
-    graph_length = len(g)
+
+    # Validate data and add to graph
+    topic_ids = [topic["@id"] for topic in topics_source_dict["topics"]]
+    for dataset in datasets_source_dict["datasets"]:
+        for topic in dataset["topics"]:
+            assert (
+                topic in topic_ids
+            ), f"{topic} not in list of approved topics {topic_ids}"
+    for topic in topics_in_editions:
+        assert topic in topic_ids, f"{topic} not in {topic_ids}"
+    validate_and_parse_json(g, schemas.Topics, topics_source_dict, "topics")
 
     # --------------------
     # Publishers resources
     # --------------------
 
-    publishers_source_path = Path(
-        subbed_metadata_store_content_path / "publishers.json"
-    )
+    graph_length = len(g)
     with open(publishers_source_path) as f:
         publishers_source_dict = json.load(f)
-        # Validate then add to graph
-        schemas.Publishers(**publishers_source_dict)
-        g += Graph().parse(
-            data=json.dumps(set_context(publishers_source_dict)),
-            format="json-ld",
-        )
+
+    # TODO This currently fails as OFCOM is not listed as a publisher in any of the datasets (it's a creator for 4gc). Do we need a separate creators.json?
+    # for publisher in publishers_source_dict["publishers"]:
+    #     assert (
+    #         publisher["@id"] in dataset_publishers
+    #     ), f"{publisher['@id']} not in list of publishers {dataset_publishers}"
+
+    # Validate then add to graph
+    schemas.Publishers(**publishers_source_dict)
+    g += Graph().parse(
+        data=json.dumps(set_context(publishers_source_dict)),
+        format="json-ld",
+    )
     assert len(g) > graph_length
 
     out_path = Path("out/seed.ttl")

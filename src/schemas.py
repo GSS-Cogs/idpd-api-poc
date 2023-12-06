@@ -75,9 +75,6 @@ class SummarisedVersion(BaseModel):
     issued: str = Field(
         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
     )
-    modified: str = Field(
-        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
-    )
 
 
 class Edition(BaseModel):
