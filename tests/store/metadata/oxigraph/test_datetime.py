@@ -17,4 +17,4 @@ def test_check_time_validation_unvalid():
     try:
         raise validate_time(time)
     except ValueError as x:
-        x == "The valid time format is 'YYYY-MM-DD %H%M%S'"
+        assert x.args == ("The valid time format is 'YYYY-MM-DD %H%M%S'",)
