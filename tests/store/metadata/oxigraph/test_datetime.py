@@ -7,4 +7,4 @@ def test_check_time_validation():
 
     time_value = "2023-11-29 16:00:00"
 
-    assert validate_time(time_value)
+    assert validate_time

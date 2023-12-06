@@ -1,6 +1,6 @@
 from sqlite3 import Date
 from pydantic import validator
-from pydantic.errors import DateTimeError
+
 from datetime import datetime
 
 
@@ -12,4 +12,4 @@ def validate_time(cls, time_value):
         datetime.strptime(time_value, '%Y-%m-%d %H:%M:%S')
         return time_value
     except ValueError:
-        return DateTimeError
+        return ValueError
