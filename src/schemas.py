@@ -6,9 +6,14 @@ validate the structure of the data returned by the API.
 from ast import alias
 from enum import Enum
 from typing import List, Literal, Optional, Union
+from typing_extensions import Annotated
 
 from pydantic import BaseModel, Field, AwareDatetime
+from pydantic.functional_validators import AfterValidator
 
+from src.validation import validate_time
+
+time_value = Annotated[str, AfterValidator(validate_time)]
 
 class Frequency(Enum):
     triennial = "triennial"
@@ -36,8 +41,8 @@ class ContactPoint(BaseModel):
 
 
 class PeriodOfTime(BaseModel):
-    start: str = AwareDatetime
-    end: str = AwareDatetime
+    start: str = time_value
+    end: str = time_value
 
 
 class Column(BaseModel):
