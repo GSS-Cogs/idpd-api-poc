@@ -15,7 +15,7 @@ import os
 import shutil
 import glob
 from pathlib import Path
-from typing import List
+from typing import Dict, List
 
 from rdflib import ConjunctiveGraph, Dataset, BNode, Graph
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore, _node_to_sparql
@@ -135,24 +135,13 @@ def populate(oxigraph_url=None, write_to_db=True):
             edition["@id"] in dataset_editions_urls
         ), f"Editions URL {edition['@id']} not found in {dataset_editions_urls}"
         for edn in edition["editions"]:
-            summarised_editions = [
-                {
-                    "@id": edn["@id"],
-                    "issued": edn["issued"],
-                    "modified": edn["modified"],
-                }
-            ]
             versions_in_edition[edn["versions_url"]] = edn["versions"]
+            topics_in_editions.update(edn["topics"])
             assert (
                 edn["publisher"] in dataset_publishers
             ), f"{edn['publisher']} not in publisher list {dataset_publishers}"
-            topics_in_editions.update(edn["topics"])
         for dataset in datasets_source_dict["datasets"]:
-            if dataset["editions_url"] == edition["@id"]:
-                for dataset_edition in dataset["editions"]:
-                    assert (
-                        dataset_edition in summarised_editions
-                    ), f"Discrepancy between {dataset_edition} and {summarised_editions}"
+            _assert_dataset_edition_in_summarised_editions(dataset, edition)
         validate_and_parse_json(g, schemas.Editions, edition, "editions")
 
     # ------------------
@@ -167,13 +156,7 @@ def populate(oxigraph_url=None, write_to_db=True):
         assert (
             version["@id"] in versions_in_edition.keys()
         ), f"Versions URL {version['@id']} not found in {versions_in_edition.keys()}"
-        summarised_versions = [
-            {"@id": vsn["@id"], "issued": vsn["issued"]} for vsn in version["versions"]
-        ]
-        for summarised_version in summarised_versions:
-            assert (
-                summarised_version in versions_in_edition[version["@id"]]
-            ), f"Discrepancy between {versions_in_edition} and {summarised_versions}"
+        _assert_summarised_version_in_edition(version, versions_in_edition)
         validate_and_parse_json(g, schemas.Versions, version, "versions")
 
     # ------------------
@@ -238,6 +221,32 @@ def populate(oxigraph_url=None, write_to_db=True):
         configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
         db = Dataset(store=SPARQLUpdateStore(*configuration, node_to_sparql=skolemise))
         db.parse(out_path)
+
+
+def _assert_dataset_edition_in_summarised_editions(dataset: Dict, edition: Dict):
+    summarised_editions = [
+        {
+            "@id": edn["@id"],
+            "issued": edn["issued"],
+            "modified": edn["modified"],
+        }
+        for edn in edition["editions"]
+    ]
+    if dataset["editions_url"] == edition["@id"]:
+        for edn in dataset["editions"]:
+            assert (
+                edn in summarised_editions
+            ), f"Discrepancy between {edn} and {summarised_editions}"
+
+
+def _assert_summarised_version_in_edition(version, versions_in_edition):
+    summarised_versions = [
+        {"@id": vsn["@id"], "issued": vsn["issued"]} for vsn in version["versions"]
+    ]
+    for summarised_version in summarised_versions:
+        assert (
+            summarised_version in versions_in_edition[version["@id"]]
+        ), f"Discrepancy between {versions_in_edition} and {summarised_versions}"
 
 
 if __name__ == "__main__":
