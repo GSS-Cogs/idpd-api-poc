@@ -3,11 +3,17 @@ This module defines the pydantic models for the API. The schemas are used to
 validate the structure of the data returned by the API.
 """
 
+from ast import alias
 from enum import Enum
 from typing import List, Literal, Optional, Union
+from typing_extensions import Annotated
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, AwareDatetime
+from pydantic.functional_validators import AfterValidator
 
+from src.validation import validate_time
+
+time_value = Annotated[str, AfterValidator(validate_time)]
 
 class Context(BaseModel):
     context: str = Field(alias="@context")
@@ -39,12 +45,8 @@ class ContactPoint(BaseModel):
 
 
 class PeriodOfTime(BaseModel):
-    start: str = Field(
-        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",
-    )
-    end: str = Field(
-        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",
-    )
+    start: str = time_value
+    end: str = time_value
 
 
 class Column(BaseModel):
@@ -72,12 +74,8 @@ class SummarisedVersion(BaseModel):
     """
 
     id: str = Field(alias="@id")
-    issued: str = Field(
-        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
-    )
-    modified: str = Field(
-        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
-    )
+    issued: str = AwareDatetime
+    modified: str = AwareDatetime
 
 
 class Edition(BaseModel):
@@ -95,19 +93,13 @@ class Edition(BaseModel):
     frequency: Frequency
     keywords: list[str]
     licence: str
-    issued: str = Field(
-        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
-    )
-    modified: str = Field(
-        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
-    )
+    issued: str = AwareDatetime
+    modified: str = AwareDatetime
     spatial_resolution: list[str]
     spatial_coverage: str = Field(pattern=r"^[EJKLMNSW]{1}\d{8}$")
     temporal_resolution: list[str]
     temporal_coverage: PeriodOfTime
-    next_release: str = Field(
-        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",
-    )
+    next_release: str = AwareDatetime
     versions_url: str
     versions: List[SummarisedVersion]
     table_schema: TableSchema
@@ -124,12 +116,8 @@ class SummarisedEdition(BaseModel):
     """
 
     id: str = Field(alias="@id")
-    issued: str = Field(
-        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
-    )
-    modified: str = Field(
-        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
-    )
+    issued: str = AwareDatetime
+    modified: str = AwareDatetime
 
 
 class Editions(BaseModel):
@@ -149,15 +137,9 @@ class Dataset(BaseModel):
     title: str = Field(max_length=90)
     summary: str = Field(max_length=500)
     description: str = Field(max_length=500)
-    issued: str = Field(
-        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
-    )
-    modified: str = Field(
-        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
-    )
-    next_release: str = Field(
-        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$",
-    )
+    issued: str = AwareDatetime
+    modified: str = AwareDatetime
+    next_release: str = AwareDatetime
     publisher: str
     creator: str
     contact_point: ContactPoint
@@ -190,9 +172,7 @@ class Version(BaseModel):
     type: List[str] = Field(alias="@type")
     id: str = Field(alias="@id")
     identifier: str
-    issued: str = Field(
-        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
-    )
+    issued: str = AwareDatetime
     title: str = Field(max_length=90)
     summary: str = Field(max_length=500)
     description: str = Field(max_length=500)
