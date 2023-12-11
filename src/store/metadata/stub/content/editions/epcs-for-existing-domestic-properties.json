@@ -29,24 +29,24 @@
           "average energy efficiency rating"
         ],
         "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-        "issued": "2023-07-27T09:30:00",
-        "modified": "2023-07-27T11:30:00",
+        "issued": "2023-07-27T09:30:00Z",
+        "modified": "2023-07-27T11:30:00Z",
         "spatial_resolution": ["E12", "E92", "E07", "E06", "K04"],
         "spatial_coverage": "K04000001",
         "temporal_resolution": ["P1M", "P1Y"],
         "temporal_coverage": {
-          "start": "2023-07-27T09:30:00",
-          "end": "2023-07-27T11:30:00"
+          "start": "2023-07-27T09:30:00Z",
+          "end": "2023-07-27T11:30:00Z"
         },
         "versions_url": "https://staging.idpd.uk/datasets/epcs-for-existing-domestic-properties/editions/2023-10/versions",
         "versions": [
           {
             "@id": "https://staging.idpd.uk/datasets/epcs-for-existing-domestic-properties/editions/2023-10/versions/1",
-            "issued": "2023-07-27T09:30:00",
-            "modified": "2023-07-27T11:30:00"
+            "issued": "2023-07-27T09:30:00Z",
+            "modified": "2023-07-27T11:30:00Z"
           }
         ],
-        "next_release": "2024-01-26T09:30:00",
+        "next_release": "2024-01-26T09:30:00Z",
         "table_schema": {
           "columns": [
             {
