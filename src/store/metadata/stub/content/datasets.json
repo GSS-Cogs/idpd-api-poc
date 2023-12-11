@@ -1,6 +1,9 @@
 {
-  "@context": "https://staging.idpd.uk/#ns",
-  "@type": ["dcat:Catalog", "hydra:Collection"],
+  "@context": "https://staging.idpd.uk/ns#",
+  "@type": [
+    "dcat:Catalog",
+    "hydra:Collection"
+  ],
   "@id": "https://staging.idpd.uk/datasets",
   "datasets": [
     {
@@ -21,7 +24,8 @@
       },
       "topics": [
         "https://staging.idpd.uk/topics/economy",
-        "https://staging.idpd.uk/topics/prices"],
+        "https://staging.idpd.uk/topics/prices"
+      ],
       "frequency": "monthly",
       "keywords": [
         "inflation",
@@ -31,10 +35,17 @@
         "consumer price index",
         "consumer price index including owner occupiers' housing costs"
       ],
-      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-      "spatial_resolution":["E01", "E92"],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",   
+      "spatial_resolution": [
+        "E01",
+        "E92"
+      ],
       "spatial_coverage": "E92000001",
-      "temporal_resolution": ["P1M","P3M","P1Y"],
+      "temporal_resolution": [
+        "P1M",
+        "P3M",
+        "P1Y"
+      ],
       "temporal_coverage": {
         "start": "2005-01-01T00:00:00Z",
         "end": "2019-03-01T00:00:00Z"
@@ -177,9 +188,9 @@
       "editions_url": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions/editions",
       "editions": [
         {
-          "@id": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions/editions/2022-07",
-          "issued": "2023-07-06T09:30:00Z",
-          "modified": "2023-07-06T09:30:00Z"
+          "@id": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions/editions/2023-06",
+          "issued": "2023-06-29T13:30:00Z",
+          "modified": "2023-06-29T16:20:00Z"
         }
       ]
     },
@@ -214,15 +225,15 @@
       "spatial_coverage": "K02000001",
       "temporal_resolution": ["P1M"],
       "temporal_coverage": {
-        "start": "2022-09-01T00:00:00Z",
+        "start": "2005-09-01T00:00:00Z",
         "end":  "2022-09-30T23:59:00Z"
       },
       "editions_url": "https://staging.idpd.uk/datasets/4gc/editions",
       "editions": [
         {
           "@id": "https://staging.idpd.uk/datasets/4gc/editions/2023-09",
-          "issued": "2023-08-24T09:30:00Z",
-          "modified": "2023-08-24T09:30:00Z"
+          "issued": "2023-03-31T12:10:00Z",
+          "modified": "2023-08-24T15:55:00Z"
         }
       ]
     },
@@ -233,9 +244,9 @@
       "title": "Domestic Energy Performance Certificates For Existing Dwellings",
       "summary": "Data from certificates for existing domestic properties lodged on the Energy Performance of Buildings Registers, by average energy efficiency rating",
       "description": "Data from certificates for existing domestic properties lodged on the Energy Performance of Buildings Registers, by average energy efficiency rating.",
-      "issued": "2023-07-27T09:30:00",
-      "modified": "2023-07-27T11:30:00",
-      "next_release": "2024-01-26T09:30:00",
+      "issued": "2023-07-27T09:30:00Z",
+      "modified": "2023-07-27T11:30:00Z",
+      "next_release": "2024-01-26T09:30:00Z",
       "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
       "creator": "https://staging.idpd.uk/publishers/department-for-levelling-up-housing-and-communities",
       "contact_point": {
