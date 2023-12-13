@@ -1,0 +1,73 @@
+{
+  "@context": "https://staging.idpd.uk/ns#",
+  "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions/2022-07/versions",
+  "@type": "hydra:Collection",
+  "title": "Local authority greenhouse gas emissions",
+  "versions": [
+      {
+          "@type": ["dcat:Distribution", "csvw:Table"],
+          "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions/2022-07/versions/1",
+          "identifier": "1",
+          "issued": "2023-06-29T00:00:00",
+          "title": "Local authority greenhouse gas emissions",
+          "summary": "UK local authority estimates of greenhouse gas emissions",
+          "description": "These statistics provide a breakdown of greenhouse gas emissions across the UK, using...",
+          "download_url": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions/2022-07/versions/1.csv",
+          "media_type": "text/csv",
+          "table_schema": {
+              "columns": [
+                  {
+                      "name": "year",
+                      "datatype": "xsd:datetime",
+                      "titles": "Year",
+                      "description": "The year associated with the observation."
+                  },
+                  {
+                      "name": "country",
+                      "datatype": "xsd:decimal",
+                      "titles": "Country",
+                      "description": "The country associated with the observation."
+                  },
+                  {
+                      "name": "LA",
+                      "datatype": "xsd:decimal",
+                      "titles": "Local Authority",
+                      "description": "The local authority associated with the observation."
+                  },
+                  {
+                      "name": "sub sector",
+                      "datatype": "xsd:decimal",
+                      "titles": "Sub Sector",
+                      "description": "The sub sector associated with the observation."
+                  },
+                  {
+                      "name": "GHG",
+                      "datatype": "xsd:decimal",
+                      "titles": "Greenhouse Gas",
+                      "description": "The greenhouse gas associated with the observation."
+                  },
+                  {
+                      "name": "measure",
+                      "datatype": "xsd:decimal",
+                      "titles": "Measure",
+                      "description": "The measure associated with the observation."
+                  },
+                  {
+                      "name": "unit",
+                      "datatype": "xsd:decimal",
+                      "titles": "Unit",
+                      "description": "The unit associated with the observation."
+                  },
+                  {
+                      "name": "value",
+                      "datatype": "xsd:decimal",
+                      "titles": "Value",
+                      "description": "The value for the given year."
+                  }
+              ]
+          }
+        }
+    ],
+    "count": 1,
+    "offset": 0
+}

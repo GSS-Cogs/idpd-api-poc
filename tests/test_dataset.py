@@ -7,7 +7,7 @@ from fastapi.testclient import TestClient
 from fastapi.exceptions import ResponseValidationError
 
 from constants import JSONLD
-from tests.fixtures.datasets import dataset_test_data
+from tests.fixtures.datasets_oxigraph import dataset_test_data
 from main import app, StubMetadataStore
 
 # Devnotes:

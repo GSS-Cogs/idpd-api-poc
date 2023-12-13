@@ -50,8 +50,14 @@ def process_json_files(g, dir_path, schema):
             data=json.dumps(set_context(resource_dict)), format="json-ld"
         )
 
+# def populate_all_files_in_directory(directory_path, oxigraph_url=None, write_to_db=True):
+#     for filename in os.listdir(directory_path):
+#         if filename.endswith(".jsonld"):  # or ".json", if your files are .json
+#             file_path = os.path.join(directory_path, filename)
+#             populate(jsonld_location=file_path, oxigraph_url=oxigraph_url, write_to_db=write_to_db)
+            
 
-def populate(oxigraph_url=None, write_to_db=True):
+def populate(jsonld_location=None, oxigraph_url=None, write_to_db=True):
     this_dir = Path(__file__).parent
     subbed_metadata_store_content_path = Path(
         "src/store/metadata/stub/content"
@@ -78,7 +84,9 @@ def populate(oxigraph_url=None, write_to_db=True):
     # ------------------
 
     # Load from disk
-    datasets_source_path = Path(subbed_metadata_store_content_path / "datasets.json")
+    datasets_source_path = Path(
+        Path(jsonld_location).absolute() / "datasets.json"
+    )
     with open(datasets_source_path) as f:
         datasets_source_dict = json.load(f)
         # Validate then add to graph
@@ -93,7 +101,9 @@ def populate(oxigraph_url=None, write_to_db=True):
     # ------------------
 
     # Load from disk
-    editions_source_path = Path(subbed_metadata_store_content_path / "editions")
+    editions_source_path = Path(
+        subbed_metadata_store_content_path / "editions"
+    )
     # Validate then add to graph
     schema = schemas.Editions
     process_json_files(g, editions_source_path, schema)
@@ -114,7 +124,9 @@ def populate(oxigraph_url=None, write_to_db=True):
     # Topics resources
     # ------------------
 
-    topics_source_path = Path(subbed_metadata_store_content_path / "topics.json")
+    topics_source_path = Path(
+        subbed_metadata_store_content_path / "topics.json"
+    )
     with open(topics_source_path) as f:
         topics_source_dict = json.load(f)
         # Validate then add to graph
@@ -165,4 +177,5 @@ def populate(oxigraph_url=None, write_to_db=True):
 
 if __name__ == "__main__":
     oxigraph_url = os.getenv("GRAPH_DB_URL", None)
-    populate(oxigraph_url=oxigraph_url)
+    jsonld_location = os.getenv("JSONLD_LOCATION", None)
+    populate(jsonld_location=jsonld_location, oxigraph_url=oxigraph_url)
