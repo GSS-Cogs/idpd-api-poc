@@ -11,8 +11,9 @@ def topic_test_data():
     """
     file_path = pathlib.Path("src/store/metadata/stub/content/topics.json")
     with open(file_path, "r") as json_file:
-        return json.load(json_file)["topics"][0]
-
+        topic = json.load(json_file)["topics"][0]
+        topic["@context"] = "https://staging.idpd.uk/ns#"
+    return topic
 
 @pytest.fixture
 def topics_test_data():
