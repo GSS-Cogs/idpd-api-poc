@@ -82,7 +82,7 @@ def test_oxigraph_get_versions_logger_request_id_is_none():
                 assert 'request_id' in log
                 assert 'log_level' in log
                 assert log.get('log_level') == 'info'
-                assert type(log.get('request_id')) == None
+                assert type(log.get('request_id')) == type(None)
 
 def test_context_store_logger_returns_request_id():
     with capture_logs() as cap_logs: 
@@ -106,7 +106,7 @@ def test_context_store_logger_request_id_is_none():
                 assert 'request_id' in log
                 assert 'log_level' in log
                 assert log.get('log_level') == 'info'
-                assert type(log.get('request_id')) == None
+                assert type(log.get('request_id')) == type(None)
 
 def test_csv_stub_logger_returns_request_id():
     """
@@ -116,7 +116,7 @@ def test_csv_stub_logger_returns_request_id():
     """
     with capture_logs() as cap_logs:
         csv_store = StubCsvStore()
-        csv = csv_store.get_version(request_id='96a101dd-c49a-4fea-aee2-a76510f32190')
+        csv = csv_store.get_version("cpih", "2022-01", "1", request_id='96a101dd-c49a-4fea-aee2-a76510f32190')
 
         for log in cap_logs:
             if log.get('event') == 'Recieved request for csv':
@@ -133,14 +133,14 @@ def test_csv_stub_logger_request_id_is_none():
     """
     with capture_logs() as cap_logs:
         csv_store = StubCsvStore()
-        csv = csv_store.get_version(request_id=None)
+        csv = csv_store.get_version("cpih", "2022-01", "1", request_id=None)
 
         for log in cap_logs:
             if log.get('event') == 'Recieved request for csv':
                 assert 'request_id' in log
                 assert 'log_level' in log
                 assert log.get('log_level') == 'info'
-                assert type(log.get('request_id')) == None
+                assert type(log.get('request_id')) == type(None)
 
 def test_stub_get_dataset_logger_returns_request_id():
     """
@@ -178,4 +178,4 @@ def test_stub_get_datasets_logger_request_id_is_none():
                 assert 'request_id' in log
                 assert 'log_level' in log
                 assert log.get('log_level') == 'info'
-                assert type(log.get('request_id')) == None
+                assert type(log.get('request_id')) == type(None)
