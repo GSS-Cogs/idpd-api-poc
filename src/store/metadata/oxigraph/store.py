@@ -17,7 +17,7 @@ from ..base import BaseMetadataStore
 class OxigraphMetadataStore(BaseMetadataStore):
     def setup(self):
         oxigraph_url = os.environ.get("GRAPH_DB_URL", None)
-        
+
         assert oxigraph_url is not None, (
             "The env var 'GRAPH_DB_URL' must be set to use "
             "the OxigraphMetadataStore store."

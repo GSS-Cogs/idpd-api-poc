@@ -1,5 +1,5 @@
-from ensurepip import version
 import os
+from ensurepip import version
 from typing import Optional
 
 from fastapi import Depends, FastAPI, Request, Response, status
