@@ -56,15 +56,15 @@ def test_oxigraph_get_datasets_logger_returns_request_id():
     """  
     with capture_logs() as cap_logs:    
         store = OxigraphMetadataStore()
-        datasets = store.get_datasets(request_id=8)
+        datasets = store.get_datasets(request_id='96a101dd-c49a-4fea-aee2-a76510f32190')
         datasets_schema = schemas.Datasets(**datasets)
 
         for log in cap_logs:
-            # if 'request_id' in log:
-            assert 'request_id' in log
-            assert 'log_level' in log
-            assert log.get('log_level') == 'info'
-            # assert type(log.get('request_id')) == None
+            if log.get('event') == 'Constructing get_datasets() response from graph':
+                assert 'request_id' in log
+                assert 'log_level' in log
+                assert log.get('log_level') == 'info'
+                assert type(log.get('request_id')) == str
 
 def test_oxigraph_get_versions_logger_request_id_is_none():
     """
@@ -78,23 +78,23 @@ def test_oxigraph_get_versions_logger_request_id_is_none():
         versions_schema = schemas.Versions(**versions)
         
         for log in cap_logs:
-            # if 'request_id' in log:
-            assert 'request_id' in log
-            assert 'log_level' in log
-            assert log.get('log_level') == 'info'
-            # assert type(log.get('request_id')) == None
+            if log.get('event') == 'Constructing get_versions() response from graph':
+                assert 'request_id' in log
+                assert 'log_level' in log
+                assert log.get('log_level') == 'info'
+                assert type(log.get('request_id')) == None
 
 def test_context_store_logger_returns_request_id():
     with capture_logs() as cap_logs: 
         context_store = ContextStore()
-        context = context_store.get_context(request_id=3)
+        context = context_store.get_context(request_id='96a101dd-c49a-4fea-aee2-a76510f32190')
 
         for log in cap_logs:
-                # if 'request_id' in log:
+            if log.get('event') == 'Getting Context':
                 assert 'request_id' in log
                 assert 'log_level' in log
                 assert log.get('log_level') == 'info'
-                # assert type(log.get('request_id')) == None
+                assert type(log.get('request_id')) == str
 
 def test_context_store_logger_request_id_is_none():
     with capture_logs() as cap_logs: 
@@ -102,11 +102,11 @@ def test_context_store_logger_request_id_is_none():
         context = context_store.get_context(request_id=None)
 
         for log in cap_logs:
-                # if 'request_id' in log:
+            if log.get('event') == 'Getting Context':
                 assert 'request_id' in log
                 assert 'log_level' in log
                 assert log.get('log_level') == 'info'
-                # assert type(log.get('request_id')) == None
+                assert type(log.get('request_id')) == None
 
 def test_csv_stub_logger_returns_request_id():
     """
@@ -116,14 +116,14 @@ def test_csv_stub_logger_returns_request_id():
     """
     with capture_logs() as cap_logs:
         csv_store = StubCsvStore()
-        csv = csv_store.get_version(request_id=3)
+        csv = csv_store.get_version(request_id='96a101dd-c49a-4fea-aee2-a76510f32190')
 
         for log in cap_logs:
-                # if 'request_id' in log:
+            if log.get('event') == 'Recieved request for csv':
                 assert 'request_id' in log
                 assert 'log_level' in log
                 assert log.get('log_level') == 'info'
-                # assert type(log.get('request_id')) == None
+                assert type(log.get('request_id')) == str
 
 def test_csv_stub_logger_request_id_is_none():
     """
@@ -136,11 +136,11 @@ def test_csv_stub_logger_request_id_is_none():
         csv = csv_store.get_version(request_id=None)
 
         for log in cap_logs:
-                # if 'request_id' in log:
+            if log.get('event') == 'Recieved request for csv':
                 assert 'request_id' in log
                 assert 'log_level' in log
                 assert log.get('log_level') == 'info'
-                # assert type(log.get('request_id')) == None
+                assert type(log.get('request_id')) == None
 
 def test_stub_get_dataset_logger_returns_request_id():
     """
@@ -152,14 +152,14 @@ def test_stub_get_dataset_logger_returns_request_id():
     with capture_logs() as cap_logs:
         store = StubMetadataStore()
 
-        dataset = store.get_dataset("cpih",request_id=3)
+        dataset = store.get_dataset("cpih",request_id='96a101dd-c49a-4fea-aee2-a76510f32190')
 
         for log in cap_logs:
-                # if 'request_id' in log:
+            if log.get('event') == 'Constructing get_dataset() from files stored on disk':
                 assert 'request_id' in log
                 assert 'log_level' in log
                 assert log.get('log_level') == 'info'
-                # assert type(log.get('request_id')) == None
+                assert type(log.get('request_id')) == str
 
 def test_stub_get_datasets_logger_request_id_is_none():
     """
@@ -174,8 +174,8 @@ def test_stub_get_datasets_logger_request_id_is_none():
         datasets = store.get_datasets(request_id=None)
 
         for log in cap_logs:
-                # if 'request_id' in log:
+            if log.get('event') == 'Constructing get_datasets() from files stored on disk':
                 assert 'request_id' in log
                 assert 'log_level' in log
                 assert log.get('log_level') == 'info'
-                # assert type(log.get('request_id')) == None
+                assert type(log.get('request_id')) == None
