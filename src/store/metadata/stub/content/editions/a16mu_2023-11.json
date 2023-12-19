@@ -33,7 +33,7 @@
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
       "issued": "2023-11-06T12:25:28Z",
-      "modified": "2023-11-06T12:25:28Z",
+      "modified": "2023-12-11T16:10:00Z",
       "spatial_resolution": [
         "N09",
         "S12",
@@ -47,7 +47,7 @@
       ],
       "temporal_coverage": {
         "start": "2004-07-01T00:00:00Z",
-        "end": "2023-06-30T23:59:59Z"
+        "end": "2022-07-04T00:00:00Z"
       },
       "versions_url": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions",
       "versions": [
