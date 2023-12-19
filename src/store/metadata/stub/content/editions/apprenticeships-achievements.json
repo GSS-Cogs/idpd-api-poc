@@ -8,7 +8,7 @@
         "@id": "https://staging.idpd.uk/datasets/apprenticeships-achievements/editions/2023-05",
         "@type": "dcat:Dataset",
         "in_series": "https://staging.idpd.uk/datasets/apprenticeships-achievements",
-        "identifier": "2023-06",
+        "identifier": "2023-05",
         "title": "Apprenticeships achievements",
         "summary": "Apprenticeships achieved by adults aged 16+ based on home address, rate per 100,000 population, England, academic years 2017/18 to 2022/23.",
         "description": "This dataset shows apprenticeships achieved by adults aged 16+ based on home address, rate per 100,000 population, in England, for full academic years 2017/18 to 2022/23.",
@@ -30,7 +30,7 @@
           "local_authority"
         ],
         "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-        "issued": "2023-05-17T12:25:28",
+        "issued": "2023-05-17T12:25:28Z",
         "modified": "2023-12-08T13:26:00Z",
         "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
         "spatial_coverage": "E92000001",
