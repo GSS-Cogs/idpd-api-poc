@@ -1,118 +1,127 @@
 {
-    "@context": "https://staging.idpd.uk/#ns",
-    "@id": "https://staging.idpd.uk/datasets/gdhi/editions",
-    "@type": "hydra:Collection",
-    "title": "Gross disposable household income per head",
-    "editions": [
+  "@context": "https://staging.idpd.uk/ns#",
+  "@id": "https://staging.idpd.uk/datasets/gdhi/editions",
+  "@type": "hydra:Collection",
+  "title": "Gross disposable household income per head",
+  "editions": [
+    {
+      "@id": "https://staging.idpd.uk/datasets/gdhi/editions/2023-03",
+      "@type": "dcat:Dataset",
+      "in_series": "https://staging.idpd.uk/datasets/gdhi",
+      "identifier": "2023-03",
+      "title": "Gross disposable household income per head",
+      "summary": "Estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, UK, 1997-2021.",
+      "description": "This dataset shows an estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, in the UK, for 1997-2021.",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "office-for-national-statistics",
+      "contact_point": {
+        "name": "Trevor Fenton",
+        "email": "mailto:regionalaccounts@ons.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/economy"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "money",
+        "spending",
+        "saving",
+        "region",
+        "local-authority",
+        "subnational"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "issued": "2023-03-31T12:12:48Z",
+      "modified": "2023-11-02T14:26:00Z",
+      "spatial_resolution": [
+        "N09",
+        "S12",
+        "W06",
+        "E92",
+        "K02"
+      ],
+      "spatial_coverage": "K02000001",
+      "temporal_resolution": [
+        "P1Y"
+      ],
+      "temporal_coverage": {
+        "start": "1997-01-01T09:00:00Z",
+        "end": "2021-01-01T09:00:00Z"
+      },
+      "versions_url": "https://staging.idpd.uk/datasets/gdhi/editions/2023-03/versions",
+      "versions": [
         {
-            "@id": "https://staging.idpd.uk/datasets/gdhi/editions/2023-03",
-            "@type": "dcat:Dataset",
-            "in_series": "https://staging.idpd.uk/datasets/gdhi",
-            "identifier": "2023-03",
-            "title": "Gross disposable household income per head",
-            "summary": "Estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, UK, 1997-2021.",
-            "description": "This dataset shows an estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, in the UK, for 1997-2021.",
-            "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
-            "creator": "office-for-national-statistics",
-            "contact_point": {
-              "name": "Trevor Fenton",
-              "email": "mailto:regionalaccounts@ons.gov.uk"
-            },
-            "topics": [
-              "https://staging.idpd.uk/topics/economy"
-            ],
-            "frequency": "annual",
-            "keywords": ["money",
-            "spending",
-            "saving",
-            "region",
-            "local-authority",
-            "subnational"],
-            "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-            "issued": "2023-03-31T12:12:48Z",
-            "modified": "2023-11-02T14:26:00Z",
-            "spatial_resolution":["N09", "S12", "W06", "E92", "K02"],
-            "spatial_coverage": "K02000001",
-            "temporal_resolution": ["P1Y"],
-            "temporal_coverage": {
-              "start": "1997-01-01T09:00:00Z",
-              "end":  "2021-01-01T09:00:00Z"
-            },
-            "versions_url": "https://staging.idpd.uk/datasets/gdhi/editions/2023-03/versions",
-            "versions": [
-              {
-                "@id": "https://staging.idpd.uk/datasets/gdhi/editions/2023-03/versions/1",
-                "issued": "2023-03-31T12:12:48Z",
-                "modified": "2023-11-02T14:26:00Z"
-              }
-            ],
-            "next_release": "2024-03-31T12:00:00Z",
-            "table_schema": {
-              "columns": [
-                  {
-                  "name": "Period",
-                  "datatype": "string",
-                  "titles": "Period",
-                  "description": "The time period associated with the observation."
-                  },
-                  {
-                  "name": "AREANM",
-                  "datatype": "string",
-                  "titles": "Area Name",
-                  "description": "The name assiciated with The geography code "
-                  },
-                  {
-                  "name": "AREACD",
-                  "datatype": "string",
-                  "titles": "Statistical Geography",
-                  "description": "The geography code associated with the observation."
-                  },                  
-                  {
-                  "name": "Geography",
-                  "datatype": "string",
-                  "titles": "Geography Type",
-                  "description": "The categorisation of the geography code"
-                  },                
-                  {
-                  "name": "Value",
-                  "datatype": "decimal",
-                  "titles": "Geographic area with 4G coverage by at least one provider",
-                  "description": "Observational Value"
-                  },
-                  {
-                  "name": "Measure",
-                  "datatype": "string",
-                  "titles": "Measure Type",
-                  "description": "Measure Type of the Observational Value"
-                  },
-                  {
-                  "name": "Unit",
-                  "datatype": "string",
-                  "titles": "Unit",
-                  "description": "Unit Type of the Observational Value"
-                  },
-                  {
-                  "name": "Lower Confidence Interval (95%)",
-                  "datatype": "decimal",
-                  "titles": "Lower Confidence Interval",
-                  "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Lower bound"
-                  },
-                  {
-                  "name": "Upper Confidence Interval (95%)",
-                  "datatype": "decimal",
-                  "titles": "Upper Confidence Interval",
-                  "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Upper bound"
-                  },
-                  {
-                  "name": "Observation Status",
-                  "datatype": "string",
-                  "titles": "Observation Status",
-                  "description": "Additional Context to the Observation if needed"
-                  }
-              ]
-          }
+          "@id": "https://staging.idpd.uk/datasets/gdhi/editions/2023-03/versions/1",
+          "issued": "2023-03-31T12:12:48Z"
         }
-    ],
-    "count": 1,
-    "offset": 0
+      ],
+      "next_release": "2024-03-31T12:00:00Z",
+      "table_schema": {
+        "columns": [
+          {
+            "name": "Period",
+            "datatype": "string",
+            "titles": "Period",
+            "description": "The time period associated with the observation."
+          },
+          {
+            "name": "AREANM",
+            "datatype": "string",
+            "titles": "Area Name",
+            "description": "The name assiciated with The geography code "
+          },
+          {
+            "name": "AREACD",
+            "datatype": "string",
+            "titles": "Statistical Geography",
+            "description": "The geography code associated with the observation."
+          },
+          {
+            "name": "Geography",
+            "datatype": "string",
+            "titles": "Geography Type",
+            "description": "The categorisation of the geography code"
+          },
+          {
+            "name": "Value",
+            "datatype": "decimal",
+            "titles": "Geographic area with 4G coverage by at least one provider",
+            "description": "Observational Value"
+          },
+          {
+            "name": "Measure",
+            "datatype": "string",
+            "titles": "Measure Type",
+            "description": "Measure Type of the Observational Value"
+          },
+          {
+            "name": "Unit",
+            "datatype": "string",
+            "titles": "Unit",
+            "description": "Unit Type of the Observational Value"
+          },
+          {
+            "name": "Lower Confidence Interval (95%)",
+            "datatype": "decimal",
+            "titles": "Lower Confidence Interval",
+            "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Lower bound"
+          },
+          {
+            "name": "Upper Confidence Interval (95%)",
+            "datatype": "decimal",
+            "titles": "Upper Confidence Interval",
+            "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Upper bound"
+          },
+          {
+            "name": "Observation Status",
+            "datatype": "string",
+            "titles": "Observation Status",
+            "description": "Additional Context to the Observation if needed"
+          }
+        ]
+      }
+    }
+  ],
+  "count": 1,
+  "offset": 0
 }

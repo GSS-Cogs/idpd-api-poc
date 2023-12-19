@@ -9,7 +9,7 @@ import schemas
 def test_oxigraph_get_topics_returns_valid_structure():
     """
     Confirm that the OxigraphMetadataStore.get_topics()
-    function returns a list of topics that matches the Topics
+    function returns a dictionary that matches the Topics
     schema.
     """
     store = OxigraphMetadataStore()
@@ -17,7 +17,7 @@ def test_oxigraph_get_topics_returns_valid_structure():
     topics_schema = schemas.Topics(**topics)
     assert topics_schema.id == "https://staging.idpd.uk/topics"
     assert topics_schema.type == "hydra:Collection"
-    assert len(topics_schema.topics) > 0
+    assert len(topics_schema.topics) == topics_schema.count
 
 
 def test_topics_schema_validation():

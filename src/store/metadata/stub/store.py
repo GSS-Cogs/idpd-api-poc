@@ -37,7 +37,7 @@ def contextualise(resource) -> Dict:
         return None
 
     if "@context" not in resource.keys():
-        resource = {"@context": "https://staging.idpd.uk/#ns"} | resource
+        resource = {"@context": "https://staging.idpd.uk/ns#"} | resource
 
     replace_host = os.environ.get("LOCAL_BROWSE_API", None)
     if replace_host is not None:
@@ -178,15 +178,21 @@ class StubMetadataStore(BaseMetadataStore):
         if topic is None:
             return None
 
-        sub_topic_ids = topic["sub_topics"]
         topics = self.get_topics()
-        sub_topics = [x for x in topics if x["@id"] in sub_topic_ids]
 
-        if sub_topics is None:
+        sub_topics = [
+            x
+            for x in topics["topics"]
+            if len(x["parent_topics"]) > 0 and topic["@id"] in x["parent_topics"]
+        ]
+
+        if len(sub_topics) == 0:
             return None
         return contextualise(
             {
-                "items": sub_topics,
+                "@id": f"https://staging.idpd.uk/topics/{topic_id}/subtopics",
+                "@type": "hydra:Collection",
+                "topics": sub_topics,
                 "count": len(sub_topics),
                 "offset": 0,
             }
