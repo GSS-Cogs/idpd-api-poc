@@ -14,7 +14,7 @@
       "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
       "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
       "issued": "2022-01-01T00:00:00Z",
-      "modified": "2022-01-02T00:00:00Z",
+      "modified": "2022-01-12T00:00:00Z",
       "next_release": "2024-04-19T09:30:00Z",
       "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
       "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
@@ -55,7 +55,7 @@
         {
           "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01",
           "issued": "2022-01-01T00:00:00Z",
-          "modified": "2022-01-02T00:00:00Z"
+          "modified": "2022-01-12T00:00:00Z"
         }
       ]
     },
