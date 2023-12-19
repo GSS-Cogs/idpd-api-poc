@@ -67,7 +67,7 @@
       "summary": "Modelled unemployment rate for people aged 16 years and over, Great Britain, 07/2004-06/2005 to 07/2022-06/2023.",
       "description": "This dataset shows modelled-based estimates for the proportion of people aged 16 years and over without a job who have been actively seeking work within the last four weeks and are available to start work within the next two weeks",
       "issued": "2023-11-06T12:25:28Z",
-      "modified": "2023-12-11T12:25:28Z",
+      "modified": "2023-12-11T16:10:00Z",
       "next_release": "2024-11-06T12:00:00Z",
       "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
       "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
@@ -94,14 +94,14 @@
       "temporal_resolution": ["P1Y"],
       "temporal_coverage": {
         "start": "2004-07-01T00:00:00Z",
-        "end": "2023-06-04T00:00:00Z"
+        "end": "2022-07-04T00:00:00Z"
       },
       "editions_url": "https://staging.idpd.uk/datasets/a16mu/editions",
       "editions": [
         {
           "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11",
           "issued": "2023-11-06T12:25:28Z",
-          "modified": "2023-12-11T12:25:28Z"
+          "modified": "2023-12-11T16:10:00Z"
         }
       ]
     },
@@ -228,8 +228,8 @@
       "spatial_coverage": "K02000001",
       "temporal_resolution": ["P1M"],
       "temporal_coverage": {
-        "start": "2005-09-01T00:00:00Z",
-        "end":  "2022-09-30T23:59:00Z"
+        "start": "2023-04-01T00:00:00Z",
+        "end":  "2023-04-30T23:59:00Z"
       },
       "editions_url": "https://staging.idpd.uk/datasets/4gc/editions",
       "editions": [
