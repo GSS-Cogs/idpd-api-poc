@@ -56,7 +56,6 @@ def _populate_partial_graph_for_test():
     }
 
     # Extract RDF triples from the database as one Graph
-    # TODO: incorporate `keywords` and `topics` into the `sparql_queries.dataset` query?
     result: Graph = (
         store.sparql_queries.dataset(init_bindings)
         + store.sparql_queries.keywords(init_bindings)
@@ -74,7 +73,6 @@ def _populate_partial_graph_for_test():
         data, {"@context": constants.CONTEXT, "@type": "dcat:DatasetSeries"}
     )
 
-    # Extract dataset graph and blank node graphs from flattened json-ld data
     dataset_graph = _get_single_graph_for_field(data, "@type")
     contact_point_graph = _get_single_graph_for_field(data, "vcard:fn")
     temporal_coverage_graph = _get_single_graph_for_field(data, "dcat:endDate")
@@ -91,7 +89,7 @@ def _populate_partial_graph_for_test():
 
     del dataset_graph["versions"]
 
-    # dataset_graph = {"@context": "https://staging.idpd.uk/ns#", **dataset_graph}
+    dataset_graph = {"@context": "https://staging.idpd.uk/ns#", **dataset_graph}
 
     all_graphs_list = [dataset_graph, contact_point_graph, temporal_coverage_graph]
     
@@ -105,3 +103,11 @@ def test_hydrate_graph_from_subgraphs():
     hydrated_graph = _hydrate_graph_from_sub_graphs(main_graph, test_graphs)
 
     assert hydrated_graph
+    assert hydrated_graph["temporal_coverage"]["dcat:startDate"]["@type"] == "xsd:dateTime"
+    assert hydrated_graph["temporal_coverage"]["dcat:startDate"]["@value"] == "2005-01-01T00:00:00+00:00"
+    
+    assert hydrated_graph["temporal_coverage"]["dcat:endDate"]["@type"] == "xsd:dateTime"
+    assert hydrated_graph["temporal_coverage"]["dcat:endDate"]["@value"] == "2019-03-01T00:00:00+00:00"
+    
+    assert hydrated_graph["contact_point"]["vcard:fn"]["@value"] == "Consumer Price Inflation Enquiries"
+    assert hydrated_graph["contact_point"]["vcard:hasEmail"] == "mailto:cpih@ons.gov.uk"
