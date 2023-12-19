@@ -28,8 +28,8 @@
         "CPIH"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-      "issued": "2017-02-21T09:30:00Z",
-      "modified": "2017-02-21T09:30:00Z",
+      "issued": "2022-01-01T00:00:00Z",
+      "modified": "2022-01-12T00:00:00Z",
       "spatial_resolution": [
         "E01",
         "E92"
@@ -41,17 +41,17 @@
         "P1Y"
       ],
       "temporal_coverage": {
-        "start": "1981-01-01T00:00:00Z",
-        "end": "2022-01-31T00:00:00Z"
+        "start": "2005-01-01T00:00:00Z",
+        "end": "2019-03-01T00:00:00Z"
       },
       "versions_url": "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions",
       "versions": [
         {
           "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1",
-          "issued": "2017-01-01T00:00:00Z"
+          "issued": "2022-01-01T00:00:00Z"
         }
       ],
-      "next_release": "2017-03-11T09:30:00Z",
+      "next_release": "2024-04-19T09:30:00Z",
       "table_schema": {
         "columns": [
           {
