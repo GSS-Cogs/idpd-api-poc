@@ -1,274 +1,325 @@
 {
-    "@context": "https://staging.idpd.uk/ns#",
-    "@type": ["dcat:Catalog", "hydra:Collection"],
-    "@id": "https://staging.idpd.uk/datasets",
-    "datasets": [
-        {
-            "@id": "https://staging.idpd.uk/datasets/cpih",
-            "@type": "dcat:DatasetSeries",
-            "identifier": "cpih",
-            "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
-            "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
-            "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
-            "issued": "2017-01-01T00:00:00",
-            "modified": "2017-01-01T00:00:00",
-            "next_release": "2019-04-19T09:30:00Z",
-            "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-            "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-            "contact_point": {
-              "name": "Consumer Price Inflation Enquiries",
-              "email": "mailto:cpih@ons.gov.uk"
-            },
-            "topics": [
-              "https://staging.idpd.uk/topics/economy",
-              "https://staging.idpd.uk/topics/prices"],
-            "frequency": "monthly",
-            "keywords": [
-              "inflation",
-              "consumer price inflation",
-              "cpi",
-              "cpih",
-              "consumer price index",
-              "consumer price index including owner occupiers' housing costs"
-            ],
-            "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-            "spatial_resolution":["E01", "E92"],
-            "spatial_coverage": "E92000001",
-            "temporal_resolution": ["P1M","P3M","P1Y"],
-            "temporal_coverage": {
-              "start": "2005-01-01T00:00:00Z",
-              "end": "2019-03-01T00:00:00Z"
-            },
-            "editions_url": "https://staging.idpd.uk/datasets/cpih/editions",
-            "editions": [
-              {
-                "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01",
-                "issued": "2017-02-21T09:30:00Z",
-                "modified": "2017-02-21T09:30:00Z"
-              }
-            ]
-        },
-        {
-          "@id": "https://staging.idpd.uk/datasets/a16mu",
-          "@type": "dcat:DatasetSeries",
-          "identifier": "a16mu",
-          "title": "Modelled unemployment rate aged 16 years and over",
-          "summary": "Modelled unemployment rate for people aged 16 years and over, Great Britain, 07/2004-06/2005 to 07/2022-06/2023.",
-          "description": "This dataset shows modelled-based estimates for the proportion of people aged 16 years and over without a job who have been actively seeking work within the last four weeks and are available to start work within the next two weeks",
-          "issued": "2023-11-06T12:25:28",
-          "modified": "2023-11-06T12:25:28",
-          "next_release": "2024-11-06T12:00:00",
-          "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-          "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-          "contact_point": {
-            "name": "Debra Leaker",
-            "email": "mailto:labour.market@ons.gov.uk"
-          },
-          "topics": [
-            "https://staging.idpd.uk/topics/labour-market-and-welfare"],
-          "frequency": "annual",
-          "keywords": [
-            "subnational",
-            "county",
-            "local-authority",
-            "unemployment",
-            "labour-market",
-            "region",
-            "annual-population-survey"
-          ],
-          "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-          "spatial_resolution":["N09", "S12", "W06", "E92", "K02"],
-          "spatial_coverage": "K02000001",
-          "temporal_resolution": ["P1Y"],
-          "temporal_coverage": {
-            "start": "2004-07-01T00:00:00Z",
-            "end": "2023-06-04T00:00:00Z"
-          },
-          "editions_url": "https://staging.idpd.uk/datasets/a16mu/editions",
-          "editions": [
-            {
-              "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11",
-              "issued": "2023-11-06T12:25:28Z",
-              "modified": "2023-11-06T12:25:28Z"
-            }
-          ]
-        },
-        {
-          "@id": "https://staging.idpd.uk/datasets/gdhi",
-          "@type": "dcat:DatasetSeries",
-          "identifier": "gdhi",
-          "title": "Gross disposable household income per head",
-          "summary": "Estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, UK, 1997-2021.",
-          "description": "This dataset shows an estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, in the UK, for 1997-2021.",
-          "issued": "2023-03-31T12:12:48",
-          "modified": "2023-11-02T14:26:00",
-          "next_release": "2024-03-31T12:00:00Z",
-          "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-          "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-          "contact_point": {
-            "name": "Trevor Fenton",
-            "email": "mailto:regionalaccounts@ons.gov.uk"
-          },
-          "topics": [
-            "https://staging.idpd.uk/topics/economy"],
-          "frequency": "annual",
-          "keywords": [
-            "money",
-            "spending",
-            "saving",
-            "region",
-            "local-authority",
-            "subnational"
-          ],
-          "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-          "spatial_resolution":["N09", "S12", "W06", "E92", "K02"],
-          "spatial_coverage": "K02000001",
-          "temporal_resolution": ["P1Y"],
-          "temporal_coverage": {
-            "start": "1997-01-01T09:00:00Z",
-            "end":  "1997-01-01T09:00:00Z"
-          },
-          "editions_url": "https://staging.idpd.uk/datasets/gdhi/editions",
-          "editions": [
-            {
-              "@id": "https://staging.idpd.uk/datasets/gdhi/editions/2023-03",
-              "issued": "2023-03-31T12:12:48Z",
-              "modified": "2023-11-02T14:26:00Z"
-            }
-          ]
-        },
-        {
-          "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions",
-          "@type": "dcat:DatasetSeries",
-          "identifier": "beis-local-authority-greenhouse-gas-emissions",
-          "title": "Local authority greenhouse gas emissions",
-          "summary": "UK local authority estimates of greenhouse gas emissions",
-          "description": "These statistics provide a breakdown of greenhouse gas emissions across the UK, using...",
-          "issued": "2023-06-29T00:00:00",
-          "modified": "2023-06-29T00:00:00",
-          "next_release": "2023-07-06T09:30:00Z",
-          "publisher": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
-          "creator": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
-          "theme": "http://gss-data.org.uk/def/gdp#climate-change",
-          "contact_point": {
-            "name": "UK local authority and regional estimates of greenhouse gas emissions",
-            "email": "mailto:GreenhouseGas.Statistics@energysecurity.gov.uk"
-          },
-          "topics": [
-            "https://staging.idpd.uk/topics/emissions",
-            "https://staging.idpd.uk/topics/greenhouse-gas"],
-          "frequency": "monthly",
-          "keywords": [
-            "emissions",
-            "greenhouse-gas",
-            "carbon-dioxide",
-            "local-authority",
-            "country"
-          ],
-          "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-          "spatial_resolution": ["E01", "E92"],
-          "spatial_coverage": "E92000001",
-          "temporal_resolution": ["P1M", "P3M", "P1Y"],
-          "temporal_coverage": {
-            "start": "2005-01-01T00:00:00Z",
-            "end": "2022-07-01T00:00:00Z"
-          },
-          "editions_url": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions",
-          "editions": [
-            {
-              "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions/2022-07",
-              "issued": "2023-07-06T09:30:00Z",
-              "modified": "2023-07-06T09:30:00Z"
-            }
-          ]
-        },
-        {
-          "@id": "https://staging.idpd.uk/datasets/4gc",
-          "@type": "dcat:DatasetSeries",
-          "identifier": "4gc",
-          "title": "4G Coverage",
-          "summary": "Percentage of geographic areas with 4G signal outdoors from at least 1 operator (signal threshold: 105dBm), UK, September 2022.",
-          "description": "This dataset shows the percentage of geographic areas with 4G signal outdoors from at least 1 operator (signal threshold: 105dBm), in the UK, for September 2022.",
-          "issued": "2023-03-31T12:10:00",
-          "modified": "2023-10-23T15:55:00",
-          "next_release": "2023-11-24T09:30:00Z",
-          "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-          "creator": "https://staging.idpd.uk/publishers/ofcom",
-          "contact_point": {
-            "name": "Ofcom Open Data",
-            "email": "mailto:open.data@ofcom.org.uk"
-          },
-          "topics": [
-            "https://staging.idpd.uk/topics/communication",
-            "https://staging.idpd.uk/topics/it-and-internet-industry"],
-          "frequency": "monthly",
-          "keywords": [
-            "broadband-mobile-coverage",
-            "connectivity",
-            "local-authority",
-            "subnational"
-          ],
-          "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-          "spatial_resolution":["N09", "S12", "W06", "E92", "K02"],
-          "spatial_coverage": "K02000001",
-          "temporal_resolution": ["P1M"],
-          "temporal_coverage": {
-            "start": "2022-09-01T00:00:00Z",
-            "end":  "2022-09-30T23:59:00Z"
-          },
-          "editions_url": "https://staging.idpd.uk/datasets/4gc/editions",
-          "editions": [
-            {
-              "@id": "https://staging.idpd.uk/datasets/4gc/editions/2023-09",
-              "issued": "2023-08-24T09:30:00Z",
-              "modified": "2023-08-24T09:30:00Z"
-            }
-          ]
-        },
-        {
-          "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions",
-          "@type": "dcat:DatasetSeries",
-          "identifier": "beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions",
-          "title": "2005 to 2019 local authority carbon dioxide (CO2) emissions",
-          "summary": "These statistics provide the most reliable and consistent breakdown of CO2 emissions across the country, using nationally available data sets going back to 2005.\n\nThe main data sources are the UK National Atmospheric Emissions Inventory and the BEIS National Statistics of energy consumption for local authority areas. All emissions included in the national inventory are covered, except aviation, shipping and military transport, for which there is no obvious basis for allocation to local areas.",
-          "description": "These statistics provide the most reliable and consistent breakdown of CO2 emissions across the country, using nationally available data sets going back to 2005.\n\nThe main data sources are the UK National Atmospheric Emissions Inventory and the BEIS National Statistics of energy consumption for local authority areas. All emissions included in the national inventory are covered, except aviation, shipping and military transport, for which there is no obvious basis for allocation to local areas.",
-          "issued": "2021-06-24T08:30:00",
-          "modified": "2022-08-18T10:51:00",
-          "next_release": "2024-04-19T09:30:00Z",
-          "publisher": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
-          "creator": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
-          "contact_point": {
-            "name": "Department for Business, Energy & Industrial Strategy",
-            "email": "mailto:Climatechange.Statistics@beis.gov.uk"
-          },
-          "topics": [
-            "https://staging.idpd.uk/topics/climate-change",
-            "https://staging.idpd.uk/topics/carbon-emissions"],
-          "frequency": "irregular",
-          "keywords": [
-            "carbon",
-            "emissions",
-            "local authority",
-            "beis"
-          ],
-          "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-          "spatial_resolution":["K02"],
-          "spatial_coverage": "K02000001",
-          "temporal_resolution": ["P1Y"],
-          "temporal_coverage": {
-            "start": "2005-01-01T00:00:00Z",
-            "end": "2019-12-31T00:00:00Z"
-          },
-          "editions_url": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions",
-          "editions": [
-            {
-              "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions/2005-2019",
-              "issued": "2021-06-24T08:30:00Z",
-              "modified": "2022-08-18T10:51:00Z"
-            }
-          ]
-      }
+  "@context": "https://staging.idpd.uk/ns#",
+  "@type": [
+    "dcat:Catalog",
+    "hydra:Collection"
+  ],
+  "@id": "https://staging.idpd.uk/datasets",
+  "datasets": [
+    {
+      "@id": "https://staging.idpd.uk/datasets/cpih",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "cpih",
+      "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
+      "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
+      "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
+      "issued": "2017-01-01T00:00:00Z",
+      "modified": "2017-01-01T00:00:00Z",
+      "next_release": "2019-04-19T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "Consumer Price Inflation Enquiries",
+        "email": "mailto:cpih@ons.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/economy",
+        "https://staging.idpd.uk/topics/prices"
       ],
-    "offset": 0,
-    "count": 6
+      "frequency": "monthly",
+      "keywords": [
+        "inflation",
+        "consumer price inflation",
+        "cpi",
+        "cpih",
+        "consumer price index",
+        "consumer price index including owner occupiers' housing costs"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution": [
+        "E01",
+        "E92"
+      ],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": [
+        "P1M",
+        "P3M",
+        "P1Y"
+      ],
+      "temporal_coverage": {
+        "start": "2005-01-01T00:00:00Z",
+        "end": "2019-03-01T00:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/cpih/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01",
+          "issued": "2017-02-21T09:30:00Z",
+          "modified": "2017-02-21T09:30:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/a16mu",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "a16mu",
+      "title": "Modelled unemployment rate aged 16 years and over",
+      "summary": "Modelled unemployment rate for people aged 16 years and over, Great Britain, 07/2004-06/2005 to 07/2022-06/2023.",
+      "description": "This dataset shows modelled-based estimates for the proportion of people aged 16 years and over without a job who have been actively seeking work within the last four weeks and are available to start work within the next two weeks",
+      "issued": "2023-11-06T12:25:28Z",
+      "modified": "2023-11-06T12:25:28Z",
+      "next_release": "2024-11-06T12:00:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "Debra Leaker",
+        "email": "mailto:labour.market@ons.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/labour-market-and-welfare"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "subnational",
+        "county",
+        "local-authority",
+        "unemployment",
+        "labour-market",
+        "region",
+        "annual-population-survey"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution": [
+        "N09",
+        "S12",
+        "W06",
+        "E92",
+        "K02"
+      ],
+      "spatial_coverage": "K02000001",
+      "temporal_resolution": [
+        "P1Y"
+      ],
+      "temporal_coverage": {
+        "start": "2004-07-01T00:00:00Z",
+        "end": "2023-06-04T00:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/a16mu/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11",
+          "issued": "2023-11-06T12:25:28Z",
+          "modified": "2023-11-06T12:25:28Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/gdhi",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "gdhi",
+      "title": "Gross disposable household income per head",
+      "summary": "Estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, UK, 1997-2021.",
+      "description": "This dataset shows an estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, in the UK, for 1997-2021.",
+      "issued": "2023-03-31T12:12:48Z",
+      "modified": "2023-11-02T14:26:00Z",
+      "next_release": "2024-03-31T12:00:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "Trevor Fenton",
+        "email": "mailto:regionalaccounts@ons.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/economy"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "money",
+        "spending",
+        "saving",
+        "region",
+        "local-authority",
+        "subnational"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution": [
+        "N09",
+        "S12",
+        "W06",
+        "E92",
+        "K02"
+      ],
+      "spatial_coverage": "K02000001",
+      "temporal_resolution": [
+        "P1Y"
+      ],
+      "temporal_coverage": {
+        "start": "1997-01-01T09:00:00Z",
+        "end": "1997-01-01T09:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/gdhi/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/gdhi/editions/2023-03",
+          "issued": "2023-03-31T12:12:48Z",
+          "modified": "2023-11-02T14:26:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "beis-local-authority-greenhouse-gas-emissions",
+      "title": "Local authority greenhouse gas emissions",
+      "summary": "UK local authority estimates of greenhouse gas emissions",
+      "description": "These statistics provide a breakdown of greenhouse gas emissions across the UK, using...",
+      "issued": "2023-06-29T00:00:00Z",
+      "modified": "2023-06-29T00:00:00Z",
+      "next_release": "2023-07-06T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
+      "creator": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
+      "contact_point": {
+        "name": "UK local authority and regional estimates of greenhouse gas emissions",
+        "email": "mailto:GreenhouseGas.Statistics@energysecurity.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/emissions",
+        "https://staging.idpd.uk/topics/greenhouse-gas"
+      ],
+      "frequency": "monthly",
+      "keywords": [
+        "emissions",
+        "greenhouse-gas",
+        "carbon-dioxide",
+        "local-authority",
+        "country"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution": [
+        "E01",
+        "E92"
+      ],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": [
+        "P1M",
+        "P3M",
+        "P1Y"
+      ],
+      "temporal_coverage": {
+        "start": "2005-01-01T00:00:00Z",
+        "end": "2022-07-01T00:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions/2022-07",
+          "issued": "2023-06-29T13:30:00Z",
+          "modified": "2023-06-29T16:20:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/4gc",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "4gc",
+      "title": "4G Coverage",
+      "summary": "Percentage of geographic areas with 4G signal outdoors from at least 1 operator (signal threshold: 105dBm), UK, September 2022.",
+      "description": "This dataset shows the percentage of geographic areas with 4G signal outdoors from at least 1 operator (signal threshold: 105dBm), in the UK, for September 2022.",
+      "issued": "2023-03-31T12:10:00Z",
+      "modified": "2023-10-23T15:55:00Z",
+      "next_release": "2023-11-24T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/ofcom",
+      "contact_point": {
+        "name": "Ofcom Open Data",
+        "email": "mailto:open.data@ofcom.org.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/communication",
+        "https://staging.idpd.uk/topics/it-and-internet-industry"
+      ],
+      "frequency": "monthly",
+      "keywords": [
+        "broadband-mobile-coverage",
+        "connectivity",
+        "local-authority",
+        "subnational"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution": [
+        "N09",
+        "S12",
+        "W06",
+        "E92",
+        "K02"
+      ],
+      "spatial_coverage": "K02000001",
+      "temporal_resolution": [
+        "P1M"
+      ],
+      "temporal_coverage": {
+        "start": "2022-09-01T00:00:00Z",
+        "end": "2022-09-30T23:59:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/4gc/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/4gc/editions/2023-09",
+          "issued": "2023-03-31T12:10:00Z",
+          "modified": "2023-08-24T15:55:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions",
+      "title": "2005 to 2019 local authority carbon dioxide (CO2) emissions",
+      "summary": "These statistics provide the most reliable and consistent breakdown of CO2 emissions across the country, using nationally available data sets going back to 2005.\n\nThe main data sources are the UK National Atmospheric Emissions Inventory and the BEIS National Statistics of energy consumption for local authority areas. All emissions included in the national inventory are covered, except aviation, shipping and military transport, for which there is no obvious basis for allocation to local areas.",
+      "description": "These statistics provide the most reliable and consistent breakdown of CO2 emissions across the country, using nationally available data sets going back to 2005.\n\nThe main data sources are the UK National Atmospheric Emissions Inventory and the BEIS National Statistics of energy consumption for local authority areas. All emissions included in the national inventory are covered, except aviation, shipping and military transport, for which there is no obvious basis for allocation to local areas.",
+      "issued": "2021-06-24T08:30:00Z",
+      "modified": "2022-08-18T10:51:00Z",
+      "next_release": "2024-04-19T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
+      "creator": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
+      "contact_point": {
+        "name": "Department for Business, Energy & Industrial Strategy",
+        "email": "mailto:Climatechange.Statistics@beis.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/climate-change",
+        "https://staging.idpd.uk/topics/carbon-emissions"
+      ],
+      "frequency": "irregular",
+      "keywords": [
+        "carbon",
+        "emissions",
+        "local authority",
+        "beis"
+
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution": [
+        "K02"
+      ],
+      "spatial_coverage": "K02000001",
+      "temporal_resolution": [
+        "P1Y"
+      ],
+      "temporal_coverage": {
+        "start": "2005-01-01T00:00:00Z",
+        "end": "2019-12-31T00:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions/2005-2019",
+          "issued": "2021-06-24T08:30:00Z",
+          "modified": "2022-08-18T10:51:00Z"
+        }
+      ]
+    }
+  ],
+  "offset": 0,
+  "count": 6
 }

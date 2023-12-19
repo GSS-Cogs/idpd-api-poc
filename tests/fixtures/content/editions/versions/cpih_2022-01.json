@@ -5,13 +5,14 @@
     "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
     "versions": [
         {
+            "@context": "https://staging.idpd.uk/ns#",
             "@type": [
                 "dcat:Distribution",
                 "csvw:Table"
             ],
             "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1",
             "identifier": "1",
-            "issued": "2017-01-01T00:00:00",
+            "issued": "2017-01-01T00:00:00Z",
             "title": "Consumer Prices Index including owner occupiers' housing costs (CPIH)",
             "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a...",
             "description": "The Consumer Prices Index...",

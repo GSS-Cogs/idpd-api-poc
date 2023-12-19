@@ -13,7 +13,9 @@ def edition_test_data():
         "src/store/metadata/stub/content/editions/cpih_2022-01.json"
     )
     with open(file_path, "r") as json_file:
-        return json.load(json_file)["editions"][0]
+        edition = json.load(json_file)["editions"][0]
+    edition["@context"] = "https://staging.idpd.uk/ns#"
+    return edition
 
 
 @pytest.fixture

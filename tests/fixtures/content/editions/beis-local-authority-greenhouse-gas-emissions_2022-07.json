@@ -1,107 +1,112 @@
 {
-    "@context": "https://staging.idpd.uk/ns#",
-    "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions",
-    "@type": "hydra:Collection",
-    "title": "Local authority greenhouse gas emissions",
-    "editions": [
+  "@context": "https://staging.idpd.uk/ns#",
+  "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions",
+  "@type": "hydra:Collection",
+  "title": "Local authority greenhouse gas emissions",
+  "editions": [
+    {
+      "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions/2022-07",
+      "@type": "dcat:Dataset",
+      "in_series": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions",
+      "identifier": "2022-07",
+      "title": "Local authority greenhouse gas emissions",
+      "summary": "UK local authority estimates of greenhouse gas emissions",
+      "description": "These statistics provide a breakdown of greenhouse gas emissions across the UK, using...",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "office-for-national-statistics",
+      "contact_point": {
+        "name": "UK local authority and regional estimates of greenhouse gas emissions",
+        "email": "mailto:GreenhouseGas.Statistics@energysecurity.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/emissions"
+      ],
+      "frequency": "monthly",
+      "keywords": [
+        "emissions",
+        "greenhouse-gas",
+        "carbon-dioxide",
+        "local-authority",
+        "country"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "issued": "2023-06-29T13:30:00Z",
+      "modified": "2023-06-29T16:20:00Z",
+      "spatial_resolution": [
+        "E01",
+        "E92"
+      ],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": [
+        "P1M",
+        "P3M"
+      ],
+      "temporal_coverage": {
+        "start": "2005-01-01T00:00:00Z",
+        "end": "2022-07-01T00:00:00Z"
+      },
+      "versions_url": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions/2022-07/versions",
+      "versions": [
         {
-            "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions/2022-07",
-            "@type": "dcat:Dataset",
-            "in_series": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions",
-            "identifier": "2022-07",
-            "title": "Local authority greenhouse gas emissions",
-            "summary": "UK local authority estimates of greenhouse gas emissions",
-            "description": "These statistics provide a breakdown of greenhouse gas emissions across the UK, using...",
-            "publisher": "https://staging.idpd.uk/office-for-national-statistics",
-            "creator": "office-for-national-statistics",
-            "contact_point": {
-              "name": "UK local authority and regional estimates of greenhouse gas emissions",
-              "email": "mailto:GreenhouseGas.Statistics@energysecurity.gov.uk"
-            },
-            "topics": [
-              "https://staging.idpd.uk/topics/emissions"
-            ],
-            "frequency": "monthly",
-            "keywords": [
-              "emissions", 
-              "greenhouse-gas", 
-              "carbon-dioxide", 
-              "local-authority", 
-              "country"
-            ],
-            "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-            "issued": "2023-06-29T13:30:00Z",
-            "modified": "2023-06-29T16:20:00Z",
-            "spatial_resolution": ["E01", "E92"],
-            "spatial_coverage": "E92000001",
-            "temporal_resolution": ["P1M", "P3M"],
-            "temporal_coverage": {
-              "start": "2005-01-01T00:00:00Z",
-              "end": "2022-07-01T00:00:00Z"
-            },
-            "versions_url": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions/2022-07/versions",
-            "versions": [
-              {
-                "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions/2022-07/versions/1",
-                "issued": "2023-06-29T00:00:00",
-                "modified": "2023-06-29T00:00:00"
-              }
-            ],
-            "next_release": "2023-07-06T09:30:00Z",
-            "table_schema": {
-              "columns": [
-                  {
-                    "name": "year",
-                    "datatype": "xsd:datetime",
-                    "titles": "Year",
-                    "description": "The year associated with the observation."
-                  },
-                  {
-                    "name": "country",
-                    "datatype": "xsd:decimal",
-                    "titles": "Country",
-                    "description": "The country associated with the observation."
-                  },
-                  {
-                    "name": "LA",
-                    "datatype": "xsd:decimal",
-                    "titles": "Local Authority",
-                    "description": "The local authority associated with the observation."
-                  },
-                  {
-                    "name": "sub sector",
-                    "datatype": "xsd:decimal",
-                    "titles": "Sub Sector",
-                    "description": "The sub sector associated with the observation."
-                  },
-                  {
-                    "name": "GHG",
-                    "datatype": "xsd:decimal",
-                    "titles": "Greenhouse Gas",
-                    "description": "The greenhouse gas associated with the observation."
-                  },
-                  {
-                    "name": "measure",
-                    "datatype": "xsd:decimal",
-                    "titles": "Measure",
-                    "description": "The measure associated with the observation."
-                  },
-                  {
-                  "name": "unit",
-                  "datatype": "xsd:decimal",
-                  "titles": "Unit",
-                  "description": "The unit associated with the observation."
-                  },
-                  {
-                    "name": "value",
-                    "datatype": "xsd:decimal",
-                    "titles": "Value",
-                    "description": "The value for the given year."
-                  }
-              ]
-          }
+          "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions/2022-07/versions/1",
+          "issued": "2023-06-29T00:00:00Z"
         }
-    ],
-    "count": 1,
-    "offset": 0
+      ],
+      "next_release": "2023-07-06T09:30:00Z",
+      "table_schema": {
+        "columns": [
+          {
+            "name": "year",
+            "datatype": "xsd:datetime",
+            "titles": "Year",
+            "description": "The year associated with the observation."
+          },
+          {
+            "name": "country",
+            "datatype": "xsd:decimal",
+            "titles": "Country",
+            "description": "The country associated with the observation."
+          },
+          {
+            "name": "LA",
+            "datatype": "xsd:decimal",
+            "titles": "Local Authority",
+            "description": "The local authority associated with the observation."
+          },
+          {
+            "name": "sub sector",
+            "datatype": "xsd:decimal",
+            "titles": "Sub Sector",
+            "description": "The sub sector associated with the observation."
+          },
+          {
+            "name": "GHG",
+            "datatype": "xsd:decimal",
+            "titles": "Greenhouse Gas",
+            "description": "The greenhouse gas associated with the observation."
+          },
+          {
+            "name": "measure",
+            "datatype": "xsd:decimal",
+            "titles": "Measure",
+            "description": "The measure associated with the observation."
+          },
+          {
+            "name": "unit",
+            "datatype": "xsd:decimal",
+            "titles": "Unit",
+            "description": "The unit associated with the observation."
+          },
+          {
+            "name": "value",
+            "datatype": "xsd:decimal",
+            "titles": "Value",
+            "description": "The value for the given year."
+          }
+        ]
+      }
+    }
+  ],
+  "count": 1,
+  "offset": 0
 }

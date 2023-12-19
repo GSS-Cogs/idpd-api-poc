@@ -4,6 +4,7 @@
     "@type": "hydra:Collection",
     "publishers": [
         {
+            "@context": "https://staging.idpd.uk/ns#",
             "@id": "https://staging.idpd.uk/publishers/office-for-national-statistics",
             "@type": "dcat:publisher",
             "title": "Office for National Statistics",
