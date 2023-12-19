@@ -100,19 +100,12 @@ def populate(jsonld_location=None, oxigraph_url=None, write_to_db=True):
     # Datasets resources
     # ------------------
 
-<<<<<<< HEAD
     # Load from disk
     # datasets_source_path = Path(
     #     Path(jsonld_location).absolute() / "datasets.json"
     # )
     
     # Load json file from disk
-=======
-    # Load json ld from disk
-    datasets_source_path = Path(
-        Path(jsonld_location).absolute() / "datasets.json"
-    )
->>>>>>> origin/168-Add-test-fixtures
     with open(datasets_source_path) as f:
         datasets_source_dict = json.load(f)
 

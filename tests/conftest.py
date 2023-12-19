@@ -44,11 +44,7 @@ def setup_before_all_tests():
     time.sleep(10)
 
     # Populate data in oxigraph
-<<<<<<< HEAD
     data.populate(oxigraph_url="http://localhost:7879", jsonld_location = "tests/fixtures/content")
-=======
-    data.populate(oxigraph_url="http://localhost:7878", jsonld_location = "tests/fixtures/content")
->>>>>>> origin/168-Add-test-fixtures
     # Yield control to the tests
     yield
 
