@@ -71,7 +71,7 @@ def validate_and_parse_json(g, schema, resource_dict, resource_type):
 
 def populate(jsonld_location=None, oxigraph_url=None, write_to_db=True):
     this_dir = Path(__file__).parent
-    metadata_stub_content_path = Path(json).absolute()
+    metadata_stub_content_path = Path("src/store/metadata/stub/content").absolute()
 
     # Clear up any previous
     out = Path(this_dir / "out")
@@ -99,7 +99,6 @@ def populate(jsonld_location=None, oxigraph_url=None, write_to_db=True):
     # ------------------
     # Datasets resources
     # ------------------
-
     
     # Load json file from disk
     with open(datasets_source_path) as f:
