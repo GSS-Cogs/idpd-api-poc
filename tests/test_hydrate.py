@@ -1,6 +1,5 @@
 import re
 import json
-import pathlib
 import pytest
 
 from rdflib import Graph, URIRef
@@ -9,32 +8,6 @@ from pyld import jsonld
 
 from src.store.metadata import constants
 from src.store.metadata.oxigraph.store import OxigraphMetadataStore, _get_single_graph_for_field
-
-# from tests.fixtures.datasets import dataset_test_data
-
-# ENDPOINT = "/datasets/some-id"
-
-# def test_hydrate_graph_from_subgraphs(dataset_test_data):
-#     mock_metadata_store = MagicMock()
-#     mock_metadata_store.hydrate_graph_from_subgraphs = MagicMock(return_value=dataset_test_data)
-#     app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
-
-#     # Create a TestClient for your FastAPI app
-#     client = TestClient(app)
-#     response = client.get(ENDPOINT, headers={"Accept": JSONLD})
-
-#     # Assertions
-#     assert response.status_code == status.HTTP_200_OK
-#     mock_metadata_store.hydrate_graph_from_subgraphs.assert_called_once()
-
-
-# file_path = pathlib.Path("src/store/metadata/stub/content/datasets.json")
-# with open(file_path, "r") as json_file:
-#     dataset = json.load(json_file)["datasets"][0]
-# dataset["@context"] = "https://staging.idpd.uk/ns#"
-# test_graph_dict = dataset
-
-# A different attempt using oxigraph implementation
 
 def _populate_partial_graph_for_test():
     """
@@ -105,7 +78,7 @@ def test_hydrate_graph_from_subgraphs():
     assert hydrated_graph
     assert hydrated_graph["temporal_coverage"]["dcat:startDate"]["@type"] == "xsd:dateTime"
     assert hydrated_graph["temporal_coverage"]["dcat:startDate"]["@value"] == "2005-01-01T00:00:00+00:00"
-    
+
     assert hydrated_graph["temporal_coverage"]["dcat:endDate"]["@type"] == "xsd:dateTime"
     assert hydrated_graph["temporal_coverage"]["dcat:endDate"]["@value"] == "2019-03-01T00:00:00+00:00"
     
