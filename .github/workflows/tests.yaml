@@ -20,5 +20,8 @@ jobs:
       - name: Install test dependencies
         run: pipenv sync --dev
 
+      - name: Validate source data
+        run: pipenv run python -c "from data import populate;populate(write_to_db=False)"
+
       - name: Run Pytest
         run: pipenv run pytest --cov-report term-missing --cov=src --cov-config=./tests/coverage.rc ./tests/
