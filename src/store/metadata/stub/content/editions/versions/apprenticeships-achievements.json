@@ -1,0 +1,88 @@
+{
+    "@context": "https://staging.idpd.uk/#ns",
+    "@id": "https://staging.idpd.uk/datasets/apprenticeships-achievements/editions/2023-05/versions",
+    "@type": "hydra:Collection",
+    "title": "Apprenticeships achievements",
+    "versions": [
+        {
+            "@type": [
+                "dcat:Distribution",
+                "csvw:Table"
+            ],
+            "@id": "https://staging.idpd.uk/datasets/apprenticeships-achievements/editions/2023-05/versions/1",
+            "identifier": "1",
+            "issued": "2023-05-17T12:25:28Z",
+            "title": "Apprenticeships achievements",
+            "summary": "Apprenticeships achieved by adults aged 16+ based on home address, rate per 100,000 population, England, academic years 2017/18 to 2022/23.",
+            "description": "This dataset shows apprenticeships achieved by adults aged 16+ based on home address, rate per 100,000 population, in England, for full academic years 2017/18 to 2022/23.",
+            "download_url": "https://staging.idpd.uk/datasets/apprenticeships-achievements/editions/2023-05/versions/1.csv",
+            "media_type": "text/csv",
+            "table_schema": {
+                "columns": [
+                    {
+                      "name": "period",
+                      "datatype": "datetime",
+                      "titles": "Period",
+                      "description": "The time period associated with the observation."
+                    },
+                    {
+                      "name": "areacd",
+                      "datatype": "string",
+                      "titles": "ONS Geography Code",
+                      "description": "The statistical geography of the observations being measured."
+                    },
+                    {
+                      "name": "areanm",
+                      "datatype": "string",
+                      "titles": "Area Name",
+                      "description": "The area name associated with the statistical geography."
+                    },
+                    {
+                      "name": "geography",
+                      "datatype": "string",
+                      "titles": "Geography Type",
+                      "description": "The geography type of the area."
+                    },
+                    {
+                      "name": "observation",
+                      "datatype": "decimal",
+                      "titles": "Observation",
+                      "description": "Observation values of apprenticeship achievements."
+                    },
+                    {
+                      "name": "measure",
+                      "datatype": "string",
+                      "titles": "Number of apprenticeship achievements",
+                      "description": "Measure type asscoiated with the observation values."
+                    },
+                    {
+                      "name": "unit",
+                      "datatype": "string",
+                      "titles": "Millions of tonnes of oil equivalent",
+                      "description": "Unit of measure of energy consumption."
+                    },
+                    {
+                      "name": "lower_confidence_interval_95",
+                      "datatype": "decimal",
+                      "titles": "Lower Confidence Interval (95%)",
+                      "description": "Observations Attribute."
+                    },
+                    {
+                      "name": "upper_confidence_interval_95",
+                      "datatype": "decimal",
+                      "titles": "Upper Confidence Interval (95%)",
+                      "description": "Observations Attribute."
+                    },
+                    {
+                      "name": "observation_status",
+                      "datatype": "string",
+                      "titles": "Observation Status",
+                      "description": "Observations Attribute."
+                    }
+                ]
+            }
+        }
+    ],
+    "count": 1,
+    "offset": 0
+}
