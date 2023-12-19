@@ -6,7 +6,7 @@ from fastapi.testclient import TestClient
 import pytest
 
 from constants import JSONLD
-from tests.fixtures.topics import topic_test_data
+from tests.fixtures.topics_oxigraph import topic_test_data
 from main import app, StubMetadataStore
 
 # Devnotes:

@@ -9,7 +9,7 @@ from fastapi.exceptions import ResponseValidationError
 from src.store.metadata.stub.store import StubMetadataStore
 
 from constants import JSONLD
-from tests.fixtures.publishers import publisher_test_data
+from tests.fixtures.publishers_oxigraph import publisher_test_data
 from main import app, StubMetadataStore
 
 # Devnotes:

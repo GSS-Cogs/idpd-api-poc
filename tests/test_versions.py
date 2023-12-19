@@ -7,7 +7,7 @@ import pytest
 
 from constants import JSONLD
 from main import app, StubMetadataStore
-from tests.fixtures.versions import versions_test_data
+from tests.fixtures.versions_oxigraph import versions_test_data
 
 # Devnotes:
 
