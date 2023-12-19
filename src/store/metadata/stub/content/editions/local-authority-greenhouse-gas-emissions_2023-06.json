@@ -45,7 +45,7 @@
         "start": "2005-01-01T00:00:00Z",
         "end": "2022-07-01T00:00:00Z"
       },
-      "versions_url": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions/editions/2023-06/versions",
+      "versions_url": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions/editions/2023-06/versions/1",
       "versions": [
         {
           "@id": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions/editions/2023-06/versions/1",

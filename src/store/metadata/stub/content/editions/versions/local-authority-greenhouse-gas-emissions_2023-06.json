@@ -1,6 +1,6 @@
 {
     "@context": "https://staging.idpd.uk/ns#",
-    "@id": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions/editions/2023-06/versions",
+    "@id": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions/editions/2023-06/versions/1",
     "@type": "hydra:Collection",
     "title": "Local authority greenhouse gas emissions",
     "versions": [
