@@ -11,7 +11,9 @@ def publisher_test_data():
     """
     file_path = pathlib.Path("src/store/metadata/stub/content/publishers.json")
     with open(file_path, "r") as json_file:
-        return json.load(json_file)["publishers"][0]
+        publisher = json.load(json_file)["publishers"][0]
+    publisher["@context"] = "https://staging.idpd.uk/ns#"
+    return publisher
 
 
 @pytest.fixture

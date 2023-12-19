@@ -76,7 +76,8 @@
         "email": "mailto:labour.market@ons.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/labour-market-and-welfare"],
+        "https://staging.idpd.uk/topics/labour-market-and-welfare"
+      ],
       "frequency": "annual",
       "keywords": [
         "subnational",
@@ -121,7 +122,8 @@
         "email": "mailto:regionalaccounts@ons.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/economy"],
+        "https://staging.idpd.uk/topics/economy"
+      ],
       "frequency": "annual",
       "keywords": [
         "money",
@@ -212,7 +214,8 @@
       },
       "topics": [
         "https://staging.idpd.uk/topics/communication",
-        "https://staging.idpd.uk/topics/it-and-internet-industry"],
+        "https://staging.idpd.uk/topics/it-and-internet-industry"
+      ],
       "frequency": "monthly",
       "keywords": [
         "broadband-mobile-coverage",
