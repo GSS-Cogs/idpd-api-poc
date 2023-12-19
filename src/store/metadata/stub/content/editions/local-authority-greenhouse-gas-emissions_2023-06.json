@@ -30,8 +30,8 @@
         "country"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-      "issued": "2023-06-29T13:30:00Z",
-      "modified": "2023-06-29T16:20:00Z",
+      "issued": "2023-06-29T00:00:00Z",
+      "modified": "2023-10-31T00:00:00Z",
       "spatial_resolution": [
         "E01",
         "E92"
@@ -52,7 +52,7 @@
           "issued": "2023-06-29T00:00:00Z"
         }
       ],
-      "next_release": "2023-07-06T09:30:00Z",
+      "next_release": "2024-06-06T09:30:00Z",
       "table_schema": {
         "columns": [
           {
