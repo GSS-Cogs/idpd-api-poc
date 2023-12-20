@@ -1,106 +1,153 @@
 {
-    "@context": "https://staging.idpd.uk/ns#",
-    "@id": "https://staging.idpd.uk/topics",
-    "@type": "hydra:Collection",
-    "topics": [
-        {
-            "@id": "https://staging.idpd.uk/topics/economy",
-            "@type": "dcat:theme",
-            "identifier": "economy",
-            "title": "Economy",
-            "description": "The UK economy and the economies of Devolved Administrations and UK regions.",
-            "sub_topics": [
-                "https://staging.idpd.uk/topics/prices"
-            ],
-            "parent_topics": []
-        },
-        {
-            "@id": "https://staging.idpd.uk/topics/prices",
-            "@type": "dcat:theme",
-            "identifier": "prices",
-            "title": "Prices",
-            "description": "Changes in the prices of goods bought and sold by UK manufacturers.",
-            "sub_topics": [],
-            "parent_topics": [
-                "https://staging.idpd.uk/topics/economy"
-            ]
-        },
-        {
-            "@id": "https://staging.idpd.uk/topics/labour-market-and-welfare",
-            "@type": "dcat:theme",
-            "identifier": "labour-market-and-welfare",
-            "title": "Labour Market and Welfare",
-            "description": "Includes statistics measuring different aspects of work and jobs and covers people's employment, working patterns, and the types of work they do.",
-            "sub_topics": [],
-            "parent_topics": []
-        },
-        {
-            "@id": "https://staging.idpd.uk/topics/emissions",
-            "@type": "dcat:theme",
-            "identifier": "emissions",
-            "title": "Emissions",
-            "description": "An amount of a substance that is produced and sent out into the air that is harmful to the environment, especially carbon dioxide",
-            "sub_topics": [
-                "https://staging.idpd.uk/topics/greenhouse-gas"
-            ],
-            "parent_topics": []
-        },
-        {
-            "@id": "https://staging.idpd.uk/topics/greenhouse-gas",
-            "@type": "dcat:theme",
-            "identifier": "greenhouse-gas",
-            "title": "Greenhouse Gas",
-            "description": "Greenhouse gas (GHG) emissions from human activities intensify the greenhouse effect.",
-            "sub_topics": [],
-            "parent_topics": [
-                "https://staging.idpd.uk/topics/emissions"
-            ]
-        },
-        {
-            "@id": "https://staging.idpd.uk/topics/communication",
-            "@type": "dcat:theme",
-            "identifier": "communication",
-            "title": "Communication",
-            "description": "The imparting or exchanging of information by speaking, writing, or using some other medium.",
-            "sub_topics": [],
-            "parent_topics": [
-                "https://staging.idpd.uk/topics/it-and-internet-industry"
-            ]
-        },
-        {
-            "@id": "https://staging.idpd.uk/topics/it-and-internet-industry",
-            "@type": "dcat:theme",
-            "identifier": "it-and-internet-industry",
-            "title": "IT and Internet Industry",
-            "description": "Internet sales by businesses in the UK (total value and as a percentage of all retail sales) and the percentage of businesses that have a website and broadband connection. These figures indicate the importance of the internet to UK businesses.",
-            "sub_topics": [
-                "https://staging.idpd.uk/topics/communication"
-            ],
-            "parent_topics": []
-        },
-        {
-            "@id": "https://staging.idpd.uk/topics/climate-change",
-            "@type": "dcat:theme",
-            "identifier": "climate-change",
-            "title": "Climate Change",
-            "description": "Climate change refers to long-term shifts in temperatures and weather patterns. Such shifts can be natural, due to changes in the sun’s activity or large volcanic eruptions. But since the 1800s, human activities have been the main driver of climate change, primarily due to the burning of fossil fuels like coal, oil and gas.",
-            "sub_topics": [
-                "https://staging.idpd.uk/topics/carbon-emissions"
-            ],
-            "parent_topics": []
-        },
-        {
-            "@id": "https://staging.idpd.uk/topics/carbon-emissions",
-            "@type": "dcat:theme",
-            "identifier": "carbon-emissions",
-            "title": "Carbon Emissions",
-            "description": "Carbon dioxide emissions or CO2 emissions are emissions stemming from the burning of fossil fuels and the manufacture of cement; they include carbon dioxide produced during consumption of solid, liquid, and gas fuels as well as gas flaring.",
-            "sub_topics": [],
-            "parent_topics": [
-                "https://staging.idpd.uk/topics/climate-change"
-            ]
-        }
-    ],
-    "count": 9,
-    "offset": 0
+  "@context": "https://staging.idpd.uk/ns#",
+  "@id": "https://staging.idpd.uk/topics",
+  "@type": "hydra:Collection",
+  "topics": [
+    {
+      "@id": "https://staging.idpd.uk/topics/agriculture-energy-and-environment",
+      "@type": "dcat:theme",
+      "identifier": "agriculture-energy-and-environment",
+      "title": "Agriculture, energy and environment",
+      "description": "Food and farming, natural environment, flooding and water, and environmental quality.",
+      "sub_topics": ["https://staging.idpd.uk/topics/climate-change"],
+      "parent_topics": []
+    },
+    {
+      "@id": "https://staging.idpd.uk/topics/climate-change",
+      "@type": "dcat:theme",
+      "identifier": "climate-change",
+      "title": "Climate Change",
+      "description": "Long term shifts in temperature and weather patterns of the environment.",
+      "sub_topics": [
+        "https://staging.idpd.uk/topics/carbon-emissions",
+        "https://staging.idpd.uk/topics/greenhouse-gas-emissions"
+      ],
+      "parent_topics": [
+        "https://staging.idpd.uk/topics/agriculture-energy-and-environment"
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/topics/carbon-emissions",
+      "@type": "dcat:theme",
+      "identifier": "carbon-emissions",
+      "title": "Carbon Emissions",
+      "description": "Carbon dioxide emissions or CO2 emissions are emissions stemming from the burning of fossil fuels and the manufacture of cement; they include carbon dioxide produced during consumption of solid, liquid, and gas fuels as well as gas flaring.",
+      "sub_topics": [],
+      "parent_topics": ["https://staging.idpd.uk/topics/climate-change"]
+    },
+    {
+      "@id": "https://staging.idpd.uk/topics/greenhouse-gas-emissions",
+      "@type": "dcat:theme",
+      "identifier": "greenhouse-gas-emissions",
+      "title": "Greenhouse Gas Emissions",
+      "description": "Greenhouse gas (GHG) emissions from human and industrial activities.",
+      "sub_topics": [],
+      "parent_topics": ["https://staging.idpd.uk/topics/climate-change"]
+    },
+    {
+      "@id": "https://staging.idpd.uk/topics/business-trade-and-international-development",
+      "@type": "dcat:theme",
+      "identifier": "business-trade-and-international-development",
+      "title": "Business, trade and international development",
+      "description": "Company structure, closures or mergers; and turnover, international and UK trade, and research and development.",
+      "sub_topics": ["https://staging.idpd.uk/topics/it-and-internet-industry"],
+      "parent_topics": []
+    },
+    {
+      "@id": "https://staging.idpd.uk/topics/it-and-internet-industry",
+      "@type": "dcat:theme",
+      "identifier": "it-and-internet-industry",
+      "title": "IT and Internet Industry",
+      "description": "Internet sales by businesses in the UK (total value and as a percentage of all retail sales) and the percentage of businesses that have a website and broadband connection. These figures indicate the importance of the internet to UK businesses.",
+      "sub_topics": ["https://staging.idpd.uk/topics/communication"],
+      "parent_topics": [
+        "https://staging.idpd.uk/topics/business-trade-and-international-development"
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/topics/communication",
+      "@type": "dcat:theme",
+      "identifier": "communication",
+      "title": "Communication",
+      "description": "The imparting or exchanging of information by speaking, writing, or using some other medium.",
+      "sub_topics": [],
+      "parent_topics": [
+        "https://staging.idpd.uk/topics/it-and-internet-industry"
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/topics/children-education-and-skills",
+      "@type": "dcat:theme",
+      "identifier": "children-education-and-skills",
+      "title": "Children, education and skills",
+      "description": "Teachers and lecturers, learners, and those not in education, employment or training.",
+      "sub_topics": [],
+      "parent_topics": []
+    },
+    {
+      "@id": "https://staging.idpd.uk/topics/crime-and-security",
+      "@type": "dcat:theme",
+      "identifier": "crime-and-security",
+      "title": "Crime and security",
+      "description": "Crime; justice systems (family, civil and criminal); and policing, people, organisations and money.",
+      "sub_topics": [],
+      "parent_topics": []
+    },
+    {
+      "@id": "https://staging.idpd.uk/topics/economy",
+      "@type": "dcat:theme",
+      "identifier": "economy",
+      "title": "Economy",
+      "description": "The UK economy and the economies of Devolved Administrations and UK regions.",
+      "sub_topics": ["https://staging.idpd.uk/topics/prices"],
+      "parent_topics": []
+    },
+    {
+      "@id": "https://staging.idpd.uk/topics/prices",
+      "@type": "dcat:theme",
+      "identifier": "prices",
+      "title": "Prices",
+      "description": "Changes in the prices of goods bought and sold by UK manufacturers.",
+      "sub_topics": [],
+      "parent_topics": ["https://staging.idpd.uk/topics/economy"]
+    },
+    {
+      "@id": "https://staging.idpd.uk/topics/health-and-social-care",
+      "@type": "dcat:theme",
+      "identifier": "health-and-social-care",
+      "title": "Health and social care",
+      "description": "Health care provision, social care provision, health status and disease, disability, cause of death, and health and safety at work.",
+      "sub_topics": [],
+      "parent_topics": []
+    },
+    {
+      "@id": "https://staging.idpd.uk/topics/housing-planning-and-local-services",
+      "@type": "dcat:theme",
+      "identifier": "housing-planning-and-local-services",
+      "title": "Housing, planning and local services",
+      "description": "Current housing, housing estimates and projections, homelessness, housing requirements and industrial and residential planning .",
+      "sub_topics": [],
+      "parent_topics": []
+    },
+    {
+      "@id": "https://staging.idpd.uk/topics/labour-market-and-welfare",
+      "@type": "dcat:theme",
+      "identifier": "labour-market-and-welfare",
+      "title": "Labour Market and Welfare",
+      "description": "Includes statistics measuring different aspects of work and jobs and covers people's employment, working patterns, and the types of work they do.",
+      "sub_topics": [],
+      "parent_topics": []
+    },
+    {
+      "@id": "https://staging.idpd.uk/topics/travel-transport-and-tourism",
+      "@type": "dcat:theme",
+      "identifier": "travel-transport-and-tourism",
+      "title": "Travel, transport and tourism",
+      "description": "Includes all modes of travel and transport, transport infrastructure and tourism. Also includes travel patterns and distances travelled, and international visits to the UK.",
+      "sub_topics": [],
+      "parent_topics": []
+    }
+  ],
+  "count": 15,
+  "offset": 0
 }
