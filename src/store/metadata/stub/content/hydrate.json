@@ -1,0 +1,243 @@
+{
+  "@context": {
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "ons": "https://data.ons.gov.uk/ns#",
+    "vcard": "http://www.w3.org/2006/vcard/ns#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+    "csvw": "https://www.w3.org/ns/csvw#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "creator": {
+      "@id": "dcterms:creator",
+      "@context": {
+        "@base": "https://www.gov.uk/government/organisations/"
+      }
+    },
+    "contact_point": {
+      "@id": "dcat:contactPoint",
+      "@context": {
+        "email": {
+          "@id": "vcard:hasEmail"
+        },
+        "name": {
+          "@id": "vcard:fn",
+          "@language": "en"
+        }
+      }
+    },
+    "description": {
+      "@id": "dcterms:description",
+      "@language": "en"
+    },
+    "distribution": {
+      "@id": "dcat:distribution"
+    },
+    "frequency": {
+      "@id": "dcterms:accrualPeriodicity",
+      "@context": {
+        "@base": "http://purl.org/cld/freq/"
+      }
+    },
+    "identifier": {
+      "@id": "dcterms:identifier"
+    },
+    "in_series": {
+      "@id": "dcat:inSeries"
+    },
+    "issued": {
+      "@id": "dcterms:issued",
+      "@type": "xsd:dateTime"
+    },
+    "modified": {
+      "@id": "dcterms:modified",
+      "@type": "xsd:dateTime"
+    },
+    "keywords": {
+      "@id": "dcat:keyword",
+      "@language": "en"
+    },
+    "landing_page": {
+      "@id": "dcat:landingPage"
+    },
+    "licence": {
+      "@id": "dcterms:license"
+    },
+    "next_release": {
+      "@id": "ons:nextRelease",
+      "@type": "xsd:dateTime"
+    },
+    "publisher": {
+      "@id": "dcterms:publisher"
+    },
+    "spatial_coverage": {
+      "@id": "dcterms:spatial",
+      "@context": {
+        "@base": "http://statistics.data.gov.uk/id/statistical-geography/"
+      }
+    },
+    "spatial_resolution": {
+      "@type": "@id",
+      "@id": "ons:spatialResolution",
+      "@context": {
+        "@base": "http://statistics.data.gov.uk/id/statistical-entity/"
+      }
+    },
+    "summary": {
+      "@id": "dcterms:abstract",
+      "@language": "en"
+    },
+    "temporal_coverage": {
+      "@id": "dcterms:temporal",
+      "@context": {
+        "end": {
+          "@id": "dcat:endDate",
+          "@type": "xsd:dateTime"
+        },
+        "start": {
+          "@id": "dcat:startDate",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+    "temporal_resolution": {
+      "@id": "dcterms:temporalResolution",
+      "@type": "xsd:duration"
+    },
+    "theme": {
+      "@id": "dcat:theme"
+    },
+    "title": {
+      "@id": "dcterms:title",
+      "@language": "en"
+    },
+    "offset": "hydra:offset",
+    "count": "hydra:totalitems",
+    "datasets": {
+      "@id": "dcat:DatasetSeries",
+      "@type": "dcat:DatasetSeries",
+      "@container": "@set"
+    },
+    "editions": {
+      "@id": "hydra:member"
+    },
+    "editions_url": {
+      "@id": "hydra:Collection"
+    },
+    "versions": {
+      "@id": "hydra:member",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "versions_url": {
+      "@id": "hydra:Collection",
+      "@type": "@id"
+    },
+    "columns": {
+      "@id": "csvw:column",
+      "@container": "@set"
+    },
+    "topics": {
+      "@id": "dcat:theme",
+      "@container": "@set"
+    },
+    "publishers": {
+      "@id": "dcat:publisher",
+      "@type": "dcat:publisher",
+      "@container": "@set"
+    },
+    "sub_topics": {
+      "@id": "skos:narrower",
+      "@container": "@set"
+    },
+    "parent_topics": {
+      "@id": "skos:broader",
+      "@container": "@set"
+    },
+    "download_url": "dcat:downloadUrl",
+    "table_schema": "csvw:schema",
+    "datatype": "csvw:datatype",
+    "name": "csvw:name",
+    "titles": {
+      "@id": "csvw:titles",
+      "@language": "en"
+    },
+    "media_type": {
+      "@id": "dcterms:MediaType"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "bnode:bne3d2a7d97fb649829581b2112488b546b10",
+      "vcard:fn": {
+        "@language": "en",
+        "@value": "Consumer Price Inflation Enquiries"
+      },
+      "vcard:hasEmail": "mailto:cpih@ons.gov.uk"
+    },
+    {
+      "@id": "bnode:bne3d2a7d97fb649829581b2112488b546b9",
+      "dcat:endDate": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-03-01T00:00:00+00:00"
+      },
+      "dcat:startDate": {
+        "@type": "xsd:dateTime",
+        "@value": "2005-01-01T00:00:00+00:00"
+      }
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/cpih",
+      "@type": "dcat:DatasetSeries",
+      "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
+      "frequency": "monthly",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
+      "identifier": "cpih",
+      "issued": "2017-01-01T00:00:00",
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "modified": "2017-01-01T00:00:00",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "spatial_coverage": "E92000001",
+      "temporal_coverage": {
+        "@id": "bnode:bne3d2a7d97fb649829581b2112488b546b9"
+      },
+      "temporal_resolution": [
+        "P1Y",
+        "P3M",
+        "P1M"
+      ],
+      "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
+      "contact_point": {
+        "@id": "bnode:bne3d2a7d97fb649829581b2112488b546b10"
+      },
+      "keywords": [
+        "consumer price inflation",
+        "cpih",
+        "consumer price index",
+        "cpi",
+        "inflation",
+        "consumer price index including owner occupiers' housing costs"
+      ],
+      "topics": [
+        "https://staging.idpd.uk/topics/economy",
+        "https://staging.idpd.uk/topics/prices"
+      ],
+      "editions_url": "https://staging.idpd.uk/datasets/cpih/editions",
+      "versions": [
+        "https://staging.idpd.uk/datasets/cpih/editions/2022-01"
+      ],
+      "next_release": "2019-04-19T09:30:00+00:00",
+      "spatial_resolution": [
+        "E92",
+        "E01"
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01",
+      "issued": "2017-02-21T09:30:00+00:00",
+      "modified": "2017-02-21T09:30:00+00:00"
+    }
+  ]
+}
