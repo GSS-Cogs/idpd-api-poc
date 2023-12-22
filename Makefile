@@ -18,7 +18,7 @@ populate: ## Populate an oxigraph DB (that/if/when) one is running on localhost:
 	pipenv run python3 ./data.py
 
 data: ## Create source ttl seed file as ./out/seed.ttl but dont load it
-	pipenv run python -c "from data import populate;populate(write_to_db=False)"
+	pipenv run python -c "from src.data import populate;populate(write_to_db=False)"
 
 start: ## Start the api
 	pipenv run uvicorn src.main:app --reload

@@ -7,7 +7,7 @@
     {
       "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11",
       "@type": "dcat:Dataset",
-      "in_series": "https://staging.idpd.uk/datasets/cpih",
+      "in_series": "https://staging.idpd.uk/datasets/a16mu",
       "identifier": "2023-11",
       "title": "Modelled unemployment rate aged 16 years and over",
       "summary": "Modelled unemployment rate for people aged 16 years and over, Great Britain, 07/2004-06/2005 to 07/2022-06/2023.",
