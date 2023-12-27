@@ -221,6 +221,7 @@ def populate(oxigraph_url=None, write_to_db=True):
         configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
         db = Dataset(store=SPARQLUpdateStore(*configuration, node_to_sparql=skolemise))
         db.parse(out_path)
+        print("Data upload complete.")
 
 
 def _assert_dataset_edition_in_summarised_editions(dataset: Dict, edition: Dict):
