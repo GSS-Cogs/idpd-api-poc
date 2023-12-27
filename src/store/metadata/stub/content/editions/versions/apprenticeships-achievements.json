@@ -18,68 +18,68 @@
             "download_url": "https://staging.idpd.uk/datasets/apprenticeships-achievements/editions/2023-05/versions/1.csv",
             "media_type": "text/csv",
             "table_schema": {
-                "columns": [
-                    {
-                      "name": "period",
-                      "datatype": "datetime",
-                      "titles": "Period",
-                      "description": "The time period associated with the observation."
-                    },
-                    {
-                      "name": "areacd",
-                      "datatype": "string",
-                      "titles": "ONS Geography Code",
-                      "description": "The statistical geography of the observations being measured."
-                    },
-                    {
-                      "name": "areanm",
-                      "datatype": "string",
-                      "titles": "Area Name",
-                      "description": "The area name associated with the statistical geography."
-                    },
-                    {
-                      "name": "geography",
-                      "datatype": "string",
-                      "titles": "Geography Type",
-                      "description": "The geography type of the area."
-                    },
-                    {
-                      "name": "observation",
-                      "datatype": "decimal",
-                      "titles": "Observation",
-                      "description": "Observation values of apprenticeship achievements."
-                    },
-                    {
-                      "name": "measure",
-                      "datatype": "string",
-                      "titles": "Number of apprenticeship achievements",
-                      "description": "Measure type asscoiated with the observation values."
-                    },
-                    {
-                      "name": "unit",
-                      "datatype": "string",
-                      "titles": "Millions of tonnes of oil equivalent",
-                      "description": "Unit of measure of energy consumption."
-                    },
-                    {
-                      "name": "lower_confidence_interval_95",
-                      "datatype": "decimal",
-                      "titles": "Lower Confidence Interval (95%)",
-                      "description": "Observations Attribute."
-                    },
-                    {
-                      "name": "upper_confidence_interval_95",
-                      "datatype": "decimal",
-                      "titles": "Upper Confidence Interval (95%)",
-                      "description": "Observations Attribute."
-                    },
-                    {
-                      "name": "observation_status",
-                      "datatype": "string",
-                      "titles": "Observation Status",
-                      "description": "Observations Attribute."
-                    }
-                ]
+              "columns": [
+                {
+                  "name": "period",
+                  "datatype": "datetime",
+                  "titles": "Gregorian Time Interval",
+                  "description": "The time period associated with the observation."
+                },
+                {
+                  "name": "areacd",
+                  "datatype": "string",
+                  "titles": "ONS Geography Code",
+                  "description": "The statistical geography of the observations being measured."
+                },
+                {
+                  "name": "areanm",
+                  "datatype": "string",
+                  "titles": "Area Name",
+                  "description": "The area name associated with the statistical geography."
+                },
+                {
+                  "name": "geography",
+                  "datatype": "string",
+                  "titles": "Geography Type",
+                  "description": "The geography type of the area."
+                },
+                {
+                  "name": "observation",
+                  "datatype": "decimal",
+                  "titles": "Number of apprenticeship achievements",
+                  "description": "Observation values of apprenticeship achievements."
+                },
+                {
+                  "name": "measure",
+                  "datatype": "string",
+                  "titles": "Measure type",
+                  "description": "Measure type asscoiated with the observation values."
+                },
+                {
+                  "name": "unit",
+                  "datatype": "string",
+                  "titles": "Unit",
+                  "description": "Unit of measure of observation values."
+                },
+                {
+                  "name": "lower_confidence_interval_95",
+                  "datatype": "decimal",
+                  "titles": "Lower Confidence Interval (95%)",
+                  "description": "Observations Attribute."
+                },
+                {
+                  "name": "upper_confidence_interval_95",
+                  "datatype": "decimal",
+                  "titles": "Upper Confidence Interval (95%)",
+                  "description": "Observations Attribute."
+                },
+                {
+                  "name": "observation_status",
+                  "datatype": "string",
+                  "titles": "Observation Status",
+                  "description": "Additional Context to the Observation if needed"
+                }
+              ]
             }
         }
     ],

@@ -1,6 +1,6 @@
 {
     "@context": "https://staging.idpd.uk/ns#",
-    "@id": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions/editions/2023-06/versions/1",
+    "@id": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions/editions/2023-06/versions",
     "@type": "hydra:Collection",
     "title": "Local authority greenhouse gas emissions",
     "versions": [
@@ -20,52 +20,52 @@
             "table_schema": {
                 "columns": [
                     {
-                        "name": "year",
-                        "datatype": "xsd:datetime",
-                        "titles": "Year",
-                        "description": "The year associated with the observation."
+                      "name": "year",
+                      "datatype": "datetime",
+                      "titles": "Year",
+                      "description": "The year associated with the observation."
                     },
                     {
-                        "name": "country",
-                        "datatype": "xsd:decimal",
-                        "titles": "Country",
-                        "description": "The country associated with the observation."
+                      "name": "country",
+                      "datatype": "decimal",
+                      "titles": "Country",
+                      "description": "The country associated with the observation."
                     },
                     {
-                        "name": "LA",
-                        "datatype": "xsd:decimal",
-                        "titles": "Local Authority",
-                        "description": "The local authority associated with the observation."
+                      "name": "local_authority",
+                      "datatype": "decimal",
+                      "titles": "Local Authority",
+                      "description": "The local authority associated with the observation."
                     },
                     {
-                        "name": "sub sector",
-                        "datatype": "xsd:decimal",
-                        "titles": "Sub Sector",
-                        "description": "The sub sector associated with the observation."
+                      "name": "sub_sector",
+                      "datatype": "decimal",
+                      "titles": "Sub Sector",
+                      "description": "The sub sector associated with the observation."
                     },
                     {
-                        "name": "GHG",
-                        "datatype": "xsd:decimal",
-                        "titles": "Greenhouse Gas",
-                        "description": "The greenhouse gas associated with the observation."
+                      "name": "greenhouse_gas",
+                      "datatype": "decimal",
+                      "titles": "Greenhouse Gas",
+                      "description": "The greenhouse gas associated with the observation."
                     },
                     {
-                        "name": "measure",
-                        "datatype": "xsd:decimal",
-                        "titles": "Measure",
-                        "description": "The measure associated with the observation."
+                      "name": "measure",
+                      "datatype": "decimal",
+                      "titles": "Measure type",
+                      "description": "The measure associated with the observation."
                     },
                     {
-                        "name": "unit",
-                        "datatype": "xsd:decimal",
-                        "titles": "Unit",
-                        "description": "The unit associated with the observation."
+                      "name": "unit",
+                      "datatype": "decimal",
+                      "titles": "Unit of measure",
+                      "description": "The unit associated with the observation."
                     },
                     {
-                        "name": "value",
-                        "datatype": "xsd:decimal",
-                        "titles": "Value",
-                        "description": "The value for the given year."
+                      "name": "value",
+                      "datatype": "decimal",
+                      "titles": "Value",
+                      "description": "The value for the given year."
                     }
                 ]
             }

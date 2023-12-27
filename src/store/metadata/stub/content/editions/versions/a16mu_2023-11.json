@@ -20,70 +20,70 @@
             "table_schema": {
                 "columns": [
                     {
-                        "name": "Period",
-                        "datatype": "string",
-                        "titles": "Period",
-                        "description": "The time period associated with the observation."
+                      "name": "period",
+                      "datatype": "string",
+                      "titles": "Gregorian Time Interval",
+                      "description": "The time period associated with the observation."
                     },
                     {
-                        "name": "AREACD",
-                        "datatype": "string",
-                        "titles": "Statistical Geography",
-                        "description": "The geography code associated with the observation."
+                      "name": "areacd",
+                      "datatype": "string",
+                      "titles": "ONS Geography Code",
+                      "description": "The geography code associated with the observation."
                     },
                     {
-                        "name": "AREANM",
-                        "datatype": "string",
-                        "titles": "Area Name",
-                        "description": "The name assiciated with The geography code "
+                      "name": "areanm",
+                      "datatype": "string",
+                      "titles": "Area Name",
+                      "description": "The name assiciated with the geography code "
                     },
                     {
-                        "name": "Geography",
-                        "datatype": "string",
-                        "titles": "Geography Type",
-                        "description": "The categorisation of the geography code"
+                      "name": "geography",
+                      "datatype": "string",
+                      "titles": "Geography Type",
+                      "description": "The categorisation of the geography code"
                     },
                     {
-                        "name": "Value",
-                        "datatype": "decimal",
-                        "titles": "Geographic area with 4G coverage by at least one provider",
-                        "description": "Observational Value"
+                      "name": "observation",
+                      "datatype": "decimal",
+                      "titles": "Unemployment Rate",
+                      "description": "Observational value"
                     },
                     {
-                        "name": "Count",
-                        "datatype": "integer",
-                        "titles": "Attribute relevant to the observation",
-                        "description": "Observational Attribute"
+                      "name": "count",
+                      "datatype": "integer",
+                      "titles": "Unemployment Count",
+                      "description": "Number of people unemployed"
                     },
                     {
-                        "name": "Measure",
-                        "datatype": "string",
-                        "titles": "Measure Type",
-                        "description": "Measure Type of the Observational Value"
+                      "name": "measure",
+                      "datatype": "string",
+                      "titles": "Measure Type",
+                      "description": "Measure Type of the Observational Value"
                     },
                     {
-                        "name": "Unit",
-                        "datatype": "string",
-                        "titles": "Unit",
-                        "description": "Unit Type of the Observational Value"
+                      "name": "unit",
+                      "datatype": "string",
+                      "titles": "Unit of Measure",
+                      "description": "Unit associated with the measure type"
                     },
                     {
-                        "name": "Lower Confidence Interval (95%)",
-                        "datatype": "decimal",
-                        "titles": "Lower Confidence Interval",
-                        "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Lower bound"
+                      "name": "lower_confidence_interval_95",
+                      "datatype": "decimal",
+                      "titles": "Lower Confidence Interval",
+                      "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Lower bound"
                     },
                     {
-                        "name": "Upper Confidence Interval (95%)",
-                        "datatype": "decimal",
-                        "titles": "Upper Confidence Interval",
-                        "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Upper bound"
+                      "name": "upper_confidence_interval_95",
+                      "datatype": "decimal",
+                      "titles": "Upper Confidence Interval",
+                      "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Upper bound"
                     },
                     {
-                        "name": "Observation Status",
-                        "datatype": "string",
-                        "titles": "Observation Status",
-                        "description": "Additional Context to the Observation if needed"
+                      "name": "observation_status",
+                      "datatype": "string",
+                      "titles": "Observation Status",
+                      "description": "Additional Context to the Observation if needed"
                     }
                 ]
             }
