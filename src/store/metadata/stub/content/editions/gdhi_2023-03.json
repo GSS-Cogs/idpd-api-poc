@@ -13,13 +13,13 @@
       "summary": "Estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, UK, 1997-2021.",
       "description": "This dataset shows an estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, in the UK, for 1997-2021.",
       "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-      "creator": "office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
       "contact_point": {
         "name": "Trevor Fenton",
         "email": "mailto:regionalaccounts@ons.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/economy"
+        "https://staging.idpd.uk/economy"
       ],
       "frequency": "annual",
       "keywords": [
@@ -59,61 +59,61 @@
       "table_schema": {
         "columns": [
           {
-            "name": "Period",
+            "name": "period",
             "datatype": "string",
             "titles": "Period",
             "description": "The time period associated with the observation."
           },
           {
-            "name": "AREANM",
+            "name": "areanm",
             "datatype": "string",
             "titles": "Area Name",
-            "description": "The name assiciated with The geography code "
+            "description": "The name assiciated with the geography code "
           },
           {
-            "name": "AREACD",
+            "name": "areacd",
             "datatype": "string",
             "titles": "Statistical Geography",
             "description": "The geography code associated with the observation."
           },
           {
-            "name": "Geography",
+            "name": "geography",
             "datatype": "string",
             "titles": "Geography Type",
             "description": "The categorisation of the geography code"
           },
           {
-            "name": "Value",
+            "name": "observation",
             "datatype": "decimal",
             "titles": "Geographic area with 4G coverage by at least one provider",
             "description": "Observational Value"
           },
           {
-            "name": "Measure",
+            "name": "measure",
             "datatype": "string",
             "titles": "Measure Type",
-            "description": "Measure Type of the Observational Value"
+            "description": "Measure type of the Observational Value"
           },
           {
-            "name": "Unit",
+            "name": "unit",
             "datatype": "string",
             "titles": "Unit",
-            "description": "Unit Type of the Observational Value"
+            "description": "Unit type of the Observational Value"
           },
           {
-            "name": "Lower Confidence Interval (95%)",
+            "name": "lower_confidence_interval_95",
             "datatype": "decimal",
             "titles": "Lower Confidence Interval",
             "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Lower bound"
           },
           {
-            "name": "Upper Confidence Interval (95%)",
+            "name": "upper_confidence_interval_95",
             "datatype": "decimal",
             "titles": "Upper Confidence Interval",
             "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Upper bound"
           },
           {
-            "name": "Observation Status",
+            "name": "observation_status",
             "datatype": "string",
             "titles": "Observation Status",
             "description": "Additional Context to the Observation if needed"

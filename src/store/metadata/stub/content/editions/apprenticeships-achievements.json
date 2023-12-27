@@ -13,21 +13,20 @@
         "summary": "Apprenticeships achieved by adults aged 16+ based on home address, rate per 100,000 population, England, academic years 2017/18 to 2022/23.",
         "description": "This dataset shows apprenticeships achieved by adults aged 16+ based on home address, rate per 100,000 population, in England, for full academic years 2017/18 to 2022/23.",
         "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-        "creator": "department-for-education",
+        "creator": "https://staging.idpd.uk/publishers/department-for-education",
         "contact_point": {
           "name": "Apprenticeships achievements",
           "email": "mailto:apprenticeships-achievements@ons.gov.uk"
         },
         "topics": [
-          "https://staging.idpd.uk/topics/children-education-and-skills"],
+          "https://staging.idpd.uk/children-education-and-skills"],
         "frequency": "annual",
         "keywords": [
           "apprenticeship",
-          "community-learning",
-          "education-and-training",
-          "subnational",
-          "county",
-          "local_authority"
+          "community",
+          "learning",
+          "education",
+          "training"
         ],
         "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
         "issued": "2023-05-17T12:25:28Z",
@@ -53,7 +52,7 @@
             {
               "name": "period",
               "datatype": "datetime",
-              "titles": "Period",
+              "titles": "Gregorian Time Interval",
               "description": "The time period associated with the observation."
             },
             {
@@ -77,20 +76,20 @@
             {
               "name": "observation",
               "datatype": "decimal",
-              "titles": "Observation",
+              "titles": "Number of apprenticeship achievements",
               "description": "Observation values of apprenticeship achievements."
             },
             {
               "name": "measure",
               "datatype": "string",
-              "titles": "Number of apprenticeship achievements",
+              "titles": "Measure type",
               "description": "Measure type asscoiated with the observation values."
             },
             {
               "name": "unit",
               "datatype": "string",
-              "titles": "Millions of tonnes of oil equivalent",
-              "description": "Unit of measure of energy consumption."
+              "titles": "Unit",
+              "description": "Unit of measure of observation values."
             },
             {
               "name": "lower_confidence_interval_95",
@@ -108,7 +107,7 @@
               "name": "observation_status",
               "datatype": "string",
               "titles": "Observation Status",
-              "description": "Observations Attribute."
+              "description": "Additional Context to the Observation if needed"
             }
           ]
         }

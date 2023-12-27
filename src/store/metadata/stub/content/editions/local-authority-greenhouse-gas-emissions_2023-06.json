@@ -13,13 +13,14 @@
       "summary": "UK local authority estimates of greenhouse gas emissions",
       "description": "These statistics provide a breakdown of greenhouse gas emissions across the UK, using...",
       "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-      "creator": "office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
       "contact_point": {
         "name": "UK local authority and regional estimates of greenhouse gas emissions",
         "email": "mailto:GreenhouseGas.Statistics@energysecurity.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/emissions"
+        "https://staging.idpd.uk/climate-change",
+        "https://staging.idpd.uk/greenhouse-gas-emissions"
       ],
       "frequency": "monthly",
       "keywords": [
@@ -39,13 +40,14 @@
       "spatial_coverage": "E92000001",
       "temporal_resolution": [
         "P1M",
-        "P3M"
+        "P3M",
+        "P1Y"
       ],
       "temporal_coverage": {
         "start": "2005-01-01T00:00:00Z",
         "end": "2022-07-01T00:00:00Z"
       },
-      "versions_url": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions/editions/2023-06/versions/1",
+      "versions_url": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions/editions/2023-06/versions",
       "versions": [
         {
           "@id": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions/editions/2023-06/versions/1",
@@ -57,49 +59,49 @@
         "columns": [
           {
             "name": "year",
-            "datatype": "xsd:datetime",
+            "datatype": "datetime",
             "titles": "Year",
             "description": "The year associated with the observation."
           },
           {
             "name": "country",
-            "datatype": "xsd:decimal",
+            "datatype": "decimal",
             "titles": "Country",
             "description": "The country associated with the observation."
           },
           {
-            "name": "LA",
-            "datatype": "xsd:decimal",
+            "name": "local_authority",
+            "datatype": "decimal",
             "titles": "Local Authority",
             "description": "The local authority associated with the observation."
           },
           {
-            "name": "sub sector",
-            "datatype": "xsd:decimal",
+            "name": "sub_sector",
+            "datatype": "decimal",
             "titles": "Sub Sector",
             "description": "The sub sector associated with the observation."
           },
           {
-            "name": "GHG",
-            "datatype": "xsd:decimal",
+            "name": "greenhouse_gas",
+            "datatype": "decimal",
             "titles": "Greenhouse Gas",
             "description": "The greenhouse gas associated with the observation."
           },
           {
             "name": "measure",
-            "datatype": "xsd:decimal",
-            "titles": "Measure",
+            "datatype": "decimal",
+            "titles": "Measure type",
             "description": "The measure associated with the observation."
           },
           {
             "name": "unit",
-            "datatype": "xsd:decimal",
-            "titles": "Unit",
+            "datatype": "decimal",
+            "titles": "Unit of measure",
             "description": "The unit associated with the observation."
           },
           {
             "name": "value",
-            "datatype": "xsd:decimal",
+            "datatype": "decimal",
             "titles": "Value",
             "description": "The value for the given year."
           }
