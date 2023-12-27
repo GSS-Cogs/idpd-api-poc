@@ -11,8 +11,8 @@
       "@type": "dcat:DatasetSeries",
       "identifier": "cpih",
       "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
-      "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
-      "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation that includes costs associated with...",
+      "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH).",
+      "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH).",
       "issued": "2022-01-01T00:00:00Z",
       "modified": "2022-01-12T00:00:00Z",
       "next_release": "2024-04-19T09:30:00Z",
@@ -23,17 +23,14 @@
         "email": "mailto:cpih@ons.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/economy",
-        "https://staging.idpd.uk/topics/prices"
+        "https://staging.idpd.uk/economy",
+        "https://staging.idpd.uk/prices"
       ],
       "frequency": "monthly",
       "keywords": [
         "inflation",
-        "consumer price inflation",
-        "cpi",
-        "cpih",
-        "consumer price index",
-        "consumer price index including owner occupiers' housing costs"
+        "consumer",
+        "price-index"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",   
       "spatial_resolution": [
@@ -76,7 +73,7 @@
         "email": "mailto:labour.market@ons.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/labour-market-and-welfare"
+        "https://staging.idpd.uk/labour-market-and-welfare"
       ],
       "frequency": "annual",
       "keywords": [
@@ -85,8 +82,7 @@
         "local-authority",
         "unemployment",
         "labour-market",
-        "region",
-        "annual-population-survey"
+        "region"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
       "spatial_resolution":["N09", "S12", "W06", "E92", "K02"],
@@ -122,7 +118,7 @@
         "email": "mailto:regionalaccounts@ons.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/economy"
+        "https://staging.idpd.uk/economy"
       ],
       "frequency": "annual",
       "keywords": [
@@ -168,8 +164,8 @@
         "email": "mailto:GreenhouseGas.Statistics@energysecurity.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/climate-change",
-        "https://staging.idpd.uk/topics/greenhouse-gas-emissions"
+        "https://staging.idpd.uk/climate-change",
+        "https://staging.idpd.uk/greenhouse-gas-emissions"
       ],
       "frequency": "monthly",
       "keywords": [
@@ -213,14 +209,15 @@
         "email": "mailto:open.data@ofcom.org.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/communication",
-        "https://staging.idpd.uk/topics/it-and-internet-industry"
+        "https://staging.idpd.uk/communication",
+        "https://staging.idpd.uk/it-and-internet-industry"
       ],
       "frequency": "monthly",
       "keywords": [
-        "broadband-mobile-coverage",
+        "broadband",
+        "mobile",
+        "coverage",
         "connectivity",
-        "local-authority",
         "subnational"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
@@ -257,15 +254,14 @@
         "email": "mailto:apprenticeships-achievements@ons.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/children-education-and-skills"],
+        "https://staging.idpd.uk/children-education-and-skills"],
       "frequency": "annual",
       "keywords": [
         "apprenticeship",
-        "community-learning",
-        "education-and-training",
-        "subnational",
-        "county",
-        "local-authority"
+        "community",
+        "learning",
+        "education",
+        "training"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
       "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
