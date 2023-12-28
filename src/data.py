@@ -61,6 +61,17 @@ def validate_and_parse_json(g, schema, resource_dict, resource_type):
             resource["@id"].split("/")[-1] == resource["identifier"]
         ), f"Mismatch between '@id' and 'identifier' fields for {resource['@id']}"
 
+        # Check that the resource type is in the path
+        # eg an id for a topic should have /topics in the url
+        assert resource_type in resource["@id"], (
+            f'''
+            The @id for a resouce of type "{resource_type}" should contain
+            /{resource_type} in the url, but does not.
+
+            Got: {resource["@id"]}
+            '''
+        )
+
     # Schema validation
     schema(**resource_dict)
 
@@ -183,7 +194,13 @@ def populate(oxigraph_url=None, write_to_db=True):
                 topic in topic_ids
             ), f"{topic} not in list of approved topics {topic_ids}"
     for topic in topics_in_editions:
-        assert topic in topic_ids, f"{topic} not in {topic_ids}"
+        assert topic in topic_ids, (
+            f'''
+            We're defining a topic of {topic} within an edition but it is not (and must) de defined as a topic resource in topics.json.
+
+            Defined topics from topics.json:
+            {topic_ids}'''
+            )
     validate_and_parse_json(g, schemas.Topics, topics_source_dict, "topics")
 
     # --------------------
@@ -256,7 +273,7 @@ def _confirm_in_use_publisher_resource(publishers: Dict, dataset_publishers: Lis
         assert publisher in publisher_ids_from_publishers_json, (
             f'''
             The publisher: {publisher}
-            is referenced in a datasets resource but does not exist in the definitions of publishers.
+            is referenced in a datasets resource but does not exist in the definitions of publishers from publishers.json.
             '''
         )
         references_used.append(publisher)
