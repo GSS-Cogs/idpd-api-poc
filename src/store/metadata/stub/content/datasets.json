@@ -23,8 +23,8 @@
         "email": "mailto:cpih@ons.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/economy",
-        "https://staging.idpd.uk/prices"
+        "https://staging.idpd.uk/topics/economy",
+        "https://staging.idpd.uk/topics/prices"
       ],
       "frequency": "monthly",
       "keywords": [
@@ -73,7 +73,7 @@
         "email": "mailto:labour.market@ons.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/labour-market-and-welfare"
+        "https://staging.idpd.uk/topics/labour-market-and-welfare"
       ],
       "frequency": "annual",
       "keywords": [
@@ -118,7 +118,7 @@
         "email": "mailto:regionalaccounts@ons.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/economy"
+        "https://staging.idpd.uk/topics/economy"
       ],
       "frequency": "annual",
       "keywords": [
@@ -164,8 +164,8 @@
         "email": "mailto:GreenhouseGas.Statistics@energysecurity.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/climate-change",
-        "https://staging.idpd.uk/greenhouse-gas-emissions"
+        "https://staging.idpd.uk/topics/climate-change",
+        "https://staging.idpd.uk/topics/greenhouse-gas-emissions"
       ],
       "frequency": "monthly",
       "keywords": [
@@ -209,8 +209,8 @@
         "email": "mailto:open.data@ofcom.org.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/communication",
-        "https://staging.idpd.uk/it-and-internet-industry"
+        "https://staging.idpd.uk/topics/communication",
+        "https://staging.idpd.uk/topics/it-and-internet-industry"
       ],
       "frequency": "monthly",
       "keywords": [
@@ -254,7 +254,7 @@
         "email": "mailto:apprenticeships-achievements@ons.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/children-education-and-skills"],
+        "https://staging.idpd.uk/topics/children-education-and-skills"],
       "frequency": "annual",
       "keywords": [
         "apprenticeship",
