@@ -13,11 +13,11 @@ def test_oxigraph_get_versions_returns_valid_structure():
     schema.
     """
     store = OxigraphMetadataStore()
-    versions = store.get_versions("4gc", "2023-09")
+    versions = store.get_versions("4gc", "2023-03")
     versions_schema = schemas.Versions(**versions)
     assert (
         versions_schema.id
-        == "https://staging.idpd.uk/datasets/4gc/editions/2023-09/versions"
+        == "https://staging.idpd.uk/datasets/4gc/editions/2023-03/versions"
     )
     assert versions_schema.type == "hydra:Collection"
     assert len(versions_schema.versions) == versions_schema.count
