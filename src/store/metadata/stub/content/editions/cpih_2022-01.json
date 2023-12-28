@@ -19,8 +19,8 @@
         "email": "mailto:cpih@ons.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/economy",
-        "https://staging.idpd.uk/prices"
+        "https://staging.idpd.uk/topics/economy",
+        "https://staging.idpd.uk/topics/prices"
       ],
       "frequency": "monthly",
       "keywords": [

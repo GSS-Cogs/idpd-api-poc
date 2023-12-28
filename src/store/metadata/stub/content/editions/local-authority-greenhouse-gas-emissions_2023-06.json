@@ -19,8 +19,8 @@
         "email": "mailto:GreenhouseGas.Statistics@energysecurity.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/climate-change",
-        "https://staging.idpd.uk/greenhouse-gas-emissions"
+        "https://staging.idpd.uk/topics/climate-change",
+        "https://staging.idpd.uk/topics/greenhouse-gas-emissions"
       ],
       "frequency": "monthly",
       "keywords": [
