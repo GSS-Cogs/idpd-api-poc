@@ -53,7 +53,7 @@
               "name": "period",
               "datatype": "datetime",
               "titles": "Gregorian Time Interval",
-              "description": "The time period associated with the observation."
+              "description": "The time period associated with the observations."
             },
             {
               "name": "areacd",
