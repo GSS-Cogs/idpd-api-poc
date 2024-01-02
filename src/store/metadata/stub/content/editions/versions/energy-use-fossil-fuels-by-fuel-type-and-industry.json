@@ -1,0 +1,76 @@
+{
+    "@context": "https://staging.idpd.uk/#ns",
+    "@id": "https://staging.idpd.uk/datasets/energy-use-fossil-fuels-by-fuel-type-and-industry/editions/2023-06/versions",
+    "@type": "hydra:Collection",
+    "title": "Energy use: fossil fuels by fuel type and industry",
+    "versions": [
+        {
+            "@type": [
+                "dcat:Distribution",
+                "csvw:Table"
+            ],
+            "@id": "https://staging.idpd.uk/datasets/energy-use-fossil-fuels-by-fuel-type-and-industr/editions/2023-06/versions/1",
+            "identifier": "1",
+            "issued": "2023-06-05T09:30:00Z",
+            "title": "Energy use: fossil fuels by fuel type and industry",
+            "summary": "The UK's fuel use by industry (SIC 2007 group - around 130 categories) and type (coal, natural gas, petrol, diesel oil for road vehicles (DERV), fuel oil, gas oil, aviation fuel and other), 1990 to 2021. The dataset excludes biofuels and waste.",
+            "description": "The UK's fuel use by industry (SIC 2007 group - around 130 categories) and type (coal, natural gas, petrol, diesel oil for road vehicles (DERV), fuel oil, gas oil, aviation fuel and other), 1990 to 2021. The dataset excludes biofuels and waste.",
+            "download_url": "https://staging.idpd.uk/datasets/energy-use-fossil-fuels-by-fuel-type-and-industry/editions/2023-06/versions/1.csv",
+            "media_type": "text/csv",
+            "table_schema": {
+                "columns": [
+                    {
+                        "name": "year",
+                        "datatype": "datetime",
+                        "titles": "Year",
+                        "description": "The time period associated with the observation."
+                    },
+                    {
+                        "name": "section_notation",
+                        "datatype": "string",
+                        "titles": "Section Notation",
+                        "description": "The standard industrial classification code related to the industry section name."
+                    },
+                    {
+                        "name": "industry_section_name",
+                        "datatype": "string",
+                        "titles": "Industry Section Name",
+                        "description": "The industry section name that resulted to energy consumption."
+                    },
+                    {
+                        "name": "fuel",
+                        "datatype": "string",
+                        "titles": "Fuel",
+                         "description": "The fuel type consumed by the standard industrial activity."
+                    },
+                    {
+                        "name": "value",
+                        "datatype": "decimal",
+                         "titles": "Value",
+                        "description": "Observation value of energy consumption."
+                    },
+                    {
+                        "name": "measure",
+                        "datatype": "string",
+                        "titles": "Energy Comsumption",
+                        "description": "Measure type asscoiated with observation values."
+                    },
+                    {
+                        "name": "unit",
+                         "datatype": "string",
+                        "titles": "Millions of tonnes of oil equivalent",
+                         "description": "Unit of measure of energy consumption."
+                    },
+                    {
+                        "name": "marker",
+                        "datatype": "string",
+                        "titles": "Observation Status",
+                        "description": "Observational Attribute."
+                    }
+                ]
+            }
+        }
+    ],
+    "count": 1,
+    "offset": 0
+}

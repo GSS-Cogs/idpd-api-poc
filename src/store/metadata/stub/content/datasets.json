@@ -35,7 +35,7 @@
         "consumer price index",
         "consumer price index including owner occupiers' housing costs"
       ],
-      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",   
       "spatial_resolution": [
         "E01",
         "E92"
@@ -76,8 +76,7 @@
         "email": "mailto:labour.market@ons.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/labour-market-and-welfare"
-      ],
+        "https://staging.idpd.uk/topics/labour-market-and-welfare"],
       "frequency": "annual",
       "keywords": [
         "subnational",
@@ -89,17 +88,9 @@
         "annual-population-survey"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-      "spatial_resolution": [
-        "N09",
-        "S12",
-        "W06",
-        "E92",
-        "K02"
-      ],
+      "spatial_resolution":["N09", "S12", "W06", "E92", "K02"],
       "spatial_coverage": "K02000001",
-      "temporal_resolution": [
-        "P1Y"
-      ],
+      "temporal_resolution": ["P1Y"],
       "temporal_coverage": {
         "start": "2004-07-01T00:00:00Z",
         "end": "2023-06-04T00:00:00Z"
@@ -130,8 +121,7 @@
         "email": "mailto:regionalaccounts@ons.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/economy"
-      ],
+        "https://staging.idpd.uk/topics/economy"],
       "frequency": "annual",
       "keywords": [
         "money",
@@ -142,20 +132,12 @@
         "subnational"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-      "spatial_resolution": [
-        "N09",
-        "S12",
-        "W06",
-        "E92",
-        "K02"
-      ],
+      "spatial_resolution":["N09", "S12", "W06", "E92", "K02"],
       "spatial_coverage": "K02000001",
-      "temporal_resolution": [
-        "P1Y"
-      ],
+      "temporal_resolution": ["P1Y"],
       "temporal_coverage": {
         "start": "1997-01-01T09:00:00Z",
-        "end": "1997-01-01T09:00:00Z"
+        "end":  "1997-01-01T09:00:00Z"
       },
       "editions_url": "https://staging.idpd.uk/datasets/gdhi/editions",
       "editions": [
@@ -167,9 +149,9 @@
       ]
     },
     {
-      "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions",
+      "@id": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions",
       "@type": "dcat:DatasetSeries",
-      "identifier": "beis-local-authority-greenhouse-gas-emissions",
+      "identifier": "local-authority-greenhouse-gas-emissions",
       "title": "Local authority greenhouse gas emissions",
       "summary": "UK local authority estimates of greenhouse gas emissions",
       "description": "These statistics provide a breakdown of greenhouse gas emissions across the UK, using...",
@@ -178,13 +160,14 @@
       "next_release": "2023-07-06T09:30:00Z",
       "publisher": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
       "creator": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
+      "theme": "http://gss-data.org.uk/def/gdp#climate-change",
       "contact_point": {
         "name": "UK local authority and regional estimates of greenhouse gas emissions",
         "email": "mailto:GreenhouseGas.Statistics@energysecurity.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/emissions",
-        "https://staging.idpd.uk/topics/greenhouse-gas"
+        "https://staging.idpd.uk/topics/climate-change",
+        "https://staging.idpd.uk/topics/greenhouse-gas-emissions"
       ],
       "frequency": "monthly",
       "keywords": [
@@ -195,24 +178,17 @@
         "country"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-      "spatial_resolution": [
-        "E01",
-        "E92"
-      ],
+      "spatial_resolution": ["E01", "E92"],
       "spatial_coverage": "E92000001",
-      "temporal_resolution": [
-        "P1M",
-        "P3M",
-        "P1Y"
-      ],
+      "temporal_resolution": ["P1M", "P3M", "P1Y"],
       "temporal_coverage": {
         "start": "2005-01-01T00:00:00Z",
         "end": "2022-07-01T00:00:00Z"
       },
-      "editions_url": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions",
+      "editions_url": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions/editions",
       "editions": [
         {
-          "@id": "https://staging.idpd.uk/datasets/beis-local-authority-greenhouse-gas-emissions/editions/2022-07",
+          "@id": "https://staging.idpd.uk/datasets/local-authority-greenhouse-gas-emissions/editions/2023-06",
           "issued": "2023-06-29T13:30:00Z",
           "modified": "2023-06-29T16:20:00Z"
         }
@@ -236,8 +212,7 @@
       },
       "topics": [
         "https://staging.idpd.uk/topics/communication",
-        "https://staging.idpd.uk/topics/it-and-internet-industry"
-      ],
+        "https://staging.idpd.uk/topics/it-and-internet-industry"],
       "frequency": "monthly",
       "keywords": [
         "broadband-mobile-coverage",
@@ -246,20 +221,12 @@
         "subnational"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-      "spatial_resolution": [
-        "N09",
-        "S12",
-        "W06",
-        "E92",
-        "K02"
-      ],
+      "spatial_resolution":["N09", "S12", "W06", "E92", "K02"],
       "spatial_coverage": "K02000001",
-      "temporal_resolution": [
-        "P1M"
-      ],
+      "temporal_resolution": ["P1M"],
       "temporal_coverage": {
-        "start": "2022-09-01T00:00:00Z",
-        "end": "2022-09-30T23:59:00Z"
+        "start": "2005-09-01T00:00:00Z",
+        "end":  "2022-09-30T23:59:00Z"
       },
       "editions_url": "https://staging.idpd.uk/datasets/4gc/editions",
       "editions": [
@@ -271,51 +238,45 @@
       ]
     },
     {
-      "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions",
+      "@id": "https://staging.idpd.uk/datasets/energy-use-fossil-fuels-by-fuel-type-and-industry",
       "@type": "dcat:DatasetSeries",
-      "identifier": "beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions",
-      "title": "2005 to 2019 local authority carbon dioxide (CO2) emissions",
-      "summary": "These statistics provide the most reliable and consistent breakdown of CO2 emissions across the country, using nationally available data sets going back to 2005.\n\nThe main data sources are the UK National Atmospheric Emissions Inventory and the BEIS National Statistics of energy consumption for local authority areas. All emissions included in the national inventory are covered, except aviation, shipping and military transport, for which there is no obvious basis for allocation to local areas.",
-      "description": "These statistics provide the most reliable and consistent breakdown of CO2 emissions across the country, using nationally available data sets going back to 2005.\n\nThe main data sources are the UK National Atmospheric Emissions Inventory and the BEIS National Statistics of energy consumption for local authority areas. All emissions included in the national inventory are covered, except aviation, shipping and military transport, for which there is no obvious basis for allocation to local areas.",
-      "issued": "2021-06-24T08:30:00Z",
-      "modified": "2022-08-18T10:51:00Z",
-      "next_release": "2024-04-19T09:30:00Z",
-      "publisher": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
-      "creator": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
+      "identifier": "energy-use-fossil-fuels-by-fuel-type-and-industry",
+      "title": "Energy use: fossil fuels by fuel type and industry",
+      "summary": "The UK's fuel use by industry (SIC 2007 group - around 130 categories) and type (coal, natural gas, petrol, diesel oil for road vehicles (DERV), fuel oil, gas oil, aviation fuel and other), 1990 to 2021. The dataset excludes biofuels and waste.",
+      "description": "The UK's fuel use by industry (SIC 2007 group - around 130 categories) and type (coal, natural gas, petrol, diesel oil for road vehicles (DERV), fuel oil, gas oil, aviation fuel and other), 1990 to 2021. The dataset excludes biofuels and waste.",
+      "issued": "2023-06-05T09:30:00Z",
+      "modified": "2023-06-05T12:55:00Z",
+      "next_release": "2024-06-30T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
       "contact_point": {
-        "name": "Department for Business, Energy & Industrial Strategy",
-        "email": "mailto:Climatechange.Statistics@beis.gov.uk"
+        "name": "Environment Accounts",
+        "email": "mailto:environment.accounts@ons.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/climate-change",
-        "https://staging.idpd.uk/topics/carbon-emissions"
-      ],
-      "frequency": "irregular",
+        "https://staging.idpd.uk/topics/agriculture-energy-and-environment"],
+      "frequency": "annual",
       "keywords": [
-        "carbon",
+        "climate",
         "emissions",
-        "local authority",
-        "beis"
-
+        "environment",
+        "greenhouse-gas",
+        "pollution"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-      "spatial_resolution": [
-        "K02"
-      ],
+      "spatial_resolution":["K02"],
       "spatial_coverage": "K02000001",
-      "temporal_resolution": [
-        "P1Y"
-      ],
+      "temporal_resolution": ["P1Y"],
       "temporal_coverage": {
-        "start": "2005-01-01T00:00:00Z",
-        "end": "2019-12-31T00:00:00Z"
+        "start": "1990-01-01T12:00:00Z",
+        "end": "2021-12-31T12:00:00Z"
       },
-      "editions_url": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions",
+      "editions_url": "https://staging.idpd.uk/datasets/energy-use-fossil-fuels-by-fuel-type-and-industry/editions",
       "editions": [
         {
-          "@id": "https://staging.idpd.uk/datasets/beis-2005-to-2019-local-authority-carbon-dioxide-co2-emissions/editions/2005-2019",
-          "issued": "2021-06-24T08:30:00Z",
-          "modified": "2022-08-18T10:51:00Z"
+          "@id": "https://staging.idpd.uk/datasets/energy-use-fossil-fuels-by-fuel-type-and-industry/editions/2023-06",
+          "issued": "2023-06-05T09:30:00Z",
+          "modified": "2023-06-05T12:55:00Z"
         }
       ]
     }
