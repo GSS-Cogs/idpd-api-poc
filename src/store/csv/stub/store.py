@@ -1,12 +1,14 @@
 import glob
 from pathlib import Path
+from typing import Optional
 
 from fastapi.responses import FileResponse
 
-from custom_logging import logger
+from custom_logging import logger, configure_logger
 
 from ..base import BaseCsvStore
 
+configure_logger()
 
 class StubCsvStore(BaseCsvStore):
     """
@@ -28,7 +30,7 @@ class StubCsvStore(BaseCsvStore):
             # Now add to dict so we can find them when a user requests
             self.datasets[csv_key] = csv_file_path
 
-    def get_version(self, dataset_id: str, edition_id: str, version_id: str):
+    def get_version(self, dataset_id: str, edition_id: str, version_id: str, request_id:Optional[str] = None):
         # Use variables to create the unique custom identifier for the csv
         # being requested.
         csv_identifier = f"{dataset_id}/{edition_id}/{version_id}".rstrip(".csv")
@@ -40,6 +42,7 @@ class StubCsvStore(BaseCsvStore):
                 "version_id": version_id,
                 "combined_csv_id": csv_identifier,
             },
+            request_id=request_id,
         )
 
         # Try and get it, then log out whether or not we did.
@@ -51,6 +54,7 @@ class StubCsvStore(BaseCsvStore):
                 "csv_ids_in_store": list(self.datasets.keys()),
                 "csv_acquired": False if csv_path is None else True,
             },
+            request_id=request_id,
         )
 
         return FileResponse(csv_path) if csv_path else None
