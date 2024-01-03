@@ -86,7 +86,7 @@
             "name": "observation",
             "datatype": "decimal",
             "titles": "Geographic area with 4G coverage by at least one provider",
-            "description": "Observation value of geographic area with 4G coverage by at least one provider"
+            "description": "Observation value of geographic area with 4G coverage by at least one provider."
           },
           {
             "name": "measure",
