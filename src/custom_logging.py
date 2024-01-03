@@ -1,5 +1,6 @@
 import logging
 import sys
+from typing import Optional
 
 import structlog
 
@@ -46,10 +47,8 @@ class DpLogger:
 def generate_trace_id():
     return "your_trace_id"
 
-
 def generate_span_id():
     return "your_span_id"
-
 
 def configure_logger(enable_json_logs: bool = False):
     timestamper = structlog.processors.TimeStamper(fmt="%Y-%m-%d %H:%M:%S")
@@ -71,7 +70,11 @@ def configure_logger(enable_json_logs: bool = False):
                 structlog.processors.CallsiteParameter.PROCESS_NAME,
             }
         ),
-        structlog.stdlib.ExtraAdder(),
+        structlog.stdlib.ExtraAdder(
+            {
+                "request_id",
+            }
+        ),
     ]
 
     structlog.configure(
