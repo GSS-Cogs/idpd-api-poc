@@ -21,43 +21,43 @@
                 "columns": [
                     {
                       "name": "year",
-                      "datatype": "datetime",
+                      "datatype": "string",
                       "titles": "Year",
                       "description": "The year associated with the observation."
                     },
                     {
                       "name": "country",
-                      "datatype": "decimal",
+                      "datatype": "string",
                       "titles": "Country",
                       "description": "The country associated with the observation."
                     },
                     {
                       "name": "local_authority",
-                      "datatype": "decimal",
+                      "datatype": "string",
                       "titles": "Local Authority",
                       "description": "The local authority associated with the observation."
                     },
                     {
                       "name": "sub_sector",
-                      "datatype": "decimal",
+                      "datatype": "string",
                       "titles": "Sub Sector",
-                      "description": "The sub sector associated with the observation."
+                      "description": "The sub-sector associated with the observation."
                     },
                     {
                       "name": "greenhouse_gas",
-                      "datatype": "decimal",
+                      "datatype": "string",
                       "titles": "Greenhouse Gas",
                       "description": "The greenhouse gas associated with the observation."
                     },
                     {
                       "name": "measure",
-                      "datatype": "decimal",
+                      "datatype": "string",
                       "titles": "Measure type",
                       "description": "The measure associated with the observation."
                     },
                     {
                       "name": "unit",
-                      "datatype": "decimal",
+                      "datatype": "string",
                       "titles": "Unit of measure",
                       "description": "The unit associated with the observation."
                     },
@@ -65,7 +65,7 @@
                       "name": "value",
                       "datatype": "decimal",
                       "titles": "Value",
-                      "description": "The value for the given year."
+                      "description": "The observation value of the measured greenhouse gas."
                     }
                 ]
             }

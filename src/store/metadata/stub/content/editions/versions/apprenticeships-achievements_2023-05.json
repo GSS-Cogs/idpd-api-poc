@@ -29,7 +29,7 @@
                   "name": "areacd",
                   "datatype": "string",
                   "titles": "ONS Geography Code",
-                  "description": "The statistical geography of the observations being measured."
+                  "description": "The statistical geography of the observation being measured."
                 },
                 {
                   "name": "areanm",
@@ -47,37 +47,37 @@
                   "name": "observation",
                   "datatype": "decimal",
                   "titles": "Number of apprenticeship achievements",
-                  "description": "Observation values of apprenticeship achievements."
+                  "description": "Observation value of apprenticeship achievements."
                 },
                 {
                   "name": "measure",
                   "datatype": "string",
                   "titles": "Measure type",
-                  "description": "Measure type asscoiated with the observation values."
+                  "description": "Measure type asscoiated with the observation value."
                 },
                 {
                   "name": "unit",
                   "datatype": "string",
                   "titles": "Unit",
-                  "description": "Unit of measure of observation values."
+                  "description": "Unit of measure of observation value."
                 },
                 {
                   "name": "lower_confidence_interval_95",
                   "datatype": "decimal",
                   "titles": "Lower Confidence Interval (95%)",
-                  "description": "Observations Attribute."
+                  "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, lower bound."
                 },
                 {
                   "name": "upper_confidence_interval_95",
                   "datatype": "decimal",
                   "titles": "Upper Confidence Interval (95%)",
-                  "description": "Observations Attribute."
+                  "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, upper bound."
                 },
                 {
                   "name": "observation_status",
                   "datatype": "string",
                   "titles": "Observation Status",
-                  "description": "Additional Context to the Observation if needed"
+                  "description": "Additional context to the observation value, if needed."
                 }
               ]
             }
