@@ -98,7 +98,7 @@
             "name": "unit",
             "datatype": "string",
             "titles": "Unit of Measure",
-            "description": "Unit type of the observation value"
+            "description": "Unit of the observation value"
           },
           {
             "name": "lower_confidence_interval_95",
