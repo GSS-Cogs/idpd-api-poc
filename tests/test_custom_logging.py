@@ -99,7 +99,7 @@ def test_oxigraph_get_versions_return_none_for_request_id_in_store_log():
     """ 
     with capture_logs() as cap_logs: 
         store = OxigraphMetadataStore()
-        versions = store.get_versions("4gc", "2023-09", request_id=None)
+        versions = store.get_versions("4gc", "2023-03", request_id=None)
         versions_schema = schemas.Versions(**versions)
         
         for log in cap_logs:
