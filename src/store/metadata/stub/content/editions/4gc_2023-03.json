@@ -95,7 +95,7 @@
             "description": "Measure type of the observation value"
           },
           {
-            "name": "Unit",
+            "name": "unit",
             "datatype": "string",
             "titles": "Unit of Measure",
             "description": "Unit of the observation value"

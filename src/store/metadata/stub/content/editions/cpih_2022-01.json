@@ -57,7 +57,7 @@
         "columns": [
           {
             "name": "period",
-            "datatype": "datetime",
+            "datatype": "string",
             "titles": "Period",
             "description": "The time period associated with the observation."
           },
