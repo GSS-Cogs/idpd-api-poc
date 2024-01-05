@@ -1,28 +1,28 @@
 {
     "@context": "https://staging.idpd.uk/ns#",
-    "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions",
+    "@id": "https://staging.idpd.uk/datasets/4gc/editions/2023-03/versions",
     "@type": "hydra:Collection",
-    "title": "Modelled unemployment rate aged 16 years and over",
+    "title": "4G Coverage",
     "versions": [
         {
             "@type": [
                 "dcat:Distribution",
                 "csvw:Table"
             ],
-            "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions/1",
+            "@id": "https://staging.idpd.uk/datasets/4gc/editions/2023-03/versions/1",
             "identifier": "1",
-            "issued": "2023-11-06T12:25:28Z",
-            "title": "Modelled unemployment rate aged 16 years and over",
-            "summary": "Modelled unemployment rate for people aged 16 years and over, Great Britain, 07/2004-06/2005 to 07/2022-06/2023.",
-            "description": "This dataset shows modelled-based estimates for the proportion of people aged 16 years and over without a job who have been actively seeking work within the last four weeks and are available to start work within the next two weeks",
-            "download_url": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions/1.csv",
+            "issued": "2023-03-31T12:10:00Z",
+            "title": "4G Coverage",
+            "summary": "Percentage of geographic areas with 4G signal outdoors from at least 1 operator (signal threshold: 105dBm), UK, September 2022.",
+            "description": "This dataset shows the percentage of geographic areas with 4G signal outdoors from at least 1 operator (signal threshold: 105dBm), in the UK, for September 2022.",
+            "download_url": "https://staging.idpd.uk/datasets/4gc/editions/2023-03/versions/1.csv",
             "media_type": "text/csv",
             "table_schema": {
                 "columns": [
                     {
                       "name": "period",
                       "datatype": "string",
-                      "titles": "Gregorian Time Interval",
+                      "titles": "Month",
                       "description": "The time period associated with the observation."
                     },
                     {
@@ -35,7 +35,7 @@
                       "name": "areanm",
                       "datatype": "string",
                       "titles": "Area Name",
-                      "description": "The name associated with the geography code."
+                      "description": "The name assiciated with the geography code."
                     },
                     {
                       "name": "geography",
@@ -46,26 +46,20 @@
                     {
                       "name": "observation",
                       "datatype": "decimal",
-                      "titles": "Unemployment Rate",
-                      "description": "Observation value of employment rate"
-                    },
-                    {
-                      "name": "count",
-                      "datatype": "integer",
-                      "titles": "Unemployment Count",
-                      "description": "Number of people unemployed"
+                      "titles": "Geographic area with 4G coverage by at least one provider",
+                      "description": "Observation value of geographic area with 4G coverage by at least one provider"
                     },
                     {
                       "name": "measure",
                       "datatype": "string",
-                      "titles": "Measure Type",
-                      "description": "Measure type of the observational value"
+                      "titles": "Measure type",
+                      "description": "Measure type of the observation value"
                     },
                     {
                       "name": "unit",
                       "datatype": "string",
                       "titles": "Unit of Measure",
-                      "description": "Unit associated with the measure type"
+                      "description": "Unit of the observation value"
                     },
                     {
                       "name": "lower_confidence_interval_95",
@@ -83,7 +77,7 @@
                       "name": "observation_status",
                       "datatype": "string",
                       "titles": "Observation Status",
-                      "description": "Additional context to the observation value, if needed"
+                      "description": "Additional context to the observation value if needed"
                     }
                 ]
             }
