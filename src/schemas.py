@@ -9,6 +9,10 @@ from typing import List, Literal, Optional, Union
 from pydantic import BaseModel, Field
 
 
+class Context(BaseModel):
+    context: str = Field(alias="@context")
+
+
 class Frequency(Enum):
     triennial = "triennial"
     biennial = "biennial"
@@ -71,9 +75,6 @@ class SummarisedVersion(BaseModel):
     issued: str = Field(
         pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
     )
-    modified: str = Field(
-        pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})?$"
-    )
 
 
 class Edition(BaseModel):
@@ -109,8 +110,8 @@ class Edition(BaseModel):
     table_schema: TableSchema
 
 
-class EditionWithContext(Edition):
-    context: str = Field(alias="@context")
+class EditionWithContext(Edition, Context):
+    ...
 
 
 class SummarisedEdition(BaseModel):
@@ -169,8 +170,8 @@ class Dataset(BaseModel):
     editions_url: str
 
 
-class DatasetWithContext(Dataset):
-    context: str = Field(alias="@context")
+class DatasetWithContext(Dataset, Context):
+    ...
 
 
 class Datasets(BaseModel):
@@ -197,8 +198,8 @@ class Version(BaseModel):
     table_schema: TableSchema
 
 
-class VersionWithContext(Version):
-    context: str = Field(alias="@context")
+class VersionWithContext(Version, Context):
+    ...
 
 
 class Versions(BaseModel):
@@ -219,8 +220,8 @@ class Publisher(BaseModel):
     landing_page: str
 
 
-class PublisherWithContext(Publisher):
-    context: str = Field(alias="@context")
+class PublisherWithContext(Publisher, Context):
+    ...
 
 
 class Publishers(BaseModel):
@@ -242,8 +243,8 @@ class Topic(BaseModel):
     parent_topics: Union[List[str], None] = Field(default_factory=list)
 
 
-class TopicWithContext(Topic):
-    context: str = Field(alias="@context")
+class TopicWithContext(Topic, Context):
+    ...
 
 
 class Topics(BaseModel):

@@ -4,62 +4,37 @@ import re
 from typing import Dict, Optional
 
 from pyld import jsonld
-from rdflib import Dataset, Graph
+from rdflib import Dataset, Graph, URIRef
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore
 
-from custom_logging import logger
+from custom_logging import logger , configure_logger
+from store.metadata.sparql import SparqlQueries
 
 from .. import constants
 from ..base import BaseMetadataStore
-from .sparql.construct import (
-    construct_dataset_contact_point,
-    construct_dataset_core,
-    construct_dataset_editions,
-    construct_dataset_keywords,
-    construct_dataset_parent_topics_by_id,
-    construct_dataset_subtopics_by_id,
-    construct_dataset_temporal_coverage,
-    construct_dataset_themes,
-    construct_dataset_topic_by_id,
-    construct_dataset_topics,
-    construct_dataset_version,
-    construct_dataset_version_table_schema,
-    construct_datasets,
-    construct_edition_contact_point,
-    construct_edition_core,
-    construct_edition_keywords,
-    construct_edition_table_schema,
-    construct_edition_temporal_coverage,
-    construct_edition_topics,
-    construct_edition_versions,
-    construct_editions,
-    construct_publisher,
-    construct_dataset_version,
-    construct_dataset_version_table_schema,
-    construct_versions,
-    construct_publishers,
-)
 
+configure_logger()
 
 class OxigraphMetadataStore(BaseMetadataStore):
     def setup(self):
         oxigraph_url = os.environ.get("GRAPH_DB_URL", None)
+        
         assert oxigraph_url is not None, (
             "The env var 'GRAPH_DB_URL' must be set to use "
             "the OxigraphMetadataStore store."
         )
         configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
         self.db = Dataset(store=SPARQLUpdateStore(*configuration))
+        self.sparql_queries = SparqlQueries(self.db)
 
-
-    def get_datasets(self) -> Optional[Dict]:
+    def get_datasets(self, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Gets all datasets
         """
-        logger.info("Constructing get_datasets() response from graph")
-        graph = self.db
+        logger.info("Constructing get_datasets() response from graph", request_id=request_id,)
 
-        result: Graph = construct_datasets(graph)
+        # Extract RDF triples from the database as one Graph
+        result: Graph = self.sparql_queries.datasets()
 
         # Serialize the graph into jsonld
         data = json.loads(result.serialize(format="json-ld"))
@@ -72,45 +47,51 @@ class OxigraphMetadataStore(BaseMetadataStore):
                 "@type": ["dcat:Catalog", "hydra:Collection"],
             },
         )
+        # Extract datasets graph from flattened json-ld data
+        datasets_graph = _get_single_graph_for_field(data, "@type")
+        if datasets_graph is None:
+            return None
 
-        # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url'
-        data["@graph"][0]["@type"] = ["dcat:Catalog", "hydra:Collection"]
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing `@type` to `versions_url'
+        datasets_graph["@type"] = ["dcat:Catalog", "hydra:Collection"]
 
-        data["@graph"][0]["datasets"] = [
+        # Get dataset results for each dataset in `datasets`
+        datasets_graph["datasets"] = [
             self.get_dataset(dataset["@id"].split("/")[-1])
-            for dataset in data["@graph"][0]["dcat:DatasetSeries"]
+            for dataset in datasets_graph["dcat:DatasetSeries"]
         ]
-        del data["@graph"][0]["dcat:DatasetSeries"]
-        
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing `datasets` to `dcat:DatasetSeries'
+        del datasets_graph["dcat:DatasetSeries"]
+
         # TODO Update @context so it's not hardcoded
-        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
+        datasets_graph = {"@context": "https://staging.idpd.uk/ns#", **datasets_graph}
+        return datasets_graph
 
-        result = data["@graph"][0]
-        return result
-
-    def get_dataset(self, dataset_id: str) -> Optional[Dict]:
+    def get_dataset(self, dataset_id: str, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Get a dataset by its ID and return its metadata as a JSON-LD dict.
         """
         logger.info(
             "Constructing get_dataset() response from graph",
             data={"dataset_id": dataset_id},
+            request_id=request_id,
         )
 
-        # Specify the named graph from which we are fetching data
-        graph = self.db
+        # Define initBindings for SPARQL query
+        init_bindings = {
+            "subject": URIRef(f"https://staging.idpd.uk/datasets/{dataset_id}"),
+            "type": URIRef("http://www.w3.org/ns/dcat#DatasetSeries"),
+        }
 
-        # Use the construct wrappers to pull the raw RDF triples
-        # (as one rdflib.Graph() for each function) and add them
-        # together to create a single Graph of the
-        # data we need.
+        # Extract RDF triples from the database as one Graph
+        # TODO: incorporate `keywords` and `topics` into the `sparql_queries.dataset` query?
         result: Graph = (
-            construct_dataset_core(graph, dataset_id)
-            + construct_dataset_keywords(graph, dataset_id)
-            + construct_dataset_themes(graph, dataset_id)
-            + construct_dataset_contact_point(graph, dataset_id)
-            + construct_dataset_temporal_coverage(graph, dataset_id)
-            + construct_dataset_editions(graph, dataset_id)
+            self.sparql_queries.dataset(init_bindings)
+            + self.sparql_queries.keywords(init_bindings)
+            + self.sparql_queries.topic_uris(init_bindings)
+            + self.sparql_queries.contact_point(init_bindings)
+            + self.sparql_queries.temporal_coverage(init_bindings)
+            + self.sparql_queries.editions(init_bindings)
         )
 
         # Serialize the graph into jsonld
@@ -120,18 +101,11 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "dcat:DatasetSeries"}
         )
-        # At this point our jonsld has a "@graph" list field with three entries in it
-        #
-        # - the dataset graph in compact form
-        # - an anonymous (blank root node) graph of contacts in long form
-        # - an anonymous (blank root node) graph of temporal coverage in long form
-        #
-        # The user doesnt need to know about blank RDF nodes so we need
-        # to flatten and embed the latter two graphs in the dataset graph.
+
+        # Extract dataset graph and blank node graphs from flattened json-ld data
         dataset_graph = _get_single_graph_for_field(data, "@type")
         contact_point_graph = _get_single_graph_for_field(data, "vcard:fn")
         temporal_coverage_graph = _get_single_graph_for_field(data, "dcat:endDate")
-
         if None in [dataset_graph, contact_point_graph, temporal_coverage_graph]:
             return None
 
@@ -142,8 +116,12 @@ class OxigraphMetadataStore(BaseMetadataStore):
             if "@id" in x.keys() and re.search("/editions/", x["@id"])
         ]
         dataset_graph["editions"] = edition_graphs
+
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing `editions` to `versions'
         del dataset_graph["versions"]
-        # Compact and embed anonymous nodes
+
+        # The user doesnt need to know about blank RDF nodes so we need
+        # to flatten and embed these graphs into the dataset graph.
         dataset_graph["contact_point"] = {
             "name": contact_point_graph["vcard:fn"]["@value"],
             "email": contact_point_graph["vcard:hasEmail"],
@@ -152,26 +130,31 @@ class OxigraphMetadataStore(BaseMetadataStore):
             "start": temporal_coverage_graph["dcat:endDate"]["@value"],
             "end": temporal_coverage_graph["dcat:startDate"]["@value"],
         }
-        dataset_graph["@context"] = "https://staging.idpd.uk/ns#"
+
+        # TODO Update @context so it's not hardcoded
+        dataset_graph = {"@context": "https://staging.idpd.uk/ns#", **dataset_graph}
         return dataset_graph
 
-    def get_editions(self, dataset_id: str) -> Optional[Dict]:
+    def get_editions(self, dataset_id: str, request_id:Optional[str] = None) -> Optional[Dict]:
         """
-        Gets all editions of a specific dataset
+        Gets all editions of a specific dataset with ID `dataset_id`
         """
         logger.info(
             "Constructing get_editions() response from graph",
             data={"dataset_id": dataset_id},
+            request_id=request_id,
         )
 
-        # Populate the graph from the database
-        graph = self.db
+        # Define initBindings for SPARQL query
+        init_bindings = {
+            "subject": URIRef(
+                f"https://staging.idpd.uk/datasets/{dataset_id}/editions"
+            ),
+            "type": URIRef("http://www.w3.org/ns/hydra/core#Collection"),
+        }
 
-        # Use the construct wrappers to pull the raw RDF triples
-        # (as one rdflib.Graph() for each function) and add them
-        # together to create a single Graph of the
-        # data we need.
-        result: Graph = construct_editions(graph, dataset_id)
+        # Extract RDF triples from the database as one Graph
+        result: Graph = self.sparql_queries.editions(init_bindings)
 
         # Serialize the graph into jsonld
         data = json.loads(result.serialize(format="json-ld"))
@@ -180,47 +163,53 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
         )
+
+        # Extract editions graph from flattened json-ld data
         editions_graph = _get_single_graph_for_field(data, "@type")
         if editions_graph is None:
             return None
 
-        # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url` and `editions` to `versions`
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing `@type` to `versions_url` and `editions` to `versions`
         editions_graph["@type"] = "hydra:Collection"
         editions_graph["editions"] = editions_graph.pop("versions")
 
+        # Populate metadata for each edition in `editions`
         editions_graph["editions"] = [
             self.get_edition(dataset_id, x.split("/")[-1])
             for x in editions_graph["editions"]
         ]
-        editions_graph["@context"] = "https://staging.idpd.uk/ns#"
+
+        # TODO Update @context so it's not hardcoded
+        editions_graph = {"@context": "https://staging.idpd.uk/ns#", **editions_graph}
         return editions_graph
 
-    def get_edition(
-        self, dataset_id: str, edition_id: str
-    ) -> Optional[Dict]:  # pragma: no cover
+    def get_edition(self, dataset_id: str, edition_id: str, request_id:Optional[str] = None) -> Optional[Dict]:
         """
-        Gets a specific edition of a specific dataset
+        Gets a specific edition with ID `edition_id` of a specific dataset with ID `dataset_id`
         """
         logger.info(
             "Constructing get_edition() response from graph",
             data={"dataset_id": dataset_id, "edition_id": edition_id},
+            request_id=request_id,
         )
 
-        # Populate the graph from the database
-        graph = self.db
+        # Define initBindings for SPARQL query
+        init_bindings = {
+            "subject": URIRef(
+                f"https://staging.idpd.uk/datasets/{dataset_id}/editions/{edition_id}"
+            ),
+            "type": URIRef("http://www.w3.org/ns/dcat#Dataset"),
+        }
 
-        # Use the construct wrappers to pull the raw RDF triples
-        # (as one rdflib.Graph() for each function) and add them
-        # together to create a single Graph of the
-        # data we need.
+        # Extract RDF triples from the database as one Graph
         result: Graph = (
-            construct_edition_core(graph, dataset_id, edition_id)
-            + construct_edition_contact_point(graph, dataset_id, edition_id)
-            + construct_edition_topics(graph, dataset_id, edition_id)
-            + construct_edition_keywords(graph, dataset_id, edition_id)
-            + construct_edition_temporal_coverage(graph, dataset_id, edition_id)
-            + construct_edition_table_schema(graph, dataset_id, edition_id)
-            + construct_edition_versions(graph, dataset_id, edition_id)
+            self.sparql_queries.edition(init_bindings)
+            + self.sparql_queries.contact_point(init_bindings)
+            + self.sparql_queries.topic_uris(init_bindings)
+            + self.sparql_queries.keywords(init_bindings)
+            + self.sparql_queries.temporal_coverage(init_bindings)
+            + self.sparql_queries.table_schema(init_bindings)
+            + self.sparql_queries.summarised_version(init_bindings)
         )
 
         # Serialize the graph into jsonld
@@ -231,6 +220,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
             data, {"@context": constants.CONTEXT, "@type": "dcat:Dataset"}
         )
 
+        # Extract edition graph and blank node graphs from flattened json-ld data
         edition_graph = _get_single_graph_for_field(data, "@type")
         contact_point_graph = _get_single_graph_for_field(data, "vcard:fn")
         temporal_coverage_graph = _get_single_graph_for_field(data, "dcat:endDate")
@@ -238,12 +228,14 @@ class OxigraphMetadataStore(BaseMetadataStore):
         if None in [edition_graph, contact_point_graph, temporal_coverage_graph]:
             return None
 
-        # Populate editions_graph.table_schema.columns with column definitions (without @id) and delete editions_graph.table_schema blank node @id
+        # Populate editions_graph.table_schema.columns with column definitions (without `@id`) and delete editions_graph.table_schema blank node `@id`
         for column in columns_graph:
             del column["@id"]
         edition_graph["table_schema"]["columns"] = columns_graph
         del edition_graph["table_schema"]["@id"]
 
+        # The user doesnt need to know about blank RDF nodes so we need
+        # to flatten and embed these graphs into the primary graph.
         edition_graph["contact_point"] = {
             "name": contact_point_graph["vcard:fn"]["@value"],
             "email": contact_point_graph["vcard:hasEmail"],
@@ -253,28 +245,38 @@ class OxigraphMetadataStore(BaseMetadataStore):
             "end": temporal_coverage_graph["dcat:endDate"]["@value"],
         }
 
+        # Add `issued` and `modified` fields to each version in `versions`
         version_graphs = [
             x
             for x in data["@graph"]
             if "@id" in x.keys() and re.search("/versions/", x["@id"])
         ]
         edition_graph["versions"] = version_graphs
-        edition_graph["@context"] = "https://staging.idpd.uk/ns#"
+
+        # TODO Update @context so it's not hardcoded
+        edition_graph = {"@context": "https://staging.idpd.uk/ns#", **edition_graph}
         return edition_graph
 
-    def get_versions(self, dataset_id: str, edition_id: str) -> Optional[Dict]:
+    def get_versions(self, dataset_id: str, edition_id: str, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Gets all versions of a specific edition of a specific dataset
         """
+        logger.info(
+            "Constructing get_versions() response from graph",
+            data={"dataset_id": dataset_id, "edition_id": edition_id},
+            request_id=request_id,
+        )
 
-        # Populate the graph from the database
-        graph = self.db
+        # Define initBindings for SPARQL query
+        init_bindings = {
+            "subject": URIRef(
+                f"https://staging.idpd.uk/datasets/{dataset_id}/editions/{edition_id}/versions"
+            ),
+            "type": URIRef("http://www.w3.org/ns/hydra/core#Collection"),
+        }
 
-        # Use the construct wrappers to pull the raw RDF triples
-        # (as one rdflib.Graph() for each function) and add them
-        # together to create a single Graph of the
-        # data we need.
-        result: Graph = construct_versions(graph, dataset_id, edition_id)
+        # Extract RDF triples from the database as one Graph
+        result: Graph = self.sparql_queries.versions(init_bindings)
 
         # Serialize the graph into jsonld
         data = json.loads(result.serialize(format="json-ld"))
@@ -283,22 +285,27 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
         )
+        # Extract versions graph from flattened json-ld data
         versions_graph = _get_single_graph_for_field(data, "@type")
         if versions_graph is None:
             return None
 
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing `@type` to `versions_url`
         versions_graph["@type"] = "hydra:Collection"
-        
+
+        # Populate metadata for each version in `versions`
         versions_graph["versions"] = [
             self.get_version(dataset_id, edition_id, x.split("/")[-1])
             for x in versions_graph["versions"]
         ]
-        versions_graph["@context"] = "https://staging.idpd.uk/ns#"
+
+        # TODO Update @context so it's not hardcoded
+        versions_graph = {"@context": "https://staging.idpd.uk/ns#", **versions_graph}
         return versions_graph
 
     def get_version(
-        self, dataset_id: str, edition_id: str, version_id: str
-    ) -> Optional[Dict]:  # pragma: no cover
+        self, dataset_id: str, edition_id: str, version_id: str, request_id:Optional[str] = None
+    ) -> Optional[Dict]:
         """
         Gets a specific version of a specific edition of a specific dataset
         """
@@ -309,20 +316,25 @@ class OxigraphMetadataStore(BaseMetadataStore):
                 "edition_id": edition_id,
                 "version_id": version_id,
             },
+            request_id=request_id,
         )
 
-        # Specify the named graph from which we are fetching data
-        graph = self.db
+        # Define initBindings for SPARQL query
+        # TODO How to represent multiple objects for `type`?
+        init_bindings = {
+            "subject": URIRef(
+                f"https://staging.idpd.uk/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}"
+            ),
+            # "type": [
+            #     URIRef("http://www.w3.org/ns/dcat#Distribution"),
+            #     URIRef("https://www.w3.org/ns/csvw#Table"),
+            # ],
+        }
 
-        # Use the construct wrappers to pull the raw RDF triples
-        # (as one rdflib.Graph() for each function) and add them
-        # together to create a sinlge Graph of the
-        # data we need.
-        result: Graph = construct_dataset_version(
-            graph, dataset_id, edition_id, version_id
-        ) + construct_dataset_version_table_schema(
-            graph, dataset_id, edition_id, version_id
-        )
+        # Extract RDF triples from the database as one Graph
+        result: Graph = self.sparql_queries.version(
+            init_bindings
+        ) + self.sparql_queries.table_schema(init_bindings)
 
         # Serialize the graph into jsonld
         data = json.loads(result.serialize(format="json-ld"))
@@ -335,31 +347,31 @@ class OxigraphMetadataStore(BaseMetadataStore):
                 "@type": ["csvw:Table", "dcat:Distribution"],
             },
         )
-
+        # Extract version graph from flattened json-ld data
         version_graph = _get_single_graph_for_field(data, "@type")
+        if version_graph is None:
+            return None
+
+        # The user doesnt need to know about blank RDF nodes so we need
+        # to flatten and embed these graphs into the version graph.
         columns_graph = [x for x in data["@graph"] if "datatype" in x.keys()]
         for column in columns_graph:
             del column["@id"]
         version_graph["table_schema"]["columns"] = columns_graph
         del version_graph["table_schema"]["@id"]
 
-        version_graph["@context"] = "https://staging.idpd.uk/ns#"
+        # TODO Update @context so it's not hardcoded
+        version_graph = {"@context": "https://staging.idpd.uk/ns#", **version_graph}
         return version_graph
 
-    def get_publishers(self) -> Optional[Dict]:
+    def get_publishers(self, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Gets all publishers
         """
-        logger.info("Constructing get_publishers() response from graph")
+        logger.info("Constructing get_publishers() response from graph", request_id=request_id,)
 
-        # Specify the named graph from which we are fetching data
-        graph = self.db
-
-        # Use the construct wrappers to pull the raw RDF triples
-        # (as one rdflib.Graph() for each function) and add them
-        # together to create a sinlge Graph of the
-        # data we need.
-        result: Graph = construct_publishers(graph)
+        # Extract RDF triples from the database as one Graph
+        result: Graph = self.sparql_queries.publishers()
 
         # Serialize the graph into jsonld
         data = json.loads(result.serialize(format="json-ld"))
@@ -368,41 +380,45 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
         )
+        # Extract publishers graph from flattened json-ld data
+        publishers_graph = _get_single_graph_for_field(data, "@type")
+        if publishers_graph is None:
+            return None
 
-        # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url`,
-        #  this will needs to be removed later.
-        data["@graph"][0]["@type"] = "hydra:Collection"
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing `@type` to `versions_url`,
+        publishers_graph["@type"] = "hydra:Collection"
+        publishers_graph["publishers"] = publishers_graph.pop("dcat:publisher")
 
-        data["@graph"][0]["publishers"] = [
+        # Populate metadata for each publisher in `publishers`
+        publishers_graph["publishers"] = [
             self.get_publisher(x["@id"].split("/")[-1])
-            for x in data["@graph"]
-            if "landing_page" in x.keys()
+            for x in publishers_graph["publishers"]
         ]
-        del data["@graph"][0]["dcat:publisher"]
 
-        # TODO Update @context due to flatten(), this will need to be removed once flatten() doesn't change it.
-        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
-        result = data["@graph"][0]
+        # TODO Update @context so it's not hardcoded
+        publishers_graph = {
+            "@context": "https://staging.idpd.uk/ns#",
+            **publishers_graph,
+        }
+        return publishers_graph
 
-        return result
-
-    def get_publisher(self, publisher_id: str) -> Optional[Dict]:
+    def get_publisher(self, publisher_id: str, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Get a specific publisher
         """
         logger.info(
             "Constructing get_publisher() response from graph",
             data={"publisher_id": publisher_id},
+            request_id=request_id,
         )
 
-        # Specify the named graph from which we are fetching data
-        graph = self.db
+        # Define initBindings for SPARQL query
+        init_bindings = {
+            "subject": URIRef(f"https://staging.idpd.uk/publishers/{publisher_id}"),
+        }
 
-        # Use the construct wrappers to pull the raw RDF triples
-        # (as one rdflib.Graph() for each function) and add them
-        # together to create a sinlge Graph of the
-        # data we need.
-        result: Graph = construct_publisher(graph, publisher_id)
+        # Extract RDF triples from the database as one Graph
+        result: Graph = self.sparql_queries.publisher(init_bindings)
 
         # Serialize the graph into jsonld
         data = json.loads(result.serialize(format="json-ld"))
@@ -411,18 +427,29 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "dcat:publisher"}
         )
-        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
-        return data["@graph"][0]
+        # Extract publisher graph from flattened json-ld data
+        publisher_graph = _get_single_graph_for_field(data, "@type")
+        if publisher_graph is None:
+            return None
 
-    def get_topics(self) -> Optional[Dict]:
+        # TODO Update @context so it's not hardcoded
+        publisher_graph = {"@context": "https://staging.idpd.uk/ns#", **publisher_graph}
+        return publisher_graph
+
+    def get_topics(self, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Get all topics
         """
-        logger.info("Constructing get_topics() response from graph")
+        logger.info("Constructing get_topics() response from graph", request_id=request_id,)
 
-        graph = self.db
+        # Define initBindings for SPARQL query
+        init_bindings = {
+            "subject": URIRef(f"https://staging.idpd.uk/topics"),
+            "type": URIRef("http://www.w3.org/ns/hydra/core#Collection"),
+        }
 
-        result: Graph = construct_dataset_topics(graph)
+        # Extract RDF triples from the database as one Graph
+        result: Graph = self.sparql_queries.topics(init_bindings)
 
         # Serialize the graph into jsonld
         data = json.loads(result.serialize(format="json-ld"))
@@ -431,37 +458,45 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "hydra:Collection"}
         )
-        # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `versions_url`
-        data["@graph"][0]["@type"] = "hydra:Collection"
+        # Extract topics graph from flattened json-ld data
+        topics_graph = _get_single_graph_for_field(data, "@type")
+        if topics_graph is None:
+            return None
 
-        for idx, topic in enumerate(data["@graph"][0]["topics"]):
-            topic_id = topic["@id"].split("/")[-1]
-            data["@graph"][0]["topics"][idx] = self.get_topic(topic_id)
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing `@type` to `versions_url`
+        topics_graph["@type"] = "hydra:Collection"
+
+        # Populate metadata for each topic in `topics`
+        topics_graph["topics"] = [
+            self.get_topic(topic["@id"].split("/")[-1])
+            for topic in topics_graph["topics"]
+        ]
 
         # TODO Update @context so it's not hardcoded
-        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
-        result = data["@graph"][0]
-        return result
+        topics_graph = {"@context": "https://staging.idpd.uk/ns#", **topics_graph}
+        return topics_graph
 
-    def get_topic(self, topic_id: str) -> Optional[Dict]:
+    def get_topic(self, topic_id: str, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Get a specific topic by topic_id
         """
         logger.info(
-            "Constructing get_topic() response from graph", data={"topic_id": topic_id}
+            "Constructing get_topic() response from graph", 
+            data={"topic_id": topic_id},
+            request_id=request_id,
         )
 
-        # Populate the graph from the database
-        graph = self.db
+        # Define initBindings for SPARQL query
+        init_bindings = {
+            "subject": URIRef(f"https://staging.idpd.uk/topics/{topic_id}"),
+            "type": URIRef("http://www.w3.org/ns/dcat#theme"),
+        }
 
-        # Use the construct wrappers to pull the raw RDF triples
-        # (as one rdflib.Graph() for each function) and add them
-        # together to create a single Graph of the
-        # data we need.
+        # Extract RDF triples from the database as one Graph
         result: Graph = (
-            construct_dataset_topic_by_id(graph, topic_id)
-            + construct_dataset_subtopics_by_id(graph, topic_id)
-            + construct_dataset_parent_topics_by_id(graph, topic_id)
+            self.sparql_queries.topic(init_bindings)
+            + self.sparql_queries.sub_topic(init_bindings)
+            + self.sparql_queries.parent_topic(init_bindings)
         )
 
         # Serialize the graph into jsonld
@@ -471,37 +506,50 @@ class OxigraphMetadataStore(BaseMetadataStore):
         data = jsonld.flatten(
             data, {"@context": constants.CONTEXT, "@type": "dcat:theme"}
         )
+        # Extract topic graph from flattened json-ld data
+        topic_graph = _get_single_graph_for_field(data, "@type")
+        if topic_graph is None:
+            return None
 
-        # TODO Fix context weirdness - at the moment, the flatten() method is changing @type to `themes`
-        data["@graph"][0]["@type"] = "dcat:theme"
-        result = data["@graph"][0]
-        data["@graph"][0]["@context"] = "https://staging.idpd.uk/ns#"
-        return result
+        # TODO Fix context weirdness - at the moment, the flatten() method is changing `@type` to `themes`
+        topic_graph["@type"] = "dcat:theme"
 
-    def get_sub_topics(self, topic_id: str) -> Optional[Dict]:
+        # TODO Update @context so it's not hardcoded
+        topic_graph = {"@context": "https://staging.idpd.uk/ns#", **topic_graph}
+        return topic_graph
+
+    def get_sub_topics(self, topic_id: str, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Get all sub-topics for a specific topic
         """
         logger.info(
             "Constructing get_sub_topics() response from graph",
             data={"topic_id": topic_id},
+            request_id=request_id,
         )
 
+        # Get all topics
         all_topics = self.get_topics()
+
+        # Extract topics which have a parent topic defined
         topics_with_parents = [
             topic
             for topic in all_topics["topics"]
             if topic.get("parent_topics", None) is not None
         ]
+
+        # Get the subtopics associated with a parent topic with ID `topic_id`
         sub_topics = [
             topic
             for topic in topics_with_parents
             if any([x.endswith(topic_id) for x in topic["parent_topics"]])
         ]
 
+        # If the topic with ID `topic_id` has no subtopics, return None
         if len(sub_topics) == 0:
             return None
 
+        # Otherwise, return a dictionary matching the Topics schema
         return {
             "@context": "https://staging.idpd.uk/ns#",
             "@id": f"https://staging.idpd.uk/topics/{topic_id}/subtopics",
