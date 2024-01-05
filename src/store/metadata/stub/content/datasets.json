@@ -336,7 +336,8 @@
         "email": "mailto:open.data@ofcom.org.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/economy"
+        "https://staging.idpd.uk/topics/economy",
+        "https://staging.idpd.uk/topics/prices"
       ],
       "frequency": "monthly",
       "keywords": [
