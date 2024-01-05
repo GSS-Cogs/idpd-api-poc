@@ -11,13 +11,6 @@
             "landing_page": "https://www.ons.gov.uk/"
         },
         {
-            "@id": "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero",
-            "@type": "dcat:publisher",
-            "title": "Department for Business, Energy & Industrial Strategy",
-            "description": "The Department for Energy Security and Net Zero (DESNZ) is focused on the energy portfolio from the former Department for Business, Energy and Industrial Strategy (BEIS).",
-            "landing_page": "https://www.gov.uk/government/organisations/department-for-energy-security-and-net-zero/"
-        },
-        {
             "@id": "https://staging.idpd.uk/publishers/ofcom",
             "@type": "dcat:publisher",
             "title": "Office of Communications",
@@ -32,6 +25,6 @@
             "landing_page": "https://www.gov.uk/government/organisations/department-for-education"
         }
     ],
-    "count": 4,
+    "count": 3,
     "offset": 0
 }
