@@ -1,6 +1,6 @@
 {
     "@context": "https://staging.idpd.uk/ns#",
-    "@id": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2022-08/versions",
+    "@id": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2023-03/versions",
     "@type": "hydra:Collection",
     "title": "Pupils at the expected standards at the end of key stage 2",
     "versions": [
@@ -9,13 +9,13 @@
                 "dcat:Distribution",
                 "csvw:Table"
             ],
-            "@id": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2022-08/versions/1",
+            "@id": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2023-03/versions/1",
             "identifier": "1",
             "issued": "2023-03-31T12:15:00Z",
             "title": "Pupils at the expected standards at the end of key stage 2",
             "summary": "Percentage of pupils in state-funded schools meeting the expected standard in reading, writing and maths at the end of key stage 2, England (state-funded schools), academic years 2015/16 - 2021/22",
             "description": "This dataset shows the percentage of pupils in state-funded schools meeting the expected standard in reading, writing and maths at the end of key stage 2, in England state-funded schools, for academic years 2015/16 - 2021/22.",
-            "download_url": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2022-08/versions/1.csv",
+            "download_url": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2023-03/versions/1.csv",
             "media_type": "text/csv",
             "table_schema": {
                 "columns": [

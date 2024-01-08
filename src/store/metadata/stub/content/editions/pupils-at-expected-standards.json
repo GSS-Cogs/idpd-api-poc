@@ -5,7 +5,7 @@
   "title": "Pupils at expected standards at the end of key stage 2",
   "editions": [
     {
-      "@id": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2022-08",
+      "@id": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2023-03",
       "@type": "dcat:Dataset",
       "in_series": "https://staging.idpd.uk/datasets/pupils-at-expected-standards",
       "identifier": "2022-08",
@@ -19,7 +19,7 @@
         "email": "mailto:open.data@ofcom.org.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/economy"
+        "https://staging.idpd.uk/topics/children-education-and-skills"
       ],
       "frequency": "monthly",
       "keywords": [
@@ -51,10 +51,10 @@
         "start": "2022-09-01T00:00:00Z",
         "end": "2022-09-30T23:59:00Z"
       },
-      "versions_url": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2022-08/versions",
+      "versions_url": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2023-03/versions",
       "versions": [
         {
-          "@id": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2022-08/versions/1",
+          "@id": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2023-03/versions/1",
           "issued": "2023-03-31T12:15:00Z"
         }
       ],
