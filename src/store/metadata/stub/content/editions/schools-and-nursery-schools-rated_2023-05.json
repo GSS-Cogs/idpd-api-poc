@@ -76,8 +76,8 @@
             {
               "name": "observation",
               "datatype": "decimal",
-              "titles": "Number of apprenticeship achievements",
-              "description": "Observation value of apprenticeship achievements."
+              "titles": "Percentage of state-funded schools",
+              "description": "Observation value of Schools and nursery schools rated good or outstanding."
             },
             {
               "name": "measure",
