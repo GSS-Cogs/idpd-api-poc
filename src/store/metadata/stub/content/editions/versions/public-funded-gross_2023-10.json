@@ -46,9 +46,9 @@
                     {
                         "name": "observation",
                         "datatype": "decimal",
-                        "titles": "Gross disposable household income per head",
-                        "description": "Observation value of gross disposable household income per head."
-                    },
+                        "titles": "Gross for expenditure on research and development",
+                        "description": "Observation value of gross for expenditure on research and development."
+                      },
                     {
                         "name": "measure",
                         "datatype": "string",
