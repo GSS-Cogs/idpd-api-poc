@@ -77,7 +77,7 @@
             "name": "areanm",
             "datatype": "string",
             "titles": "Area Name",
-            "description": "The name assiciated with The geography code "
+            "description": "The name associated with The geography code "
           },
           {
             "name": "geography",
@@ -104,19 +104,19 @@
             "description": "Unit Type of the Observational Value"
           },
           {
-            "name": "lower confidence interval (95%)",
+            "name": "lower_confidence_interval (95%)",
             "datatype": "decimal",
             "titles": "Lower Confidence Interval",
             "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Lower bound"
           },
           {
-            "name": "upper confidence interval (95%)",
+            "name": "upper_confidence_interval (95%)",
             "datatype": "decimal",
             "titles": "Upper Confidence Interval",
             "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Upper bound"
           },
           {
-            "name": "observation status",
+            "name": "observation_status",
             "datatype": "string",
             "titles": "Observation Status",
             "description": "Additional Context to the Observation if needed"
