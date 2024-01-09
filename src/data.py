@@ -116,6 +116,11 @@ def populate(oxigraph_url=None, write_to_db=True):
         datasets_source_dict = json.load(f)
     _confirm_resource_count(datasets_source_dict, "datasets")
 
+    _assert_ordered_by_issued(datasets_source_dict, "datasets", "editions")
+
+    _assert_ordered_by_issued(editions_source_path, "editions", "versions")
+
+    datasets_source_dict(datasets_source_dict, "versions")
     # Validate data and add to graph
     validate_and_parse_json(g, schemas.Datasets, datasets_source_dict, "datasets")
 
@@ -395,7 +400,7 @@ def _assert_summarised_edition_in_dataset(datasets: Dict, edition: Dict):
             '''
         )
 
-def _assert_ordered_by_issued(list_of_datasets, sub_topic: str):
+def _assert_ordered_by_issued(list_of_datasets, topic: str,sub_topic: str):
     """this function will assert that the list of datasets
      is ordered by issued, raises error if not"""
 
@@ -403,7 +408,7 @@ def _assert_ordered_by_issued(list_of_datasets, sub_topic: str):
 
     list_of_issued=[]
     
-    for x in list_of_datasets["datasets"]:
+    for x in list_of_datasets[topic]:
         if len(x[sub_topic]) > 1 and x[sub_topic] is not None:
             for y in x[sub_topic]:
                 if index == 0:
