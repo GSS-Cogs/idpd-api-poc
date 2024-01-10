@@ -191,7 +191,7 @@ def populate(oxigraph_url=None, write_to_db=True):
     # Validate data and add to graph
     topic_ids = [topic["@id"] for topic in topics_source_dict["topics"]]
     for dataset in datasets_source_dict["datasets"]:
-        _assert_ordered_by_issued(datasets_source_dict, "datasets", "editions")
+        _assert_ordered_by_issued(dataset, "datasets", "editions")
         for topic in dataset["topics"]:
             assert (
                 topic in topic_ids
