@@ -116,11 +116,7 @@ def populate(oxigraph_url=None, write_to_db=True):
         datasets_source_dict = json.load(f)
     _confirm_resource_count(datasets_source_dict, "datasets")
 
-    #assert that the sub_editions and sub_version are ordered by issued
-    _assert_ordered_by_issued(datasets_source_dict, "datasets", "editions")
-    _assert_ordered_by_issued(editions_source_path, "editions", "versions")
 
-    datasets_source_dict(datasets_source_dict, "versions")
     # Validate data and add to graph
     validate_and_parse_json(g, schemas.Datasets, datasets_source_dict, "datasets")
 
@@ -157,6 +153,7 @@ def populate(oxigraph_url=None, write_to_db=True):
         assert (
             edition["@id"] in dataset_editions_urls
         ), f"Editions URL {edition['@id']} not found in {dataset_editions_urls}"
+        _assert_ordered_by_issued(edition, "editions", "versions")
         for edn in edition["editions"]:
             versions_in_edition[edn["versions_url"]] = edn["versions"]
             topics_in_editions.update(edn["topics"])
@@ -194,6 +191,7 @@ def populate(oxigraph_url=None, write_to_db=True):
     # Validate data and add to graph
     topic_ids = [topic["@id"] for topic in topics_source_dict["topics"]]
     for dataset in datasets_source_dict["datasets"]:
+        _assert_ordered_by_issued(datasets_source_dict, "datasets", "editions")
         for topic in dataset["topics"]:
             assert (
                 topic in topic_ids

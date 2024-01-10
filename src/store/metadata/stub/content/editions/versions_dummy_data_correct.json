@@ -51,19 +51,19 @@
       "versions_url": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions",
       "versions": [
         {
-          "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions/1",
+          "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-1/versions/1",
           "issued": "2023-11-06T12:25:28Z"
         },
         {
-          "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions/1",
+          "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-2/versions/1",
           "issued": "2020-11-06T12:25:28Z"
         },
         {
-          "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions/1",
+          "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-5/versions/1",
           "issued": "2020-11-06T12:25:28Z"
         },
         {
-          "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions/1",
+          "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-7/versions/1",
           "issued": "2019-11-06T12:25:28Z"
         }
       ],

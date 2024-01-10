@@ -31,7 +31,7 @@
         "region"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-      "issued": "2023-11-06T12:25:28Z",
+      "issued": "2021-11-06T12:25:28Z",
       "modified": "2023-12-11T16:10:00Z",
       "spatial_resolution": [
         "N09",
@@ -55,15 +55,15 @@
           "issued": "2021-11-06T12:25:28Z"
         },
         {
-          "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions/1",
+          "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions/2",
           "issued": "2023-11-06T12:25:28Z"
         },
         {
-          "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions/1",
+          "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions/3",
           "issued": "2020-11-06T12:25:28Z"
         },
         {
-          "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions/1",
+          "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions/4",
           "issued": "2019-11-06T12:25:28Z"
         }
       ],
