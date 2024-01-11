@@ -10,8 +10,8 @@
         "in_series": "https://staging.idpd.uk/datasets/schools-and-nursery-schools-rated",
         "identifier": "2023-05",
         "title": "Schools and nursery schools rated good or outstanding",
-        "summary": "Percentage of state-funded provided for schools that are rated",
-        "description": "This dataset shows the percentage of state-funded Nursery schools, Primary schools, Secondary schools, Alternative Provision (AP) schools and Special schools that are rated.",
+        "summary": "Percentage of state-funded provided for schools that are rated good or outstanding",
+        "description": "This dataset shows the percentage of state-funded Nursery schools, Primary schools, Secondary schools, Alternative Provision (AP) schools and Special schools that are rated good or outstanding.",
         "publisher": "https://staging.idpd.uk/publishers/department-for-education",
         "creator": "https://staging.idpd.uk/publishers/department-for-education",
         "contact_point": {
@@ -76,7 +76,7 @@
             {
               "name": "observation",
               "datatype": "decimal",
-              "titles": "Percentage of state-funded schools",
+              "titles": "Percentage of state-funded schools rated good or outstanding",
               "description": "Observation value of Schools and nursery schools rated good or outstanding."
             },
             {
