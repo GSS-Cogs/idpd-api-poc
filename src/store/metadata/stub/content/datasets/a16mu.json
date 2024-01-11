@@ -1,0 +1,57 @@
+{
+    "@context": "https://staging.idpd.uk/ns#",
+    "@type": [
+      "dcat:Catalog",
+      "hydra:Collection"
+    ],
+    "@id": "https://staging.idpd.uk/datasets",
+    "datasets": [
+        {
+            "@id": "https://staging.idpd.uk/datasets/a16mu",
+            "@type": "dcat:DatasetSeries",
+            "identifier": "a16mu",
+            "title": "Modelled unemployment rate aged 16 years and over",
+            "summary": "Modelled unemployment rate for people aged 16 years and over, Great Britain, 07/2004-06/2005 to 07/2022-06/2023.",
+            "description": "This dataset shows modelled-based estimates for the proportion of people aged 16 years and over without a job who have been actively seeking work within the last four weeks and are available to start work within the next two weeks",
+            "issued": "2023-11-06T12:25:28Z",
+            "modified": "2023-12-11T16:10:00Z",
+            "next_release": "2024-11-06T12:00:00Z",
+            "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+            "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+            "contact_point": {
+              "name": "Debra Leaker",
+              "email": "mailto:labour.market@ons.gov.uk"
+            },
+            "topics": [
+              "https://staging.idpd.uk/topics/labour-market-and-welfare"
+            ],
+            "frequency": "annual",
+            "keywords": [
+              "subnational",
+              "county",
+              "local-authority",
+              "unemployment",
+              "labour-market",
+              "region"
+            ],
+            "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "spatial_resolution":["N09", "S12", "W06", "E92", "K02"],
+            "spatial_coverage": "K02000001",
+            "temporal_resolution": ["P1Y"],
+            "temporal_coverage": {
+              "start": "2004-07-01T00:00:00Z",
+              "end": "2022-07-04T00:00:00Z"
+            },
+            "editions_url": "https://staging.idpd.uk/datasets/a16mu/editions",
+            "editions": [
+              {
+                "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11",
+                "issued": "2023-11-06T12:25:28Z",
+                "modified": "2023-12-11T16:10:00Z"
+              }
+            ]
+          }
+    ],
+    "offset": 0,
+    "count": 5
+  }

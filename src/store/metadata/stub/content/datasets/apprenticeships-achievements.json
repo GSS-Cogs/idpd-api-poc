@@ -1,0 +1,55 @@
+{
+    "@context": "https://staging.idpd.uk/ns#",
+    "@type": [
+      "dcat:Catalog",
+      "hydra:Collection"
+    ],
+    "@id": "https://staging.idpd.uk/datasets",
+    "datasets": [
+        {
+            "@id": "https://staging.idpd.uk/datasets/apprenticeships-achievements",
+            "@type": "dcat:DatasetSeries",
+            "identifier": "apprenticeships-achievements",
+            "title": "Apprenticeships achievements",
+            "summary": "Apprenticeships achieved by adults aged 16+ based on home address, rate per 100,000 population, England, academic years 2017/18 to 2022/23",
+            "description": "This dataset shows apprenticeships achieved by adults aged 16+ based on home address, rate per 100,000 population, in England, for full academic years 2017/18 to 2022/23.",
+            "issued": "2023-05-17T12:25:28Z",
+            "modified": "2023-12-08T13:26:00Z",
+            "next_release": "2024-05-01T09:30:00Z",
+            "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+            "creator": "https://staging.idpd.uk/publishers/department-for-education",
+            "contact_point": {
+              "name": "Apprenticeships achievements",
+              "email": "mailto:apprenticeships-achievements@ons.gov.uk"
+            },
+            "topics": [
+              "https://staging.idpd.uk/topics/children-education-and-skills"],
+            "frequency": "annual",
+            "keywords": [
+              "apprenticeship",
+              "community",
+              "learning",
+              "education",
+              "training"
+            ],
+            "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+            "spatial_coverage": "E92000001",
+            "temporal_resolution": ["P1Y"],
+            "temporal_coverage": {
+              "start": "2017-01-01T12:00:00Z",
+              "end": "2022-12-31T12:00:00Z"
+            },
+            "editions_url": "https://staging.idpd.uk/datasets/apprenticeships-achievements/editions",
+            "editions": [
+              {
+                "@id": "https://staging.idpd.uk/datasets/apprenticeships-achievements/editions/2023-05",
+                "issued": "2023-05-17T12:25:28Z",
+                "modified": "2023-12-08T13:26:00Z"
+              }
+            ]
+          }
+    ],
+    "offset": 0,
+    "count": 5
+  }
