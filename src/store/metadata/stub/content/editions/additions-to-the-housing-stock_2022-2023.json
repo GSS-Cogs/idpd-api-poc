@@ -19,8 +19,7 @@
           "email": "mailto:correspondence@levellingup.gov.uk"
         },
         "topics": [
-          "https://staging.idpd.uk/topics/climate-change",
-          "https://staging.idpd.uk/topics/carbon-emissions"
+          "https://staging.idpd.uk/topics/housing-planning-and-local-services"
         ],
       "frequency": "annual",
       "keywords": [
@@ -52,8 +51,7 @@
       "versions": [
         {
           "@id": "https://staging.idpd.uk/datasets/additions-to-the-housing-stock/editions/2022-2023/versions/1",
-          "issued": "2023-05-05T08:59:11Z",
-          "modified": "2023-12-06T15:10:00Z"
+          "issued": "2023-05-05T08:59:11Z"
         }
       ],
       "next_release": "2024-04-19T09:30:00Z",
