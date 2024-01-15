@@ -20,7 +20,6 @@ from typing import Dict, List
 from rdflib import BNode, ConjunctiveGraph, Dataset, Graph
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore, _node_to_sparql
 
-
 # Load the context file
 with open(Path("src/store/metadata/context.json")) as f:
     context = json.load(f)
