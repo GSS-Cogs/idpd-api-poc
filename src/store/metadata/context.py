@@ -6,6 +6,7 @@ from custom_logging import configure_logger, logger
 
 configure_logger()
 
+
 class ContextStore:
     def __init__(self):
         this_dir = Path(__file__).parent

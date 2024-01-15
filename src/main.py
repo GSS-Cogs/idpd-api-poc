@@ -1,4 +1,3 @@
-from ensurepip import version
 import os
 from typing import Optional
 
@@ -11,8 +10,6 @@ from custom_logging import configure_logger, logger
 from middleware import logging_middleware
 from store import StubCsvStore, StubMetadataStore
 from store.metadata.context import ContextStore
-from store.metadata.oxigraph.store import OxigraphMetadataStore
-
 
 configure_logger()
 # Simple env var flag to allow local browsing of api responses
@@ -145,7 +142,11 @@ def get_dataset_by_id(
     This endpoint returns detailed information about a dataset based on its unique identifier.
     """
     request_id = request.headers.get("X-Request-ID", None)
-    logger.info("Received request for dataset with ID", data={"dataset_id": dataset_id}, request_id=request_id)
+    logger.info(
+        "Received request for dataset with ID",
+        data={"dataset_id": dataset_id},
+        request_id=request_id,
+    )
 
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         dataset = metadata_store.get_dataset(dataset_id, request_id=request_id)
@@ -189,7 +190,9 @@ def get_dataset_editions(
     """
     request_id = request.headers.get("X-Request-ID", None)
     logger.info(
-        "Received request for dataset editions", data={"dataset_id": dataset_id}, request_id=request_id
+        "Received request for dataset editions",
+        data={"dataset_id": dataset_id},
+        request_id=request_id,
     )
 
     if request.headers["Accept"] == JSONLD or BROWSABLE:
@@ -241,7 +244,9 @@ def get_dataset_edition_by_id(
     )
 
     if request.headers["Accept"] == JSONLD or BROWSABLE:
-        edition = metadata_store.get_edition(dataset_id, edition_id, request_id=request_id)
+        edition = metadata_store.get_edition(
+            dataset_id, edition_id, request_id=request_id
+        )
         if edition is not None:
             response.status_code = status.HTTP_200_OK
             return edition
@@ -289,7 +294,9 @@ def get_dataset_edition_versions(
     )
 
     if request.headers["Accept"] == JSONLD or BROWSABLE:
-        versions = metadata_store.get_versions(dataset_id, edition_id, request_id=request_id)
+        versions = metadata_store.get_versions(
+            dataset_id, edition_id, request_id=request_id
+        )
         if versions is not None:
             response.status_code = status.HTTP_200_OK
             return versions
@@ -334,12 +341,18 @@ def get_dataset_edition_version_by_id(
     request_id = request.headers.get("X-Request-ID", None)
     logger.info(
         "Received request for dataset versions",
-        data={"dataset_id": dataset_id, "edition_id": edition_id, "version_id": version_id},
+        data={
+            "dataset_id": dataset_id,
+            "edition_id": edition_id,
+            "version_id": version_id,
+        },
         request_id=request_id,
     )
 
     if request.headers["Accept"] == CSV:
-        csv_data = csv_store.get_version(dataset_id, edition_id, version_id, request_id=request_id)
+        csv_data = csv_store.get_version(
+            dataset_id, edition_id, version_id, request_id=request_id
+        )
         if csv_data is not None:
             response.status_code = status.HTTP_200_OK
             return csv_data
@@ -348,7 +361,9 @@ def get_dataset_edition_version_by_id(
             return
 
     elif request.headers["Accept"] == JSONLD or BROWSABLE:
-        version = metadata_store.get_version(dataset_id, edition_id, version_id, request_id=request_id)
+        version = metadata_store.get_version(
+            dataset_id, edition_id, version_id, request_id=request_id
+        )
         if version is not None:
             response.status_code = status.HTTP_200_OK
             return version
@@ -388,7 +403,11 @@ def get_all_publishers(
     This endpoint returns all the publishers available in the system.
     """
     request_id = request.headers.get("X-Request-ID", None)
-    logger.info("Received request for publishers", data={"request_type": "publishers"}, request_id=request_id)
+    logger.info(
+        "Received request for publishers",
+        data={"request_type": "publishers"},
+        request_id=request_id,
+    )
 
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
@@ -434,11 +453,13 @@ def get_publisher_by_id(
     """
     request_id = request.headers.get("X-Request-ID", None)
     logger.info(
-        "Received request for publisher with ID", data={"publisher_id": publisher_id}, request_id=request_id
+        "Received request for publisher with ID",
+        data={"publisher_id": publisher_id},
+        request_id=request_id,
     )
 
     if request.headers["Accept"] == JSONLD or BROWSABLE:
-        publisher = metadata_store.get_publisher(publisher_id,request_id=request_id)
+        publisher = metadata_store.get_publisher(publisher_id, request_id=request_id)
         if publisher is not None:
             response.status_code = status.HTTP_200_OK
             return publisher
@@ -477,7 +498,11 @@ def get_all_topics(
     This endpoint returns all of the topics available in the system.
     """
     request_id = request.headers.get("X-Request-ID", None)
-    logger.info("Received request for topics", data={"request_type": "topics"}, request_id=request_id)
+    logger.info(
+        "Received request for topics",
+        data={"request_type": "topics"},
+        request_id=request_id,
+    )
 
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
@@ -522,10 +547,14 @@ def get_topic_by_id(
     This endpoint returns detailed information about a specific topic based on its unique identifier.
     """
     request_id = request.headers.get("X-Request-ID", None)
-    logger.info("Received request for topic with ID", data={"topic_id": topic_id}, request_id=request_id)
+    logger.info(
+        "Received request for topic with ID",
+        data={"topic_id": topic_id},
+        request_id=request_id,
+    )
 
     if request.headers["Accept"] == JSONLD or BROWSABLE:
-        topic = metadata_store.get_topic(topic_id,request_id=request_id)
+        topic = metadata_store.get_topic(topic_id, request_id=request_id)
         if topic is not None:
             response.status_code = status.HTTP_200_OK
             return topic
@@ -566,12 +595,14 @@ def get_sub_topics(
     """
     request_id = request.headers.get("X-Request-ID", None)
     logger.info(
-        "Received request for subtopics for topic ID", data={"topic_id": topic_id}, request_id=request_id
+        "Received request for subtopics for topic ID",
+        data={"topic_id": topic_id},
+        request_id=request_id,
     )
 
     if request.headers["Accept"] == JSONLD or BROWSABLE:
         response.status_code = status.HTTP_200_OK
-        topics = metadata_store.get_sub_topics(topic_id,request_id=request_id)
+        topics = metadata_store.get_sub_topics(topic_id, request_id=request_id)
         if topics is not None:
             response.status_code = status.HTTP_200_OK
             return topics
