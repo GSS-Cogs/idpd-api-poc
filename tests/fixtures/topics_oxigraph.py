@@ -2,6 +2,7 @@ import json
 import pathlib
 import pytest
 from data import populate
+from store.metadata.context import ContextStore
 
 @pytest.fixture
 def topic_test_data():
@@ -13,7 +14,9 @@ def topic_test_data():
     # Use the data.py script to populate the graph
     populate(jsonld_location="tests/fixtures/content", write_to_db=False)
     with open(file_path, "r") as json_file:
-        return json.load(json_file)["topics"][0]
+       topic = json.load(json_file)["topics"][0]
+       topic["context"] = ContextStore().get_context()
+    return topic
 
 
 @pytest.fixture

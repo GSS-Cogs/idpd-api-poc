@@ -20,6 +20,7 @@ from typing import Dict, List
 from rdflib import ConjunctiveGraph, Dataset, BNode, Graph
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore, _node_to_sparql
 import schemas
+from store.metadata.stub.store import StubMetadataStore
 
 
 # Load the context file
@@ -65,13 +66,16 @@ def validate_and_parse_json(g, schema, resource_dict, resource_type):
     schema(**resource_dict)
 
     # Parse the JSON-LD and add to the graph
+    jsonld_data = json.dumps(set_context(resource_dict))
+    print(jsonld_data)
     g += Graph().parse(data=json.dumps(set_context(resource_dict)), format="json-ld")
     assert len(g) > graph_length   
 
 
 def populate(jsonld_location=None, oxigraph_url=None, write_to_db=True):
     this_dir = Path(__file__).parent
-    metadata_stub_content_path = Path("src/store/metadata/stub/content").absolute()
+    store = StubMetadataStore(jsonld_location)
+    metadata_stub_content_path = store.content_dir
 
     # Clear up any previous
     out = Path(this_dir / "out")

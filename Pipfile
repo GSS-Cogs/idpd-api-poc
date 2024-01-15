@@ -10,6 +10,7 @@ uvicorn = "*"
 httpx = "*"
 structlog = "*"
 pyld = "*"
+rdflib = "*"
 
 [dev-packages]
 pytest = "*"

@@ -2,6 +2,7 @@ import json
 import pathlib
 import pytest
 from data import populate
+from store.metadata.context import ContextStore
 
 @pytest.fixture
 def publisher_test_data():
@@ -13,7 +14,9 @@ def publisher_test_data():
     # Use the data.py script to populate the graph
     populate(jsonld_location="tests/fixtures/content", write_to_db=False)
     with open(file_path, "r") as json_file:
-        return json.load(json_file)["publishers"][0]
+        publisher = json.load(json_file)["publishers"][0]
+        publisher["context"] = ContextStore().get_context()
+    return publisher
 
 
 @pytest.fixture
