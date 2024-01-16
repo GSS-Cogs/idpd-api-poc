@@ -11,11 +11,11 @@ def test_editions_ordered_by_issued_fail():
     (has to be longer than 1), the test is expected to fail
     """
     try:
-        file_path = Path("src/store/metadata/stub/content/datasets_dummy_fail.json").absolute()
+        file_path = Path("tests/test_jsons/datasets_dummy_fail.json").absolute()
 
         with open(file_path) as f:
             datasets_source_dict = json.load(f)
-        _assert_ordered_by_issued(datasets_source_dict,"datasets", "editions")
+        _assert_ordered_by_issued(datasets_source_dict, "datasets","editions")
     except:
         "The datasets should be ordered by 'issued' (from most recent)" 
 
@@ -26,13 +26,13 @@ def test_editions_ordered_by_issued_succeed():
     (has to be longer than 1), the test is expected to pass
     """
 
-    file_path = Path("src/store/metadata/stub/content/datasets_dummy_correct.json").absolute()
+    file_path = Path("tests/test_jsons/datasets_dummy_correct.json").absolute()
 
     with open(file_path) as f:
         datasets_source_dict = json.load(f)
     
 
-    _assert_ordered_by_issued(datasets_source_dict,"datasets", "editions")
+    _assert_ordered_by_issued(datasets_source_dict, "datasets","editions")
 
 
 
@@ -42,11 +42,11 @@ def test_verisons_ordered_by_issued_fail():
     (has to be longer than 1), the test is expected to fail
     """
     try:
-        file_path = Path("src/store/metadata/stub/content/editions/versions_dummy_data_fail.json").absolute()
+        file_path = Path("tests/test_jsons/versions_dummy_data_fail.json").absolute()
 
         with open(file_path) as f:
             datasets_source_dict = json.load(f)
-        _assert_ordered_by_issued(datasets_source_dict, "editions", "versions")
+        _assert_ordered_by_issued(datasets_source_dict, "editions","versions")
     except:
         "The datasets should be ordered by 'issued' (from most recent)" 
 
@@ -56,10 +56,10 @@ def test_versions_ordered_by_issued_succeed():
     (has to be longer than 1), the test is expected to pass
     """
 
-    file_path = Path("src/store/metadata/stub/content/editions/versions_dummy_data_correct.json").absolute()
+    file_path = Path("tests/test_jsons/versions_dummy_data_correct.json").absolute()
 
     with open(file_path) as f:
         datasets_source_dict = json.load(f)
     
 
-    _assert_ordered_by_issued(datasets_source_dict,"editions", "versions")
+    _assert_ordered_by_issued(datasets_source_dict,"editions" ,"versions")
