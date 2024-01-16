@@ -153,7 +153,8 @@ def populate(oxigraph_url=None, write_to_db=True):
         assert (
             edition["@id"] in dataset_editions_urls
         ), f"Editions URL {edition['@id']} not found in {dataset_editions_urls}"
-        _assert_ordered_by_issued(edition, "datasets", "editions")
+        print(edition['@id'])
+        _assert_ordered_by_issued(edition, "editions", "versions")
         for edn in edition["editions"]:
             versions_in_edition[edn["versions_url"]] = edn["versions"]
             topics_in_editions.update(edn["topics"])
