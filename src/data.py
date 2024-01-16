@@ -153,8 +153,7 @@ def populate(oxigraph_url=None, write_to_db=True):
         assert (
             edition["@id"] in dataset_editions_urls
         ), f"Editions URL {edition['@id']} not found in {dataset_editions_urls}"
-        print(edition['@id'])
-        _assert_ordered_by_issued(edition, "editions", "versions")
+        _assert_editions__ordered_by_issued(edition, "editions", "versions")
         for edn in edition["editions"]:
             versions_in_edition[edn["versions_url"]] = edn["versions"]
             topics_in_editions.update(edn["topics"])
@@ -192,7 +191,7 @@ def populate(oxigraph_url=None, write_to_db=True):
     # Validate data and add to graph
     topic_ids = [topic["@id"] for topic in topics_source_dict["topics"]]
     for dataset in datasets_source_dict["datasets"]:
-        _assert_ordered_by_issued(dataset, "editions", "versions")
+        _assert_versions__ordered_by_issued(dataset, "editions")
         for topic in dataset["topics"]:
             assert (
                 topic in topic_ids
@@ -399,7 +398,7 @@ def _assert_summarised_edition_in_dataset(datasets: Dict, edition: Dict):
             '''
         )
 
-def _assert_ordered_by_issued(list_of_datasets, topic: str, sub_topic: str):
+def _assert_editions__ordered_by_issued(list_of_datasets, topic: str, sub_topic: str):
     """this function will assert that the list of datasets
      is ordered by issued, raises error if not"""
 
@@ -418,6 +417,25 @@ def _assert_ordered_by_issued(list_of_datasets, topic: str, sub_topic: str):
 
             most_recent = max(list_of_issued)
             assert first_value == most_recent, (f"The datasets should be ordered by 'issued' (from most recent) {x}") 
+
+def _assert_versions__ordered_by_issued(datasets, sub_topic: str):
+    """this function will assert that the list of datasets
+     is ordered by issued, raises error if not"""
+
+    index  = 0
+
+    list_of_issued=[]
+    
+    if len(datasets[sub_topic]) > 1 and datasets[sub_topic] is not None:
+        for y in datasets[sub_topic]:
+            if index == 0:
+                first_value = datasets[sub_topic][0]["issued"]
+            fornow = y["issued"]
+            list_of_issued.append(fornow)
+            index += 1
+
+        most_recent = max(list_of_issued)
+        assert first_value == most_recent, (f"The datasets should be ordered by 'issued' (from most recent) {x}") 
 
 
 
