@@ -1,0 +1,155 @@
+{
+    "@context": "https://staging.idpd.uk/ns#",
+    "@id": "https://staging.idpd.uk/datasets/adult-obesity-prevalence-aged-18-years-and-over/editions",
+    "@type": "hydra:Collection",
+    "title": "Adult obesity prevalence (aged 18 years and over)",
+    "editions": [
+      {
+        "@id": "https://staging.idpd.uk/datasets/adult-obesity-prevalence-aged-18-years-and-over/editions/2023-05",
+        "@type": "dcat:Dataset",
+        "in_series": "https://staging.idpd.uk/datasets/adult-obesity-prevalence-aged-18-years-and-over",
+        "identifier": "2015-2021",
+        "title": "Adult obesity prevalence (aged 18 years and over)",
+        "summary": "Percentage of adults aged 18 and over classified as living with obesity, England, 16/11/2015-15/11/2016 to 16/11/2021-15/11/2022.",
+        "description": "Percentage of adults aged 18 and over classified as living with obesity, in England, for 16/11/2015-15/11/2016 to 16/11/2021-15/11/2022.\n\nCoverage\nEngland\n\nGeography definition\nLocal Authority Districts and Unitary Authorities,\nCounties,\nRegions,\nCombined Authorities,\nNation (England)\n\nSource\nEngland: [Office for Health Improvement and Disparities]\n\nSource Notes and Caveats\nAdults are defined as obese if their body mass index (BMI) is greater than or equal to 30kg/m²",
+        "issued": "2023-05-17T12:41:00Z",
+        "modified": "2023-12-13T09:01:00Z",
+        "next_release": "1900-01-01T00:00:00Z",
+        "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+        "creator": "https://staging.idpd.uk/publishers/office-for-health-improvement-and-disparities",
+        "contact_point": {
+          "name": "Office for Health Improvement and Disparities",
+          "email": "mailto:dhsc.publicenquiries@dhsc.gov.uk"
+        },
+        "topics": [
+          "https://staging.idpd.uk/topics/health-and-social-care"
+        ],
+        "frequency": "irregular",
+        "keywords": [
+          "obesity",
+          "health",
+          "subnational",
+          "community",
+          "county"
+        ],
+        "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2015-11-16T00:00:00Z",
+        "end": "2021-11-16T00:00:00Z"
+       },
+        "versions_url": "https://staging.idpd.uk/datasets/adult-obesity-prevalence-aged-18-years-and-over/editions/2023-05/versions",
+        "versions": [
+          {
+            "@id": "https://staging.idpd.uk/datasets/adult-obesity-prevalence-aged-18-years-and-over/editions/2023-05/versions/1",
+            "issued": "2023-05-17T12:41:00Z"
+          }
+        ],
+        "table_schema": {
+          "columns": [
+            {
+                "name": "Period",
+                "datatype": "string",
+                "titles": "gregorian-interval",
+                "description": "The time period associated with the observation."
+              },
+              {
+                "name": "AREACD",
+                "datatype": "string",
+                "titles": "Statistical Geography",
+                "description": "The geography code associated with the observation."
+              },
+              {
+                "name": "AREANM",
+                "datatype": "string",
+                "titles": "Area Name",
+                "description": "The name assiciated with The geography code "
+              },
+              {
+                "name": "Geography",
+                "datatype": "string",
+                "titles": "Geography Type",
+                "description": "The categorisation of the geography code"
+              },
+              {
+                "name": "Variable Name",
+                "datatype": "string",
+                "titles": "Variable Name",
+                "description": "Which ESS variable is being measured"
+              },
+              {
+                "name": "Indicator", 		
+                "datatype": "string",
+                "titles": "Indicator",
+                "description": "Which ESS indicator is being measured"
+              },
+              {
+                "name": "Mission",
+                "datatype": "string",
+                "titles": "Mission",
+                "description": "Which ESS mission number this dataset is fulfilling"
+              },
+              {
+                "name": "Category",
+                "datatype": "string",
+                "titles": "Category",
+                "description": "Which ESS category the dataset belongs to"
+              },
+              {
+                  "name": "Observation",
+                  "datatype": "integer",
+                  "titles": "Observation",
+                  "description": "Observation value for the chosen variable"
+                },
+                {
+                    "name": "Measure",
+                    "datatype": "string",
+                    "titles": "Measure Type",
+                    "description": "Measure Type of the Observational Value"
+                },
+                {
+                    "name": "Unit",
+                    "datatype": "string",
+                    "titles": "Unit",
+                    "description": "Unit Type of the Observational Value"
+                  },
+                {
+                "name": "Lower Confidence Interval (95%)",
+                "datatype": "decimal",
+                "titles": "Lower Confidence Interval",
+                "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Lower bound"
+              },
+              {
+                "name": "Upper Confidence Interval (95%)",
+                "datatype": "decimal",
+                "titles": "Upper Confidence Interval",
+                "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Upper bound"
+              },
+              {
+                "name": "Observation Status",
+                "datatype": "string",
+                "titles": "Observation Status",
+                "description": "Additional Context to the Observation if needed"
+              },
+              {
+                "name": "Polarity",
+                "datatype": "string",
+                "titles": "Polarity",
+                "description": "Polarity"
+              },
+              {
+                "name": "Notes",
+                "datatype": "string",
+                "titles": "Notes",
+                "description": "Additional notes for column values where needed"
+              }
+    
+        ]
+        }
+      }
+    ],
+    "count": 1,
+    "offset": 0
+  }
