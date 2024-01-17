@@ -516,7 +516,7 @@
       "editions_url": "https://staging.idpd.uk/datasets/adult-obesity-prevalence-aged-18-years-and-over/editions",
       "editions": [
         {
-          "@id": "https://staging.idpd.uk/datasets/adult-obesity-prevalence-aged-18-years-and-over/editions/2015-2021",
+          "@id": "https://staging.idpd.uk/datasets/adult-obesity-prevalence-aged-18-years-and-over/editions/2023-05",
           "issued": "2023-05-17T12:41:00Z",
           "modified": "2023-12-13T09:01:00Z"
         }
