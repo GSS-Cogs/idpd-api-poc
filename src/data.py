@@ -399,8 +399,10 @@ def _assert_summarised_edition_in_dataset(datasets: Dict, edition: Dict):
         )
 
 def _assert_editions__ordered_by_issued(list_of_datasets, topic: str, sub_topic: str):
-    """this function will assert that the list of datasets
-     is ordered by issued, raises error if not"""
+    """
+        this function will assert that the list of datasets subtset
+        is ordered by issued, raises error if not
+    """
 
     index  = 0
 
@@ -416,11 +418,13 @@ def _assert_editions__ordered_by_issued(list_of_datasets, topic: str, sub_topic:
                 index += 1
 
             most_recent = max(list_of_issued)
-            assert first_value == most_recent, (f"The datasets should be ordered by 'issued' (from most recent) {x}") 
+            assert first_value == most_recent, (f"The datasets should be ordered by 'issued' (from most recent)") 
 
 def _assert_versions__ordered_by_issued(datasets, sub_topic: str):
-    """this function will assert that the list of datasets
-     is ordered by issued, raises error if not"""
+    """
+        this function will assert that the list of datasets subset
+        is ordered by issued, raises error if not
+    """
 
     index  = 0
 
@@ -435,7 +439,7 @@ def _assert_versions__ordered_by_issued(datasets, sub_topic: str):
             index += 1
 
         most_recent = max(list_of_issued)
-        assert first_value == most_recent, (f"The datasets should be ordered by 'issued' (from most recent) {x}") 
+        assert first_value == most_recent, (f"The datasets should be ordered by 'issued' (from most recent)") 
 
 
 
