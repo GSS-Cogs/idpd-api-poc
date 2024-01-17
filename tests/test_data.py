@@ -2,7 +2,7 @@ import pytest
 from pathlib import Path
 import json
 
-from src.data import _assert_editions__ordered_by_issued
+from src.data import _assert_editions_ordered_by_issued
 
 
 def test_editions_ordered_by_issued_fail():
@@ -32,7 +32,7 @@ def test_editions_ordered_by_issued_succeed():
         datasets_source_dict = json.load(f)
     
 
-    _assert_editions__ordered_by_issued(datasets_source_dict, "datasets","editions")
+    _assert_editions_ordered_by_issued(datasets_source_dict, "datasets","editions")
 
 
 
@@ -46,7 +46,7 @@ def test_verisons_ordered_by_issued_fail():
 
         with open(file_path) as f:
             datasets_source_dict = json.load(f)
-        _assert_editions__ordered_by_issued(datasets_source_dict, "editions","versions")
+        _assert_editions_ordered_by_issued(datasets_source_dict, "editions","versions")
     except:
         "The datasets should be ordered by 'issued' (from most recent)" 
 
@@ -62,4 +62,4 @@ def test_versions_ordered_by_issued_succeed():
         datasets_source_dict = json.load(f)
     
 
-    _assert_editions__ordered_by_issued(datasets_source_dict,"editions" ,"versions")
+    _assert_editions_ordered_by_issued(datasets_source_dict,"editions" ,"versions")

@@ -191,7 +191,7 @@ def populate(oxigraph_url=None, write_to_db=True):
     # Validate data and add to graph
     topic_ids = [topic["@id"] for topic in topics_source_dict["topics"]]
     for dataset in datasets_source_dict["datasets"]:
-        _assert_versions__ordered_by_issued(dataset, "editions")
+        _assert_versions_ordered_by_issued(dataset, "editions")
         for topic in dataset["topics"]:
             assert (
                 topic in topic_ids
@@ -398,7 +398,7 @@ def _assert_summarised_edition_in_dataset(datasets: Dict, edition: Dict):
             '''
         )
 
-def _assert_editions__ordered_by_issued(list_of_datasets, topic: str, sub_topic: str):
+def _assert_editions__ordered_by_issued(list_of_datasets, main_dict: str, sub_dict: str):
     """
         this function will assert that the list of datasets subtset
         is ordered by issued, raises error if not
@@ -408,11 +408,11 @@ def _assert_editions__ordered_by_issued(list_of_datasets, topic: str, sub_topic:
 
     list_of_issued=[]
     
-    for x in list_of_datasets[topic]:
-        if len(x[sub_topic]) > 1 and x[sub_topic] is not None:
-            for y in x[sub_topic]:
+    for dataset_dict in list_of_datasets[main_dict]:
+        if len(dataset_dict[sub_dict]) > 1 and dataset_dict[sub_dict] is not None:
+            for y in dataset_dict[sub_dict]:
                 if index == 0:
-                    first_value = x[sub_topic][0]["issued"]
+                    first_value = dataset_dict[sub_dict][0]["issued"]
                 fornow = y["issued"]
                 list_of_issued.append(fornow)
                 index += 1
@@ -420,7 +420,7 @@ def _assert_editions__ordered_by_issued(list_of_datasets, topic: str, sub_topic:
             most_recent = max(list_of_issued)
             assert first_value == most_recent, (f"The datasets should be ordered by 'issued' (from most recent)") 
 
-def _assert_versions__ordered_by_issued(datasets, sub_topic: str):
+def _assert_versions_ordered_by_issued(datasets, sub_dict: str):
     """
         this function will assert that the list of datasets subset
         is ordered by issued, raises error if not
@@ -430,11 +430,11 @@ def _assert_versions__ordered_by_issued(datasets, sub_topic: str):
 
     list_of_issued=[]
     
-    if len(datasets[sub_topic]) > 1 and datasets[sub_topic] is not None:
-        for y in datasets[sub_topic]:
+    if len(datasets[sub_dict]) > 1 and datasets[sub_dict] is not None:
+        for dataset in datasets[sub_dict]:
             if index == 0:
-                first_value = datasets[sub_topic][0]["issued"]
-            fornow = y["issued"]
+                first_value = datasets[sub_dict][0]["issued"]
+            fornow = dataset["issued"]
             list_of_issued.append(fornow)
             index += 1
 
