@@ -15,7 +15,7 @@ def test_editions_ordered_by_issued_fail():
 
         with open(file_path) as f:
             datasets_source_dict = json.load(f)
-        _assert_editions__ordered_by_issued(datasets_source_dict, "datasets","editions")
+        _assert_editions_ordered_by_issued(datasets_source_dict, "datasets","editions")
     except:
         "The datasets should be ordered by 'issued' (from most recent)" 
 
