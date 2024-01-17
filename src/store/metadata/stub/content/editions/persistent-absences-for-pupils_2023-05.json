@@ -43,7 +43,7 @@
         "versions_url": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils-looked-after-by-local-authorities/editions/2023-05/versions",
         "versions": [
           {
-            "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils-looked-after-by-local-authorities/2023-05/versions/1",
+            "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils-looked-after-by-local-authorities/editions/2023-05/versions/1",
             "issued": "2023-05-16T13:35:25Z"
           }
         ],
