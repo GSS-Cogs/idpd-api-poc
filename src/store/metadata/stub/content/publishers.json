@@ -23,8 +23,15 @@
             "title": "Department for Education",
             "description": "The Department for Education is responsible for children’s services and education, including early years, schools, higher and further education policy, apprenticeships and wider skills in England.",
             "landing_page": "https://www.gov.uk/government/organisations/department-for-education"
+        },
+        {
+            "@id": "https://staging.idpd.uk/publishers/office-for-health-improvement-and-disparities",
+            "@type": "dcat:publisher",
+            "title": "Office For Health Improvement And Disparities",
+            "description": "We focus on improving the nation’s health so that everyone can expect to live more of life in good health, and on levelling up health disparities to break the link between background and prospects for a healthy life.",
+            "landing_page": "https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities"
         }
     ],
-    "count": 3,
+    "count": 4,
     "offset": 0
 }
