@@ -1,0 +1,76 @@
+{
+    "@context": "https://staging.idpd.uk/#ns",
+    "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils/editions/2023-05/versions",
+    "@type": "hydra:Collection",
+    "title": "Persistent absences for pupils looked after by local authorities",
+    "versions": [
+        {
+            "@type": [
+                "dcat:Distribution",
+                "csvw:Table"
+            ],
+            "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils/editions/2023-05/versions/1",
+            "identifier": "1",
+            "issued": "2023-05-16T13:35:25Z",
+            "title": "Persistent absences for pupils looked after by local authorities",
+            "summary": "Percentage of pupils who have been looked after by the local authorities over financial years 2016/17 - 2021/22.",
+            "description": "This dataset shows the percentage of pupils in state-funded primary, state funded secondary, special schools and pupil referral units who have been looked after continuously for at least 12 months (as of 31 March of that year) by local authorities who were persistently absent (those absent for 10% of schooling sessions) during the academic year, in England for financial years 2016/17 - 2021/22.",
+            "download_url": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils/editions/2023-05/versions/1.csv",
+            "media_type": "text/csv",
+            "table_schema": {
+              "columns": [
+                {
+                  "name": "period",
+                  "datatype": "datetime",
+                  "titles": "Gregorian Time Interval",
+                  "description": "The time period associated with the observation."
+                },
+                {
+                  "name": "areacd",
+                  "datatype": "string",
+                  "titles": "ONS Geography Code",
+                  "description": "The statistical geography of the observation being measured."
+                },
+                {
+                  "name": "observation",
+                  "datatype": "decimal",
+                  "titles": "Percentage of pupils who have been looked after by the local authorities over financial years 2016/17 - 2021/22",
+                  "description": "Observation value of pupils that have been looked after continuously for atleast 12 months over financial years 2016/17 - 2021/22."
+                },
+                {
+                  "name": "measure",
+                  "datatype": "string",
+                  "titles": "Measure type",
+                  "description": "Measure type asscoiated with the observation value."
+                },
+                {
+                  "name": "unit",
+                  "datatype": "string",
+                  "titles": "Unit",
+                  "description": "Unit of measure of observation value."
+                },
+                {
+                  "name": "lower_confidence_interval_95",
+                  "datatype": "decimal",
+                  "titles": "Lower Confidence Interval (95%)",
+                  "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, lower bound."
+                },
+                {
+                  "name": "upper_confidence_interval_95",
+                  "datatype": "decimal",
+                  "titles": "Upper Confidence Interval (95%)",
+                  "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, upper bound."
+                },
+                {
+                  "name": "observation_status",
+                  "datatype": "string",
+                  "titles": "Observation Status",
+                  "description": "Additional context to the observation value, if needed."
+                }
+              ]
+            }
+        }
+    ],
+    "count": 1,
+    "offset": 0
+}
