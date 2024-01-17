@@ -479,9 +479,9 @@
       ]
     },
     {
-      "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils",
+      "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils-looked-after-by-local-authorities",
       "@type": "dcat:DatasetSeries",
-      "identifier": "persistent-absences-for-pupils",
+      "identifier": "persistent-absences-for-pupils-looked-after-by-local-authorities",
       "title": "Persistent absences for pupils looked after by local authorities",
       "summary": "Percentage of pupils who have been looked after by the local authorities over financial years 2016/17 - 2021/22.",
       "description": "This dataset shows the percentage of pupils in state-funded primary, state funded secondary, special schools and pupil referral units who have been looked after continuously for at least 12 months (as of 31 March of that year) by local authorities who were persistently absent (those absent for 10% of schooling sessions) during the academic year, in England for financial years 2016/17 - 2021/22.",
@@ -515,10 +515,10 @@
         "start": "2022-01-01T12:00:00Z",
         "end": "2022-12-31T12:00:00Z"
       },
-      "editions_url": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils/editions",
+      "editions_url": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils-looked-after-by-local-authorities/editions",
       "editions": [
         {
-          "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils/editions/2023-05",
+          "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils-looked-after-by-local-authorities/editions/2023-05",
           "issued": "2023-05-16T13:35:25Z",
           "modified": "2023-09-01T12:30:00Z"
         }
