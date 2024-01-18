@@ -17,7 +17,7 @@ def dataset_test_data():
     populate(jsonld_location="tests/fixtures/content", write_to_db=False)
     with open(file_path, "r") as json_file:
         dataset = json.load(json_file)["datasets"][0]
-        dataset["context"] = ContextStore().get_context()
+        dataset["@context"] = "https://staging.idpd.uk/ns#"
     return dataset
 
 @pytest.fixture

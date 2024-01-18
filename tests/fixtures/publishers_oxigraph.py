@@ -15,7 +15,7 @@ def publisher_test_data():
     populate(jsonld_location="tests/fixtures/content", write_to_db=False)
     with open(file_path, "r") as json_file:
         publisher = json.load(json_file)["publishers"][0]
-        publisher["context"] = ContextStore().get_context()
+        publisher["@context"] = "https://staging.idpd.uk/ns#"
     return publisher
 
 

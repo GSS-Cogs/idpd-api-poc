@@ -4,7 +4,6 @@
     "@type": "hydra:Collection",
     "topics": [
         {
-            "@context": "https://staging.idpd.uk/ns#",
             "@id": "https://staging.idpd.uk/topics/economy",
             "@type": "dcat:theme",
             "identifier": "economy",

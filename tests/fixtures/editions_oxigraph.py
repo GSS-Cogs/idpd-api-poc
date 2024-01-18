@@ -15,7 +15,7 @@ def edition_test_data():
     populate(jsonld_location="tests/fixtures/content", write_to_db=False)
     with open(file_path, "r") as json_file:
         edition = json.load(json_file)["editions"][0]
-        edition["context"] = ContextStore().get_context()
+        edition["@context"] = "https://staging.idpd.uk/ns#"
     return edition
 
 

@@ -5,7 +5,6 @@
     "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
     "versions": [
         {
-            "@context": "https://staging.idpd.uk/ns#",
             "@type": [
                 "dcat:Distribution",
                 "csvw:Table"

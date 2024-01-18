@@ -15,7 +15,7 @@ def topic_test_data():
     populate(jsonld_location="tests/fixtures/content", write_to_db=False)
     with open(file_path, "r") as json_file:
        topic = json.load(json_file)["topics"][0]
-       topic["context"] = ContextStore().get_context()
+       topic["@context"] = "https://staging.idpd.uk/ns#"
     return topic
 
 

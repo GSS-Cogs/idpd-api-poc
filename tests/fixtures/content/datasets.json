@@ -7,7 +7,6 @@
   "@id": "https://staging.idpd.uk/datasets",
   "datasets": [
     {
-      "@context":"https://staging.idpd.uk/ns#",
       "@id": "https://staging.idpd.uk/datasets/cpih",
       "@type": "dcat:DatasetSeries",
       "identifier": "cpih",

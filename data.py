@@ -27,7 +27,6 @@ from store.metadata.stub.store import StubMetadataStore
 with open(Path("src/store/metadata/context.json")) as f:
     context = json.load(f)
 
-
 def set_context(resource_item):
     """
     Set a specific context location to inform the RDF created
@@ -54,7 +53,7 @@ def validate_and_parse_json(g, schema, resource_dict, resource_type):
     """
     Validate resources, apply context, and add to an RDF graph.
     """
-    graph_length = len(g)
+    graph_length = len(g)   
 
     # Check that `@id` and `identifier` are consistent
     for resource in resource_dict[resource_type]:
@@ -66,15 +65,13 @@ def validate_and_parse_json(g, schema, resource_dict, resource_type):
     schema(**resource_dict)
 
     # Parse the JSON-LD and add to the graph
-    jsonld_data = json.dumps(set_context(resource_dict))
-    print(jsonld_data)
     g += Graph().parse(data=json.dumps(set_context(resource_dict)), format="json-ld")
     assert len(g) > graph_length   
 
 
 def populate(jsonld_location=None, oxigraph_url=None, write_to_db=True):
     this_dir = Path(__file__).parent
-    store = StubMetadataStore(jsonld_location)
+    store = StubMetadataStore(content_path=jsonld_location)
     metadata_stub_content_path = store.content_dir
 
     # Clear up any previous
