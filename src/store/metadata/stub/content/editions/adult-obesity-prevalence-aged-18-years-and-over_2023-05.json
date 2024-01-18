@@ -8,7 +8,7 @@
         "@id": "https://staging.idpd.uk/datasets/adult-obesity-prevalence-aged-18-years-and-over/editions/2023-05",
         "@type": "dcat:Dataset",
         "in_series": "https://staging.idpd.uk/datasets/adult-obesity-prevalence-aged-18-years-and-over",
-        "identifier": "2015-2021",
+        "identifier": "2023-05",
         "title": "Adult obesity prevalence (aged 18 years and over)",
         "summary": "Percentage of adults aged 18 and over classified as living with obesity, England, 16/11/2015-15/11/2016 to 16/11/2021-15/11/2022.",
         "description": "Percentage of adults aged 18 and over classified as living with obesity, in England, for 16/11/2015-15/11/2016 to 16/11/2021-15/11/2022.\n\nCoverage\nEngland\n\nGeography definition\nLocal Authority Districts and Unitary Authorities,\nCounties,\nRegions,\nCombined Authorities,\nNation (England)\n\nSource\nEngland: [Office for Health Improvement and Disparities]\n\nSource Notes and Caveats\nAdults are defined as obese if their body mass index (BMI) is greater than or equal to 30kg/m²",
