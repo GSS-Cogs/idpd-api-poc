@@ -33,7 +33,7 @@
           "county"
         ],
         "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_resolution":["E0", "E1", "E9"],
       "spatial_coverage": "E92000001",
       "temporal_resolution": ["P1Y"],
       "temporal_coverage": {
