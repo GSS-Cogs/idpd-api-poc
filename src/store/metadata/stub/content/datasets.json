@@ -477,8 +477,52 @@
           "modified": "2023-11-27T15:38:00Z"
         }
       ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/adult-obesity-prevalence-aged-18-years-and-over",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "adult-obesity-prevalence-aged-18-years-and-over",
+      "title": "Adult obesity prevalence (aged 18 years and over)",
+      "summary": "Percentage of adults aged 18 and over classified as living with obesity, England, 16/11/2015-15/11/2016 to 16/11/2021-15/11/2022.",
+      "description": "Percentage of adults aged 18 and over classified as living with obesity, in England, for 16/11/2015-15/11/2016 to 16/11/2021-15/11/2022.\n\nCoverage\nEngland\n\nGeography definition\nLocal Authority Districts and Unitary Authorities,\nCounties,\nRegions,\nCombined Authorities,\nNation (England)\n\nSource\nEngland: [Office for Health Improvement and Disparities]\n\nSource Notes and Caveats\nAdults are defined as obese if their body mass index (BMI) is greater than or equal to 30kg/m²",
+      "issued": "2023-05-17T12:41:00Z",
+      "modified": "2023-12-13T09:01:00Z",
+      "next_release": "1900-01-01T00:00:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-health-improvement-and-disparities",
+      "contact_point": {
+        "name": "Office for Health Improvement and Disparities",
+        "email": "mailto:dhsc.publicenquiries@dhsc.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/health-and-social-care"
+      ],
+      "frequency": "irregular",
+      "keywords": [
+        "obesity",
+        "health",
+        "subnational",
+        "community",
+        "county"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E0", "E1", "E9"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2015-11-16T00:00:00Z",
+        "end": "2021-11-16T00:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/adult-obesity-prevalence-aged-18-years-and-over/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/adult-obesity-prevalence-aged-18-years-and-over/editions/2023-05",
+          "issued": "2023-05-17T12:41:00Z",
+          "modified": "2023-12-13T09:01:00Z"
+        }
+      ]
     }
   ],
   "offset": 0,
-  "count": 10
+  "count": 11
 }
