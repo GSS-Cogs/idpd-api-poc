@@ -1,28 +1,28 @@
 {
     "@context": "https://staging.idpd.uk/ns#",
-    "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions",
+    "@id": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2023-03/versions",
     "@type": "hydra:Collection",
-    "title": "Modelled unemployment rate aged 16 years and over",
+    "title": "Pupils at the expected standards at the end of key stage 2",
     "versions": [
         {
             "@type": [
                 "dcat:Distribution",
                 "csvw:Table"
             ],
-            "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions/1",
+            "@id": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2023-03/versions/1",
             "identifier": "1",
-            "issued": "2023-11-06T12:25:28Z",
-            "title": "Modelled unemployment rate aged 16 years and over",
-            "summary": "Modelled unemployment rate for people aged 16 years and over, Great Britain, 07/2004-06/2005 to 07/2022-06/2023.",
-            "description": "This dataset shows modelled-based estimates for the proportion of people aged 16 years and over without a job who have been actively seeking work within the last four weeks and are available to start work within the next two weeks",
-            "download_url": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions/1.csv",
+            "issued": "2023-03-31T12:15:00Z",
+            "title": "Pupils at the expected standards at the end of key stage 2",
+            "summary": "Percentage of pupils in state-funded schools meeting the expected standard in reading, writing and maths at the end of key stage 2, England (state-funded schools), academic years 2015/16 - 2021/22",
+            "description": "This dataset shows the percentage of pupils in state-funded schools meeting the expected standard in reading, writing and maths at the end of key stage 2, in England state-funded schools, for academic years 2015/16 - 2021/22.",
+            "download_url": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2023-03/versions/1.csv",
             "media_type": "text/csv",
             "table_schema": {
                 "columns": [
                     {
                       "name": "period",
                       "datatype": "string",
-                      "titles": "Gregorian Time Interval",
+                      "titles": "Period",
                       "description": "The time period associated with the observation."
                     },
                     {
@@ -35,7 +35,7 @@
                       "name": "areanm",
                       "datatype": "string",
                       "titles": "Area Name",
-                      "description": "The name associated with the geography code."
+                      "description": "The name associated with The geography code "
                     },
                     {
                       "name": "geography",
@@ -44,46 +44,40 @@
                       "description": "The categorisation of the geography code"
                     },
                     {
-                      "name": "observation",
+                      "name": "value",
                       "datatype": "decimal",
-                      "titles": "Unemployment Rate",
-                      "description": "Observation value of employment rate"
-                    },
-                    {
-                      "name": "count",
-                      "datatype": "integer",
-                      "titles": "Unemployment Count",
-                      "description": "Number of people unemployed"
+                      "titles": "Geographic area with percentage of pulpils at expected standards by at least one provider",
+                      "description": "Observational Value"
                     },
                     {
                       "name": "measure",
                       "datatype": "string",
                       "titles": "Measure Type",
-                      "description": "Measure type of the observational value"
+                      "description": "Measure Type of the Observational Value"
                     },
                     {
                       "name": "unit",
                       "datatype": "string",
-                      "titles": "Unit of Measure",
-                      "description": "Unit associated with the measure type"
+                      "titles": "Unit",
+                      "description": "Unit Type of the Observational Value"
                     },
                     {
                       "name": "lower_confidence_interval_95",
                       "datatype": "decimal",
                       "titles": "Lower Confidence Interval",
-                      "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, lower bound"
+                      "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Lower bound"
                     },
                     {
                       "name": "upper_confidence_interval_95",
                       "datatype": "decimal",
                       "titles": "Upper Confidence Interval",
-                      "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, upper bound"
+                      "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Upper bound"
                     },
                     {
                       "name": "observation_status",
                       "datatype": "string",
                       "titles": "Observation Status",
-                      "description": "Additional context to the observation value, if needed"
+                      "description": "Additional Context to the Observation if needed"
                     }
                 ]
             }

@@ -7,12 +7,13 @@ from pyld import jsonld
 from rdflib import Dataset, Graph, URIRef
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore
 
-from custom_logging import logger
+from custom_logging import logger , configure_logger
 from store.metadata.sparql import SparqlQueries
 
 from .. import constants
 from ..base import BaseMetadataStore
 
+configure_logger()
 
 class OxigraphMetadataStore(BaseMetadataStore):
     def setup(self):
@@ -26,11 +27,11 @@ class OxigraphMetadataStore(BaseMetadataStore):
         self.db = Dataset(store=SPARQLUpdateStore(*configuration))
         self.sparql_queries = SparqlQueries(self.db)
 
-    def get_datasets(self) -> Optional[Dict]:
+    def get_datasets(self, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Gets all datasets
         """
-        logger.info("Constructing get_datasets() response from graph")
+        logger.info("Constructing get_datasets() response from graph", request_id=request_id,)
 
         # Extract RDF triples from the database as one Graph
         result: Graph = self.sparql_queries.datasets()
@@ -66,13 +67,14 @@ class OxigraphMetadataStore(BaseMetadataStore):
         datasets_graph = {"@context": "https://staging.idpd.uk/ns#", **datasets_graph}
         return datasets_graph
 
-    def get_dataset(self, dataset_id: str) -> Optional[Dict]:
+    def get_dataset(self, dataset_id: str, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Get a dataset by its ID and return its metadata as a JSON-LD dict.
         """
         logger.info(
             "Constructing get_dataset() response from graph",
             data={"dataset_id": dataset_id},
+            request_id=request_id,
         )
 
         # Define initBindings for SPARQL query
@@ -133,13 +135,14 @@ class OxigraphMetadataStore(BaseMetadataStore):
         dataset_graph = {"@context": "https://staging.idpd.uk/ns#", **dataset_graph}
         return dataset_graph
 
-    def get_editions(self, dataset_id: str) -> Optional[Dict]:
+    def get_editions(self, dataset_id: str, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Gets all editions of a specific dataset with ID `dataset_id`
         """
         logger.info(
             "Constructing get_editions() response from graph",
             data={"dataset_id": dataset_id},
+            request_id=request_id,
         )
 
         # Define initBindings for SPARQL query
@@ -180,13 +183,14 @@ class OxigraphMetadataStore(BaseMetadataStore):
         editions_graph = {"@context": "https://staging.idpd.uk/ns#", **editions_graph}
         return editions_graph
 
-    def get_edition(self, dataset_id: str, edition_id: str) -> Optional[Dict]:
+    def get_edition(self, dataset_id: str, edition_id: str, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Gets a specific edition with ID `edition_id` of a specific dataset with ID `dataset_id`
         """
         logger.info(
             "Constructing get_edition() response from graph",
             data={"dataset_id": dataset_id, "edition_id": edition_id},
+            request_id=request_id,
         )
 
         # Define initBindings for SPARQL query
@@ -253,13 +257,14 @@ class OxigraphMetadataStore(BaseMetadataStore):
         edition_graph = {"@context": "https://staging.idpd.uk/ns#", **edition_graph}
         return edition_graph
 
-    def get_versions(self, dataset_id: str, edition_id: str) -> Optional[Dict]:
+    def get_versions(self, dataset_id: str, edition_id: str, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Gets all versions of a specific edition of a specific dataset
         """
         logger.info(
             "Constructing get_versions() response from graph",
             data={"dataset_id": dataset_id, "edition_id": edition_id},
+            request_id=request_id,
         )
 
         # Define initBindings for SPARQL query
@@ -299,7 +304,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
         return versions_graph
 
     def get_version(
-        self, dataset_id: str, edition_id: str, version_id: str
+        self, dataset_id: str, edition_id: str, version_id: str, request_id:Optional[str] = None
     ) -> Optional[Dict]:
         """
         Gets a specific version of a specific edition of a specific dataset
@@ -311,6 +316,7 @@ class OxigraphMetadataStore(BaseMetadataStore):
                 "edition_id": edition_id,
                 "version_id": version_id,
             },
+            request_id=request_id,
         )
 
         # Define initBindings for SPARQL query
@@ -358,11 +364,11 @@ class OxigraphMetadataStore(BaseMetadataStore):
         version_graph = {"@context": "https://staging.idpd.uk/ns#", **version_graph}
         return version_graph
 
-    def get_publishers(self) -> Optional[Dict]:
+    def get_publishers(self, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Gets all publishers
         """
-        logger.info("Constructing get_publishers() response from graph")
+        logger.info("Constructing get_publishers() response from graph", request_id=request_id,)
 
         # Extract RDF triples from the database as one Graph
         result: Graph = self.sparql_queries.publishers()
@@ -396,13 +402,14 @@ class OxigraphMetadataStore(BaseMetadataStore):
         }
         return publishers_graph
 
-    def get_publisher(self, publisher_id: str) -> Optional[Dict]:
+    def get_publisher(self, publisher_id: str, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Get a specific publisher
         """
         logger.info(
             "Constructing get_publisher() response from graph",
             data={"publisher_id": publisher_id},
+            request_id=request_id,
         )
 
         # Define initBindings for SPARQL query
@@ -429,11 +436,11 @@ class OxigraphMetadataStore(BaseMetadataStore):
         publisher_graph = {"@context": "https://staging.idpd.uk/ns#", **publisher_graph}
         return publisher_graph
 
-    def get_topics(self) -> Optional[Dict]:
+    def get_topics(self, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Get all topics
         """
-        logger.info("Constructing get_topics() response from graph")
+        logger.info("Constructing get_topics() response from graph", request_id=request_id,)
 
         # Define initBindings for SPARQL query
         init_bindings = {
@@ -469,12 +476,14 @@ class OxigraphMetadataStore(BaseMetadataStore):
         topics_graph = {"@context": "https://staging.idpd.uk/ns#", **topics_graph}
         return topics_graph
 
-    def get_topic(self, topic_id: str) -> Optional[Dict]:
+    def get_topic(self, topic_id: str, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Get a specific topic by topic_id
         """
         logger.info(
-            "Constructing get_topic() response from graph", data={"topic_id": topic_id}
+            "Constructing get_topic() response from graph", 
+            data={"topic_id": topic_id},
+            request_id=request_id,
         )
 
         # Define initBindings for SPARQL query
@@ -509,13 +518,14 @@ class OxigraphMetadataStore(BaseMetadataStore):
         topic_graph = {"@context": "https://staging.idpd.uk/ns#", **topic_graph}
         return topic_graph
 
-    def get_sub_topics(self, topic_id: str) -> Optional[Dict]:
+    def get_sub_topics(self, topic_id: str, request_id:Optional[str] = None) -> Optional[Dict]:
         """
         Get all sub-topics for a specific topic
         """
         logger.info(
             "Constructing get_sub_topics() response from graph",
             data={"topic_id": topic_id},
+            request_id=request_id,
         )
 
         # Get all topics
