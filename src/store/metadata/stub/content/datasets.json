@@ -477,8 +477,53 @@
           "modified": "2023-11-27T15:38:00Z"
         }
       ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/aged-19-years-and-over-further-education-and-skills-learner-achievements",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "aged-19-years-and-over-further-education-and-skills-learner-achievements",
+      "title": "Aged 19 years and over further education and skills learner achievements",
+      "summary": "Count of learners achieving a funded further education and skills learning aim, with the exception of community learning, non-qualification parts of the Multiply programme and bootcamps, England, academic years 2016/17 to 2021/22",
+      "description": "This dataset shows the count of learners achieving a funded further education and skills learning aim, with the exception of community learning, non-qualification parts of the Multiply programme and bootcamps, in England, for academic years 2016/17 to 2021/22.\n\nCoverage \n\nEngland\n\nGeography definition\n\nCounties and Unitary Authorities,\nNation (England)\n\nSource\n\n - England: [Department for Education]",
+      "issued": "2023-05-17T00:00:00Z",
+      "modified": "2023-05-17T00:00:00Z",
+      "next_release": "1900-01-01T00:00:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/department-for-education",
+      "contact_point": {
+        "name": "ofsted",
+        "email": "mailto:informationrequest@ofsted.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/children-education-and-skills"
+      ],
+      "frequency": "irregular",
+      "keywords": [
+        "skills",
+        "education",
+        "adults",
+        "subnational",
+        "county",
+        "region"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2016-08-01T00:00:00Z",
+        "end": "2021-08-01T00:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/aged-19-years-and-over-further-education-and-skills-learner-achievements/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/aged-19-years-and-over-further-education-and-skills-learner-achievements/editions/2023-05",
+          "issued": "2023-05-17T00:00:00Z",
+          "modified": "2023-05-17T00:00:00Z"
+        }
+      ]
     }
   ],
   "offset": 0,
-  "count": 10
+  "count": 11
 }
