@@ -27,7 +27,7 @@
         {
             "@id": "https://staging.idpd.uk/publishers/department-for-levelling-up-housing-and-communities",
             "@type": "dcat:publisher",
-            "title": "Department For Levelling Up Housing And Communities",
+            "title": "Department For Levelling Up, Housing And Communities",
             "description": "The Department For Levelling Up, Housing And Communities supports communities across the UK to thrive, making them great places to live and work.",
             "landing_page": "https://www.gov.uk/government/organisations/department-for-levelling-up-housing-and-communities"
         }

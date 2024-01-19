@@ -1,0 +1,162 @@
+{
+  "@context": "https://staging.idpd.uk/ns#",
+  "@id": "https://staging.idpd.uk/datasets/additions-to-the-housing-stock/editions",
+  "@type": "hydra:Collection",
+  "title": "Net additions to the housing stock",
+  "editions": [
+    {
+      "@id": "https://staging.idpd.uk/datasets/additions-to-the-housing-stock/editions/2023-05",
+      "@type": "dcat:Dataset",
+      "in_series": "https://staging.idpd.uk/datasets/additions-to-the-housing-stock",
+      "identifier": "2023-05",
+      "title": "Net additions to the housing stock for 2022 to 2023",
+      "summary": "Net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, England, financial year 2022 - 2023.",
+      "description": "This dataset shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in England, for financial year 2022 - 2023.\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nMetropolitan Counties,\nNation (England) \n\n### Source\n\n - England: [Department for Levelling Up, Housing and Communities]",
+      "publisher": "https://staging.idpd.uk/publishers/department-for-levelling-up-housing-and-communities",
+      "creator": "office-for-national-statistics",
+      "contact_point": {
+          "name": "Department for Levelling Up, Housing and Communities",
+          "email": "mailto:correspondence@levellingup.gov.uk"
+        },
+        "topics": [
+          "https://staging.idpd.uk/topics/housing-planning-and-local-services"
+        ],
+      "frequency": "annual",
+      "keywords": [
+          "new-building",
+          "conversion",
+          "demolition",
+          "dwelling",
+          "subnational",
+          "local-authority",
+          "county"
+  
+        ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "issued": "2023-05-05T08:59:11Z",
+      "modified": "2023-12-06T15:10:00Z",
+      "spatial_resolution": [
+        "E0", "E1", "E9"  
+        ],
+        "spatial_coverage": "E92000001",
+        "temporal_resolution": [
+          "P1Y"
+        ],
+        "temporal_coverage": {
+          "start": "2022-01-01T00:00:00Z",
+          "end": "2023-12-31T00:00:00Z"
+        },
+      "versions_url": "https://staging.idpd.uk/datasets/additions-to-the-housing-stock/editions/2023-05/versions",
+      "versions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/additions-to-the-housing-stock/editions/2023-05/versions/1",
+          "issued": "2023-05-05T08:59:11Z"
+        }
+      ],
+      "next_release": "2024-04-19T09:30:00Z",
+      "table_schema": {
+        "columns": [
+          {
+              "name": "period",
+              "datatype": "string",
+              "titles": "gregorian-interval",
+              "description": "The time period associated with the observation."
+            },
+            {
+              "name": "areacd",
+              "datatype": "string",
+              "titles": "Statistical Geography",
+              "description": "The geography code associated with the observation."
+            },
+            {
+              "name": "areanm",
+              "datatype": "string",
+              "titles": "Area Name",
+              "description": "The name assiciated with The geography code "
+            },
+            {
+              "name": "geography",
+              "datatype": "string",
+              "titles": "Geography Type",
+              "description": "The categorisation of the geography code"
+            },
+            {
+              "name": "variable_name",
+              "datatype": "string",
+              "titles": "Variable Name",
+              "description": "Which ESS variable is being measured"
+            },
+            {
+              "name": "indicator", 		
+              "datatype": "string",
+              "titles": "Indicator",
+              "description": "Which ESS indicator is being measured"
+            },
+            {
+              "name": "mission",
+              "datatype": "string",
+              "titles": "Mission",
+              "description": "Which ESS mission number this dataset is fulfilling"
+            },
+            {
+              "name": "category",
+              "datatype": "string",
+              "titles": "Category",
+              "description": "Which ESS category the dataset belongs to"
+            },
+            {
+                "name": "observation",
+                "datatype": "decimal",
+                "titles": "Observation",
+                "description": "Observation value for the chosen variable"
+              },
+              {
+                  "name": "measure",
+                  "datatype": "string",
+                  "titles": "Measure Type",
+                  "description": "Measure Type of the Observational Value"
+              },
+              {
+                  "name": "unit",
+                  "datatype": "string",
+                  "titles": "Unit",
+                  "description": "Unit Type of the Observational Value"
+                },
+              {
+              "name": "lower_confidence_Interval_95%",
+              "datatype": "decimal",
+              "titles": "Lower Confidence Interval (95%)",
+              "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Lower bound"
+            },
+            {
+              "name": "upper_confidence_Interval_95%",
+              "datatype": "decimal",
+              "titles": "Upper Confidence Interval (95%)",
+              "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Upper bound"
+            },
+            {
+              "name": "observation_status",
+              "datatype": "string",
+              "titles": "Observation Status",
+              "description": "Additional Context to the Observation if needed"
+            },
+            {
+              "name": "polarity",
+              "datatype": "string",
+              "titles": "Polarity",
+              "description": "Polarity"
+            },
+            {
+              "name": "notes",
+              "datatype": "string",
+              "titles": "Notes",
+              "description": "Additional notes for column values where needed"
+            }
+  
+      ]
+    }
+    }
+  ],
+  "count": 1,
+  "offset": 0
+}

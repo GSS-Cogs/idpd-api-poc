@@ -1,6 +1,6 @@
 {
     "@context": "https://staging.idpd.uk/ns#",
-    "@id": "https://staging.idpd.uk/datasets/additions-to-the-housing-stock/editions/2022-2023/versions",
+    "@id": "https://staging.idpd.uk/datasets/additions-to-the-housing-stock/editions/2023-05/versions",
     "@type": "hydra:Collection",
     "title": "Net additions to the housing stock",
     "versions": [
@@ -9,108 +9,108 @@
               "dcat:Distribution",
               "csvw:Table"
             ],
-            "@id": "https://staging.idpd.uk/datasets/additions-to-the-housing-stock/editions/2022-2023/versions/1",
+            "@id": "https://staging.idpd.uk/datasets/additions-to-the-housing-stock/editions/2023-05/versions/1",
             "identifier": "1",
             "issued": "2023-05-05T08:59:11Z",
             "title": "Net additions to the housing stock",
             "summary": "Net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, England, financial year 2022 - 2023.",
             "description": "This dataset shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in England, for financial year 2022 - 2023.\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nMetropolitan Counties,\nNation (England) \n\n### Source\n\n - England: [Department for Levelling Up, Housing and Communities]",
-            "download_url": "https://staging.idpd.uk/datasets/additions-to-the-housing-stock/editions/2022-2023/versions/1.csv",
+            "download_url": "https://staging.idpd.uk/datasets/additions-to-the-housing-stock/editions/2023-05/versions/1.csv",
             "media_type": "text/csv",
             "table_schema": {
           "columns": [
             {
-                "name": "Period",
+                "name": "period",
                 "datatype": "string",
-                "titles": "Period",
+                "titles": "gregorian-interval",
                 "description": "The time period associated with the observation."
               },
               {
-                "name": "AREACD",
+                "name": "areacd",
                 "datatype": "string",
                 "titles": "Statistical Geography",
                 "description": "The geography code associated with the observation."
               },
               {
-                "name": "AREANM",
+                "name": "areanm",
                 "datatype": "string",
                 "titles": "Area Name",
                 "description": "The name assiciated with The geography code "
               },
               {
-                "name": "Geography",
+                "name": "geography",
                 "datatype": "string",
                 "titles": "Geography Type",
                 "description": "The categorisation of the geography code"
               },
               {
-                "name": "Variable Name",
+                "name": "variable_name",
                 "datatype": "string",
                 "titles": "Variable Name",
                 "description": "Which ESS variable is being measured"
               },
               {
-                "name": "Indicator", 		
+                "name": "indicator", 		
                 "datatype": "string",
                 "titles": "Indicator",
                 "description": "Which ESS indicator is being measured"
               },
               {
-                "name": "Mission",
+                "name": "mission",
                 "datatype": "string",
                 "titles": "Mission",
                 "description": "Which ESS mission number this dataset is fulfilling"
               },
               {
-                "name": "Category",
+                "name": "category",
                 "datatype": "string",
                 "titles": "Category",
                 "description": "Which ESS category the dataset belongs to"
               },
               {
-                  "name": "Observation",
-                  "datatype": "integer",
+                  "name": "observation",
+                  "datatype": "decimal",
                   "titles": "Observation",
                   "description": "Observation value for the chosen variable"
                 },
                 {
-                    "name": "Measure",
+                    "name": "measure",
                     "datatype": "string",
                     "titles": "Measure Type",
                     "description": "Measure Type of the Observational Value"
                 },
                 {
-                    "name": "Unit",
+                    "name": "unit",
                     "datatype": "string",
                     "titles": "Unit",
                     "description": "Unit Type of the Observational Value"
                   },
                 {
-                "name": "Lower Confidence Interval (95%)",
+                "name": "lower_confidence_Interval_95%",
                 "datatype": "decimal",
-                "titles": "Lower Confidence Interval",
+                "titles": "Lower Confidence Interval (95%)",
                 "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Lower bound"
               },
               {
-                "name": "Upper Confidence Interval (95%)",
+                "name": "upper_confidence_Interval_95%",
                 "datatype": "decimal",
-                "titles": "Upper Confidence Interval",
+                "titles": "Upper Confidence Interval (95%)",
                 "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Upper bound"
               },
               {
-                "name": "Observation Status",
+                "name": "observation_status",
                 "datatype": "string",
                 "titles": "Observation Status",
                 "description": "Additional Context to the Observation if needed"
               },
               {
-                "name": "Polarity",
+                "name": "polarity",
                 "datatype": "string",
                 "titles": "Polarity",
                 "description": "Polarity"
               },
               {
-                "name": "Notes",
+                "name": "notes",
                 "datatype": "string",
                 "titles": "Notes",
                 "description": "Additional notes for column values where needed"
