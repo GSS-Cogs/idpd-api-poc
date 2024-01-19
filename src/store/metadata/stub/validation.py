@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Set
 
 import schemas
 from data import process_json_files
@@ -8,44 +8,44 @@ from data import process_json_files
 
 def _validate_resource_count(resource_dict: Dict, resource_name: str):
     """
-    Check that the sub document of a json file has a length that matches the count field of that json file.
+    Check that the length of a sub-document in a json file matches the `count` field of the json file.
     """
     if len(resource_dict[resource_name]) != int(resource_dict["count"]):
         raise ValueError(
             f"""
         The `count` field for {resource_name} is wrong.
-        Got: {int(resource_dict["count"])}.
-        Expected: {len(resource_dict[resource_name])}.
+        Count: {int(resource_dict["count"])}.
+        Number of {resource_name}: {len(resource_dict[resource_name])}.
         """
         )
 
 
-def _validate_resource_identifier_type_and_schema(resource_dict, resource_type, schema):
+def _validate_resource_identifier_type_and_schema(
+    resource_dict: Dict, resource_type: str, schema
+):
     """
-    Validate resource identifier and type, and validate against schema.
+    Validate resource identifier and type, and validate against schema model.
     """
-    # Check that `@id` and `identifier` are consistent
     for resource in resource_dict[resource_type]:
+        # Check that `@id` and `identifier` are consistent
         if resource["@id"].split("/")[-1] != resource["identifier"]:
             raise ValueError(
                 f"""
             Mismatch between '@id' and 'identifier' fields:
-
-            @id: {resource['@id'].split("/")[-1]}
-
+            @id: {resource['@id']}
             identifier: {resource['identifier']}
             """
             )
 
         # Check that the resource type is in the path
-        # eg an id for a topic should have /topics in the url
+        # e.g. the @id for a topic should have "/topics" in the URL
         if resource_type not in resource["@id"]:
             raise ValueError(
                 f"""
             The @id for a resource of type `{resource_type}` should contain
             /{resource_type} in the URL, but does not.
 
-            Got: {resource["@id"]}
+            @id: {resource["@id"]}
             """
             )
 
@@ -55,169 +55,139 @@ def _validate_resource_identifier_type_and_schema(resource_dict, resource_type, 
 
 def _validate_edition_in_dataset(datasets: Dict, edition: Dict):
     """
-    Editions sub documents are included in two places within our stubbed data content:
-    1. A short form representation of an edition is included in a "editions" sub-document within the dataset json file.
-    2. The full edition document is included in the edition json file.
+    Editions sub-documents are included in two places within our stubbed data content:
+    1. A summarised edition is included in the `editions` sub-document within the `datasets.json` file.
+    2. The full edition document is included in the `edition.json` file.
 
-    With this check we are making sure that the field values in the short form edition match the fields in the full edition document.
+    This check ensures that the field values in the summarised edition sub-document match the fields in the full edition document.
     """
-
+    dataset_editions_urls = [
+        dataset["editions_url"] for dataset in datasets["datasets"]
+    ]
+    if edition["@id"] not in dataset_editions_urls:
+        raise ValueError(
+            f"Editions URL {edition['@id']} not found in {dataset_editions_urls}"
+        )
     for id, issued, modified, in_series in [
         (edn["@id"], edn["issued"], edn["modified"], edn["in_series"])
         for edn in edition["editions"]
     ]:
-        # Confirm that the `in_series` reference is pointing to the
-        # same series as specified by the id
+        # Confirm that the `in_series` value references the same series as specified in the `@id` value
         if not id.startswith(in_series):
             raise ValueError(
                 f"""
-            The `in_series` field should appear at the beginning of the `@id` field but does not. This is a data error.
-
+            The `in_series` value should appear at the beginning of the `@id` value but does not.
             @id: {id}
             in_series: {in_series}
             """
             )
 
-        # Use the `in_series` field to pull the correct parent dataset document from all datasets.
+        # Use the `in_series` field to extract the parent dataset from all datasets.
         parent_dataset = [
             dataset for dataset in datasets["datasets"] if dataset["@id"] == in_series
         ]
         if len(parent_dataset) != 1:
             raise ValueError(
-                f"Cannot find exactly one parent dataset with an @id of {in_series}"
+                f"Cannot find exactly one parent dataset with an `@id` value of {in_series}"
             )
+
+        # Get the summarised editions from the parent dataset
         parent_dataset = parent_dataset[0]
+        summarised_editions = parent_dataset["editions"]
 
-        # Now get the short form editions from that dataset document
-        short_form_editions = parent_dataset["editions"]
-
-        # Using our list of short form editions docs, confirm there is exactly one short form
-        # editional document (from those listed in the dataset) with the same @id as the long form
-        # representation from the editions file.
-        short_form_editions_with_correct_id = [
-            x for x in short_form_editions if x["@id"] == id
+        # Confirm there is exactly one summarised edition with the same `@id` as the long form representation from the `editions.json` file.
+        summarised_editions_for_edition_id = [
+            edn for edn in summarised_editions if edn["@id"] == id
         ]
 
-        if len(short_form_editions_with_correct_id) != 1:
+        if len(summarised_editions_for_edition_id) != 1:
             raise ValueError(
                 f"""
-            Could not find exactly one edition listed at the dataset level that
-            has the @id of:
-
-            {id}
-
-            Found {len(short_form_editions_with_correct_id)} matching editions in parent dataset:
-            {parent_dataset["@id"]}.
-
-            The truncated editions listed for this dataset are:
-            {json.dumps(short_form_editions, indent=2)}
+            Could not find exactly one edition listed at the dataset level with an `@id` of {id}.
+            Found {len(summarised_editions_for_edition_id)} matching editions in parent dataset {parent_dataset["@id"]}.
+            The summarised editions listed for this dataset are:
+            {json.dumps(summarised_editions, indent=2)}
             """
             )
-        short_form_edition_with_correct_id = short_form_editions_with_correct_id[0]
+        summarised_edition_for_edition_id = summarised_editions_for_edition_id[0]
 
-        # Confirm the issued date matches
-        if issued != short_form_edition_with_correct_id["issued"]:
+        # Confirm the `issued` date matches
+        if issued != summarised_edition_for_edition_id["issued"]:
             raise ValueError(
                 f"""
-            For the version {id}.
-
-            The issued date in the full version document is {issued}.
-
-            But in the truncated view at the dataset level it is {short_form_edition_with_correct_id["issued"]}.
-
+            For edition {id}, the `issued` date in the full edition document is {issued}.
+            But in the summarised edition at the dataset level the `issued` date is {summarised_edition_for_edition_id["issued"]}.
             These fields should match.
             """
             )
 
-        # Confirm the modified date matches
-        if modified != short_form_edition_with_correct_id["modified"]:
+        # Confirm the `modified` date matches
+        if modified != summarised_edition_for_edition_id["modified"]:
             raise ValueError(
                 f"""
-            For the version {id}.
-
-            The modified date in the full version document is {modified}.
-
-            But in the truncated view at the dataset level it is {short_form_edition_with_correct_id["modified"]}.
-
+            For edition {id}, the `modified` date in the full edition document is {modified}.
+            But in the summarised edition at the dataset level the `modified` date is {summarised_edition_for_edition_id["modified"]}.
             These fields should match.
             """
             )
 
-        if len(short_form_edition_with_correct_id) != 3:
+        # Confirm that the summarised edition only consists of three fields (`@id`, `issued` and `modified`)
+        if len(summarised_edition_for_edition_id) != 3:
             raise ValueError(
-                f"""The version:
+                f"""The edition {id} should have three fields, "@id", "issued" and "modified" but has more:
 
-                {json.dumps(short_form_edition_with_correct_id, indent=2)}
-
-            Should have three fields, "@id", "issued" and "modified" but has more.
+            {json.dumps(summarised_edition_for_edition_id, indent=2)}
             """
             )
 
 
-def _validate_version_in_edition(
-    version: List[Dict], versions_in_edition: Dict[str, Dict]
-):
+def _validate_version_in_edition(version: Dict, versions_in_editions: Dict):
     """
-    Versions sub documents are included in two places witin our stubbed data
-    content.
+    Versions sub-documents are included in two places within our stubbed data content.
+    1. A summarised version is included in the `versions` sub-document within the `edition.json` file for the relevant edition.
+    2. The full version document is included in the `version.json` file.
 
-    1. A short form representation of a version is included in a "versions" sub
-       document within the edition json file for the relevant edition.
-    2. The full version documents is included in the versions json file.
-
-    With this check we are making sure that the field values as inlcuded in the
-    short form version match the fields as included in the full version document.
+    This check ensures that the field values in the summarised version sub-document match the fields in the full version document.
     """
-    if version["@id"] not in versions_in_edition.keys():
+    if version["@id"] not in versions_in_editions.keys():
         raise ValueError(
-            f"Version @id {version['@id']} not found in {versions_in_edition.keys()}"
+            f"Version @id {version['@id']} not found in {list(versions_in_editions.keys())}"
         )
-    for id, issued in [(x["@id"], x["issued"]) for x in version["versions"]]:
-        # The version id includes the path to its edition so get all
-        # the short form version information we processed at the edition level
+    for id, issued in [(vsn["@id"], vsn["issued"]) for vsn in version["versions"]]:
+        # The `version` @id includes the path to its edition the version_url field) so get the summarised version information from the versions_in_editions dictionary
         version_path = "/".join(id.split("/")[:-1])
-        versions_for_this_edition = versions_in_edition.get(version_path, None)
+        versions_for_this_edition = versions_in_editions.get(version_path, None)
 
-        # Now we have a list of all relevant short form version docs, confirm there is
-        # exactly one short form version document (from the editions file) with the
-        # same @id as the long form representation from the versions file.
-        short_form_versions_with_correct_id = [
-            x for x in versions_for_this_edition if x["@id"] == id
+        # Confirm there is exactly one summarised version with the same `@id` as the long form representation from the `versions.json` file.
+        summarised_versions_for_version_id = [
+            vsn for vsn in versions_for_this_edition if vsn["@id"] == id
         ]
-        if len(short_form_versions_with_correct_id) != 1:
+        if len(summarised_versions_for_version_id) != 1:
             raise ValueError(
                 f"""
-            Could not find exactly one version listed at the edition level that has the @id of {id}.
-
-            Found {len(short_form_versions_with_correct_id)} versions.
-
-            The truncated versions listed for this edition are:
+            Could not find exactly one version listed at the edition level with an `@id` of {id}.
+            Found {len(summarised_versions_for_version_id)} versions.
+            The summarised versions listed for this edition are:
             {versions_for_this_edition}
             """
             )
-        short_form_version_with_correct_id = short_form_versions_with_correct_id[0]
+        summarised_version_for_version_id = summarised_versions_for_version_id[0]
 
-        # Confirm the issued date matches
-        if issued != short_form_version_with_correct_id["issued"]:
+        # Confirm the `issued` date matches
+        if issued != summarised_version_for_version_id["issued"]:
             raise ValueError(
                 f"""
-            For the version {id}.
-
-            The issued date in the full version document is {issued}.
-
-            But in the truncated view at the editions level it is {short_form_version_with_correct_id["issued"]}.
-
+            For version {id}, the `issued` date in the full version document is {issued}.
+            But in the summarised version at the editions level the `issued` date is {summarised_version_for_version_id["issued"]}.
             These fields should match.
             """
             )
-
-        if len(short_form_version_with_correct_id) != 2:
+        # Confirm that the summarised version only consists of two fields (`@id` and `issued`)
+        if len(summarised_version_for_version_id) != 2:
             raise ValueError(
-                f"""The version:
+                f"""The version {id} should have two fields, "@id" and "issued" but has more:
 
-            {json.dumps(short_form_version_with_correct_id, indent=2)}
-
-            Should only have two fields, "@id" and "issued" but has more.
+            {json.dumps(summarised_version_for_version_id, indent=2)}
             """
             )
 
@@ -229,41 +199,31 @@ def validate_datasets(datasets):
     )
 
 
-def validate_editions(
-    datasets,
-    editions,
-    dataset_editions_urls,
-    versions_in_edition,
-    topics_in_editions,
-    dataset_publishers,
-):
+def validate_editions(datasets, editions, dataset_publishers, dataset_creators):
     for edition in editions:
         _validate_resource_count(edition, "editions")
         _validate_resource_identifier_type_and_schema(
             edition, "editions", schemas.Editions
         )
-        # TODO Move this to _assert_edition_in_dataset?
-        if edition["@id"] not in dataset_editions_urls:
-            raise ValueError(
-                f"Editions URL {edition['@id']} not found in {dataset_editions_urls}"
-            )
         for edn in edition["editions"]:
-            versions_in_edition[edn["versions_url"]] = edn["versions"]
-            topics_in_editions.update(edn["topics"])
             if edn["publisher"] not in dataset_publishers:
                 raise ValueError(
                     f"{edn['publisher']} not in publisher list {dataset_publishers}"
                 )
+            if edn["creator"] not in dataset_creators:
+                raise ValueError(
+                    f"{edn['creator']} not in creator list {dataset_creators}"
+                )
         _validate_edition_in_dataset(datasets, edition)
 
 
-def validate_versions(versions, versions_in_edition):
+def validate_versions(versions: List[Dict], versions_in_editions: Dict):
     for version in versions:
         _validate_resource_count(version, "versions")
         _validate_resource_identifier_type_and_schema(
             version, "versions", schemas.Versions
         )
-        _validate_version_in_edition(version, versions_in_edition)
+        _validate_version_in_edition(version, versions_in_editions)
 
 
 def validate_topics(datasets, topics, topics_in_editions):
@@ -286,7 +246,7 @@ def validate_topics(datasets, topics, topics_in_editions):
 
 
 def validate_publishers(
-    publishers: Dict, dataset_publishers: List[Dict], dataset_creators: List[Dict]
+    publishers: Dict, dataset_publishers: Set, dataset_creators: Set
 ):
     """
     Confirm that:
@@ -295,45 +255,44 @@ def validate_publishers(
     - all publisher resources appear in one or more of the above checks
     """
     _validate_resource_count(publishers, "publishers")
-    publisher_ids_from_publishers_json = [x["@id"] for x in publishers["publishers"]]
-    references_used = []
+    publisher_ids = [publisher["@id"] for publisher in publishers["publishers"]]
+    publishers_referenced = []
 
     for publisher in dataset_publishers:
-        if publisher not in publisher_ids_from_publishers_json:
+        if publisher not in publisher_ids:
             raise ValueError(
                 f"""
             The publisher: {publisher}
             is referenced in a datasets resource but does not exist in the definitions of publishers from publishers.json.
             """
             )
-        references_used.append(publisher)
+        publishers_referenced.append(publisher)
 
-    for publisher in dataset_creators:
-        if publisher not in publisher_ids_from_publishers_json:
+    for creator in dataset_creators:
+        if creator not in publisher_ids:
             raise ValueError(
                 f"""
-            The publisher: {publisher}
-            is referenced in a datasets resource but does not exist in the definitions of publishers.
+            The creator {creator} is referenced in a datasets resource but does not exist in the definitions of publishers from publishers.json.
             """
             )
-        references_used.append(publisher)
+        publishers_referenced.append(creator)
 
     # At this point all publishers we've defined should have appeared at least once.
-    unique_references_used = list(set(references_used))
+    unique_publishers_referenced = list(set(publishers_referenced))
 
-    unique_references_used.sort()
-    publisher_ids_from_publishers_json.sort()
+    unique_publishers_referenced.sort()
+    publisher_ids.sort()
 
-    if len(unique_references_used) != len(publisher_ids_from_publishers_json):
+    if len(unique_publishers_referenced) != len(publisher_ids):
         raise ValueError(
             f"""
         Publishers are being created that do not appear to be utilised.
 
         IDs of publisher resources being created:
-        {publisher_ids_from_publishers_json}
+        {publisher_ids}
 
         IDs of publisher resources being used:
-        {unique_references_used}
+        {unique_publishers_referenced}
         """
         )
 
@@ -349,53 +308,41 @@ versions_source_path = Path(metadata_stub_content_path / "editions" / "versions"
 topics_source_path = Path(metadata_stub_content_path / "topics.json")
 publishers_source_path = Path(metadata_stub_content_path / "publishers.json")
 
-# Load datasets json file from disk
+# Load JSON files from disk
 with open(datasets_source_path) as f:
     datasets_source_dict = json.load(f)
 
-# Load editions json files from disk
 editions = process_json_files(editions_source_path)
 
-# Load versions json files from disk
 versions = process_json_files(versions_source_path)
 
-# Load topics json file from disk
 with open(topics_source_path) as f:
     topics_source_dict = json.load(f)
 
-# Load publishers json file from disk
 with open(publishers_source_path) as f:
     publishers_source_dict = json.load(f)
 
-# Extract edition URLs from datasets.json for validation later
-dataset_editions_urls = [
-    dataset["editions_url"] for dataset in datasets_source_dict["datasets"]
-]
-
-# Extract publishers from datasets.json for validation later
+# Extract publishers and creators from datasets.json for validation later
 dataset_publishers = {
     dataset["publisher"] for dataset in datasets_source_dict["datasets"]
 }
 
-# Extract creators from datasets.json for validation later
 dataset_creators = {dataset["creator"] for dataset in datasets_source_dict["datasets"]}
 
-# Empty dict to hold version data from editions for validation later
-versions_in_edition = dict()
-
-# Empty set to hold topic data from editions for validation later
+# Extract version and topic data from editions for validation later
+versions_in_editions = dict()
 topics_in_editions = set()
+for edition in editions:
+    for edn in edition["editions"]:
+        versions_in_editions[edn["versions_url"]] = edn["versions"]
+        topics_in_editions.update(edn["topics"])
+
 
 if __name__ == "__main__":
     validate_datasets(datasets_source_dict)
     validate_editions(
-        datasets_source_dict,
-        editions,
-        dataset_editions_urls,
-        versions_in_edition,
-        topics_in_editions,
-        dataset_publishers,
+        datasets_source_dict, editions, dataset_publishers, dataset_creators
     )
-    validate_versions(versions, versions_in_edition)
+    validate_versions(versions, versions_in_editions)
     validate_topics(datasets_source_dict, topics_source_dict, topics_in_editions)
     validate_publishers(publishers_source_dict, dataset_publishers, dataset_creators)
