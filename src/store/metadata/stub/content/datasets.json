@@ -550,7 +550,7 @@
         "schools",
         "local-authority",
         "subnational",
-        "county",
+        "county"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
       "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
