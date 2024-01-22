@@ -53,7 +53,7 @@
             {
               "name": "period",
               "datatype": "datetime",
-              "titles": "Period",
+              "titles": "Year",
               "description": "The time period associated with the observation."
             },
             {
@@ -61,6 +61,12 @@
               "datatype": "string",
               "titles": "ONS Geography Code",
               "description": "The statistical geography of the observation being measured."
+            },
+            {
+              "name": "areanm",
+              "datatype": "string",
+              "titles": "Statistical Geography",
+              "description": "The name assiciated with the geography code."
             },
             {
               "name": "observation",
