@@ -1,6 +1,6 @@
 {
     "@context": "https://staging.idpd.uk/#ns",
-    "@id": "https://staging.idpd.uk/datasets/age-16-to-64-years-level/editions/2023-05/versions",
+    "@id": "https://staging.idpd.uk/datasets/age-16-to-64-years-level-3-or-above-qualifications/editions/2023-05/versions",
     "@type": "hydra:Collection",
     "title": "Aged 16 to 64 years level 3 or above qualifications",
     "versions": [
@@ -9,20 +9,20 @@
                 "dcat:Distribution",
                 "csvw:Table"
             ],
-            "@id": "https://staging.idpd.uk/datasets/age-16-to-64-years-level/editions/2023-05/versions/1",
+            "@id": "https://staging.idpd.uk/datasets/age-16-to-64-years-level-3-or-above-qualifications/editions/2023-05/versions/1",
             "identifier": "1",
             "issued": "2023-05-23T10:17:47Z",
             "title": "Aged 16 to 64 years level 3 or above qualifications",
             "summary": "Percentage of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications, Great Britain (Northern Ireland national figure included), 2004 to 2021",
         "description": "This dataset shows the percentage of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications, in Great Britain (Northern Ireland national figure included), for 2004 - 2021.",
-            "download_url": "https://staging.idpd.uk/datasets/age-16-to-64-years-level/editions/2023-05/versions/1.csv",
+            "download_url": "https://staging.idpd.uk/datasets/age-16-to-64-years-level-3-or-above-qualifications/editions/2023-05/versions/1.csv",
             "media_type": "text/csv",
             "table_schema": {
               "columns": [
                 {
                   "name": "period",
                   "datatype": "datetime",
-                  "titles": "Gregorian Time Interval",
+                  "titles": "Period",
                   "description": "The time period associated with the observation."
                 },
                 {
@@ -30,18 +30,6 @@
                   "datatype": "string",
                   "titles": "ONS Geography Code",
                   "description": "The statistical geography of the observation being measured."
-                },
-                {
-                  "name": "areanm",
-                  "datatype": "string",
-                  "titles": "Area Name",
-                  "description": "The name assiciated with the geography code."
-                },
-                {
-                  "name": "geography",
-                  "datatype": "string",
-                  "titles": "Geography Type",
-                  "description": "The categorisation of the geography code"
                 },
                 {
                   "name": "observation",

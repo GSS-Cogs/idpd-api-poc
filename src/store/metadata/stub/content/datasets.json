@@ -479,9 +479,9 @@
       ]
     },
     {
-      "@id": "https://staging.idpd.uk/datasets/age-16-to-64-years-level",
+      "@id": "https://staging.idpd.uk/datasets/age-16-to-64-years-level-3-or-above-qualifications",
       "@type": "dcat:DatasetSeries",
-      "identifier": "age-16-to-64-years-level",
+      "identifier": "age-16-to-64-years-level-3-or-above-qualifications",
       "title": "Aged 16 to 64 years level 3 or above qualifications",
       "summary": "Percentage of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications, Great Britain (Northern Ireland national figure included), 2004 to 2021",
       "description": "This dataset shows the percentage of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications, in Great Britain (Northern Ireland national figure included), for 2004 - 2021.",
@@ -515,10 +515,10 @@
         "start": "2004-01-01T12:00:00Z",
         "end": "2021-12-31T12:00:00Z"
       },
-      "editions_url": "https://staging.idpd.uk/datasets/age-16-to-64-years-level/editions",
+      "editions_url": "https://staging.idpd.uk/datasets/age-16-to-64-years-level-3-or-above-qualifications/editions",
       "editions": [
         {
-          "@id": "https://staging.idpd.uk/datasets/age-16-to-64-years-level/editions/2023-05",
+          "@id": "https://staging.idpd.uk/datasets/age-16-to-64-years-level-3-or-above-qualifications/editions/2023-05",
           "issued": "2023-05-23T10:17:47Z",
           "modified": "2023-08-27T13:10:00Z"
         }
