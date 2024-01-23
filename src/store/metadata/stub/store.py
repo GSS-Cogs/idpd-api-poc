@@ -4,6 +4,8 @@ import os
 from pathlib import Path
 from typing import Dict, Optional
 
+from main import combine_datasets
+
 from ..base import BaseMetadataStore
 
 from custom_logging import logger , configure_logger
@@ -94,7 +96,9 @@ class StubMetadataStore(BaseMetadataStore):
 
     def get_datasets(self, request_id:Optional[str] = None) -> Dict:
         logger.info("Constructing get_datasets() from files stored on disk", request_id=request_id)
-        return contextualise(self.datasets)
+        # return contextualise(self.datasets)
+        datasets = combine_datasets()
+        return contextualise(datasets)
 
     def get_dataset(self, id: str, request_id:Optional[str] = None) -> Dict:
         logger.info("Constructing get_dataset() from files stored on disk", request_id=request_id)

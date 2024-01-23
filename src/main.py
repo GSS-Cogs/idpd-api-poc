@@ -1,5 +1,8 @@
+from copy import deepcopy
 from ensurepip import version
+import json
 import os
+import pathlib
 from typing import Optional
 
 from fastapi import Depends, FastAPI, Request, Response, status
@@ -35,6 +38,26 @@ app.add_middleware(
     allow_methods=["GET"],
     allow_headers=["*"],
 )
+
+def combine_datasets()-> dict:
+    DATASETS_DIR = "/Users/muazzamchaudhary/git/idpd-api-poc/src/store/metadata/stub/content/datasets"
+    dataset = {}
+    for file in os.listdir(DATASETS_DIR):
+        file_path = os.path.join(DATASETS_DIR, file)
+        if os.path.isfile(file_path):
+            with open(file_path) as json_file:
+                if not dataset:
+                    dataset = json.load(json_file)
+                else:
+                    sub_datasets = json.load(json_file)
+                    # sub_dataset = sub_datasets["datasets"]
+                    # dataset["datasets"].append(sub_dataset)
+                    for key in sub_datasets:
+                        if key == "datasets":
+                            sub_dataset = sub_datasets[key]
+                            dataset[key].append(sub_dataset)
+
+    return dataset
 
 
 @app.get(

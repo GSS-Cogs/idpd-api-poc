@@ -19,6 +19,7 @@ from typing import Dict, List
 
 from rdflib import ConjunctiveGraph, Dataset, BNode, Graph
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore, _node_to_sparql
+from main import combine_datasets
 import schemas
 
 
@@ -101,9 +102,9 @@ def populate(oxigraph_url=None, write_to_db=True):
     out_dir.mkdir()
 
     # Specify locations of JSON files
-    datasets_source_path = Path(metadata_stub_content_path / "datasets.json")
-    editions_source_path = Path(metadata_stub_content_path / "editions")
-    versions_source_path = Path(metadata_stub_content_path / "editions" / "versions")
+    # datasets_source_path = Path(metadata_stub_content_path / "datasets" / "*.json")
+    editions_source_path = Path(metadata_stub_content_path / "datasets" / "*" / "editions")
+    versions_source_path = Path(metadata_stub_content_path / "datasets" / "*" / "editions" / "*" / "versions")
     topics_source_path = Path(metadata_stub_content_path / "topics.json")
     publishers_source_path = Path(metadata_stub_content_path / "publishers.json")
 
@@ -112,8 +113,9 @@ def populate(oxigraph_url=None, write_to_db=True):
     # ------------------
 
     # Load json file from disk
-    with open(datasets_source_path) as f:
-        datasets_source_dict = json.load(f)
+    # with open(datasets_source_path) as f:
+    #     datasets_source_dict = json.load(f)
+    datasets_source_dict = combine_datasets()
     _confirm_resource_count(datasets_source_dict, "datasets")
 
     # Validate data and add to graph
