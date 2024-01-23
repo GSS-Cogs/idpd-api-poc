@@ -523,8 +523,52 @@
           "modified": "2023-09-01T12:30:00Z"
         }
       ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/children-at-expected-level-for-language-by-end-of-early-years-foundation-stage",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "children-at-expected-level-for-language-by-end-of-early-years-foundation-stage",
+      "title": "Children at expected level for communication and language by end of early years foundation stage",
+      "summary": "Early years foundation stage profile outcomes of 5 year olds. Percentage at 'expected level' across all communication and language learning goals, England (state-funded schools), academic year 2022/23.",
+      "description": "This dataset shows the early years foundation stage profile outcomes of 5 year olds. Percentage at 'expected level' across all communication and language learning goals, in England (state-funded schools), for academic year 2022/23.\n\nCoverage\n\nEngland (state-funded schools)\n\nGeography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nRegions,\nNation (England)\n\nSource\n\n - England: [Department for Education]",
+      "issued": "2023-05-19T09:29:46Z",
+      "modified": "2023-12-12T10:27:00Z",
+      "next_release": "1900-01-01T00:00:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/department-for-education",
+      "contact_point": {
+        "name": "ofsted",
+        "email": "mailto:informationrequest@ofsted.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/children-education-and-skills"
+      ],
+      "frequency": "annually",
+      "keywords": [
+        "skills",
+        "education",
+        "language",
+        "children",
+        "subnational"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2022-09-01T00:00:00Z",
+        "end": "2023-06-01T00:00:00Z"
+      },
+    "editions_url": "https://staging.idpd.uk/datasets/children-at-expected-level-for-language-by-end-of-early-years-foundation-stage/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/children-at-expected-level-for-language-by-end-of-early-years-foundation-stage/editions/2023-05",
+          "issued": "2023-05-19T09:29:46Z",
+          "modified": "2023-12-12T10:27:00Z"
+        }
+      ]
     }
   ],
   "offset": 0,
-  "count": 11
+  "count": 12
 }
