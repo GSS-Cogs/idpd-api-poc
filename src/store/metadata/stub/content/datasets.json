@@ -543,7 +543,7 @@
       "topics": [
         "https://staging.idpd.uk/topics/children-education-and-skills"
       ],
-        "frequency": "irregular",
+      "frequency": "irregular",
       "keywords": [
         "skills",
         "education",
@@ -571,5 +571,5 @@
     }
   ],
   "offset": 0,
-  "count": 11
+  "count": 12
 }
