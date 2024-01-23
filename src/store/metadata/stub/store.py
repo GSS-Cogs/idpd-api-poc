@@ -65,8 +65,9 @@ class StubMetadataStore(BaseMetadataStore):
         content_dir = Path(Path(__file__).parent / "content")
 
         # get specific stubbed resources into memory on application startup
-        with open(Path(content_dir / "datasets.json").absolute()) as f:
-            self.datasets = json.load(f)
+        # with open(Path(content_dir / "datasets.json").absolute()) as f:
+        #     self.datasets = json.load(f)
+        self.datasets = combine_datasets()
 
         with open(Path(content_dir / "publishers.json").absolute()) as f:
             self.publishers = json.load(f)
@@ -96,9 +97,7 @@ class StubMetadataStore(BaseMetadataStore):
 
     def get_datasets(self, request_id:Optional[str] = None) -> Dict:
         logger.info("Constructing get_datasets() from files stored on disk", request_id=request_id)
-        # return contextualise(self.datasets)
-        datasets = combine_datasets()
-        return contextualise(datasets)
+        return contextualise(self.datasets)
 
     def get_dataset(self, id: str, request_id:Optional[str] = None) -> Dict:
         logger.info("Constructing get_dataset() from files stored on disk", request_id=request_id)
