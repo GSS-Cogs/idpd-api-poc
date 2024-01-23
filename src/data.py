@@ -153,7 +153,7 @@ def populate(oxigraph_url=None, write_to_db=True):
         assert (
             edition["@id"] in dataset_editions_urls
         ), f"Editions URL {edition['@id']} not found in {dataset_editions_urls}"
-        _assert_editions__ordered_by_issued(edition, "editions", "versions")
+        _assert_editions_ordered_by_issued(edition, "editions", "versions")
         for edn in edition["editions"]:
             versions_in_edition[edn["versions_url"]] = edn["versions"]
             topics_in_editions.update(edn["topics"])
@@ -398,7 +398,7 @@ def _assert_summarised_edition_in_dataset(datasets: Dict, edition: Dict):
             '''
         )
 
-def _assert_editions__ordered_by_issued(list_of_datasets, main_dict: str, sub_dict: str):
+def _assert_editions_ordered_by_issued(list_of_datasets, main_dict: str, sub_dict: str):
     """
         this function will assert that the list of datasets subtset
         is ordered by issued, raises error if not
