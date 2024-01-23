@@ -96,6 +96,7 @@ def populate(oxigraph_url=None, write_to_db=True):
     # Add editions to graph
     for edition in editions:
         g += Graph().parse(data=json.dumps(set_context(edition)), format="json-ld")
+        _assert_editions_ordered_by_issued(edition, "editions", "versions")
 
     # ------------------
     # Versions resources
@@ -155,6 +156,55 @@ def populate(oxigraph_url=None, write_to_db=True):
         configuration = (f"{oxigraph_url}/query", f"{oxigraph_url}/update")
         db = Dataset(store=SPARQLUpdateStore(*configuration, node_to_sparql=skolemise))
         db.parse(out_path)
+
+
+def _assert_editions_ordered_by_issued(list_of_datasets, main_dict: str, sub_dict: str):
+    """
+    this function will assert that the list of datasets subtset
+    is ordered by issued, raises error if not
+    """
+
+    index = 0
+
+    list_of_issued = []
+
+    for dataset_dict in list_of_datasets[main_dict]:
+        if len(dataset_dict[sub_dict]) > 1 and dataset_dict[sub_dict] is not None:
+            for y in dataset_dict[sub_dict]:
+                if index == 0:
+                    first_value = dataset_dict[sub_dict][0]["issued"]
+                fornow = y["issued"]
+                list_of_issued.append(fornow)
+                index += 1
+
+            most_recent = max(list_of_issued)
+            assert (
+                first_value == most_recent
+            ), "The datasets should be ordered by 'issued' (from most recent)"
+
+
+def _assert_versions_ordered_by_issued(datasets, sub_dict: str):
+    """
+    this function will assert that the list of datasets subset
+    is ordered by issued, raises error if not
+    """
+
+    index = 0
+
+    list_of_issued = []
+
+    if len(datasets[sub_dict]) > 1 and datasets[sub_dict] is not None:
+        for dataset in datasets[sub_dict]:
+            if index == 0:
+                first_value = datasets[sub_dict][0]["issued"]
+            fornow = dataset["issued"]
+            list_of_issued.append(fornow)
+            index += 1
+
+        most_recent = max(list_of_issued)
+        assert (
+            first_value == most_recent
+        ), "The datasets should be ordered by 'issued' (from most recent)"
 
 
 if __name__ == "__main__":
