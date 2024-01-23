@@ -1,0 +1,156 @@
+{
+    "@context": "https://staging.idpd.uk/ns#",
+    "@id": "https://staging.idpd.uk/datasets/aged-19-years-and-over-further-education-and-skills-learner-achievements/editions",
+    "@type": "hydra:Collection",
+    "title": "Aged 19 years and over further education and skills learner achievements",
+    "editions": [
+      {
+        "@id": "https://staging.idpd.uk/datasets/aged-19-years-and-over-further-education-and-skills-learner-achievements/editions/2023-05",
+        "@type": "dcat:Dataset",
+        "in_series": "https://staging.idpd.uk/datasets/aged-19-years-and-over-further-education-and-skills-learner-achievements",
+        "identifier": "2023-05",
+        "title": "Aged 19 years and over further education and skills learner achievements",
+        "summary": "Count of learners achieving a funded further education and skills learning aim, with the exception of community learning, non-qualification parts of the Multiply programme and bootcamps, England, academic years 2016/17 to 2021/22",
+        "description": "This dataset shows the count of learners achieving a funded further education and skills learning aim, with the exception of community learning, non-qualification parts of the Multiply programme and bootcamps, in England, for academic years 2016/17 to 2021/22.\n\nCoverage \n\nEngland\n\nGeography definition\n\nCounties and Unitary Authorities,\nNation (England)\n\nSource\n\n - England: [Department for Education]",
+        "issued": "2023-05-17T00:00:00Z",
+        "modified": "2023-05-17T00:00:00Z",
+        "next_release": "1900-01-01T00:00:00Z",
+        "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+        "creator": "https://staging.idpd.uk/publishers/department-for-education",
+        "contact_point": {
+          "name": "ofsted",
+          "email": "mailto:informationrequest@ofsted.gov.uk"
+        },
+        "topics": [
+          "https://staging.idpd.uk/topics/children-education-and-skills"
+        ],
+        "frequency": "irregular",
+        "keywords": [
+          "skills",
+          "education",
+          "adults",
+          "subnational",
+          "county",
+          "region"
+        ],
+        "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+        "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+        "spatial_coverage": "E92000001",
+        "temporal_resolution": ["P1Y"],
+        "temporal_coverage": {
+          "start": "2016-08-01T00:00:00Z",
+          "end": "2021-08-01T00:00:00Z"
+        },
+        "versions_url": "https://staging.idpd.uk/datasets/aged-19-years-and-over-further-education-and-skills-learner-achievements/editions/2023-05/versions",
+        "versions": [
+          {
+            "@id": "https://staging.idpd.uk/datasets/aged-19-years-and-over-further-education-and-skills-learner-achievements/editions/2023-05/versions/1",
+            "issued": "2023-05-17T12:41:00Z"
+          }
+        ],
+        "table_schema": {
+          "columns": [
+            {
+                "name": "period",
+                "datatype": "string",
+                "titles": "gregorian-interval",
+                "description": "The time period associated with the observation."
+              },
+              {
+                "name": "areacd",
+                "datatype": "string",
+                "titles": "Statistical Geography",
+                "description": "The geography code associated with the observation."
+              },
+              {
+                "name": "areanm",
+                "datatype": "string",
+                "titles": "Area Name",
+                "description": "The name assiciated with The geography code "
+              },
+              {
+                "name": "geography",
+                "datatype": "string",
+                "titles": "Geography Type",
+                "description": "The categorisation of the geography code"
+              },
+              {
+                "name": "variable_name",
+                "datatype": "string",
+                "titles": "Variable Name",
+                "description": "Which ESS variable is being measured"
+              },
+              {
+                "name": "indicator", 		
+                "datatype": "string",
+                "titles": "Indicator",
+                "description": "Which ESS indicator is being measured"
+              },
+              {
+                "name": "mission",
+                "datatype": "string",
+                "titles": "Mission",
+                "description": "Which ESS mission number this dataset is fulfilling"
+              },
+              {
+                "name": "category",
+                "datatype": "string",
+                "titles": "Category",
+                "description": "Which ESS category the dataset belongs to"
+              },
+              {
+                  "name": "observation",
+                  "datatype": "decimal",
+                  "titles": "Observation",
+                  "description": "Observation value for the chosen variable"
+                },
+                {
+                    "name": "measure",
+                    "datatype": "string",
+                    "titles": "Measure Type",
+                    "description": "Measure Type of the Observational Value"
+                },
+                {
+                    "name": "unit",
+                    "datatype": "string",
+                    "titles": "Unit",
+                    "description": "Unit Type of the Observational Value"
+                  },
+                {
+                "name": "lower_confidence_Interval_95%",
+                "datatype": "decimal",
+                "titles": "Lower Confidence Interval (95%)",
+                "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Lower bound"
+              },
+              {
+                "name": "upper_confidence_Interval_95%",
+                "datatype": "decimal",
+                "titles": "Upper Confidence Interval (95%)",
+                "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Upper bound"
+              },
+              {
+                "name": "observation_status",
+                "datatype": "string",
+                "titles": "Observation Status",
+                "description": "Additional Context to the Observation if needed"
+              },
+              {
+                "name": "polarity",
+                "datatype": "string",
+                "titles": "Polarity",
+                "description": "Polarity"
+              },
+              {
+                "name": "notes",
+                "datatype": "string",
+                "titles": "Notes",
+                "description": "Additional notes for column values where needed"
+              }
+    
+        ]
+        }
+      }
+    ],
+    "count": 1,
+    "offset": 0
+  }
