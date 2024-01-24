@@ -479,6 +479,52 @@
       ]
     },
     {
+      "@id": "https://staging.idpd.uk/datasets/age-16-to-64-years-level-3-or-above-qualifications",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "age-16-to-64-years-level-3-or-above-qualifications",
+      "title": "Aged 16 to 64 years level 3 or above qualifications",
+      "summary": "Percentage of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications, Great Britain (Northern Ireland national figure included), 2004 to 2021",
+      "description": "This dataset shows the percentage of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications, in Great Britain (Northern Ireland national figure included), for 2004 - 2021.",
+      "issued": "2023-05-23T10:17:47Z",
+      "modified": "2023-08-27T13:10:00Z",
+      "next_release": "2024-05-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/department-for-education",
+      "creator": "https://staging.idpd.uk/publishers/department-for-education",
+      "contact_point": {
+        "name": "ofsted",
+        "email": "mailto:informationrequest@ofsted.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/children-education-and-skills"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "annual-population",
+        "annual-survey",
+        "national-vocational",
+        "national-qualification",
+        "subnational",
+        "local-authority",
+        "region"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2004-01-01T12:00:00Z",
+        "end": "2021-12-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/age-16-to-64-years-level-3-or-above-qualifications/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/age-16-to-64-years-level-3-or-above-qualifications/editions/2023-05",
+          "issued": "2023-05-23T10:17:47Z",
+          "modified": "2023-08-27T13:10:00Z"
+         }
+      ]
+    }, 
+    {
       "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils-looked-after-by-local-authorities",
       "@type": "dcat:DatasetSeries",
       "identifier": "persistent-absences-for-pupils-looked-after-by-local-authorities",
@@ -504,8 +550,7 @@
         "schools",
         "local-authority",
         "subnational",
-        "county",
-        "region"
+        "county"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
       "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
@@ -521,6 +566,51 @@
           "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils-looked-after-by-local-authorities/editions/2023-05",
           "issued": "2023-05-16T13:35:25Z",
           "modified": "2023-09-01T12:30:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/aged-19-years-and-over-further-education-and-skills-participation",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "aged-19-years-and-over-further-education-and-skills-participation",
+      "title": "Aged 19 years and over further education and skills participation",
+      "summary": "19+ further education and skills participation rate per 100,000 population, England, academic years 2017/18 to 2022/23",
+      "description": "This dataset shows 19+ further education and skills participation rate per 100,000 population, in England, for full academic years 2017/18 to 2022/23",
+      "issued": "2023-05-17T12:25:15Z",
+      "modified": "2023-12-08T11:55:00Z",
+      "next_release": "2024-05-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/department-for-education",
+      "contact_point": {
+        "name": "ofsted",
+        "email": "mailto:informationrequest@ofsted.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/children-education-and-skills"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "apprenticeship",
+        "community-learning",
+        "education",
+        "training",
+        "subnational",
+        "local-authority"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2017-01-01T12:00:00Z",
+        "end": "2022-12-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/aged-19-years-and-over-further-education-and-skills-participation/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/aged-19-years-and-over-further-education-and-skills-participation/editions/2023-05",
+          "issued": "2023-05-17T12:25:15Z",
+          "modified": "2023-12-08T11:55:00Z"
         }
       ]
     },
