@@ -1,0 +1,125 @@
+{
+    "@context": "https://staging.idpd.uk/ns#",
+    "@id": "https://staging.idpd.uk/datasets/children-at-expected-level-for-language-by-end-of-early-years-foundation-stage/editions/2023-05/versions",
+    "@type": "hydra:Collection",
+    "title": "Children at expected level for communication and language by end of early years foundation stage",
+    "versions": [
+        {
+            "@type": [
+              "dcat:Distribution",
+              "csvw:Table"
+            ],
+            "@id": "https://staging.idpd.uk/datasets/children-at-expected-level-for-language-by-end-of-early-years-foundation-stage/editions/2023-05/versions/1",
+            "identifier": "1",
+            "issued": "2023-05-19T09:29:46Z",
+            "title": "Children at expected level for communication and language by end of early years foundation stage",
+            "summary": "Early years foundation stage profile outcomes of 5 year olds. Percentage at 'expected level' across all communication and language learning goals, England (state-funded schools), academic year 2022/23.",
+            "description": "This dataset shows the early years foundation stage profile outcomes of 5 year olds. Percentage at 'expected level' across all communication and language learning goals, in England (state-funded schools), for academic year 2022/23.\n\nCoverage\n\nEngland (state-funded schools)\n\nGeography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nRegions,\nNation (England)\n\nSource\n\n - England: [Department for Education]",
+            "download_url": "https://staging.idpd.uk/datasets/children-at-expected-level-for-language-by-end-of-early-years-foundation-stage/editions/2023-05/versions/1.csv",
+            "media_type": "text/csv",
+            "table_schema": {
+          "columns": [
+            {
+                "name": "period",
+                "datatype": "string",
+                "titles": "Period",
+                "description": "The time period associated with the observation."
+              },
+              {
+                "name": "areacd",
+                "datatype": "string",
+                "titles": "Statistical Geography",
+                "description": "The geography code associated with the observation."
+              },
+              {
+                "name": "areanm",
+                "datatype": "string",
+                "titles": "Area Name",
+                "description": "The name assiciated with The geography code "
+              },
+              {
+                "name": "geography",
+                "datatype": "string",
+                "titles": "Geography Type",
+                "description": "The categorisation of the geography code"
+              },
+              {
+                "name": "variable_name",
+                "datatype": "string",
+                "titles": "Variable Name",
+                "description": "Which ESS variable is being measured"
+              },
+              {
+                "name": "indicator", 		
+                "datatype": "string",
+                "titles": "Indicator",
+                "description": "Which ESS indicator is being measured"
+              },
+              {
+                "name": "mission",
+                "datatype": "string",
+                "titles": "Mission",
+                "description": "Which ESS mission number this dataset is fulfilling"
+              },
+              {
+                "name": "category",
+                "datatype": "string",
+                "titles": "Category",
+                "description": "Which ESS category the dataset belongs to"
+              },
+              {
+                  "name": "observation",
+                  "datatype": "decimal",
+                  "titles": "Observation",
+                  "description": "Observation value for the chosen variable"
+                },
+                {
+                    "name": "measure",
+                    "datatype": "string",
+                    "titles": "Measure Type",
+                    "description": "Measure Type of the Observational Value"
+                },
+                {
+                    "name": "unit",
+                    "datatype": "string",
+                    "titles": "Unit",
+                    "description": "Unit Type of the Observational Value"
+                  },
+                {
+                "name": "lower_confidence_Interval_95",
+                "datatype": "decimal",
+                "titles": "Lower Confidence Interval",
+                "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Lower bound"
+              },
+              {
+                "name": "upper_confidence_Interval_95%",
+                "datatype": "decimal",
+                "titles": "Upper Confidence Interval",
+                "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, Upper bound"
+              },
+              {
+                "name": "observation_status",
+                "datatype": "string",
+                "titles": "Observation Status",
+                "description": "Additional Context to the Observation if needed"
+              },
+              {
+                "name": "polarity",
+                "datatype": "string",
+                "titles": "Polarity",
+                "description": "Polarity"
+              },
+              {
+                "name": "notes",
+                "datatype": "string",
+                "titles": "Notes",
+                "description": "Additional notes for column values where needed"
+              }
+    
+        ]
+        }
+      }
+    ],
+    "count": 1,
+    "offset": 0
+  }
