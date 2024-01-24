@@ -95,6 +95,17 @@ def _validate_edition_in_dataset(datasets: Dict, edition: Dict):
         parent_dataset = parent_dataset[0]
         summarised_editions = parent_dataset["editions"]
 
+        ###
+        issued_dates = [edn["issued"] for edn in summarised_editions]
+        sorted_issued_dates = sorted(
+            issued_dates, reverse=True
+        )  # Pass a key in here to enforce datetime sorting
+        if issued_dates != sorted_issued_dates:
+            raise ValueError(
+                "Summarised editions should be sorted from most to least recent"
+            )
+        ###
+
         # Confirm there is exactly one summarised edition with the same `@id` as the long form representation from the `editions.json` file.
         summarised_editions_for_edition_id = [
             edn for edn in summarised_editions if edn["@id"] == id
@@ -157,6 +168,17 @@ def _validate_version_in_edition(version: Dict, versions_in_editions: Dict):
         # The `version` @id includes the path to its edition the version_url field) so get the summarised version information from the versions_in_editions dictionary
         version_path = "/".join(id.split("/")[:-1])
         versions_for_this_edition = versions_in_editions.get(version_path, None)
+
+        ###
+        issued_dates = [vsn["issued"] for vsn in versions_for_this_edition]
+        sorted_issued_dates = sorted(
+            issued_dates, reverse=True
+        )  # Pass a key in here to enforce datetime sorting
+        if issued_dates != sorted_issued_dates:
+            raise ValueError(
+                "Summarised versions should be sorted from most to least recent"
+            )
+        ###
 
         # Confirm there is exactly one summarised version with the same `@id` as the long form representation from the `versions.json` file.
         summarised_versions_for_version_id = [
@@ -298,6 +320,55 @@ def validate_publishers(
 
     # Schema validation
     schemas.Publishers(**publishers)
+
+
+def _assert_editions_ordered_by_issued(list_of_datasets, main_dict: str, sub_dict: str):
+    """
+    this function will assert that the list of datasets subtset
+    is ordered by issued, raises error if not
+    """
+
+    index = 0
+
+    list_of_issued = []
+
+    for dataset_dict in list_of_datasets[main_dict]:
+        if len(dataset_dict[sub_dict]) > 1 and dataset_dict[sub_dict] is not None:
+            for y in dataset_dict[sub_dict]:
+                if index == 0:
+                    first_value = dataset_dict[sub_dict][0]["issued"]
+                fornow = y["issued"]
+                list_of_issued.append(fornow)
+                index += 1
+
+            most_recent = max(list_of_issued)
+            assert (
+                first_value == most_recent
+            ), "The datasets should be ordered by 'issued' (from most recent)"
+
+
+def _assert_versions_ordered_by_issued(datasets, sub_dict: str):
+    """
+    this function will assert that the list of datasets subset
+    is ordered by issued, raises error if not
+    """
+
+    index = 0
+
+    list_of_issued = []
+
+    if len(datasets[sub_dict]) > 1 and datasets[sub_dict] is not None:
+        for dataset in datasets[sub_dict]:
+            if index == 0:
+                first_value = datasets[sub_dict][0]["issued"]
+            fornow = dataset["issued"]
+            list_of_issued.append(fornow)
+            index += 1
+
+        most_recent = max(list_of_issued)
+        assert (
+            first_value == most_recent
+        ), "The datasets should be ordered by 'issued' (from most recent)"
 
 
 # Specify locations of JSON files

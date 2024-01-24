@@ -181,7 +181,7 @@ def test_validate_version_in_edition_invalid_version_id():
 
 def test_validate_version_in_edition_multiple_versions():
     with open(
-        "tests/store/metadata/stub/test-cases/versions_in_editions_multiple_versions.json"
+        "tests/store/metadata/stub/test-cases/versions_in_editions_multiple_versions_with_same_id.json"
     ) as f:
         versions_in_editions = json.load(f)
     with open("tests/store/metadata/stub/test-cases/version.json") as f:
