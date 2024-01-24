@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 import pytest
 from store.metadata.stub.validation import (
@@ -14,9 +15,10 @@ import schemas
 
 
 def test_validate_resource_count():
-    with open(
-        "tests/store/metadata/stub/test-cases/datasets_invalid_resource_count.json"
-    ) as f:
+    file_path = Path(
+        "tests/store/metadata/stub/test-cases/datasets/datasets_invalid_resource_count.json"
+    )
+    with open(file_path) as f:
         datasets = json.load(f)
     with pytest.raises(ValueError) as exc:
         _validate_resource_count(datasets, "datasets")
@@ -27,9 +29,10 @@ def test_validate_resource_count():
 
 
 def test_validate_resource_identifier():
-    with open(
-        "tests/store/metadata/stub/test-cases/datasets_invalid_identifier.json"
-    ) as f:
+    file_path = Path(
+        "tests/store/metadata/stub/test-cases/datasets/datasets_invalid_identifier.json"
+    )
+    with open(file_path) as f:
         datasets = json.load(f)
     with pytest.raises(ValueError) as exc:
         _validate_resource_identifier_type_and_schema(
@@ -42,7 +45,10 @@ def test_validate_resource_identifier():
 
 
 def test_validate_resource_type():
-    with open("tests/store/metadata/stub/test-cases/datasets_invalid_type.json") as f:
+    file_path = Path(
+        "tests/store/metadata/stub/test-cases/datasets/datasets_invalid_type.json"
+    )
+    with open(file_path) as f:
         datasets = json.load(f)
     with pytest.raises(ValueError) as exc:
         _validate_resource_identifier_type_and_schema(
@@ -55,11 +61,15 @@ def test_validate_resource_type():
 
 
 def test_validate_edition_in_dataset_id_not_in_dataset():
-    with open("tests/store/metadata/stub/test-cases/datasets.json") as f:
+    datasets_file_path = Path(
+        "tests/store/metadata/stub/test-cases/datasets/datasets.json"
+    )
+    edition_file_path = Path(
+        "tests/store/metadata/stub/test-cases/editions/edition_id_not_in_dataset.json"
+    )
+    with open(datasets_file_path) as f:
         datasets = json.load(f)
-    with open(
-        "tests/store/metadata/stub/test-cases/edition_id_not_in_dataset.json"
-    ) as f:
+    with open(edition_file_path) as f:
         edition = json.load(f)
 
     with pytest.raises(ValueError) as exc:
@@ -71,11 +81,15 @@ def test_validate_edition_in_dataset_id_not_in_dataset():
 
 
 def test_validate_edition_in_dataset_id_not_in_series():
-    with open("tests/store/metadata/stub/test-cases/datasets.json") as f:
+    datasets_file_path = Path(
+        "tests/store/metadata/stub/test-cases/datasets/datasets.json"
+    )
+    edition_file_path = Path(
+        "tests/store/metadata/stub/test-cases/editions/edition_id_not_in_series.json"
+    )
+    with open(datasets_file_path) as f:
         datasets = json.load(f)
-    with open(
-        "tests/store/metadata/stub/test-cases/edition_id_not_in_series.json"
-    ) as f:
+    with open(edition_file_path) as f:
         edition = json.load(f)
 
     with pytest.raises(ValueError) as exc:
@@ -87,11 +101,15 @@ def test_validate_edition_in_dataset_id_not_in_series():
 
 
 def test_validate_edition_in_dataset_no_parent_dataset():
-    with open("tests/store/metadata/stub/test-cases/datasets.json") as f:
+    datasets_file_path = Path(
+        "tests/store/metadata/stub/test-cases/datasets/datasets.json"
+    )
+    edition_file_path = Path(
+        "tests/store/metadata/stub/test-cases/editions/edition_invalid_parent_dataset.json"
+    )
+    with open(datasets_file_path) as f:
         datasets = json.load(f)
-    with open(
-        "tests/store/metadata/stub/test-cases/edition_invalid_parent_dataset.json"
-    ) as f:
+    with open(edition_file_path) as f:
         edition = json.load(f)
 
     with pytest.raises(ValueError) as exc:
@@ -102,12 +120,36 @@ def test_validate_edition_in_dataset_no_parent_dataset():
     ) in str(exc.value)
 
 
-def test_validate_edition_in_dataset_invalid_summarised_edition_id():
-    with open(
-        "tests/store/metadata/stub/test-cases/datasets_invalid_summarised_edition_id.json"
-    ) as f:
+def test_validate_edition_in_dataset_invalid_date_order():
+    datasets_file_path = Path(
+        "tests/store/metadata/stub/test-cases/datasets/datasets_with_multiple_editions_invalid_order.json"
+    )
+    edition_file_path = Path(
+        "tests/store/metadata/stub/test-cases/editions/edition.json"
+    )
+    with open(datasets_file_path) as f:
         datasets = json.load(f)
-    with open("tests/store/metadata/stub/test-cases/edition.json") as f:
+    with open(edition_file_path) as f:
+        edition = json.load(f)
+
+    with pytest.raises(ValueError) as exc:
+        _validate_edition_in_dataset(datasets, edition)
+
+    assert (
+        "Editions at the dataset level should be sorted from newest to oldest."
+    ) in str(exc.value)
+
+
+def test_validate_edition_in_dataset_invalid_summarised_edition_id():
+    datasets_file_path = Path(
+        "tests/store/metadata/stub/test-cases/datasets/datasets_invalid_summarised_edition_id.json"
+    )
+    edition_file_path = Path(
+        "tests/store/metadata/stub/test-cases/editions/edition.json"
+    )
+    with open(datasets_file_path) as f:
+        datasets = json.load(f)
+    with open(edition_file_path) as f:
         edition = json.load(f)
 
     with pytest.raises(ValueError) as exc:
@@ -119,11 +161,15 @@ def test_validate_edition_in_dataset_invalid_summarised_edition_id():
 
 
 def test_validate_edition_in_dataset_invalid_issued_date():
-    with open("tests/store/metadata/stub/test-cases/datasets.json") as f:
+    datasets_file_path = Path(
+        "tests/store/metadata/stub/test-cases/datasets/datasets.json"
+    )
+    edition_file_path = Path(
+        "tests/store/metadata/stub/test-cases/editions/edition_invalid_issued_date.json"
+    )
+    with open(datasets_file_path) as f:
         datasets = json.load(f)
-    with open(
-        "tests/store/metadata/stub/test-cases/edition_invalid_issued_date.json"
-    ) as f:
+    with open(edition_file_path) as f:
         edition = json.load(f)
 
     with pytest.raises(ValueError) as exc:
@@ -135,11 +181,15 @@ def test_validate_edition_in_dataset_invalid_issued_date():
 
 
 def test_validate_edition_in_dataset_invalid_modified_date():
-    with open("tests/store/metadata/stub/test-cases/datasets.json") as f:
+    datasets_file_path = Path(
+        "tests/store/metadata/stub/test-cases/datasets/datasets.json"
+    )
+    edition_file_path = Path(
+        "tests/store/metadata/stub/test-cases/editions/edition_invalid_modified_date.json"
+    )
+    with open(datasets_file_path) as f:
         datasets = json.load(f)
-    with open(
-        "tests/store/metadata/stub/test-cases/edition_invalid_modified_date.json"
-    ) as f:
+    with open(edition_file_path) as f:
         edition = json.load(f)
 
     with pytest.raises(ValueError) as exc:
@@ -151,11 +201,15 @@ def test_validate_edition_in_dataset_invalid_modified_date():
 
 
 def test_validate_edition_in_dataset_additional_summarised_edition_field():
-    with open(
-        "tests/store/metadata/stub/test-cases/datasets_additional_summarised_edition_field.json"
-    ) as f:
+    datasets_file_path = Path(
+        "tests/store/metadata/stub/test-cases/datasets/datasets_additional_summarised_edition_field.json"
+    )
+    edition_file_path = Path(
+        "tests/store/metadata/stub/test-cases/editions/edition.json"
+    )
+    with open(datasets_file_path) as f:
         datasets = json.load(f)
-    with open("tests/store/metadata/stub/test-cases/edition.json") as f:
+    with open(edition_file_path) as f:
         edition = json.load(f)
 
     with pytest.raises(ValueError) as exc:
@@ -167,10 +221,17 @@ def test_validate_edition_in_dataset_additional_summarised_edition_field():
 
 
 def test_validate_version_in_edition_invalid_version_id():
-    with open("tests/store/metadata/stub/test-cases/versions_in_editions.json") as f:
+    versions_in_edition_file_path = Path(
+        "tests/store/metadata/stub/test-cases/versions_in_editions/versions_in_editions.json"
+    )
+    version_file_path = Path(
+        "tests/store/metadata/stub/test-cases/versions/version_invalid_id.json"
+    )
+    with open(versions_in_edition_file_path) as f:
         versions_in_editions = json.load(f)
-    with open("tests/store/metadata/stub/test-cases/version_invalid_id.json") as f:
+    with open(version_file_path) as f:
         version = json.load(f)
+
     with pytest.raises(ValueError) as exc:
         _validate_version_in_edition(version, versions_in_editions)
     assert (
@@ -179,13 +240,38 @@ def test_validate_version_in_edition_invalid_version_id():
     )
 
 
-def test_validate_version_in_edition_multiple_versions_same_id():
-    with open(
-        "tests/store/metadata/stub/test-cases/versions_in_editions_multiple_versions_with_same_id.json"
-    ) as f:
+def test_validate_version_in_edition_invalid_date_order():
+    versions_in_edition_file_path = Path(
+        "tests/store/metadata/stub/test-cases/versions_in_editions/versions_in_editions_multiple_versions_invalid_order.json"
+    )
+    version_file_path = Path(
+        "tests/store/metadata/stub/test-cases/versions/version.json"
+    )
+    with open(versions_in_edition_file_path) as f:
         versions_in_editions = json.load(f)
-    with open("tests/store/metadata/stub/test-cases/version.json") as f:
+    with open(version_file_path) as f:
         version = json.load(f)
+
+    with pytest.raises(ValueError) as exc:
+        _validate_version_in_edition(version, versions_in_editions)
+    assert (
+        "Versions at the edition level should be sorted from newest to oldest."
+        in str(exc.value)
+    )
+
+
+def test_validate_version_in_edition_multiple_versions_same_id():
+    versions_in_edition_file_path = Path(
+        "tests/store/metadata/stub/test-cases/versions_in_editions/versions_in_editions_multiple_versions_with_same_id.json"
+    )
+    version_file_path = Path(
+        "tests/store/metadata/stub/test-cases/versions/version.json"
+    )
+    with open(versions_in_edition_file_path) as f:
+        versions_in_editions = json.load(f)
+    with open(version_file_path) as f:
+        version = json.load(f)
+
     with pytest.raises(ValueError) as exc:
         _validate_version_in_edition(version, versions_in_editions)
     assert (
@@ -194,12 +280,17 @@ def test_validate_version_in_edition_multiple_versions_same_id():
 
 
 def test_validate_version_in_edition_invalid_issued_date():
-    with open(
-        "tests/store/metadata/stub/test-cases/versions_in_editions_invalid_issued_date.json"
-    ) as f:
+    versions_in_edition_file_path = Path(
+        "tests/store/metadata/stub/test-cases/versions_in_editions/versions_in_editions_invalid_issued_date.json"
+    )
+    version_file_path = Path(
+        "tests/store/metadata/stub/test-cases/versions/version.json"
+    )
+    with open(versions_in_edition_file_path) as f:
         versions_in_editions = json.load(f)
-    with open("tests/store/metadata/stub/test-cases/version.json") as f:
+    with open(version_file_path) as f:
         version = json.load(f)
+
     with pytest.raises(ValueError) as exc:
         _validate_version_in_edition(version, versions_in_editions)
     assert (
@@ -208,12 +299,17 @@ def test_validate_version_in_edition_invalid_issued_date():
 
 
 def test_validate_version_in_edition_additional_field():
-    with open(
-        "tests/store/metadata/stub/test-cases/versions_in_editions_additional_field.json"
-    ) as f:
+    versions_in_edition_file_path = Path(
+        "tests/store/metadata/stub/test-cases/versions_in_editions/versions_in_editions_additional_field.json"
+    )
+    version_file_path = Path(
+        "tests/store/metadata/stub/test-cases/versions/version.json"
+    )
+    with open(versions_in_edition_file_path) as f:
         versions_in_editions = json.load(f)
-    with open("tests/store/metadata/stub/test-cases/version.json") as f:
+    with open(version_file_path) as f:
         version = json.load(f)
+
     with pytest.raises(ValueError) as exc:
         _validate_version_in_edition(version, versions_in_editions)
     assert (
@@ -222,9 +318,15 @@ def test_validate_version_in_edition_additional_field():
 
 
 def test_validate_publishers_in_editions():
-    with open("tests/store/metadata/stub/test-cases/datasets.json") as f:
+    datasets_file_path = Path(
+        "tests/store/metadata/stub/test-cases/datasets/datasets.json"
+    )
+    edition_file_path = Path(
+        "tests/store/metadata/stub/test-cases/editions/edition.json"
+    )
+    with open(datasets_file_path) as f:
         datasets = json.load(f)
-    with open("tests/store/metadata/stub/test-cases/edition.json") as f:
+    with open(edition_file_path) as f:
         edition = json.load(f)
     editions = [edition]
     dataset_publishers = {"publisher1", "publisher2"}
@@ -237,10 +339,17 @@ def test_validate_publishers_in_editions():
 
 
 def test_validate_creators_in_editions():
-    with open("tests/store/metadata/stub/test-cases/datasets.json") as f:
+    datasets_file_path = Path(
+        "tests/store/metadata/stub/test-cases/datasets/datasets.json"
+    )
+    edition_file_path = Path(
+        "tests/store/metadata/stub/test-cases/editions/edition.json"
+    )
+    with open(datasets_file_path) as f:
         datasets = json.load(f)
-    with open("tests/store/metadata/stub/test-cases/edition.json") as f:
+    with open(edition_file_path) as f:
         edition = json.load(f)
+
     editions = [edition]
     dataset_publishers = {
         "https://staging.idpd.uk/publishers/office-for-national-statistics"
@@ -254,14 +363,21 @@ def test_validate_creators_in_editions():
 
 
 def test_validate_topics_in_dataset():
-    with open("tests/store/metadata/stub/test-cases/datasets.json") as f:
+    datasets_file_path = Path(
+        "tests/store/metadata/stub/test-cases/datasets/datasets.json"
+    )
+    topics_file_path = Path(
+        "tests/store/metadata/stub/test-cases/topics_not_in_dataset.json"
+    )
+    with open(datasets_file_path) as f:
         datasets = json.load(f)
-    with open("tests/store/metadata/stub/test-cases/topics_not_in_dataset.json") as f:
+    with open(topics_file_path) as f:
         topics = json.load(f)
     topics_in_editions = {
         "https://staging.idpd.uk/topics/it-and-internet-industry",
         "https://staging.idpd.uk/topics/business-trade-and-international-development",
     }
+
     with pytest.raises(ValueError) as exc:
         validate_topics(datasets, topics, topics_in_editions)
     assert (
@@ -270,9 +386,13 @@ def test_validate_topics_in_dataset():
 
 
 def test_validate_topics_in_edition():
-    with open("tests/store/metadata/stub/test-cases/datasets.json") as f:
+    datasets_file_path = Path(
+        "tests/store/metadata/stub/test-cases/datasets/datasets.json"
+    )
+    topics_file_path = Path("tests/store/metadata/stub/test-cases/topics.json")
+    with open(datasets_file_path) as f:
         datasets = json.load(f)
-    with open("tests/store/metadata/stub/test-cases/topics.json") as f:
+    with open(topics_file_path) as f:
         topics = json.load(f)
     topics_in_editions = {
         "https://staging.idpd.uk/topics/invalid-topic",
@@ -285,7 +405,8 @@ def test_validate_topics_in_edition():
 
 
 def test_validate_dataset_publishers():
-    with open("tests/store/metadata/stub/test-cases/publishers.json") as f:
+    publishers_file_path = Path("tests/store/metadata/stub/test-cases/publishers.json")
+    with open(publishers_file_path) as f:
         publishers = json.load(f)
     dataset_publishers = {"https://staging.idpd.uk/publishers/invalid-publisher"}
     dataset_creators = {
@@ -301,7 +422,8 @@ def test_validate_dataset_publishers():
 
 
 def test_validate_dataset_creators():
-    with open("tests/store/metadata/stub/test-cases/publishers.json") as f:
+    publishers_file_path = Path("tests/store/metadata/stub/test-cases/publishers.json")
+    with open(publishers_file_path) as f:
         publishers = json.load(f)
     dataset_publishers = {
         "https://staging.idpd.uk/publishers/office-for-national-statistics"
@@ -315,9 +437,10 @@ def test_validate_dataset_creators():
 
 
 def test_validate_publishers_referenced():
-    with open(
+    publishers_file_path = Path(
         "tests/store/metadata/stub/test-cases/publishers_not_referenced.json"
-    ) as f:
+    )
+    with open(publishers_file_path) as f:
         publishers = json.load(f)
     dataset_publishers = {
         "https://staging.idpd.uk/publishers/office-for-national-statistics"

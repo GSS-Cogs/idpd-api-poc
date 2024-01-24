@@ -96,16 +96,17 @@ def _validate_edition_in_dataset(datasets: Dict, edition: Dict):
         parent_dataset = parent_dataset[0]
         summarised_editions = parent_dataset["editions"]
 
-        ###
+        # Check that summarised editions are listed in date order from newest to oldest
         issued_dates = [edn["issued"] for edn in summarised_editions]
         sorted_issued_dates = sorted(
-            issued_dates, reverse=True, key= lambda x: datetime.fromisoformat(x)
-        )  # Pass a key in here to enforce datetime sorting
+            issued_dates,
+            reverse=True,
+            key=lambda x: datetime.strptime(x, "%Y-%m-%dT%H:%M:%S%z"),
+        )
         if issued_dates != sorted_issued_dates:
             raise ValueError(
-                "Summarised editions should be sorted from most to least recent"
+                "Editions at the dataset level should be sorted from newest to oldest."
             )
-        ###
 
         # Confirm there is exactly one summarised edition with the same `@id` as the long form representation from the `editions.json` file.
         summarised_editions_for_edition_id = [
@@ -170,13 +171,16 @@ def _validate_version_in_edition(version: Dict, versions_in_editions: Dict):
         version_path = "/".join(id.split("/")[:-1])
         versions_for_this_edition = versions_in_editions.get(version_path, None)
 
-        ###
+        # Check that summarised versions are listed in date order from newest to oldest
         issued_dates = [vsn["issued"] for vsn in versions_for_this_edition]
         sorted_issued_dates = sorted(
-            issued_dates, reverse=True, key= lambda x: datetime.fromisoformat(x))  # Pass a key in here to enforce datetime sorting
+            issued_dates,
+            reverse=True,
+            key=lambda x: datetime.strptime(x, "%Y-%m-%dT%H:%M:%S%z"),
+        )
         if issued_dates != sorted_issued_dates:
             raise ValueError(
-                "Summarised versions should be sorted from most to least recent"
+                "Versions at the edition level should be sorted from newest to oldest."
             )
         ###
 

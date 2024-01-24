@@ -14,6 +14,9 @@ lint: ## Run the ruff python linter (auto triggered on pre-commit)
 test: ## Run pytest and check test coverage (auto triggered on pre-push)
 	pipenv run pytest --cov-report term-missing --cov=src --cov-config=./tests/coverage.rc
 
+validate: ## Validate stub data files
+	pipenv run python3 ./src/store/metadata/stub/validation.py
+
 populate: ## Populate an oxigraph DB (that/if/when) one is running on localhost:7878
 	pipenv run python3 ./src/data.py
 
