@@ -179,7 +179,7 @@ def test_validate_version_in_edition_invalid_version_id():
     )
 
 
-def test_validate_version_in_edition_multiple_versions():
+def test_validate_version_in_edition_multiple_versions_same_id():
     with open(
         "tests/store/metadata/stub/test-cases/versions_in_editions_multiple_versions_with_same_id.json"
     ) as f:
@@ -189,7 +189,7 @@ def test_validate_version_in_edition_multiple_versions():
     with pytest.raises(ValueError) as exc:
         _validate_version_in_edition(version, versions_in_editions)
     assert (
-        "Could not find exactly one version listed at the edition level with an `@id` of https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1.\n            Found 2 versions.\n            The summarised versions listed for this edition are:\n            [{'@id': 'https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1', 'issued': '2022-01-01T00:00:00Z'}, {'@id': 'https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1', 'issued': '2023-01-01T00:00:00Z'}]"
+        "Could not find exactly one version listed at the edition level with an `@id` of https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1.\n            Found 2 versions.\n            The summarised versions listed for this edition are:\n            [{'@id': 'https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1', 'issued': '2022-01-01T00:00:00Z'}, {'@id': 'https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1', 'issued': '2022-01-01T00:00:00Z'}]"
     ) in str(exc.value)
 
 
