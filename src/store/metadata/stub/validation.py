@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 from pathlib import Path
 from typing import Dict, List, Set
@@ -98,7 +99,7 @@ def _validate_edition_in_dataset(datasets: Dict, edition: Dict):
         ###
         issued_dates = [edn["issued"] for edn in summarised_editions]
         sorted_issued_dates = sorted(
-            issued_dates, reverse=True
+            issued_dates, reverse=True, key= lambda x: datetime.fromisoformat(x)
         )  # Pass a key in here to enforce datetime sorting
         if issued_dates != sorted_issued_dates:
             raise ValueError(
@@ -172,8 +173,7 @@ def _validate_version_in_edition(version: Dict, versions_in_editions: Dict):
         ###
         issued_dates = [vsn["issued"] for vsn in versions_for_this_edition]
         sorted_issued_dates = sorted(
-            issued_dates, reverse=True
-        )  # Pass a key in here to enforce datetime sorting
+            issued_dates, reverse=True, key= lambda x: datetime.fromisoformat(x))  # Pass a key in here to enforce datetime sorting
         if issued_dates != sorted_issued_dates:
             raise ValueError(
                 "Summarised versions should be sorted from most to least recent"
