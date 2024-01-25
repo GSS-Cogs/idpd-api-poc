@@ -110,7 +110,7 @@
             "@type": "dcat:theme",
             "identifier": "travel-transport-and-tourism",
             "title": "Travel, transport and tourism",
-            "description": "Includes all modes of travel and transport, transport infrastructure and tourism. Also includes travel patterns and distances travelled, and international visits to the UK.",
+            "description": "Includes all modes of travel and transport, transport infrastructure and tourism. It also includes travel patterns and distances travelled, and international visits to the UK.",
             "sub_topics": [],
             "parent_topics": []
         }
