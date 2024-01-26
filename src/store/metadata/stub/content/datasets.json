@@ -615,46 +615,46 @@
       ]
     },
     {
-      "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-all-pupils",
+      "@id": "https://staging.idpd.uk/datasets/cancer-diagnosis-at-stage-1-and-2",
       "@type": "dcat:DatasetSeries",
-      "identifier": "persistent-absences-for-all-pupils",
-      "title": "Persistent absences for all pupils",
-      "summary": "Percentage of pupils in state-funded primary, state funded secondary and special schools that were persistently absent (those absent for 10% of schooling sessions) during the academic year, England (state-funded schools), academic years 2008/09 - 2021/22.",
-      "description": "This dataset shows the percentage of pupils in state-funded primary, state funded secondary and special schools that were persistently absent (those absent for 10% of schooling sessions) during the academic year, in England (state-funded schools), for academic years 2008/09 - 2021/22.",
-      "issued": "2023-06-05T13:27:00Z",
-      "modified": "2023-06-05T16:27:00Z",
-      "next_release": "2024-06-01T09:30:00Z",
+      "identifier": "cancer-diagnosis-at-stage-1-and-2",
+      "title": "Cancer diagnosis at stage 1 and 2",
+      "summary": "New cases of cancer diagnosed at stages 1 and 2 as a percentage of all new cases of cancer diagnosed at any known stage, England, 2013 to 2020.",
+      "description": "This dataset shows new cases of cancer diagnosed at stages 1 and 2 as a percentage of all new cases of cancer diagnosed at any known stage, in England, for 2013 to 2020.",
+      "issued": "2023-05-17T12:25:53Z",
+      "modified": "2023-08-17T11:55:00Z",
+      "next_release": "2024-05-01T09:30:00Z",
       "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-      "creator": "https://staging.idpd.uk/publishers/department-for-education",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
       "contact_point": {
-        "name": "Persistent absences",
-        "email": "mailto:persistent-absences@ons.gov.uk"
+        "name": "Office for health improvement and disparities",
+        "email": "mailto:dhsc.publicenquiries@dhsc.gov.uk"
       },
       "topics": [
-        "https://staging.idpd.uk/topics/children-education-and-skills"
+        "https://staging.idpd.uk/topics/health-and-social-care"
       ],
       "frequency": "annual",
       "keywords": [
-        "state-funded-school",
-        "children-out-of-school",
+        "tumor",
         "subnational",
+        "local-authority",
         "county",
         "region"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-      "spatial_resolution":["E06", "E07", "E08", "E09", "E10", "E11"],
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
       "spatial_coverage": "E92000001",
       "temporal_resolution": ["P1Y"],
       "temporal_coverage": {
-        "start": "2008-08-01T00:00:00Z",
-        "end": "2021-08-01T00:00:00Z"
+        "start": "2013-01-01T12:00:00Z",
+        "end": "2020-12-31T12:00:00Z"
       },
-      "editions_url": "https://staging.idpd.uk/datasets/persistent-absences-for-all-pupils/editions",
+      "editions_url": "https://staging.idpd.uk/datasets/cancer-diagnosis-at-stage-1-and-2/editions",
       "editions": [
         {
-          "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-all-pupils/editions/2023-06",
-          "issued": "2023-06-05T13:27:00Z",
-          "modified": "2023-06-05T16:27:00Z"
+          "@id": "https://staging.idpd.uk/datasets/cancer-diagnosis-at-stage-1-and-2/editions/2023-05",
+          "issued": "2023-05-17T12:25:53Z",
+          "modified": "2023-08-17T11:55:00Z"
         }
       ]
     }
