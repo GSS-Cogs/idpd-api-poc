@@ -13,7 +13,7 @@
         "summary": "Estimates of life satisfaction, feeling that the things done in life are worthwhile, happiness and anxiety for adults aged 16 years and over, UK, 04/2011-03/2012 to 04/2022-03/2023.",
         "description": "This dataset shows the average rating of those that feel satisfied about their lives (where 0 is 'not at all satisfied' and 10 is 'completely satisfied'), for adults aged 16 years and over, in the UK, for periods 04/2011-03/2012 to 04/2022-03/2023.",
         "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-        "creator": "https://staging.idpd.uk/publishers/department-for-education",
+        "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
         "contact_point": {
           "name": "Personal wellbeing in the UK",
           "email": "mailto:qualityoflife@ons.gov.uk"
