@@ -55,7 +55,7 @@
           "columns": [
             {
               "name": "period",
-              "datatype": "datetime",
+              "datatype": "string",
               "titles": "Government Year",
               "description": "The time period associated with the observation."
             },
