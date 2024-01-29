@@ -12,8 +12,8 @@
       "title": "Total value of UK exports",
       "summary": "Average travel time in minutes to nearest employment centre with 500 to 4999 jobs available by public transport or walking, by cycle and by car (experimental statistics), England, 2014-2019.",
       "description": "This dataset shows the average travel time in minutes to nearest employment centre with 500 to 4999 jobs available by public transport or walking, by cycle and by car (experimental statistics), in England, for periods 2014-2019.",
-      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-      "creator": "ofcom",
+      "publisher": "https://staging.idpd.uk/publishers/department-for-transport",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
       "contact_point": {
         "name": "Department for transport",
         "email": "mailto:enquiries@dvsa.gov.uk"
@@ -84,7 +84,7 @@
             "description": "The categorisation of the geography code"
           },
           {
-            "name": "mode of travel",
+            "name": "mode-of-travel",
             "datatype": "string",
             "titles": "Mode of travel",
             "description": "The travel mode associated with observation"
@@ -98,8 +98,8 @@
           {
             "name": "measure",
             "datatype": "string",
-            "titles": "Measure Type",
-            "description": "Measure Type of the Observational Value"
+            "titles": "Measure type",
+            "description": "Measure type of the Observational Value"
           },
           {
             "name": "unit",

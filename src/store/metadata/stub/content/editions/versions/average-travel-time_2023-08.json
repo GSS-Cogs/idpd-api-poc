@@ -44,7 +44,7 @@
                   "description": "The categorisation of the geography code"
                 },
                 {
-                  "name": "mode of travel",
+                  "name": "mode_of_travel",
                   "datatype": "string",
                   "titles": "Mode of travel",
                   "description": "The travel mode associated with observation"
@@ -58,8 +58,8 @@
                 {
                   "name": "measure",
                   "datatype": "string",
-                  "titles": "Measure Type",
-                  "description": "Measure Type of the Observational Value"
+                  "titles": "Measure type",
+                  "description": "Measure type of the Observational Value"
                 },
                 {
                   "name": "unit",

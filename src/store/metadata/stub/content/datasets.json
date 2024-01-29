@@ -624,7 +624,7 @@
       "issued": "2023-08-18T09:10:26Z",
       "modified": "2023-08-18T09:10:26Z",
       "next_release": "2024-08-01T09:30:00Z",
-      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "publisher": "https://staging.idpd.uk/publishers/department-for-transport",
       "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
       "contact_point": {
         "name": "Department for transport",
@@ -658,7 +658,6 @@
         }
       ]
     }
- 
   ],
   "offset": 0,
   "count": 14
