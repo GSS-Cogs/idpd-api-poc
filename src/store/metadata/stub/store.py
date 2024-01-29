@@ -4,10 +4,9 @@ import os
 from pathlib import Path
 from typing import Dict, Optional
 
-from main import combine_datasets
-
 from ..base import BaseMetadataStore
 
+# from main import combine_datasets
 from custom_logging import logger , configure_logger
 
 configure_logger()
@@ -50,6 +49,27 @@ def contextualise(resource) -> Dict:
         recursive_replace(resource, "https://staging.idpd.uk", "http://localhost:8000")
     return resource
 
+def combine_datasets()-> dict:
+    DATASETS_DIR = "src/store/metadata/stub/content/datasets"
+    dataset = {}
+    for file in os.listdir(DATASETS_DIR):
+        file_path = os.path.join(DATASETS_DIR, file)
+        if os.path.isfile(file_path):
+            with open(file_path) as json_file:
+                if not dataset:
+                    dataset = json.load(json_file)
+                else:
+                    sub_datasets = json.load(json_file)
+                    for key in sub_datasets:
+                        if key == "datasets":
+                            sub_dataset = sub_datasets[key][0]
+                            dataset[key].append(sub_dataset)
+
+    # api won't start if datasets checks fail
+    
+
+    return dataset
+
 
 class StubMetadataStore(BaseMetadataStore):
     """
@@ -79,7 +99,7 @@ class StubMetadataStore(BaseMetadataStore):
         # and scoop up all jsons. We use the naming conventions of
         # <dataset_id>_<edition_id> to populate the keys so we can get
         # them back out
-        editions_dir = Path(content_dir / "editions")
+        editions_dir = Path(content_dir / "datasets" / "editions")
         self.editions = {}
         for edition_json_file in glob.glob(os.path.join(editions_dir, "*.json")):
             with open(edition_json_file) as f:
@@ -87,7 +107,7 @@ class StubMetadataStore(BaseMetadataStore):
                     edition_json_file.split("/")[-1].rstrip(".json")
                 ] = json.load(f)
 
-        versions_dir = Path(editions_dir / "versions")
+        versions_dir = Path(editions_dir /"versions")
         self.versions = {}
         for version_json_file in glob.glob(os.path.join(versions_dir, "*.json")):
             with open(version_json_file) as f:

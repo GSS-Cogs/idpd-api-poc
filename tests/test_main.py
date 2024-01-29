@@ -1,6 +1,6 @@
 import pytest
 import json
-from src.main import combine_datasets
+from src.store.metadata.stub.store import combine_datasets
 
 def test_combine():
     datasets = combine_datasets()
