@@ -641,8 +641,8 @@
         "subnational",
         "local-authority"
       ],
-      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+       "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
       "spatial_coverage": "E92000001",
       "temporal_resolution": ["P1Y"],
       "temporal_coverage": {
@@ -657,8 +657,193 @@
           "modified": "2023-08-18T09:10:26Z"
         }
       ]
-    }
+    },
+    {  
+      "@id": "https://staging.idpd.uk/datasets/cancer-diagnosis-at-stage-1-and-2",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "cancer-diagnosis-at-stage-1-and-2",
+      "title": "Cancer diagnosis at stage 1 and 2",
+      "summary": "New cases of cancer diagnosed at stages 1 and 2 as a percentage of all new cases of cancer diagnosed at any known stage, England, 2013 to 2020.",
+      "description": "This dataset shows new cases of cancer diagnosed at stages 1 and 2 as a percentage of all new cases of cancer diagnosed at any known stage, in England, for 2013 to 2020.",
+      "issued": "2023-05-17T12:25:53Z",
+      "modified": "2023-08-17T11:55:00Z",
+      "next_release": "2024-05-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "Office for health improvement and disparities",
+        "email": "mailto:dhsc.publicenquiries@dhsc.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/health-and-social-care"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "tumor",
+        "subnational",
+        "local-authority",
+        "county",
+        "region"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2013-01-01T12:00:00Z",
+        "end": "2020-12-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/cancer-diagnosis-at-stage-1-and-2/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/cancer-diagnosis-at-stage-1-and-2/editions/2023-05",
+          "issued": "2023-05-17T12:25:53Z",
+          "modified": "2023-08-17T11:55:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-all-pupils",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "persistent-absences-for-all-pupils",
+      "title": "Persistent absences for all pupils",
+      "summary": "Percentage of pupils in state-funded primary, state funded secondary and special schools that were persistently absent (those absent for 10% of schooling sessions) during the academic year, England (state-funded schools), academic years 2008/09 - 2021/22.",
+      "description": "This dataset shows the percentage of pupils in state-funded primary, state funded secondary and special schools that were persistently absent (those absent for 10% of schooling sessions) during the academic year, in England (state-funded schools), for academic years 2008/09 - 2021/22.",
+      "issued": "2023-06-05T13:27:00Z",
+      "modified": "2023-06-05T16:27:00Z",
+      "next_release": "2024-06-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/department-for-education",
+      "contact_point": {
+        "name": "Persistent absences",
+        "email": "mailto:persistent-absences@ons.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/children-education-and-skills"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "state-funded-school",
+        "children-out-of-school",
+        "subnational",
+        "county",
+        "region"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E10", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2008-08-01T00:00:00Z",
+        "end": "2021-08-01T00:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/persistent-absences-for-all-pupils/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-all-pupils/editions/2023-06",
+          "issued": "2023-06-05T13:27:00Z",
+          "modified": "2023-06-05T16:27:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/annual-personal-wellbeing-estimates",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "annual-personal-wellbeing-estimates",
+      "title": "Annual personal wellbeing estimates",
+      "summary": "Estimates of life satisfaction, feeling that the things done in life are worthwhile, happiness and anxiety for adults aged 16 years and over, UK, 04/2011-03/2012 to 04/2022-03/2023.",
+      "description": "This dataset shows the average rating of those that feel satisfied about their lives (where 0 is 'not at all satisfied' and 10 is 'completely satisfied'), for adults aged 16 years and over, in the UK, for periods 04/2011-03/2012 to 04/2022-03/2023.",
+      "issued": "2023-09-13T13:32:00Z",
+      "modified": "2023-11-28T14:40:00Z",
+      "next_release": "2024-09-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "Personal wellbeing in the UK",
+        "email": "mailto:qualityoflife@ons.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/health-and-social-care"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "personal-wellbeing",
+        "subnational",
+        "quality-of-life",
+        "annual-population",
+        "local-authorities",
+        "counties",
+        "anxiety",
+        "happiness",
+        "life-satisfaction",
+        "regions"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2011-04-01T12:00:00Z",
+        "end": "2023-03-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/annual-personal-wellbeing-estimates/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/annual-personal-wellbeing-estimates/editions/2023-09",
+          "issued": "2023-09-13T13:32:00Z",
+          "modified": "2023-11-28T14:40:00Z"
+          }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/children-prevalence-of-weight-status",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "children-prevalence-of-weight-status",
+      "title": "Children prevalence of weight status",
+      "summary": "Proportion of children aged 4-5 years (reception age) and 10-11 years (Year 6 age) classified as underweight, healthy weight, overweight or obese (including severe obesity), England, academic years 2006/07 to 2022/23.",
+      "description": "This dataset shows the proportion of children aged 4-5 years (reception age) and 10-11 years (Year 6 age) classified as underweight, healthy weight, overweight or obese (including severe obesity), in England, for academic years 2006/07 to 2022/23.",
+      "issued": "2023-11-06T11:20:33Z",
+      "modified": "2023-11-23T11:00:00Z",
+      "next_release": "2024-11-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "Office for health improvement and disparities",
+        "email": "mailto:dhsc.publicenquiries@dhsc.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/health-and-social-care"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "obesity",
+        "schools",
+        "national-programme",
+        "child-measurement",
+        "state-funded",
+        "subnational",
+        "local-authority",
+        "county",
+        "region"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2006-01-01T09:00:00Z",
+        "end": "2022-12-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/children-prevalence-of-weight-status/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/children-prevalence-of-weight-status/editions/2023-11",
+          "issued": "2023-11-06T11:20:33Z",
+          "modified": "2023-11-23T11:00:00Z"
+        }
+      ]
+    }  
   ],
   "offset": 0,
-  "count": 14
+  "count": 18
 }
