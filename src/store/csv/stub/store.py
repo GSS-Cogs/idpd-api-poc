@@ -30,6 +30,35 @@ class StubCsvStore(BaseCsvStore):
             # Now add to dict so we can find them when a user requests
             self.datasets[csv_key] = csv_file_path
 
+            
+    
+    def get_dataset(self, dataset_id: str, request_id:Optional[str] = None):
+        # Use variables to create the unique custom identifier for the csv
+        # being requested.
+        csv_identifier = f"{dataset_id}".rstrip(".csv")
+        logger.info(
+            "Recieved request for csv",
+            data={
+                "dataset_id": dataset_id,
+                "combined_csv_id": csv_identifier,
+            },
+            request_id=request_id,
+        )
+
+    def get_edition(self, dataset_id: str, edition_id: str, request_id:Optional[str] = None):
+        # Use variables to create the unique custom identifier for the csv
+        # being requested.
+        csv_identifier = f"{dataset_id}/{edition_id}".rstrip(".csv")
+        logger.info(
+            "Recieved request for csv",
+            data={
+                "dataset_id": dataset_id,
+                "edition_id": edition_id,
+                "combined_csv_id": csv_identifier,
+            },
+            request_id=request_id,
+        )
+        
     def get_version(self, dataset_id: str, edition_id: str, version_id: str, request_id:Optional[str] = None):
         # Use variables to create the unique custom identifier for the csv
         # being requested.

@@ -6,9 +6,9 @@ from fastapi import status
 from fastapi.testclient import TestClient
 from fastapi.exceptions import ResponseValidationError
 
-from constants import JSONLD
+from constants import CSV, JSONLD
 from tests.fixtures.datasets import dataset_test_data
-from main import app, StubMetadataStore
+from main import app, StubMetadataStore, StubCsvStore
 
 # Devnotes:
 
@@ -114,3 +114,50 @@ def test_dataset_406():
     # Assertions
     assert response.status_code == status.HTTP_406_NOT_ACCEPTABLE
     mock_metadata_store.get_dataset.assert_not_called()
+
+
+def test_dataset_csv_200(dataset_test_data):
+    """
+    Confirms that:
+
+    - Then store.get_dataset() is called exactly once.
+    - And if store.get_dataset() returns not None
+    - Status code 200 is returned.
+    """
+
+    # Create a mock store with a callable mocked get_dataset() method
+    mock_csv_store = MagicMock()
+    # Note: returning a populated list to simulate id is found
+    mock_csv_store.get_dataset = MagicMock(return_value=dataset_test_data)
+    app.dependency_overrides[StubCsvStore] = lambda: mock_csv_store
+
+    # Create a TestClient for your FastAPI app
+    client = TestClient(app)
+    response = client.get(ENDPOINT, headers={"Accept": CSV})
+
+    # Assertions
+    assert response.status_code == status.HTTP_200_OK
+    mock_csv_store.get_dataset.assert_called_once()
+
+
+def test_dataset_csv_404():
+    """
+    Confirms that:
+
+    - Then store.get_dataset() is called exactly once.
+    - And if store.get_dataset() returns None
+    - Status code 404 is returned.
+    """
+
+    # Create a mock store with a callable mocked get_dataset() method
+    mock_csv_store = MagicMock()
+    mock_csv_store.get_dataset = MagicMock(return_value=None)
+    app.dependency_overrides[StubCsvStore] = lambda: mock_csv_store
+
+    # Create a TestClient for your FastAPI app
+    client = TestClient(app)
+    response = client.get(ENDPOINT, headers={"Accept": CSV})
+
+    # Assertions
+    assert response.status_code == status.HTTP_404_NOT_FOUND
+    mock_csv_store.get_dataset.assert_called_once()
