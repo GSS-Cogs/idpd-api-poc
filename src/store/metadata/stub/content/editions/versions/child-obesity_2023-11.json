@@ -35,7 +35,7 @@
                   "name": "areanm",
                   "datatype": "string",
                   "titles": "Area Name",
-                  "description": "The name associated with The geography code "
+                  "description": "The name associated with The geography code"
                 },
                 {
                   "name": "geography",
