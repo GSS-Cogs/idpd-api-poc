@@ -750,13 +750,9 @@
           "modified": "2023-11-28T14:40:00Z"
           }
       ]
-    }
-  ],
-  "offset": 0,
-  "count": 16
-},
-{
-  "@id": "https://staging.idpd.uk/datasets/children-prevalence-of-weight-status",
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/children-prevalence-of-weight-status",
       "@type": "dcat:DatasetSeries",
       "identifier": "children-prevalence-of-weight-status",
       "title": "Children prevalence of weight status",
