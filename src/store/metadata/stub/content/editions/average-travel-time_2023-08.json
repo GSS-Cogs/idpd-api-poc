@@ -1,0 +1,116 @@
+{
+  "@context": "https://staging.idpd.uk/ns#",
+  "@id": "https://staging.idpd.uk/datasets/average-travel-time/editions",
+  "@type": "hydra:Collection",
+  "title": "Travel time to employment centres by mode of travel",
+  "editions": [
+    {
+      "@id": "https://staging.idpd.uk/datasets/average-travel-time/editions/2023-08",
+      "@type": "dcat:Dataset",
+      "in_series": "https://staging.idpd.uk/datasets/average-travel-time",
+      "identifier": "2023-08",
+      "title": "Total value of UK exports",
+      "summary": "Average travel time in minutes to nearest employment centre with 500 to 4999 jobs available by public transport or walking, by cycle and by car (experimental statistics), England, 2014-2019.",
+      "description": "This dataset shows the average travel time in minutes to nearest employment centre with 500 to 4999 jobs available by public transport or walking, by cycle and by car (experimental statistics), in England, for periods 2014-2019.",
+      "publisher": "https://staging.idpd.uk/publishers/department-for-transport",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "Department for transport",
+        "email": "mailto:enquiries@dvsa.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/travel-transport-and-tourism"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "transport",
+        "travel-to-work",
+        "journey-time",
+        "subnational",
+        "local-authority"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "issued": "2023-08-18T09:10:26Z",
+      "modified": "2023-08-18T09:10:26Z",
+      "spatial_resolution": [
+        "N09",
+        "S12",
+        "W06",
+        "E92",
+        "K02"
+      ],
+      "spatial_coverage": "K02000001",
+      "temporal_resolution": [
+        "P1M",
+        "P3M",
+        "P1Y"
+      ],
+      "temporal_coverage": {
+        "start": "2014-01-01T12:00:00Z",
+        "end": "2019-12-31T12:00:00Z"
+      },
+      "versions_url": "https://staging.idpd.uk/datasets/average-travel-time/editions/2023-08/versions",
+      "versions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/average-travel-time/editions/2023-08/versions/1",
+          "issued": "2023-08-18T09:10:26Z"
+        }
+      ],
+      "next_release": "2024-08-01T09:30:00Z",
+      "table_schema": {
+        "columns": [
+          {
+            "name": "period",
+            "datatype": "string",
+            "titles": "Year",
+            "description": "The time period associated with the observation."
+          },
+          {
+            "name": "areacd",
+            "datatype": "string",
+            "titles": "ONS Geography Code",
+            "description": "The geography code associated with the observation."
+          },
+          {
+            "name": "areanm",
+            "datatype": "string",
+            "titles": "Area Name",
+            "description": "The name associated with The geography code"
+          },
+          {
+            "name": "geography",
+            "datatype": "string",
+            "titles": "Geography Type",
+            "description": "The categorisation of the geography code"
+          },
+          {
+            "name": "mode-of-travel",
+            "datatype": "string",
+            "titles": "Mode of travel",
+            "description": "The travel mode associated with observation"
+          },
+          {
+            "name": "value",
+            "datatype": "decimal",
+            "titles": "Travel time to employment centres with 500 to 4999 jobs",
+            "description": "Observational Value"
+          },
+          {
+            "name": "measure",
+            "datatype": "string",
+            "titles": "Measure type",
+            "description": "Measure type of the Observational Value"
+          },
+          {
+            "name": "unit",
+            "datatype": "string",
+            "titles": "Unit of Measure",
+            "description": "Unit measure of the Observational Value"
+          }
+        ]
+      }
+    }
+  ],
+  "count": 1,
+  "offset": 0
+}

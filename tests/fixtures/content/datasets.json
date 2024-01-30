@@ -615,6 +615,50 @@
       ]
     },
     {
+      "@id": "https://staging.idpd.uk/datasets/average-travel-time",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "average-travel-time",
+      "title": "Travel time to employment centres by mode of travel",
+      "summary": "Average travel time in minutes to nearest employment centre with 500 to 4999 jobs available by public transport or walking, by cycle and by car (experimental statistics), England, 2014-2019.",
+      "description": "This dataset shows the average travel time in minutes to nearest employment centre with 500 to 4999 jobs available by public transport or walking, by cycle and by car (experimental statistics), in England, for periods 2014-2019.",
+      "issued": "2023-08-18T09:10:26Z",
+      "modified": "2023-08-18T09:10:26Z",
+      "next_release": "2024-08-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/department-for-transport",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "Department for transport",
+        "email": "mailto:enquiries@dvsa.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/travel-transport-and-tourism"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "transport",
+        "travel-to-work",
+        "journey-time",
+        "subnational",
+        "local-authority"
+      ],
+       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+       "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2014-01-01T12:00:00Z",
+        "end": "2019-12-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/average-travel-time/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/average-travel-time/editions/2023-08",
+          "issued": "2023-08-18T09:10:26Z",
+          "modified": "2023-08-18T09:10:26Z"
+        }
+      ]
+    },
+    {  
       "@id": "https://staging.idpd.uk/datasets/cancer-diagnosis-at-stage-1-and-2",
       "@type": "dcat:DatasetSeries",
       "identifier": "cancer-diagnosis-at-stage-1-and-2",
@@ -801,5 +845,5 @@
     }  
   ],
   "offset": 0,
-  "count": 17
+  "count": 18
 }
