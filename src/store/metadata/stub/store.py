@@ -58,15 +58,18 @@ def combine_datasets()-> dict:
             with open(file_path) as json_file:
                 if not dataset:
                     dataset = json.load(json_file)
+                    dataset['datasets'] = dataset.pop('dataset')
                 else:
                     sub_datasets = json.load(json_file)
                     for key in sub_datasets:
                         if key == "datasets":
                             sub_dataset = sub_datasets[key][0]
                             dataset[key].append(sub_dataset)
+    dataset['count'] = len(dataset["datasets"])
 
     # api won't start if datasets checks fail
-    
+    if len(dataset["datasets"]) != len(os.listdir(DATASETS_DIR)):
+        raise Exception("Number of dataset definitions don't match number of datset files.")
 
     return dataset
 
