@@ -5,7 +5,7 @@
       "hydra:Collection"
     ],
     "@id": "https://staging.idpd.uk/datasets",
-    "dataset": [
+    "datasets": [
         {
             "@id": "https://staging.idpd.uk/datasets/aged-19-years-and-over-further-education-and-skills-participation",
             "@type": "dcat:DatasetSeries",

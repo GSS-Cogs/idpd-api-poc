@@ -52,13 +52,14 @@ def contextualise(resource) -> Dict:
 def combine_datasets()-> dict:
     DATASETS_DIR = "src/store/metadata/stub/content/datasets"
     dataset = {}
+    dataset_file_count = 0
     for file in os.listdir(DATASETS_DIR):
         file_path = os.path.join(DATASETS_DIR, file)
-        if os.path.isfile(file_path):
+        if os.path.isfile(file_path) and ".json" in str(file_path):
+            dataset_file_count+=1
             with open(file_path) as json_file:
                 if not dataset:
                     dataset = json.load(json_file)
-                    dataset['datasets'] = dataset.pop('dataset')
                 else:
                     sub_datasets = json.load(json_file)
                     for key in sub_datasets:
@@ -68,7 +69,7 @@ def combine_datasets()-> dict:
     dataset['count'] = len(dataset["datasets"])
 
     # api won't start if datasets checks fail
-    if len(dataset["datasets"]) != len(os.listdir(DATASETS_DIR)):
+    if len(dataset["datasets"]) != dataset_file_count:
         raise Exception("Number of dataset definitions don't match number of datset files.")
 
     return dataset

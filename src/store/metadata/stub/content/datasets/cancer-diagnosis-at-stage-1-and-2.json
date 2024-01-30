@@ -5,7 +5,7 @@
       "hydra:Collection"
     ],
     "@id": "https://staging.idpd.uk/datasets",
-    "dataset": [
+    "datasets": [
         {
             "@id": "https://staging.idpd.uk/datasets/cancer-diagnosis-at-stage-1-and-2",
             "@type": "dcat:DatasetSeries",

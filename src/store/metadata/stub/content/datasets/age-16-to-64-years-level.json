@@ -5,7 +5,7 @@
       "hydra:Collection"
     ],
     "@id": "https://staging.idpd.uk/datasets",
-    "dataset": [
+    "datasets": [
         {
             "@id": "https://staging.idpd.uk/datasets/age-16-to-64-years-level-3-or-above-qualifications",
             "@type": "dcat:DatasetSeries",

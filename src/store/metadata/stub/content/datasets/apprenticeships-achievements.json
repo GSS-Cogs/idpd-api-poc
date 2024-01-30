@@ -5,7 +5,7 @@
       "hydra:Collection"
     ],
     "@id": "https://staging.idpd.uk/datasets",
-    "dataset": [
+    "datasets": [
         {
             "@id": "https://staging.idpd.uk/datasets/apprenticeships-achievements",
             "@type": "dcat:DatasetSeries",
