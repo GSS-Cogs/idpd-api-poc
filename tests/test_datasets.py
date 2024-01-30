@@ -7,8 +7,7 @@ import pytest
 
 from constants import JSONLD
 from main import app, StubMetadataStore
-from store.metadata.oxigraph.store import OxigraphMetadataStore
-from tests.fixtures.datasets import datasets_test_data
+from tests.fixtures.datasets_oxigraph import datasets_test_data
 
 # Devnotes:
 
