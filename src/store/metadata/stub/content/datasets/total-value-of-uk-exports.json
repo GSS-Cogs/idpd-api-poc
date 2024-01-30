@@ -1,0 +1,68 @@
+{
+    "@context": "https://staging.idpd.uk/ns#",
+    "@type": [
+      "dcat:Catalog",
+      "hydra:Collection"
+    ],
+    "@id": "https://staging.idpd.uk/datasets",
+    "dataset": [
+        {
+            "@id": "https://staging.idpd.uk/datasets/total-value-of-exports",
+            "@type": "dcat:DatasetSeries",
+            "identifier": "total-value-of-exports",
+            "title": "Total value of UK exports",
+            "summary": "Estimated total value of UK exports including trade in both goods and services (experimental statistics), UK, 2021.",
+            "description": "This dataset shows the estimated total value of UK exports including trade in both goods and services (experimental statistics), in the UK, for 2021.\n\n### Coverage \n\nUK \n\n#### Geography definition\n\nInternational Territorial Level (ITL) 1, 2 and 3,\nCity Regions,\nCountry (UK)\n\n### Source\n\n - UK: [Office for National Statistics](https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/bulletins/internationaltradeinuknationsregionsandcities/previousReleases) \n\n\n",
+            "issued": "2023-05-23T10:14:20",
+            "modified": "2023-08-25T11:09:00",
+            "next_release": "2023-09-24T09:30:00Z",
+            "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+            "creator": "https://staging.idpd.uk/publishers/ofcom",
+            "contact_point": {
+              "name": "Ofcom Open Data",
+              "email": "mailto:open.data@ofcom.org.uk"
+            },
+            "topics": [
+              "https://staging.idpd.uk/topics/economy",
+              "https://staging.idpd.uk/topics/prices"
+            ],
+            "frequency": "monthly",
+            "keywords": [
+              "economic-growth",
+              "exports",
+              "goods-and-services",
+              "imports",
+              "trade-deficit",
+              "subnational",
+              "international-territorial-level"
+            ],
+            "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "spatial_resolution": [
+              "N09",
+              "S12",
+              "W06",
+              "E92",
+              "K02"
+            ],
+            "spatial_coverage": "K02000001",
+            "temporal_resolution": [
+              "P1M",
+              "P3M"
+            ],
+            "temporal_coverage": {
+              "start": "2022-09-01T00:00:00Z",
+              "end": "2022-09-30T23:59:00Z"
+            },
+            "editions_url": "https://staging.idpd.uk/datasets/total-value-of-exports/editions",
+            "editions": [
+              {
+                "@id": "https://staging.idpd.uk/datasets/total-value-of-exports/editions/2022-08",
+                "issued": "2023-05-23T10:14:20",
+                "modified": "2023-08-25T11:09:00"
+              }
+            ]
+        }
+    ],
+    "offset": 0,
+    "count": 1
+  }

@@ -1,0 +1,57 @@
+{
+    "@context": "https://staging.idpd.uk/ns#",
+    "@type": [
+      "dcat:Catalog",
+      "hydra:Collection"
+    ],
+    "@id": "https://staging.idpd.uk/datasets",
+    "dataset": [
+        {
+            "@id": "https://staging.idpd.uk/datasets/schools-and-nursery-schools-rated",
+            "@type": "dcat:DatasetSeries",
+            "identifier": "schools-and-nursery-schools-rated",
+            "title": "Schools and nursery schools rated good or outstanding",
+            "summary": "Percentage of state-funded provided for schools that are rated good or outstanding",
+            "description": "This dataset shows the percentage of state-funded Nursery schools, Primary schools, Secondary schools, Alternative Provision (AP) schools and Special schools that are rated good or outstanging.",
+            "issued": "2023-05-16T13:36:00Z",
+            "modified": "2023-11-27T15:38:00Z",
+            "next_release": "2024-05-01T09:30:00Z",
+            "publisher": "https://staging.idpd.uk/publishers/department-for-education",
+            "creator": "https://staging.idpd.uk/publishers/department-for-education",
+            "contact_point": {
+              "name": "ofsted",
+              "email": "mailto:informationrequest@ofsted.gov.uk"
+            },
+            "topics": [
+              "https://staging.idpd.uk/topics/children-education-and-skills"
+            ],
+            "frequency": "annual",
+            "keywords": [
+              "state-funded",
+              "inspections-and-outcomes",
+              "subnational",
+              "schools",
+              "county",
+              "region"
+            ],
+            "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+            "spatial_coverage": "E92000001",
+            "temporal_resolution": ["P1Y"],
+            "temporal_coverage": {
+              "start": "2022-01-01T12:00:00Z",
+              "end": "2022-12-31T12:00:00Z"
+            },
+            "editions_url": "https://staging.idpd.uk/datasets/schools-and-nursery-schools-rated/editions",
+            "editions": [
+              {
+                "@id": "https://staging.idpd.uk/datasets/schools-and-nursery-schools-rated/editions/2023-05",
+                "issued": "2023-05-16T13:36:00Z",
+                "modified": "2023-11-27T15:38:00Z"
+              }
+            ]
+        }
+    ],
+    "offset": 0,
+    "count": 1
+  }

@@ -5,7 +5,7 @@
       "hydra:Collection"
     ],
     "@id": "https://staging.idpd.uk/datasets",
-    "datasets": [
+    "dataset": [
         {
             "@id": "https://staging.idpd.uk/datasets/cpih",
             "@type": "dcat:DatasetSeries",
@@ -58,5 +58,5 @@
           }
         ],
         "offset": 0,
-        "count": 5
+        "count": 1
       }
