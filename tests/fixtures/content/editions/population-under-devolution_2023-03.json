@@ -1,0 +1,127 @@
+{
+  "@context": "https://staging.idpd.uk/ns#",
+  "@id": "https://staging.idpd.uk/datasets/population-under-devolution/editions",
+  "@type": "hydra:Collection",
+  "title": "Population under devolution deal in England",
+  "editions": [
+    {
+      "@id": "https://staging.idpd.uk/datasets/population-under-devolution/editions/2023-03",
+      "@type": "dcat:Dataset",
+      "in_series": "https://staging.idpd.uk/datasets/population-under-devolution",
+      "identifier": "2023-03",
+      "title": "Population under devolution deal in England",
+      "summary": "Percentage population area of the highest level of devolution in England.",
+      "description": "This dataset shows the percentage of the population living in an area covered by the highest level of devolution, in England, as of 13 January 2023.",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "People, population and community",
+        "email": "mailto:Subnational@ons.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/economy"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "combined-authority",
+        "mayor",
+        "community",
+        "population",
+        "subnational",
+        "region"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "issued": "2023-03-31T12:14:51Z",
+      "modified": "2023-06-01T12:14:11Z",
+      "spatial_resolution": [
+        "N09",
+        "S12",
+        "W06",
+        "E92",
+        "K02"
+      ],
+      "spatial_coverage": "K02000001",
+      "temporal_resolution": [
+        "P1Y"
+      ],
+      "temporal_coverage": {
+        "start": "2022-01-01T09:00:00Z",
+        "end":  "2022-12-31T09:00:00Z"
+      },
+      "versions_url": "https://staging.idpd.uk/datasets/population-under-devolution/editions/2023-03/versions",
+      "versions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/population-under-devolution/editions/2023-03/versions/1",
+          "issued": "2023-03-31T12:14:51Z"
+        }
+      ],
+      "next_release": "2024-03-01T09:30:00Z",
+      "table_schema": {
+        "columns": [
+          {
+            "name": "period",
+            "datatype": "string",
+            "titles": "Year",
+            "description": "The time period associated with the observation."
+          },
+          {
+            "name": "areanm",
+            "datatype": "string",
+            "titles": "Area Name",
+            "description": "The name associated with the geography code."
+          },
+          {
+            "name": "areacd",
+            "datatype": "string",
+            "titles": "ONS Geography Code",
+            "description": "The geography code associated with the observation."
+          },
+          {
+            "name": "geography",
+            "datatype": "string",
+            "titles": "Geography Type",
+            "description": "The categorisation of the geography code."
+          },
+          {
+            "name": "observation",
+            "datatype": "decimal",
+            "titles": "Population under devolution deal in England",
+            "description": "Observation value of population under devolution deal in England."
+          },
+          {
+            "name": "measure",
+            "datatype": "string",
+            "titles": "Measure type",
+            "description": "Measure type of the observation value"
+          },
+          {
+            "name": "unit",
+            "datatype": "string",
+            "titles": "Unit of Measure",
+            "description": "Unit of the observation value"
+          },
+          {
+            "name": "lower_confidence_interval_95",
+            "datatype": "decimal",
+            "titles": "Lower Confidence Interval",
+            "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, lower bound"
+          },
+          {
+            "name": "upper_confidence_interval_95",
+            "datatype": "decimal",
+            "titles": "Upper Confidence Interval",
+            "description": "The interval estimate gives an indication of how much uncertainty there is in our estimate of the true mean, upper bound"
+          },
+          {
+            "name": "observation_status",
+            "datatype": "string",
+            "titles": "Observation Status",
+            "description": "Additional context to the observation value, if needed"
+          }
+        ]
+      }
+    }
+  ],
+  "count": 1,
+  "offset": 0
+}

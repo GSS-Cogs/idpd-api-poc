@@ -10,7 +10,7 @@ def edition_test_data():
     we'd expect returned from store.get_edition().
     """
     file_path = pathlib.Path(
-        "src/store/metadata/stub/content/editions/cpih_2022-01.json"
+        "tests/fixtures/content/editions/cpih_2022-01.json"
     )
     with open(file_path, "r") as json_file:
         edition = json.load(json_file)["editions"][0]
@@ -25,7 +25,7 @@ def editions_test_data():
     we'd expect returned from store.get_editions().
     """
     file_path = pathlib.Path(
-        "src/store/metadata/stub/content/editions/cpih_2022-01.json"
+        "tests/fixtures/content/editions/cpih_2022-01.json"
     )
     with open(file_path, "r") as json_file:
         return json.load(json_file)
