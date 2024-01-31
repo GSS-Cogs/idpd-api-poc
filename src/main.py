@@ -148,6 +148,8 @@ def get_dataset_by_id(
     request_id = request.headers.get("X-Request-ID", None)
     logger.info("Received request for dataset with ID", data={"dataset_id": dataset_id}, request_id=request_id)
 
+    # If the 'Accept' header is set to 'text/csv' for a dataset request,
+    # the latest version of the latest edition is returned from the CSV store.
     if request.headers["Accept"] == CSV:
         csv_data = csv_store.get_dataset(dataset_id, request_id=request_id)
         if csv_data is not None:
@@ -252,6 +254,8 @@ def get_dataset_edition_by_id(
         request_id=request_id,
     )
 
+    # If the 'Accept' header is set to 'text/csv' for an edition request,
+    # the latest version of the requested edition is returned from the CSV store.
     if request.headers["Accept"] == CSV:
         csv_data = csv_store.get_edition(dataset_id, edition_id, request_id=request_id)
         if csv_data is not None:
