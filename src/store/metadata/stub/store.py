@@ -6,7 +6,6 @@ from typing import Dict, Optional
 
 from ..base import BaseMetadataStore
 
-# from main import combine_datasets
 from custom_logging import logger , configure_logger
 
 configure_logger()
@@ -89,8 +88,6 @@ class StubMetadataStore(BaseMetadataStore):
         content_dir = Path(Path(__file__).parent / "content")
 
         # get specific stubbed resources into memory on application startup
-        # with open(Path(content_dir / "datasets.json").absolute()) as f:
-        #     self.datasets = json.load(f)
         self.datasets = combine_datasets()
 
         with open(Path(content_dir / "publishers.json").absolute()) as f:

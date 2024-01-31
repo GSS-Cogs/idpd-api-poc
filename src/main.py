@@ -1,5 +1,4 @@
 from ensurepip import version
-import json
 import os
 from typing import Optional
 
