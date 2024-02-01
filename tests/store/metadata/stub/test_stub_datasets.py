@@ -43,9 +43,6 @@ def test_combine_datsets():
     assert datasets["@id"] == "https://staging.idpd.uk/datasets"
     assert len(datasets["datasets"]) > 0
     assert datasets["count"] > 0
-    
-    with open("example.json","w") as f:
-        json.dump(datasets,f,indent=4)
 
 
 def test_none_dataset_files_dont_affect_dataset_amalgamation():
