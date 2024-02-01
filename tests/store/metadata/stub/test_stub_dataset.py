@@ -8,7 +8,7 @@ from src import schemas
 
 def test_stub_get_dataset_returns_valid_structure():
     """
-    Confirm that the OxigrapgMetadataStore.get_dataset()
+    Confirm that the StubMetadataStore.get_dataset()
     function returns a dataset that matches the dataset
     schema.
     """

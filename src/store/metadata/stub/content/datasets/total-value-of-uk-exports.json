@@ -9,7 +9,7 @@
         {
             "@id": "https://staging.idpd.uk/datasets/total-value-of-exports",
             "@type": "dcat:DatasetSeries",
-            "identifier": "total-value-of-exports",
+            "identifier": "total-value-of-uk-exports",
             "title": "Total value of UK exports",
             "summary": "Estimated total value of UK exports including trade in both goods and services (experimental statistics), UK, 2021.",
             "description": "This dataset shows the estimated total value of UK exports including trade in both goods and services (experimental statistics), in the UK, for 2021.\n\n### Coverage \n\nUK \n\n#### Geography definition\n\nInternational Territorial Level (ITL) 1, 2 and 3,\nCity Regions,\nCountry (UK)\n\n### Source\n\n - UK: [Office for National Statistics](https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/bulletins/internationaltradeinuknationsregionsandcities/previousReleases) \n\n\n",

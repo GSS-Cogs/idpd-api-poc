@@ -50,28 +50,49 @@ def contextualise(resource) -> Dict:
 
 def combine_datasets()-> dict:
     DATASETS_DIR = "src/store/metadata/stub/content/datasets"
-    dataset = {}
+    datasets = {}
     dataset_file_count = 0
     for file in os.listdir(DATASETS_DIR):
         file_path = os.path.join(DATASETS_DIR, file)
         if os.path.isfile(file_path) and ".json" in str(file_path):
             dataset_file_count+=1
             with open(file_path) as json_file:
-                if not dataset:
-                    dataset = json.load(json_file)
+                if not datasets:
+                    datasets = json.load(json_file)
                 else:
                     sub_datasets = json.load(json_file)
                     for key in sub_datasets:
                         if key == "datasets":
                             sub_dataset = sub_datasets[key][0]
-                            dataset[key].append(sub_dataset)
-    dataset['count'] = len(dataset["datasets"])
+                            datasets[key].append(sub_dataset)
+    datasets['count'] = len(datasets["datasets"])
 
     # api won't start if datasets checks fail
-    if len(dataset["datasets"]) != dataset_file_count:
-        raise Exception("Number of dataset definitions don't match number of datset files.")
+    if len(datasets["datasets"]) < 1:
+        raise Exception("No dataset can be found to extract dataset definitions from.")
+    if len(datasets["datasets"]) != dataset_file_count:
+        raise Exception("Number of dataset definitions don't match number of dataset files.")
+    if datasets["count"] != dataset_file_count:
+        raise Exception("Number of dataset definitions don't match number of dataset files.")
+    
+    number_of_dataset_files_with_corresponding_identifiers = 0
+    for file in os.listdir(DATASETS_DIR):
+        if ".json" in str(file):
+            file = str(file).replace("src/store/metadata/stub/content/datasets/","")
+            file = str(file).replace(".json","")
 
-    return dataset
+            for dataset in datasets["datasets"]:
+                if file in dataset["identifier"]:
+                    number_of_dataset_files_with_corresponding_identifiers +=1
+                    break
+    if number_of_dataset_files_with_corresponding_identifiers != dataset_file_count:
+        raise Exception("A dataset file doesn't match any dataset identifiers")
+    
+    # if 2==2:
+    #     raise Exception("A dataset file doesn't match any dataset identifiers")
+        
+
+    return datasets
 
 
 class StubMetadataStore(BaseMetadataStore):
