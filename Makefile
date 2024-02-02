@@ -17,7 +17,7 @@ test: ## Run pytest and check test coverage (auto triggered on pre-push)
 validate: ## Validate stub data files
 	pipenv run python3 ./src/store/metadata/stub/validation.py
 
-populate: ## Populate an oxigraph DB (that/if/when) one is running on localhost:7878
+populate: validate ## Populate an oxigraph DB (that/if/when) one is running on localhost:7878
 	pipenv run python3 ./src/data.py
 
 data: ## Create source ttl seed file as ./out/seed.ttl but dont load it
