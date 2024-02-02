@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Dict, Optional
 
 from custom_logging import configure_logger, logger
-from src.store.metadata.base import BaseMetadataStore
+from store.metadata.base import BaseMetadataStore
 
 configure_logger()
 
@@ -83,17 +83,17 @@ class StubMetadataStore(BaseMetadataStore):
         self.editions = {}
         for edition_json_file in glob.glob(os.path.join(editions_dir, "*.json")):
             with open(edition_json_file) as f:
-                self.editions[
-                    edition_json_file.split("/")[-1].rstrip(".json")
-                ] = json.load(f)
+                self.editions[edition_json_file.split("/")[-1].rstrip(".json")] = (
+                    json.load(f)
+                )
 
         versions_dir = Path(editions_dir / "versions")
         self.versions = {}
         for version_json_file in glob.glob(os.path.join(versions_dir, "*.json")):
             with open(version_json_file) as f:
-                self.versions[
-                    version_json_file.split("/")[-1].rstrip(".json")
-                ] = json.load(f)
+                self.versions[version_json_file.split("/")[-1].rstrip(".json")] = (
+                    json.load(f)
+                )
 
     def get_datasets(self, request_id: Optional[str] = None) -> Dict:
         logger.info(
