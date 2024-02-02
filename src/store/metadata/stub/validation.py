@@ -328,7 +328,7 @@ def validate_publishers(
 
 
 # Specify locations of JSON files
-metadata_stub_content_path = Path("src/store/metadata/stub/content").absolute()
+metadata_stub_content_path = Path("tests/fixtures/content").absolute()
 datasets_source_path = Path(metadata_stub_content_path / "datasets.json")
 editions_source_path = Path(metadata_stub_content_path / "editions")
 versions_source_path = Path(metadata_stub_content_path / "editions" / "versions")

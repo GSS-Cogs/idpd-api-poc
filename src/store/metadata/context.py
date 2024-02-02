@@ -16,4 +16,3 @@ class ContextStore:
     def get_context(self, request_id: Optional[str] = None):
         logger.info("Getting Context", request_id=request_id)
         return self.context
-    

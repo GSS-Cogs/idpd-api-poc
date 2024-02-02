@@ -55,18 +55,17 @@ class StubMetadataStore(BaseMetadataStore):
     files stored on disk.
     """
 
-
     def setup(self, content_path=None):
         """
         Populates our in-memory stubbed responses
         using the contents of ./content
         """
-        
+
         if content_path is None:
             self.content_dir = Path("./tests/fixtures/content")
         else:
             self.content_dir = Path(content_path)
-        
+
         # get specific stubbed resources into memory on application startup
         with open(Path(self.content_dir / "datasets.json").absolute()) as f:
             self.datasets = json.load(f)
