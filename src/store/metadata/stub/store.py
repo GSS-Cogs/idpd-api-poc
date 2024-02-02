@@ -55,28 +55,33 @@ class StubMetadataStore(BaseMetadataStore):
     files stored on disk.
     """
 
-    def setup(self):
+
+    def setup(self, content_path=None):
         """
         Populates our in-memory stubbed responses
         using the contents of ./content
         """
-        content_dir = Path(Path(__file__).parent / "content")
-
+        
+        if content_path is None:
+            self.content_dir = Path("./tests/fixtures/content")
+        else:
+            self.content_dir = Path(content_path)
+        
         # get specific stubbed resources into memory on application startup
-        with open(Path(content_dir / "datasets.json").absolute()) as f:
+        with open(Path(self.content_dir / "datasets.json").absolute()) as f:
             self.datasets = json.load(f)
 
-        with open(Path(content_dir / "publishers.json").absolute()) as f:
+        with open(Path(self.content_dir / "publishers.json").absolute()) as f:
             self.publishers = json.load(f)
 
-        with open(Path(content_dir / "topics.json").absolute()) as f:
+        with open(Path(self.content_dir / "topics.json").absolute()) as f:
             self.topics = json.load(f)
 
         # for editions and versions we glob the directories in question
         # and scoop up all jsons. We use the naming conventions of
         # <dataset_id>_<edition_id> to populate the keys so we can get
         # them back out
-        editions_dir = Path(content_dir / "editions")
+        editions_dir = Path(self.content_dir / "editions")
         self.editions = {}
         for edition_json_file in glob.glob(os.path.join(editions_dir, "*.json")):
             with open(edition_json_file) as f:

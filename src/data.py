@@ -5,7 +5,7 @@ Tool that uses jsonld files in /src/store/metadata/stub/content to:
 - create a seed.trig file repredenting single load file of these
   resources as named graphs.
 - loads this seed.trig into an oxigraph database running on
-  http://localhost:7878
+  http://localhost:7879
 
 Please run this via the Makefile if you want to finesse this behaviour.
 """
@@ -46,9 +46,10 @@ def process_json_files(dir_path):
     return resource_dicts
 
 
-def populate(oxigraph_url=None, write_to_db=True):
+def populate(jsonld_location=None, oxigraph_url=None, write_to_db=True):
     this_dir = Path(__file__).parent
-    metadata_stub_content_path = Path("src/store/metadata/stub/content").absolute()
+    store = StubMetadataStore(content_path=jsonld_location)
+    metadata_stub_content_path = store.content_dir
 
     # Clear up any previous out files
     out = Path(this_dir / "out")
@@ -113,9 +114,9 @@ def populate(oxigraph_url=None, write_to_db=True):
         g += Graph().parse(data=json.dumps(set_context(version)), format="json-ld")
     assert len(g) > graph_length
 
-    # ----------------
+    # ------------------
     # Topics resources
-    # ----------------
+    # ------------------
 
     # Load json file from disk
     with open(topics_source_path) as f:
@@ -168,4 +169,5 @@ def populate(oxigraph_url=None, write_to_db=True):
 
 if __name__ == "__main__":
     oxigraph_url = os.getenv("GRAPH_DB_URL", None)
-    populate(oxigraph_url=oxigraph_url)
+    jsonld_location = os.getenv("JSONLD_LOCATION", None)
+    populate(jsonld_location=jsonld_location, oxigraph_url=oxigraph_url)

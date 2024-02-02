@@ -136,6 +136,7 @@ def get_dataset_by_id(
     response: Response,
     dataset_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    csv_store: StubCsvStore = Depends(StubCsvStore),
 ):
     """
     Retrieve information about a specific dataset by ID.
@@ -148,7 +149,18 @@ def get_dataset_by_id(
         request_id=request_id,
     )
 
-    if request.headers["Accept"] == JSONLD or BROWSABLE:
+    # If the 'Accept' header is set to 'text/csv' for a dataset request,
+    # the latest version of the latest edition is returned from the CSV store.
+    if request.headers["Accept"] == CSV:
+        csv_data = csv_store.get_dataset(dataset_id, request_id=request_id)
+        if csv_data is not None:
+            response.status_code = status.HTTP_200_OK
+            return csv_data
+        else:
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return
+
+    elif request.headers["Accept"] == JSONLD or BROWSABLE:
         dataset = metadata_store.get_dataset(dataset_id, request_id=request_id)
         if dataset is not None:
             response.status_code = status.HTTP_200_OK
@@ -231,6 +243,7 @@ def get_dataset_edition_by_id(
     dataset_id: str,
     edition_id: str,
     metadata_store: StubMetadataStore = Depends(StubMetadataStore),
+    csv_store: StubCsvStore = Depends(StubCsvStore),
 ):
     """
     Retrieve information about a specific edition of a dataset.
@@ -243,7 +256,18 @@ def get_dataset_edition_by_id(
         request_id=request_id,
     )
 
-    if request.headers["Accept"] == JSONLD or BROWSABLE:
+    # If the 'Accept' header is set to 'text/csv' for an edition request,
+    # the latest version of the requested edition is returned from the CSV store.
+    if request.headers["Accept"] == CSV:
+        csv_data = csv_store.get_edition(dataset_id, edition_id, request_id=request_id)
+        if csv_data is not None:
+            response.status_code = status.HTTP_200_OK
+            return csv_data
+        else:
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return
+
+    elif request.headers["Accept"] == JSONLD or BROWSABLE:
         edition = metadata_store.get_edition(
             dataset_id, edition_id, request_id=request_id
         )
