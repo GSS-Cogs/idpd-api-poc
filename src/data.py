@@ -19,7 +19,7 @@ from pathlib import Path
 from rdflib import BNode, ConjunctiveGraph, Dataset, Graph
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore, _node_to_sparql
 
-from store.metadata.stub.store import StubMetadataStore
+from store.metadata.stub.stub_store import StubMetadataStore
 
 # Load the context file
 with open(Path("src/store/metadata/context.json")) as f:

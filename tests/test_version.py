@@ -6,7 +6,7 @@ from fastapi.testclient import TestClient
 import pytest
 
 from constants import CSV, JSONLD
-from store.metadata.stub.store import StubMetadataStore
+from store.metadata.stub.stub_store import StubMetadataStore
 from tests.fixtures.versions_oxigraph import version_test_data
 from main import app, StubCsvStore
 
