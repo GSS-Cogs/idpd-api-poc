@@ -12,7 +12,7 @@
             "sub_topics": [
                 "https://staging.idpd.uk/topics/it-and-internet-industry"
             ],
-            "parent_": []
+            "parent_topics": []
         },
         {
             "@id": "https://staging.idpd.uk/topics/it-and-internet-industry",
@@ -20,11 +20,11 @@
             "identifier": "it-and-internet-industry",
             "title": "IT and Internet Industry",
             "description": "Internet sales by businesses in the UK (total value and as a percentage of all retail sales) and the percentage of businesses that have a website and broadband connection. These figures indicate the importance of the internet to UK businesses.",
-            "sub_": [
+            "sub_topics": [
                 "https://staging.idpd.uk/topics/communication"
             ],
             "parent_topics": [
-                "https://staging.idpd.uk/topics/business-trade-and-international-development"  
+                "https://staging.idpd.uk/topics/business-trade-and-international-development"
             ]
         },
         {
