@@ -5,8 +5,8 @@ from fastapi.exceptions import ResponseValidationError
 from fastapi.testclient import TestClient
 import pytest
 
-from constants import JSONLD
-from main import app, StubMetadataStore
+from constants import CSV, JSONLD
+from main import app, StubMetadataStore, StubCsvStore
 
 from tests.fixtures.editions_oxigraph import edition_test_data
 
@@ -116,3 +116,50 @@ def test_edition_406():
     # Assertions
     assert response.status_code == status.HTTP_406_NOT_ACCEPTABLE
     mock_metadata_store.get_edition.assert_not_called()
+
+
+def test_edition_csv_200(edition_test_data):
+    """
+    Confirms that:
+
+    - Then store.get_edition() is called exactly once.
+    - And if store.get_edition() returns not None
+    - Status code 200 is returned.
+    """
+
+    # Create a mock store with a callable mocked get_edition() method
+    mock_csv_store = MagicMock()
+    # Note: returning a populated list to simulate id is found
+    mock_csv_store.get_edition = MagicMock(return_value=edition_test_data)
+    app.dependency_overrides[StubCsvStore] = lambda: mock_csv_store
+
+    # Create a TestClient for your FastAPI app
+    client = TestClient(app)
+    response = client.get(ENDPOINT, headers={"Accept": CSV})
+
+    # Assertions
+    assert response.status_code == status.HTTP_200_OK
+    mock_csv_store.get_edition.assert_called_once()
+
+
+def test_edition_csv_404():
+    """
+    Confirms that:
+
+    - Then store.get_edition() is called exactly once.
+    - And if store.get_edition() returns None
+    - Status code 404 is returned.
+    """
+
+    # Create a mock store with a callable mocked get_edition() method
+    mock_csv_store = MagicMock()
+    mock_csv_store.get_edition = MagicMock(return_value=None)
+    app.dependency_overrides[StubCsvStore] = lambda: mock_csv_store
+
+    # Create a TestClient for your FastAPI app
+    client = TestClient(app)
+    response = client.get(ENDPOINT, headers={"Accept": CSV})
+
+    # Assertions
+    assert response.status_code == status.HTTP_404_NOT_FOUND
+    mock_csv_store.get_edition.assert_called_once()
