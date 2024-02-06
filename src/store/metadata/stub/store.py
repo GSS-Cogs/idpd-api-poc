@@ -49,7 +49,7 @@ def contextualise(resource) -> Dict:
     return resource
 
 def combine_datasets()-> dict:
-    DATASETS_DIR = "src/store/metadata/stub/content/datasets"
+    DATASETS_DIR = "tests/fixtures/content/datasets"
     datasets = {}
     dataset_file_count = 0
     for file in os.listdir(DATASETS_DIR):
@@ -78,7 +78,7 @@ def combine_datasets()-> dict:
     number_of_dataset_files_with_corresponding_identifiers = 0
     for file in os.listdir(DATASETS_DIR):
         if ".json" in str(file):
-            file = str(file).replace("src/store/metadata/stub/content/datasets/","")
+            file = str(file).replace("tests/fixtures/content/datasets/","")
             file = str(file).replace(".json","")
 
             for dataset in datasets["datasets"]:
@@ -114,12 +114,7 @@ class StubMetadataStore(BaseMetadataStore):
             self.content_dir = Path(content_path)
         
         # get specific stubbed resources into memory on application startup
-<<<<<<< HEAD
         self.datasets = combine_datasets()
-=======
-        with open(Path(self.content_dir / "datasets.json").absolute()) as f:
-            self.datasets = json.load(f)
->>>>>>> main
 
         with open(Path(self.content_dir / "publishers.json").absolute()) as f:
             self.publishers = json.load(f)
@@ -131,11 +126,7 @@ class StubMetadataStore(BaseMetadataStore):
         # and scoop up all jsons. We use the naming conventions of
         # <dataset_id>_<edition_id> to populate the keys so we can get
         # them back out
-<<<<<<< HEAD
-        editions_dir = Path(content_dir / "datasets" / "editions")
-=======
-        editions_dir = Path(self.content_dir / "editions")
->>>>>>> main
+        editions_dir = Path(self.content_dir / "datasets" / "editions")
         self.editions = {}
         for edition_json_file in glob.glob(os.path.join(editions_dir, "*.json")):
             with open(edition_json_file) as f:

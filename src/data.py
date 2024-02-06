@@ -101,13 +101,8 @@ def populate(jsonld_location=None, oxigraph_url=None, write_to_db=True):
     # ------------------
     
     # Load json file from disk
-<<<<<<< HEAD
     datasets_source_dict = combine_datasets()
-    _confirm_resource_count(datasets_source_dict, "datasets")
-=======
-    with open(datasets_source_path) as f:
-        datasets_source_dict = json.load(f)
->>>>>>> main
+    # _confirm_resource_count(datasets_source_dict, "datasets")
 
     # Validate data and add to graph
     validate_and_parse_json(g, schemas.Datasets, datasets_source_dict, "datasets")
