@@ -1,5 +1,5 @@
 import os
-from datetime import UTC, datetime
+from datetime import timezone, datetime
 import pytest
 
 from pydantic import ValidationError
@@ -23,7 +23,7 @@ def test_oxigraph_get_dataset_returns_valid_structure():
     dataset_schema = schemas.Dataset(**dataset)
     assert dataset_schema.id == "https://staging.idpd.uk/datasets/cpih"
     assert dataset_schema.type == "dcat:DatasetSeries"
-    assert dataset_schema.issued == datetime(2017,1,1,0,0,tzinfo=UTC)
+    assert dataset_schema.issued == datetime(2017,1,1,0,0,tzinfo=timezone.UTC)
 
 
 def test_oxigraph_get_dataset_with_context_returns_valid_structure():

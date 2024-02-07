@@ -1,4 +1,4 @@
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 import pytest
 
 from pydantic import ValidationError
@@ -30,7 +30,7 @@ def test_oxigraph_get_version_returns_valid_structure():
         version_schema.title
         == "Consumer Prices Index including owner occupiers' housing costs (CPIH)"
     )
-    assert version_schema.issued == datetime(2017,1,1,0,0,tzinfo=UTC)
+    assert version_schema.issued == datetime(2017,1,1,0,0,tzinfo=timezone.UTC)
     assert (
         version_schema.summary
         == "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a..."
