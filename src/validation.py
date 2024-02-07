@@ -1,9 +1,4 @@
-from sqlite3 import Date
-
-from pydantic import AwareDatetime
 from datetime import datetime
-
-
 
 def validate_time(cls, time_value: str) -> str:
     try:
