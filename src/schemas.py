@@ -70,8 +70,8 @@ class SummarisedVersion(BaseModel):
     """
 
     id: str = Field(alias="@id")
-    issued: str = AwareDatetime
-    modified: str = AwareDatetime
+    issued: AwareDatetime
+    modified: AwareDatetime
 
 
 class Edition(BaseModel):
@@ -89,13 +89,13 @@ class Edition(BaseModel):
     frequency: Frequency
     keywords: list[str]
     licence: str
-    issued: str = AwareDatetime
-    modified: str = AwareDatetime
+    issued: AwareDatetime
+    modified: AwareDatetime
     spatial_resolution: list[str]
     spatial_coverage: str = Field(pattern=r"^[EJKLMNSW]{1}\d{8}$")
     temporal_resolution: list[str]
     temporal_coverage: PeriodOfTime
-    next_release: str = AwareDatetime
+    next_release: AwareDatetime
     versions_url: str
     versions: List[SummarisedVersion]
     table_schema: TableSchema
@@ -112,8 +112,8 @@ class SummarisedEdition(BaseModel):
     """
 
     id: str = Field(alias="@id")
-    issued: str = AwareDatetime
-    modified: str = AwareDatetime
+    issued: AwareDatetime
+    modified: AwareDatetime
 
 
 class Editions(BaseModel):
@@ -133,9 +133,9 @@ class Dataset(BaseModel):
     title: str = Field(max_length=90)
     summary: str = Field(max_length=500)
     description: str = Field(max_length=500)
-    issued: str = AwareDatetime
-    modified: str = AwareDatetime
-    next_release: str = AwareDatetime
+    issued: AwareDatetime
+    modified: AwareDatetime
+    next_release: AwareDatetime
     publisher: str
     creator: str
     contact_point: ContactPoint
@@ -168,7 +168,7 @@ class Version(BaseModel):
     type: List[str] = Field(alias="@type")
     id: str = Field(alias="@id")
     identifier: str
-    issued: str = AwareDatetime
+    issued: AwareDatetime
     title: str = Field(max_length=90)
     summary: str = Field(max_length=500)
     description: str = Field(max_length=500)
