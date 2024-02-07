@@ -15,6 +15,10 @@ from src.validation import validate_time
 
 time_value = Annotated[str, AfterValidator(validate_time)]
 
+class Context(BaseModel):
+    context: str = Field(alias="@context")
+
+
 class Frequency(Enum):
     triennial = "triennial"
     biennial = "biennial"
@@ -101,8 +105,8 @@ class Edition(BaseModel):
     table_schema: TableSchema
 
 
-class EditionWithContext(Edition):
-    context: str = Field(alias="@context")
+class EditionWithContext(Edition, Context):
+    ...
 
 
 class SummarisedEdition(BaseModel):
@@ -151,8 +155,8 @@ class Dataset(BaseModel):
     editions_url: str
 
 
-class DatasetWithContext(Dataset):
-    context: str = Field(alias="@context")
+class DatasetWithContext(Dataset, Context):
+    ...
 
 
 class Datasets(BaseModel):
@@ -177,8 +181,8 @@ class Version(BaseModel):
     table_schema: TableSchema
 
 
-class VersionWithContext(Version):
-    context: str = Field(alias="@context")
+class VersionWithContext(Version, Context):
+    ...
 
 
 class Versions(BaseModel):
@@ -199,8 +203,8 @@ class Publisher(BaseModel):
     landing_page: str
 
 
-class PublisherWithContext(Publisher):
-    context: str = Field(alias="@context")
+class PublisherWithContext(Publisher, Context):
+    ...
 
 
 class Publishers(BaseModel):
@@ -222,8 +226,8 @@ class Topic(BaseModel):
     parent_topics: Union[List[str], None] = Field(default_factory=list)
 
 
-class TopicWithContext(Topic):
-    context: str = Field(alias="@context")
+class TopicWithContext(Topic, Context):
+    ...
 
 
 class Topics(BaseModel):

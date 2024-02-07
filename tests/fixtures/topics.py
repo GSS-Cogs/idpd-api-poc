@@ -9,7 +9,7 @@ def topic_test_data():
     Returns a dictionary representing the dictionary
     we'd expect returned from store.get_topic().
     """
-    file_path = pathlib.Path("src/store/metadata/stub/content/topics.json")
+    file_path = pathlib.Path("tests/fixtures/content/topics.json")
     with open(file_path, "r") as json_file:
         topic = json.load(json_file)["topics"][0]
         topic["@context"] = "https://staging.idpd.uk/ns#"
@@ -21,6 +21,6 @@ def topics_test_data():
     Returns a dictionary representing the dictionary
     we'd expect returned from store.get_topics().
     """
-    file_path = pathlib.Path("src/store/metadata/stub/content/topics.json")
+    file_path = pathlib.Path("tests/fixtures/content/topics.json")
     with open(file_path, "r") as json_file:
         return json.load(json_file)

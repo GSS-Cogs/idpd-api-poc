@@ -1,0 +1,849 @@
+{
+  "@context": "https://staging.idpd.uk/ns#",
+  "@type": [
+    "dcat:Catalog",
+    "hydra:Collection"
+  ],
+  "@id": "https://staging.idpd.uk/datasets",
+  "datasets": [
+    {
+      "@id": "https://staging.idpd.uk/datasets/cpih",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "cpih",
+      "title": "Consumer Prices Index including owner occupiers' housing costs (CPIH)",
+      "summary": "CPIH is defined as the Consumer Prices Index including owner occupiers' housing costs. This reflects the fact that it is identical to the CPI, with the exception of inclusion of owner occupiers' housing costs and council tax.",
+      "description": "CPIH is the most comprehensive measure of inflation. It extends CPI to include a measure of the costs associated with owning, maintaining and living in one's own home, known as owner occupiers' housing costs (OOH), along with council tax.",
+      "issued": "2022-01-01T00:00:00Z",
+      "modified": "2022-01-12T00:00:00Z",
+      "next_release": "2024-04-19T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "Consumer Price Inflation Enquiries",
+        "email": "mailto:cpih@ons.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/economy",
+        "https://staging.idpd.uk/topics/prices"
+      ],
+      "frequency": "monthly",
+      "keywords": [
+        "inflation",
+        "consumer",
+        "price-index"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",   
+      "spatial_resolution": [
+        "E01",
+        "E92"
+      ],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": [
+        "P1M",
+        "P3M",
+        "P1Y"
+      ],
+      "temporal_coverage": {
+        "start": "2005-01-01T00:00:00Z",
+        "end": "2019-03-01T00:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/cpih/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01",
+          "issued": "2022-01-01T00:00:00Z",
+          "modified": "2022-01-12T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/a16mu",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "a16mu",
+      "title": "Modelled unemployment rate aged 16 years and over",
+      "summary": "Modelled unemployment rate for people aged 16 years and over, Great Britain, 07/2004-06/2005 to 07/2022-06/2023.",
+      "description": "This dataset shows modelled-based estimates for the proportion of people aged 16 years and over without a job who have been actively seeking work within the last four weeks and are available to start work within the next two weeks",
+      "issued": "2023-11-06T12:25:28Z",
+      "modified": "2023-12-11T16:10:00Z",
+      "next_release": "2024-11-06T12:00:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "Debra Leaker",
+        "email": "mailto:labour.market@ons.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/labour-market-and-welfare"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "subnational",
+        "county",
+        "local-authority",
+        "unemployment",
+        "labour-market",
+        "region"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["N09", "S12", "W06", "E92", "K02"],
+      "spatial_coverage": "K02000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2004-07-01T00:00:00Z",
+        "end": "2022-07-04T00:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/a16mu/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11",
+          "issued": "2023-11-06T12:25:28Z",
+          "modified": "2023-12-11T16:10:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/gdhi",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "gdhi",
+      "title": "Gross disposable household income per head",
+      "summary": "Estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, UK, 1997-2021.",
+      "description": "This dataset shows an estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, in the UK, for 1997-2021.",
+      "issued": "2023-03-31T12:12:48Z",
+      "modified": "2023-11-02T14:26:00Z",
+      "next_release": "2024-03-31T12:00:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "Trevor Fenton",
+        "email": "mailto:regionalaccounts@ons.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/economy"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "money",
+        "spending",
+        "saving",
+        "region",
+        "local-authority",
+        "subnational"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["N09", "S12", "W06", "E92", "K02"],
+      "spatial_coverage": "K02000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "1997-01-01T09:00:00Z",
+        "end":  "2021-12-31T09:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/gdhi/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/gdhi/editions/2023-03",
+          "issued": "2023-03-31T12:12:48Z",
+          "modified": "2023-11-02T14:26:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/4gc",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "4gc",
+      "title": "4G Coverage",
+      "summary": "Percentage of geographic areas with 4G signal outdoors from at least 1 operator (signal threshold: 105dBm), UK, September 2022.",
+      "description": "This dataset shows the percentage of geographic areas with 4G signal outdoors from at least 1 operator (signal threshold: 105dBm), in the UK, for September 2022.",
+      "issued": "2023-03-31T12:10:00Z",
+      "modified": "2023-10-23T15:55:00Z",
+      "next_release": "2024-03-31T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/ofcom",
+      "contact_point": {
+        "name": "Ofcom Open Data",
+        "email": "mailto:open.data@ofcom.org.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/communication",
+        "https://staging.idpd.uk/topics/it-and-internet-industry"
+      ],
+      "frequency": "monthly",
+      "keywords": [
+        "broadband",
+        "mobile",
+        "coverage",
+        "connectivity",
+        "subnational"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["N09", "S12", "W06", "E92", "K02"],
+      "spatial_coverage": "K02000001",
+      "temporal_resolution": ["P1M"],
+      "temporal_coverage": {
+        "start": "2023-04-01T00:00:00Z",
+        "end":  "2023-04-30T23:59:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/4gc/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/4gc/editions/2023-03",
+          "issued": "2023-03-31T12:10:00Z",
+          "modified": "2023-10-23T15:55:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/apprenticeships-achievements",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "apprenticeships-achievements",
+      "title": "Apprenticeships achievements",
+      "summary": "Apprenticeships achieved by adults aged 16+ based on home address, rate per 100,000 population, England, academic years 2017/18 to 2022/23",
+      "description": "This dataset shows apprenticeships achieved by adults aged 16+ based on home address, rate per 100,000 population, in England, for full academic years 2017/18 to 2022/23.",
+      "issued": "2023-05-17T12:25:28Z",
+      "modified": "2023-12-08T13:26:00Z",
+      "next_release": "2024-05-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/department-for-education",
+      "contact_point": {
+        "name": "Apprenticeships achievements",
+        "email": "mailto:apprenticeships-achievements@ons.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/children-education-and-skills"],
+      "frequency": "annual",
+      "keywords": [
+        "apprenticeship",
+        "community",
+        "learning",
+        "education",
+        "training"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2017-01-01T12:00:00Z",
+        "end": "2022-12-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/apprenticeships-achievements/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/apprenticeships-achievements/editions/2023-05",
+          "issued": "2023-05-17T12:25:28Z",
+          "modified": "2023-12-08T13:26:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/pupils-at-expected-standards",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "pupils-at-expected-standards",
+      "title": "Pupils at expected standards at the end of key stage 2",
+      "summary": "Percentage of pupils in state-funded schools meeting the expected standard in reading, writing and maths at the end of key stage 2, England (state-funded schools), academic years 2015/16 - 2021/22",
+      "description": "This dataset shows the percentage of pupils in state-funded schools meeting the expected standard in reading, writing and maths at the end of key stage 2, in England state-funded schools, for academic years 2015/16 - 2021/22.",
+      "issued": "2023-03-31T12:15:00Z",
+      "modified": "2023-08-23T15:55:00Z",
+      "next_release": "2023-11-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/ofcom",
+      "contact_point": {
+        "name": "Ofcom Open Data",
+        "email": "mailto:open.data@ofcom.org.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/children-education-and-skills"
+      ],
+      "frequency": "monthly",
+      "keywords": [
+        "reading",
+        "writing",
+        "maths",
+        "subnational",
+        "region",
+        "county",
+        "state-funded-school",
+        "key-stage-2-attainment"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution": [
+        "N09",
+        "S12",
+        "W06",
+        "E92",
+        "K02"
+      ],
+      "spatial_coverage": "K02000001",
+      "temporal_resolution": [
+        "P1M",
+        "P3M"
+      ],
+      "temporal_coverage": {
+        "start": "2022-09-01T00:00:00Z",
+        "end": "2022-09-30T23:59:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/pupils-at-expected-standards/editions/2023-03",
+          "issued": "2023-03-31T12:15:00Z",
+          "modified": "2023-08-23T15:55:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/total-value-of-exports",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "total-value-of-exports",
+      "title": "Total value of UK exports",
+      "summary": "Estimated total value of UK exports including trade in both goods and services (experimental statistics), UK, 2021.",
+      "description": "This dataset shows the estimated total value of UK exports including trade in both goods and services (experimental statistics), in the UK, for 2021.\n\n### Coverage \n\nUK \n\n#### Geography definition\n\nInternational Territorial Level (ITL) 1, 2 and 3,\nCity Regions,\nCountry (UK)\n\n### Source\n\n - UK: [Office for National Statistics](https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/bulletins/internationaltradeinuknationsregionsandcities/previousReleases) \n\n\n",
+      "issued": "2023-05-23T10:14:20",
+      "modified": "2023-08-25T11:09:00",
+      "next_release": "2023-09-24T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/ofcom",
+      "contact_point": {
+        "name": "Ofcom Open Data",
+        "email": "mailto:open.data@ofcom.org.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/economy",
+        "https://staging.idpd.uk/topics/prices"
+      ],
+      "frequency": "monthly",
+      "keywords": [
+        "economic-growth",
+        "exports",
+        "goods-and-services",
+        "imports",
+        "trade-deficit",
+        "subnational",
+        "international-territorial-level"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution": [
+        "N09",
+        "S12",
+        "W06",
+        "E92",
+        "K02"
+      ],
+      "spatial_coverage": "K02000001",
+      "temporal_resolution": [
+        "P1M",
+        "P3M"
+      ],
+      "temporal_coverage": {
+        "start": "2022-09-01T00:00:00Z",
+        "end": "2022-09-30T23:59:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/total-value-of-exports/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/total-value-of-exports/editions/2022-08",
+          "issued": "2023-05-23T10:14:20",
+          "modified": "2023-08-25T11:09:00"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/public-funded-gross-expenditure",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "public-funded-gross-expenditure",
+      "title": "Public funded gross for expenditure on research and development",
+      "summary": "Total UK public-funded expenditure on research and development for financial year 2020 - 2021.",
+      "description": "This dataset shows the total UK public-funded gross regional capital and non-capital expenditure on research and development (experimental statistics), in the UK, for financial year 2020 - 2021.\n\n### Research and development refers to any creative and systematic activity that contains certain amount of novelty – which includes the development of new concepts, products and processes – with the aim of increasing the stock of knowledge.",
+      "issued": "2023-10-27T10:41:11Z",
+      "modified": "2023-11-02T14:41:11Z",
+      "next_release": "2024-10-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "Subnational Development Team",
+        "email": "mailto:Subnational.Development@ons.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/business-trade-and-international-development"],
+      "frequency": "annual",
+      "keywords": [
+        "public-funded",
+        "research-and-development",
+        "expenditure" ,
+        "subnational",
+        "region"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2022-01-01T12:00:00Z",
+        "end": "2022-12-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/public-funded-gross-expenditure/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/public-funded-gross-expenditure/editions/2023-10",
+          "issued": "2023-10-27T10:41:11Z",
+          "modified": "2023-11-02T14:41:11Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/population-under-devolution",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "population-under-devolution",
+      "title": "Population under devolution deal in England",
+      "summary": "Percentage population area of the highest level of devolution in England.",
+      "description": "This dataset shows the percentage of the population living in an area covered by the highest level of devolution, in England, as of 13 January 2023.",
+      "issued": "2023-03-31T12:14:51Z",
+      "modified": "2023-06-01T12:14:11Z",
+      "next_release": "2024-03-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "People, population and community",
+        "email": "mailto:Subnational@ons.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/economy"],
+      "frequency": "annual",
+      "keywords": [
+        "combined-authority",
+        "mayor",
+        "community",
+        "population",
+        "subnational",
+        "region"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2022-01-01T12:00:00Z",
+        "end": "2022-12-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/population-under-devolution/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/population-under-devolution/editions/2023-03",
+          "issued": "2023-03-31T12:14:51Z",
+          "modified": "2023-06-01T12:14:11Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/schools-and-nursery-schools-rated",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "schools-and-nursery-schools-rated",
+      "title": "Schools and nursery schools rated good or outstanding",
+      "summary": "Percentage of state-funded provided for schools that are rated good or outstanding",
+      "description": "This dataset shows the percentage of state-funded Nursery schools, Primary schools, Secondary schools, Alternative Provision (AP) schools and Special schools that are rated good or outstanging.",
+      "issued": "2023-05-16T13:36:00Z",
+      "modified": "2023-11-27T15:38:00Z",
+      "next_release": "2024-05-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/department-for-education",
+      "creator": "https://staging.idpd.uk/publishers/department-for-education",
+      "contact_point": {
+        "name": "ofsted",
+        "email": "mailto:informationrequest@ofsted.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/children-education-and-skills"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "state-funded",
+        "inspections-and-outcomes",
+        "subnational",
+        "schools",
+        "county",
+        "region"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2022-01-01T12:00:00Z",
+        "end": "2022-12-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/schools-and-nursery-schools-rated/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/schools-and-nursery-schools-rated/editions/2023-05",
+          "issued": "2023-05-16T13:36:00Z",
+          "modified": "2023-11-27T15:38:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/age-16-to-64-years-level-3-or-above-qualifications",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "age-16-to-64-years-level-3-or-above-qualifications",
+      "title": "Aged 16 to 64 years level 3 or above qualifications",
+      "summary": "Percentage of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications, Great Britain (Northern Ireland national figure included), 2004 to 2021",
+      "description": "This dataset shows the percentage of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications, in Great Britain (Northern Ireland national figure included), for 2004 - 2021.",
+      "issued": "2023-05-23T10:17:47Z",
+      "modified": "2023-08-27T13:10:00Z",
+      "next_release": "2024-05-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/department-for-education",
+      "creator": "https://staging.idpd.uk/publishers/department-for-education",
+      "contact_point": {
+        "name": "ofsted",
+        "email": "mailto:informationrequest@ofsted.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/children-education-and-skills"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "annual-population",
+        "annual-survey",
+        "national-vocational",
+        "national-qualification",
+        "subnational",
+        "local-authority",
+        "region"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2004-01-01T12:00:00Z",
+        "end": "2021-12-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/age-16-to-64-years-level-3-or-above-qualifications/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/age-16-to-64-years-level-3-or-above-qualifications/editions/2023-05",
+          "issued": "2023-05-23T10:17:47Z",
+          "modified": "2023-08-27T13:10:00Z"
+         }
+      ]
+    }, 
+    {
+      "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils-looked-after-by-local-authorities",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "persistent-absences-for-pupils-looked-after-by-local-authorities",
+      "title": "Persistent absences for pupils looked after by local authorities",
+      "summary": "Percentage of pupils who have been looked after by the local authorities over financial years 2016/17 - 2021/22.",
+      "description": "This dataset shows the percentage of pupils in state-funded primary, state funded secondary, special schools and pupil referral units who have been looked after continuously for at least 12 months (as of 31 March of that year) by local authorities who were persistently absent (those absent for 10% of schooling sessions) during the academic year, in England for financial years 2016/17 - 2021/22.",
+      "issued": "2023-05-16T13:35:25Z",
+      "modified": "2023-09-01T12:30:00Z",
+      "next_release": "2024-05-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/department-for-education",
+      "creator": "https://staging.idpd.uk/publishers/department-for-education",
+      "contact_point": {
+        "name": "ofsted",
+        "email": "mailto:informationrequest@ofsted.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/children-education-and-skills"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "state-funded",
+        "children-out-of-school",
+        "schools",
+        "local-authority",
+        "subnational",
+        "county"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2022-01-01T12:00:00Z",
+        "end": "2022-12-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils-looked-after-by-local-authorities/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-pupils-looked-after-by-local-authorities/editions/2023-05",
+          "issued": "2023-05-16T13:35:25Z",
+          "modified": "2023-09-01T12:30:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/aged-19-years-and-over-further-education-and-skills-participation",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "aged-19-years-and-over-further-education-and-skills-participation",
+      "title": "Aged 19 years and over further education and skills participation",
+      "summary": "19+ further education and skills participation rate per 100,000 population, England, academic years 2017/18 to 2022/23",
+      "description": "This dataset shows 19+ further education and skills participation rate per 100,000 population, in England, for full academic years 2017/18 to 2022/23",
+      "issued": "2023-05-17T12:25:15Z",
+      "modified": "2023-12-08T11:55:00Z",
+      "next_release": "2024-05-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/department-for-education",
+      "contact_point": {
+        "name": "ofsted",
+        "email": "mailto:informationrequest@ofsted.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/children-education-and-skills"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "apprenticeship",
+        "community-learning",
+        "education",
+        "training",
+        "subnational",
+        "local-authority"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2017-01-01T12:00:00Z",
+        "end": "2022-12-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/aged-19-years-and-over-further-education-and-skills-participation/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/aged-19-years-and-over-further-education-and-skills-participation/editions/2023-05",
+          "issued": "2023-05-17T12:25:15Z",
+          "modified": "2023-12-08T11:55:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/average-travel-time",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "average-travel-time",
+      "title": "Travel time to employment centres by mode of travel",
+      "summary": "Average travel time in minutes to nearest employment centre with 500 to 4999 jobs available by public transport or walking, by cycle and by car (experimental statistics), England, 2014-2019.",
+      "description": "This dataset shows the average travel time in minutes to nearest employment centre with 500 to 4999 jobs available by public transport or walking, by cycle and by car (experimental statistics), in England, for periods 2014-2019.",
+      "issued": "2023-08-18T09:10:26Z",
+      "modified": "2023-08-18T09:10:26Z",
+      "next_release": "2024-08-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/department-for-transport",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "Department for transport",
+        "email": "mailto:enquiries@dvsa.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/travel-transport-and-tourism"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "transport",
+        "travel-to-work",
+        "journey-time",
+        "subnational",
+        "local-authority"
+      ],
+       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+       "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2014-01-01T12:00:00Z",
+        "end": "2019-12-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/average-travel-time/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/average-travel-time/editions/2023-08",
+          "issued": "2023-08-18T09:10:26Z",
+          "modified": "2023-08-18T09:10:26Z"
+        }
+      ]
+    },
+    {  
+      "@id": "https://staging.idpd.uk/datasets/cancer-diagnosis-at-stage-1-and-2",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "cancer-diagnosis-at-stage-1-and-2",
+      "title": "Cancer diagnosis at stage 1 and 2",
+      "summary": "New cases of cancer diagnosed at stages 1 and 2 as a percentage of all new cases of cancer diagnosed at any known stage, England, 2013 to 2020.",
+      "description": "This dataset shows new cases of cancer diagnosed at stages 1 and 2 as a percentage of all new cases of cancer diagnosed at any known stage, in England, for 2013 to 2020.",
+      "issued": "2023-05-17T12:25:53Z",
+      "modified": "2023-08-17T11:55:00Z",
+      "next_release": "2024-05-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "Office for health improvement and disparities",
+        "email": "mailto:dhsc.publicenquiries@dhsc.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/health-and-social-care"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "tumor",
+        "subnational",
+        "local-authority",
+        "county",
+        "region"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2013-01-01T12:00:00Z",
+        "end": "2020-12-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/cancer-diagnosis-at-stage-1-and-2/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/cancer-diagnosis-at-stage-1-and-2/editions/2023-05",
+          "issued": "2023-05-17T12:25:53Z",
+          "modified": "2023-08-17T11:55:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-all-pupils",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "persistent-absences-for-all-pupils",
+      "title": "Persistent absences for all pupils",
+      "summary": "Percentage of pupils in state-funded primary, state funded secondary and special schools that were persistently absent (those absent for 10% of schooling sessions) during the academic year, England (state-funded schools), academic years 2008/09 - 2021/22.",
+      "description": "This dataset shows the percentage of pupils in state-funded primary, state funded secondary and special schools that were persistently absent (those absent for 10% of schooling sessions) during the academic year, in England (state-funded schools), for academic years 2008/09 - 2021/22.",
+      "issued": "2023-06-05T13:27:00Z",
+      "modified": "2023-06-05T16:27:00Z",
+      "next_release": "2024-06-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/department-for-education",
+      "contact_point": {
+        "name": "Persistent absences",
+        "email": "mailto:persistent-absences@ons.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/children-education-and-skills"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "state-funded-school",
+        "children-out-of-school",
+        "subnational",
+        "county",
+        "region"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E10", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2008-08-01T00:00:00Z",
+        "end": "2021-08-01T00:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/persistent-absences-for-all-pupils/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/persistent-absences-for-all-pupils/editions/2023-06",
+          "issued": "2023-06-05T13:27:00Z",
+          "modified": "2023-06-05T16:27:00Z"
+        }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/annual-personal-wellbeing-estimates",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "annual-personal-wellbeing-estimates",
+      "title": "Annual personal wellbeing estimates",
+      "summary": "Estimates of life satisfaction, feeling that the things done in life are worthwhile, happiness and anxiety for adults aged 16 years and over, UK, 04/2011-03/2012 to 04/2022-03/2023.",
+      "description": "This dataset shows the average rating of those that feel satisfied about their lives (where 0 is 'not at all satisfied' and 10 is 'completely satisfied'), for adults aged 16 years and over, in the UK, for periods 04/2011-03/2012 to 04/2022-03/2023.",
+      "issued": "2023-09-13T13:32:00Z",
+      "modified": "2023-11-28T14:40:00Z",
+      "next_release": "2024-09-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "Personal wellbeing in the UK",
+        "email": "mailto:qualityoflife@ons.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/health-and-social-care"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "personal-wellbeing",
+        "subnational",
+        "quality-of-life",
+        "annual-population",
+        "local-authorities",
+        "counties",
+        "anxiety",
+        "happiness",
+        "life-satisfaction",
+        "regions"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2011-04-01T12:00:00Z",
+        "end": "2023-03-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/annual-personal-wellbeing-estimates/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/annual-personal-wellbeing-estimates/editions/2023-09",
+          "issued": "2023-09-13T13:32:00Z",
+          "modified": "2023-11-28T14:40:00Z"
+          }
+      ]
+    },
+    {
+      "@id": "https://staging.idpd.uk/datasets/children-prevalence-of-weight-status",
+      "@type": "dcat:DatasetSeries",
+      "identifier": "children-prevalence-of-weight-status",
+      "title": "Children prevalence of weight status",
+      "summary": "Proportion of children aged 4-5 years (reception age) and 10-11 years (Year 6 age) classified as underweight, healthy weight, overweight or obese (including severe obesity), England, academic years 2006/07 to 2022/23.",
+      "description": "This dataset shows the proportion of children aged 4-5 years (reception age) and 10-11 years (Year 6 age) classified as underweight, healthy weight, overweight or obese (including severe obesity), in England, for academic years 2006/07 to 2022/23.",
+      "issued": "2023-11-06T11:20:33Z",
+      "modified": "2023-11-23T11:00:00Z",
+      "next_release": "2024-11-01T09:30:00Z",
+      "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+      "contact_point": {
+        "name": "Office for health improvement and disparities",
+        "email": "mailto:dhsc.publicenquiries@dhsc.gov.uk"
+      },
+      "topics": [
+        "https://staging.idpd.uk/topics/health-and-social-care"
+      ],
+      "frequency": "annual",
+      "keywords": [
+        "obesity",
+        "schools",
+        "national-programme",
+        "child-measurement",
+        "state-funded",
+        "subnational",
+        "local-authority",
+        "county",
+        "region"
+      ],
+      "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+      "spatial_coverage": "E92000001",
+      "temporal_resolution": ["P1Y"],
+      "temporal_coverage": {
+        "start": "2006-01-01T09:00:00Z",
+        "end": "2022-12-31T12:00:00Z"
+      },
+      "editions_url": "https://staging.idpd.uk/datasets/children-prevalence-of-weight-status/editions",
+      "editions": [
+        {
+          "@id": "https://staging.idpd.uk/datasets/children-prevalence-of-weight-status/editions/2023-11",
+          "issued": "2023-11-06T11:20:33Z",
+          "modified": "2023-11-23T11:00:00Z"
+        }
+      ]
+    }  
+  ],
+  "offset": 0,
+  "count": 18
+}

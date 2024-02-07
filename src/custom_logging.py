@@ -71,7 +71,11 @@ def configure_logger(enable_json_logs: bool = False):
                 structlog.processors.CallsiteParameter.PROCESS_NAME,
             }
         ),
-        structlog.stdlib.ExtraAdder(),
+        structlog.stdlib.ExtraAdder(
+            {
+                "request_id",
+            }
+        ),
     ]
 
     structlog.configure(
