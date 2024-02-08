@@ -54,6 +54,9 @@ class StubMetadataStore(BaseMetadataStore):
     files stored on disk.
     """
 
+    def __init__(self, content_path=None):
+        self.setup(content_path)
+        
     def setup(self, content_path=None):
         """
         Populates our in-memory stubbed responses

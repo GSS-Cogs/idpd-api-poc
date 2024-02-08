@@ -3,9 +3,6 @@ from typing import Dict, Optional
 
 
 class BaseMetadataStore(ABC):
-    def __init__(self, **kwargs):
-        self.setup(**kwargs)
-
     @abstractmethod
     def setup(self):
         """
