@@ -1,0 +1,30 @@
+{
+    "@context": "https://staging.idpd.uk/ns#",
+    "@id": "https://staging.idpd.uk/publishers",
+    "@type": "hydra:Collection",
+    "publishers": [
+        {
+            "@id": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+            "@type": "dcat:publisher",
+            "title": "Office for National Statistics",
+            "description": "We are the UK’s largest independent producer of official statistics and its recognised national statistical institute. We are responsible for collecting and publishing statistics related to the economy, population and society at national, regional and local levels.",
+            "landing_page": "https://www.ons.gov.uk/"
+        },
+        {
+            "@id": "https://staging.idpd.uk/publishers/ofcom",
+            "@type": "dcat:publisher",
+            "title": "Office of Communications",
+            "description": "The Office of Communications, commonly known as Ofcom, is the government-approved regulatory and competition authority for the broadcasting, telecommunications and postal industries of the United Kingdom.",
+            "landing_page": "https://www.ofcom.org.uk/"
+        },
+        {
+            "@id": "https://staging.idpd.uk/publishers/department-for-education",
+            "@type": "dcat:publisher",
+            "title": "Department for Education",
+            "description": "The Department for Education is responsible for children’s services and education, including early years, schools, higher and further education policy, apprenticeships and wider skills in England.",
+            "landing_page": "https://www.gov.uk/government/organisations/department-for-education"
+        }
+    ],
+    "count": 3,
+    "offset": 0
+}

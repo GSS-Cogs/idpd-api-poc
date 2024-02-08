@@ -5,8 +5,7 @@ from pathlib import Path
 from typing import Dict, Optional
 
 from custom_logging import configure_logger, logger
-
-from ..base import BaseMetadataStore
+from store.metadata.base import BaseMetadataStore
 
 configure_logger()
 
@@ -57,8 +56,8 @@ class StubMetadataStore(BaseMetadataStore):
 
     def __init__(self, content_path=None):
         self.setup(content_path)
-
-    def setup(self, content_path):
+        
+    def setup(self, content_path=None):
         """
         Populates our in-memory stubbed responses
         using the contents of ./content

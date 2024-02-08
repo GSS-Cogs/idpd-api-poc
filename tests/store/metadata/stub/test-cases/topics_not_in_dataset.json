@@ -1,0 +1,33 @@
+{
+    "@context": "https://staging.idpd.uk/ns#",
+    "@id": "https://staging.idpd.uk/topics",
+    "@type": "hydra:Collection",
+    "topics": [
+        {
+            "@id": "https://staging.idpd.uk/topics/business-trade-and-international-development",
+            "@type": "dcat:theme",
+            "identifier": "business-trade-and-international-development",
+            "title": "Business, trade and international development",
+            "description": "Company structure, closures or mergers; and turnover, international and UK trade, and research and development.",
+            "sub_topics": [
+                "https://staging.idpd.uk/topics/it-and-internet-industry"
+            ],
+            "parent_topics": []
+        },
+        {
+            "@id": "https://staging.idpd.uk/topics/it-and-internet-industry",
+            "@type": "dcat:theme",
+            "identifier": "it-and-internet-industry",
+            "title": "IT and Internet Industry",
+            "description": "Internet sales by businesses in the UK (total value and as a percentage of all retail sales) and the percentage of businesses that have a website and broadband connection. These figures indicate the importance of the internet to UK businesses.",
+            "sub_topics": [
+                "https://staging.idpd.uk/topics/communication"
+            ],
+            "parent_topics": [
+                "https://staging.idpd.uk/topics/business-trade-and-international-development"
+            ]
+        }
+    ],
+    "count": 2,
+    "offset": 0
+}
