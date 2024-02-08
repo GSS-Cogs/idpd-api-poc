@@ -86,7 +86,7 @@ def construct(
     result = graph.query(query, initBindings=init_bindings).graph
     if len(result) == 0:
         logger.info(
-            f"No results found for SPARQL query",
+            "No results found for SPARQL query",
             data={"query": query, "init_bindings": init_bindings},
         )
     return result

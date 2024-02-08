@@ -10,23 +10,23 @@ Tool that uses jsonld files in /src/store/metadata/stub/content to:
 Please run this vai the Makefile if you want to finesses this behaviour.
 """
 
+import glob
 import json
 import os
 import shutil
-import glob
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict
 
-from rdflib import ConjunctiveGraph, Dataset, BNode, Graph
+from rdflib import BNode, ConjunctiveGraph, Dataset, Graph
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore, _node_to_sparql
-from store.metadata.stub.store import combine_datasets
-import schemas
-from store.metadata.stub.store import StubMetadataStore
 
+import schemas
+from store.metadata.stub.store import StubMetadataStore, combine_datasets
 
 # Load the context file
 with open(Path("src/store/metadata/context.json")) as f:
     context = json.load(f)
+
 
 def set_context(resource_item):
     """
@@ -53,7 +53,7 @@ def validate_and_parse_json(g, schema, resource_dict, resource_type):
     """
     Validate resources, apply context, and add to an RDF graph.
     """
-    graph_length = len(g)   
+    graph_length = len(g)
 
     # Check that `@id` and `identifier` are consistent
     for resource in resource_dict[resource_type]:
@@ -66,7 +66,7 @@ def validate_and_parse_json(g, schema, resource_dict, resource_type):
 
     # Parse the JSON-LD and add to the graph
     g += Graph().parse(data=json.dumps(set_context(resource_dict)), format="json-ld")
-    assert len(g) > graph_length   
+    assert len(g) > graph_length
 
 
 def populate(jsonld_location=None, oxigraph_url=None, write_to_db=True):
@@ -99,7 +99,7 @@ def populate(jsonld_location=None, oxigraph_url=None, write_to_db=True):
     # ------------------
     # Datasets resources
     # ------------------
-    
+
     # Load json file from disk
     datasets_source_dict = combine_datasets()
     # _confirm_resource_count(datasets_source_dict, "datasets")
@@ -116,7 +116,6 @@ def populate(jsonld_location=None, oxigraph_url=None, write_to_db=True):
     dataset_publishers = {
         dataset["publisher"] for dataset in datasets_source_dict["datasets"]
     }
-
 
     # ------------------
     # Editions resources
