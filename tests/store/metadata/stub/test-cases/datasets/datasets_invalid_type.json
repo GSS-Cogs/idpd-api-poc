@@ -1,0 +1,62 @@
+{
+    "@context": "https://staging.idpd.uk/ns#",
+    "@type": [
+        "dcat:Catalog",
+        "hydra:Collection"
+    ],
+    "@id": "https://staging.idpd.uk/datasets",
+    "datasets": [
+        {
+            "@id": "https://staging.idpd.uk/cpih",
+            "@type": "dcat:DatasetSeries",
+            "identifier": "cpih",
+            "title": "Consumer Prices Index including owner occupiers' housing costs (CPIH)",
+            "summary": "CPIH is defined as the Consumer Prices Index including owner occupiers' housing costs. This reflects the fact that it is identical to the CPI, with the exception of inclusion of owner occupiers' housing costs and council tax.",
+            "description": "CPIH is the most comprehensive measure of inflation. It extends CPI to include a measure of the costs associated with owning, maintaining and living in one's own home, known as owner occupiers' housing costs (OOH), along with council tax.",
+            "issued": "2022-01-01T00:00:00Z",
+            "modified": "2022-01-12T00:00:00Z",
+            "next_release": "2024-04-19T09:30:00Z",
+            "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+            "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+            "contact_point": {
+                "name": "Consumer Price Inflation Enquiries",
+                "email": "mailto:cpih@ons.gov.uk"
+            },
+            "topics": [
+                "https://staging.idpd.uk/topics/economy",
+                "https://staging.idpd.uk/topics/prices"
+            ],
+            "frequency": "monthly",
+            "keywords": [
+                "inflation",
+                "consumer",
+                "price-index"
+            ],
+            "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "spatial_resolution": [
+                "E01",
+                "E92"
+            ],
+            "spatial_coverage": "E92000001",
+            "temporal_resolution": [
+                "P1M",
+                "P3M",
+                "P1Y"
+            ],
+            "temporal_coverage": {
+                "start": "2005-01-01T00:00:00Z",
+                "end": "2019-03-01T00:00:00Z"
+            },
+            "editions_url": "https://staging.idpd.uk/datasets/cpih/editions",
+            "editions": [
+                {
+                    "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01",
+                    "issued": "2022-01-01T00:00:00Z",
+                    "modified": "2022-01-12T00:00:00Z"
+                }
+            ]
+        }
+    ],
+    "offset": 0,
+    "count": 1
+}

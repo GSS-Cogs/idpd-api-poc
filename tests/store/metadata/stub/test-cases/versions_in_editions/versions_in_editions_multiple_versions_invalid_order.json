@@ -1,0 +1,52 @@
+{
+    "https://staging.idpd.uk/datasets/apprenticeships-achievements/editions/2023-05/versions": [
+        {
+            "@id": "https://staging.idpd.uk/datasets/apprenticeships-achievements/editions/2023-05/versions/1",
+            "issued": "2023-05-17T12:25:28Z"
+        }
+    ],
+    "https://staging.idpd.uk/datasets/population-under-devolution/editions/2023-03/versions": [
+        {
+            "@id": "https://staging.idpd.uk/datasets/population-under-devolution/editions/2023-03/versions/1",
+            "issued": "2023-03-31T12:14:51Z"
+        }
+    ],
+    "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions": [
+        {
+            "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1",
+            "issued": "2022-01-01T00:00:00Z"
+        },
+        {
+            "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/3",
+            "issued": "2023-03-01T00:00:00Z"
+        },
+        {
+            "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/2",
+            "issued": "2023-02-01T00:00:00Z"
+        }
+    ],
+    "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions": [
+        {
+            "@id": "https://staging.idpd.uk/datasets/a16mu/editions/2023-11/versions/1",
+            "issued": "2023-11-06T12:25:28Z"
+        }
+    ],
+    "https://staging.idpd.uk/datasets/public-funded-gross-expenditure/editions/2023-10/versions": [
+        {
+            "@id": "https://staging.idpd.uk/datasets/public-funded-gross-expenditure/editions/2023-10/versions/1",
+            "issued": "2023-10-27T10:41:11Z"
+        }
+    ],
+    "https://staging.idpd.uk/datasets/4gc/editions/2023-03/versions": [
+        {
+            "@id": "https://staging.idpd.uk/datasets/4gc/editions/2023-03/versions/1",
+            "issued": "2023-03-31T12:10:00Z"
+        }
+    ],
+    "https://staging.idpd.uk/datasets/gdhi/editions/2023-03/versions": [
+        {
+            "@id": "https://staging.idpd.uk/datasets/gdhi/editions/2023-03/versions/1",
+            "issued": "2023-03-31T12:12:48Z"
+        }
+    ]
+}

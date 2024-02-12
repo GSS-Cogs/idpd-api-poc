@@ -6,7 +6,7 @@ from fastapi import status
 from fastapi.testclient import TestClient
 from fastapi.exceptions import ResponseValidationError
 
-from src.store.metadata.stub.store import StubMetadataStore
+from store.metadata.stub.stub_store import StubMetadataStore
 
 from constants import JSONLD
 from tests.fixtures.publishers_oxigraph import publisher_test_data
