@@ -1,0 +1,52 @@
+{
+    "@context": "https://staging.idpd.uk/ns#",
+    "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions",
+    "@type": "hydra:Collection",
+    "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
+    "versions": [
+        {
+            "@type": [
+                "dcat:Distribution",
+                "csvw:Table"
+            ],
+            "@id": "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1",
+            "identifier": "1",
+            "issued": "2022-01-01T00:00:00Z",
+            "title": "Consumer Prices Index including owner occupiers' housing costs (CPIH)",
+            "summary": "CPIH is defined as the Consumer Prices Index including owner occupiers' housing costs. This reflects the fact that it is identical to the CPI, with the exception of inclusion of owner occupiers' housing costs and council tax.",
+            "description": "CPIH is the most comprehensive measure of inflation. It extends CPI to include a measure of the costs associated with owning, maintaining and living in one's own home, known as owner occupiers' housing costs (OOH), along with council tax.",
+            "download_url": "https://staging.idpd.uk/datasets/cpih/editions/2022-01/versions/1.csv",
+            "media_type": "text/csv",
+            "table_schema": {
+                "columns": [
+                    {
+                      "name": "period",
+                      "datatype": "string",
+                      "titles": "Period",
+                      "description": "The time period associated with the observation."
+                    },
+                    {
+                      "name": "cpih",
+                      "datatype": "decimal",
+                      "titles": "Consumer Price Index including Housing (CPIH)",
+                      "description": "The consumer price index including housing for the given time period."
+                    },
+                    {
+                      "name": "cpi",
+                      "datatype": "decimal",
+                      "titles": "Consumer Price Index (CPI)",
+                      "description": "The consumer price index for the given time period."
+                    },
+                    {
+                      "name": "ooh",
+                      "datatype": "decimal",
+                      "titles": "Owner occupiers’ housing costs",
+                      "description": "An index of owner occupiers' housing costs for the given time period."
+                    }
+                ]
+            }
+        }
+    ],
+    "count": 1,
+    "offset": 0
+}
