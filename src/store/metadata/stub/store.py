@@ -61,13 +61,21 @@ class StubMetadataStore(BaseMetadataStore):
     def setup(self, content_path):
         """
         Populates our in-memory stubbed responses
-        using the contents of ./content
+        using the contents of ./content 
         """
 
+        # Retrieves the value of the 'ENVIRONMENT' environment variable
+        environment = os.getenv('ENVIRONMENT')
+        # If no content path is provided, determine the content directory based on the environment
         if content_path is None:
-            self.content_dir = Path("./tests/fixtures/content")
-        else:
-            self.content_dir = Path(content_path)
+            # If the environment is 'test', use the test content directory
+            if os.getenv('ENV') == 'test':
+                    self.content_dir = Path('/app/src/tests/fixtures/content')
+           # Otherwise, use the stub content directory
+            else:
+                    self.content_dir = Path('/app/src/store/metadata/stub/content')
+
+
 
         # get specific stubbed resources into memory on application startup
         with open(Path(self.content_dir / "datasets.json").absolute()) as f:
