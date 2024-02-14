@@ -13,7 +13,7 @@
       "summary": "Estimated total value of UK exports including trade in both goods and services (experimental statistics), UK, 2021.",
       "description": "This dataset shows the estimated total value of UK exports including trade in both goods and services (experimental statistics), in the UK, for 2021.\n\n### Coverage \n\nUK \n\n#### Geography definition\n\nInternational Territorial Level (ITL) 1, 2 and 3,\nCity Regions,\nCountry (UK)\n\n### Source\n\n - UK: [Office for National Statistics](https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/bulletins/internationaltradeinuknationsregionsandcities/previousReleases) \n\n\n",
       "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
-      "creator": "ofcom",
+      "creator": "https://staging.idpd.uk/publishers/ofcom",
       "contact_point": {
         "name": "Ofcom Open Data",
         "email": "mailto:open.data@ofcom.org.uk"
@@ -32,8 +32,8 @@
         "international-territorial-level"
       ],
       "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-      "issued": "2023-05-23T10:14:20",
-      "modified": "2023-08-25T11:09:00",
+      "issued": "2023-05-23T10:14:20Z",
+      "modified": "2023-08-25T11:09:00Z",
       "spatial_resolution": [
         "N09",
         "S12",
@@ -55,7 +55,7 @@
       "versions": [
         {
           "@id": "https://staging.idpd.uk/datasets/total-value-of-exports/editions/2022-08/versions/1",
-          "issued": "2023-05-23T10:14:20"
+          "issued": "2023-05-23T10:14:20Z"
         }
       ],
       "next_release": "2023-09-24T09:30:00Z",

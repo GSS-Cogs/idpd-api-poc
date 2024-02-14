@@ -5,10 +5,10 @@ from fastapi.testclient import TestClient
 
 import schemas
 from main import app
-from store.metadata.oxigraph.store import OxigraphMetadataStore
+from store.metadata.oxigraph.oxigraph_store import OxigraphMetadataStore
 from store.metadata.context import ContextStore
 from store.csv.stub.store import StubCsvStore
-from store.metadata.stub.store import StubMetadataStore
+from store.metadata.stub.stub_store import StubMetadataStore
 
 
 def test_stub_get_versions_return_request_id_in_store_logs():
@@ -30,15 +30,20 @@ def test_stub_get_versions_return_request_id_in_store_logs():
         app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
         client = TestClient(app)
-        response = client.get(ENDPOINT, headers={"Accept": "foo", "X-Request-ID": "test_request_id_625"})
+        response = client.get(
+            ENDPOINT, headers={"Accept": "foo", "X-Request-ID": "test_request_id_625"}
+        )
 
         # Assertions
         for log in cap_logs:
-            if log.get('event') == 'Constructing get_versions() from files stored on disk':
-                assert 'request_id' in log
-                assert 'log_level' in log
-                assert log.get('log_level') == 'info'
-                assert log.get('request_id') == "test_request_id_625"
+            if (
+                log.get("event")
+                == "Constructing get_versions() from files stored on disk"
+            ):
+                assert "request_id" in log
+                assert "log_level" in log
+                assert log.get("log_level") == "info"
+                assert log.get("request_id") == "test_request_id_625"
 
 
 def test_stub_get_versions_return_none_for_request_id_in_store_logs():
@@ -64,11 +69,15 @@ def test_stub_get_versions_return_none_for_request_id_in_store_logs():
 
         # Assertions
         for log in cap_logs:
-            if log.get('event') == 'Constructing get_versions() from files stored on disk':
-                assert 'request_id' in log
-                assert 'log_level' in log
-                assert log.get('log_level') == 'info'
-                assert type(log.get('request_id')) == type(None)
+            if (
+                log.get("event")
+                == "Constructing get_versions() from files stored on disk"
+            ):
+                assert "request_id" in log
+                assert "log_level" in log
+                assert log.get("log_level") == "info"
+                assert type(log.get("request_id")) == type(None)
+
 
 # def test_oxigraph_get_datasets_return_request_id_in_store_log():
 #     """
@@ -76,8 +85,8 @@ def test_stub_get_versions_return_none_for_request_id_in_store_logs():
 
 #     - Request ID is pass into store OxigraphMetadataStore methods
 #     - All OxigraphMetadataStore loggers are logging with request ID
-#     """  
-#     with capture_logs() as cap_logs:    
+#     """
+#     with capture_logs() as cap_logs:
 #         store = OxigraphMetadataStore()
 #         datasets = store.get_datasets(request_id='test_request_id_625')
 #         datasets_schema = schemas.Datasets(**datasets)
@@ -96,12 +105,12 @@ def test_stub_get_versions_return_none_for_request_id_in_store_logs():
 
 #     - Request ID is pass into OxigraphMetadataStore methods
 #     - All OxigraphMetadataStore loggers are logging with request ID, even if request_id=None
-#     """ 
-#     with capture_logs() as cap_logs: 
+#     """
+#     with capture_logs() as cap_logs:
 #         store = OxigraphMetadataStore()
 #         versions = store.get_versions("4gc", "2023-09", request_id=None)
 #         versions_schema = schemas.Versions(**versions)
-        
+
 #         for log in cap_logs:
 #             if log.get('event') == 'Constructing get_versions() response from graph':
 #                 assert 'request_id' in log
@@ -117,7 +126,7 @@ def test_context_store_return_request_id_in_store_log():
     - Request ID is generated at the start of each request handler
     - Request ID is pass into ContextStore methods
     - All ContextStore loggers are logging with request ID
-    """ 
+    """
     ENDPOINT = "/ns"
 
     with capture_logs() as cap_logs:
@@ -128,16 +137,19 @@ def test_context_store_return_request_id_in_store_log():
         app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
         client = TestClient(app)
-        response = client.get(ENDPOINT, headers={"Accept": "foo", "X-Request-ID": "test_request_id_625"})
+        response = client.get(
+            ENDPOINT, headers={"Accept": "foo", "X-Request-ID": "test_request_id_625"}
+        )
 
         # Assertions
         for log in cap_logs:
-            if log.get('event') == 'Getting Context':
-                assert 'request_id' in log
-                assert 'log_level' in log
-                assert log.get('log_level') == 'info'
-                assert type(log.get('request_id')) == str
-                assert log.get('request_id') == "test_request_id_625"
+            if log.get("event") == "Getting Context":
+                assert "request_id" in log
+                assert "log_level" in log
+                assert log.get("log_level") == "info"
+                assert type(log.get("request_id")) == str
+                assert log.get("request_id") == "test_request_id_625"
+
 
 def test_context_store_return_none_for_request_id_in_store_logs():
     """
@@ -146,7 +158,7 @@ def test_context_store_return_none_for_request_id_in_store_logs():
     - Request ID is generated at the start of each request handler
     - Request ID is pass into ContextStore methods
     - All ContextStore loggers are logging with request ID
-    """ 
+    """
     ENDPOINT = "/ns"
 
     with capture_logs() as cap_logs:
@@ -161,11 +173,12 @@ def test_context_store_return_none_for_request_id_in_store_logs():
 
         # Assertions
         for log in cap_logs:
-            if log.get('event') == 'Getting Context':
-                assert 'request_id' in log
-                assert 'log_level' in log
-                assert log.get('log_level') == 'info'
-                assert type(log.get('request_id')) == type(None)
+            if log.get("event") == "Getting Context":
+                assert "request_id" in log
+                assert "log_level" in log
+                assert log.get("log_level") == "info"
+                assert type(log.get("request_id")) == type(None)
+
 
 def test_csv_stub_return_request_id_in_store_log():
     """
@@ -174,7 +187,7 @@ def test_csv_stub_return_request_id_in_store_log():
     - Request ID is generated at the start of each request handler
     - Request ID is pass into StubCsvStore methods
     - All StubCsvStore loggers are logging with request ID
-    """ 
+    """
     ENDPOINT = "/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}"
 
     with capture_logs() as cap_logs:
@@ -185,16 +198,18 @@ def test_csv_stub_return_request_id_in_store_log():
         app.dependency_overrides[StubMetadataStore] = lambda: mock_metadata_store
 
         client = TestClient(app)
-        response = client.get(ENDPOINT, headers={"Accept": "foo", "X-Request-ID": "test_request_id_625"})
+        response = client.get(
+            ENDPOINT, headers={"Accept": "foo", "X-Request-ID": "test_request_id_625"}
+        )
 
         # Assertions
         for log in cap_logs:
-            if log.get('event') == 'Recieved request for csv':
-                assert 'request_id' in log
-                assert 'log_level' in log
-                assert log.get('log_level') == 'info'
-                assert type(log.get('request_id')) == str
-                assert log.get('request_id') == "test_request_id_625"
+            if log.get("event") == "Recieved request for csv":
+                assert "request_id" in log
+                assert "log_level" in log
+                assert log.get("log_level") == "info"
+                assert type(log.get("request_id")) == str
+                assert log.get("request_id") == "test_request_id_625"
 
 
 def test_csv_stub_return_none_for_request_id_in_store_log():
@@ -204,7 +219,7 @@ def test_csv_stub_return_none_for_request_id_in_store_log():
     - Request ID is generated at the start of each request handler
     - Request ID is pass into StubCsvStore methods
     - All StubCsvStore loggers are logging with request ID, even if request_id=None
-    """ 
+    """
     ENDPOINT = "/datasets/{dataset_id}/editions/{edition_id}/versions/{version_id}"
 
     with capture_logs() as cap_logs:
@@ -219,8 +234,8 @@ def test_csv_stub_return_none_for_request_id_in_store_log():
 
         # Assertions
         for log in cap_logs:
-            if log.get('event') == 'Recieved request for csv':
-                assert 'request_id' in log
-                assert 'log_level' in log
-                assert log.get('log_level') == 'info'
-                assert type(log.get('request_id')) == type(None)
+            if log.get("event") == "Recieved request for csv":
+                assert "request_id" in log
+                assert "log_level" in log
+                assert log.get("log_level") == "info"
+                assert type(log.get("request_id")) == type(None)

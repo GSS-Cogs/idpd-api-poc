@@ -5,8 +5,7 @@ from pathlib import Path
 from typing import Dict, Optional
 
 from custom_logging import configure_logger, logger
-
-from ..base import BaseMetadataStore
+from store.metadata.base import BaseMetadataStore
 
 configure_logger()
 
@@ -103,17 +102,27 @@ class StubMetadataStore(BaseMetadataStore):
 
     def __init__(self, content_path=None):
         self.setup(content_path)
-
-    def setup(self, content_path):
+        
+    def setup(self, content_path=None):
         """
         Populates our in-memory stubbed responses
-        using the contents of ./content
+        using the contents of ./content 
         """
 
+        # Retrieves the value of the 'ENVIRONMENT' environment variable
+        environment = os.getenv('ENVIRONMENT')
+
+        # If no content path is provided, determine the content directory based on the environment
         if content_path is None:
-            self.content_dir = Path("./tests/fixtures/content")
+            # If the environment is 'test', use the test content directory
+            if environment == 'test':
+                self.content_dir = Path('./tests/fixtures/content')
+            # Otherwise, use the stub content directory
+            else:
+                self.content_dir = Path('./src/store/metadata/stub/content')
         else:
             self.content_dir = Path(content_path)
+
 
         # get specific stubbed resources into memory on application startup
         self.datasets = combine_datasets()

@@ -2,7 +2,7 @@ import pytest
 
 from pydantic import ValidationError
 
-from store.metadata.stub.store import StubMetadataStore
+from store.metadata.stub.stub_store import StubMetadataStore
 from src import schemas
 
 

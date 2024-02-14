@@ -4,7 +4,7 @@ import os
 
 from pydantic import ValidationError
 
-from store.metadata.stub.store import StubMetadataStore, combine_datasets
+from store.metadata.stub.stub_store import StubMetadataStore, combine_datasets
 from src.data import populate
 from src import schemas
 
