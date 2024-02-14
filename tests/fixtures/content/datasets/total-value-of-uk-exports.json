@@ -7,7 +7,7 @@
     "@id": "https://staging.idpd.uk/datasets",
     "datasets": [
         {
-            "@id": "https://staging.idpd.uk/datasets/total-value-of-exports",
+            "@id": "https://staging.idpd.uk/datasets/total-value-of-uk-exports",
             "@type": "dcat:DatasetSeries",
             "identifier": "total-value-of-uk-exports",
             "title": "Total value of UK exports",

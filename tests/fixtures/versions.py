@@ -11,7 +11,7 @@ def version_test_data():
     we'd expect returned from store.get_versions().
     """
     file_path = pathlib.Path(
-        "tests/fixtures/content/editions/versions/cpih_2022-01.json"
+        "tests/fixtures/content/datasets/cpih/editions/cpih_2022-01/versions/cpih_2022-01.json"
     )
     with open(file_path, "r") as json_file:
         version = json.load(json_file)["versions"][0]
@@ -25,7 +25,7 @@ def versions_test_data():
     we'd expect returned from store.get_versions().
     """
     file_path = pathlib.Path(
-        "tests/fixtures/content/editions/versions/cpih_2022-01.json"
+        "tests/fixtures/content/datasets/cpih/editions/cpih_2022-01/versions/cpih_2022-01.json"
     )
     with open(file_path, "r") as json_file:
         return json.load(json_file)

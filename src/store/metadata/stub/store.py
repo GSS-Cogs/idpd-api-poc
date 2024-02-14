@@ -128,7 +128,7 @@ class StubMetadataStore(BaseMetadataStore):
         # and scoop up all jsons. We use the naming conventions of
         # <dataset_id>_<edition_id> to populate the keys so we can get
         # them back out
-        editions_dir = Path(self.content_dir / "datasets" / "editions")
+        editions_dir = Path(self.content_dir / "datasets" / "*" / "editions")
         self.editions = {}
         for edition_json_file in glob.glob(os.path.join(editions_dir, "*.json")):
             with open(edition_json_file) as f:
@@ -136,7 +136,7 @@ class StubMetadataStore(BaseMetadataStore):
                     edition_json_file.split("/")[-1].rstrip(".json")
                 ] = json.load(f)
 
-        versions_dir = Path(editions_dir /"versions")
+        versions_dir = Path(editions_dir / "*" /"versions")
         self.versions = {}
         for version_json_file in glob.glob(os.path.join(versions_dir, "*.json")):
             with open(version_json_file) as f:
