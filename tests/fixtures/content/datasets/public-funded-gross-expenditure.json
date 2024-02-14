@@ -1,0 +1,55 @@
+{
+    "@context": "https://staging.idpd.uk/ns#",
+    "@type": [
+      "dcat:Catalog",
+      "hydra:Collection"
+    ],
+    "@id": "https://staging.idpd.uk/datasets",
+    "datasets": [
+        {
+            "@id": "https://staging.idpd.uk/datasets/public-funded-gross-expenditure",
+            "@type": "dcat:DatasetSeries",
+            "identifier": "public-funded-gross-expenditure",
+            "title": "Public funded gross for expenditure on research and development",
+            "summary": "Total UK public-funded expenditure on research and development for financial year 2020 - 2021.",
+            "description": "This dataset shows the total UK public-funded gross regional capital and non-capital expenditure on research and development (experimental statistics), in the UK, for financial year 2020 - 2021.\n\n### Research and development refers to any creative and systematic activity that contains certain amount of novelty – which includes the development of new concepts, products and processes – with the aim of increasing the stock of knowledge.",
+            "issued": "2023-10-27T10:41:11Z",
+            "modified": "2023-11-02T14:41:11Z",
+            "next_release": "2024-10-01T09:30:00Z",
+            "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+            "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+            "contact_point": {
+              "name": "Subnational Development Team",
+              "email": "mailto:Subnational.Development@ons.gov.uk"
+            },
+            "topics": [
+              "https://staging.idpd.uk/topics/business-trade-and-international-development"],
+            "frequency": "annual",
+            "keywords": [
+              "public-funded",
+              "research-and-development",
+              "expenditure" ,
+              "subnational",
+              "region"
+            ],
+            "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+            "spatial_coverage": "E92000001",
+            "temporal_resolution": ["P1Y"],
+            "temporal_coverage": {
+              "start": "2022-01-01T12:00:00Z",
+              "end": "2022-12-31T12:00:00Z"
+            },
+            "editions_url": "https://staging.idpd.uk/datasets/public-funded-gross-expenditure/editions",
+            "editions": [
+              {
+                "@id": "https://staging.idpd.uk/datasets/public-funded-gross-expenditure/editions/2023-10",
+                "issued": "2023-10-27T10:41:11Z",
+                "modified": "2023-11-02T14:41:11Z"
+              }
+            ]
+        }
+    ],
+    "offset": 0,
+    "count": 1
+  }

@@ -19,7 +19,8 @@ from pathlib import Path
 from rdflib import BNode, ConjunctiveGraph, Dataset, Graph
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore, _node_to_sparql
 
-from store.metadata.stub.stub_store import StubMetadataStore
+import schemas
+from store.metadata.stub.stub_store import StubMetadataStore, combine_datasets
 
 # Load the context file
 with open(Path("src/store/metadata/context.json")) as f:
@@ -35,11 +36,10 @@ def set_context(resource_item):
     return resource_item
 
 
-def process_json_files(dir_path):
+def process_json_files(json_files):
     """
     Process all JSON files in a given directory
     """
-    json_files = glob.glob(os.path.join(dir_path, "*.json"))
     assert len(json_files) > 0
     resource_dicts = []
     for json_file in json_files:
@@ -70,9 +70,8 @@ def populate(jsonld_location=None, oxigraph_url=None, write_to_db=True):
     out_dir.mkdir()
 
     # Specify locations of JSON files
-    datasets_source_path = Path(metadata_stub_content_path / "datasets.json")
-    editions_source_path = Path(metadata_stub_content_path / "editions")
-    versions_source_path = Path(metadata_stub_content_path / "editions" / "versions")
+    editions_source_path = glob.glob(str(metadata_stub_content_path / "datasets/*/editions/*.json"))
+    versions_source_path = glob.glob(str(metadata_stub_content_path / "datasets/*/editions/*/versions/*.json"))
     topics_source_path = Path(metadata_stub_content_path / "topics.json")
     publishers_source_path = Path(metadata_stub_content_path / "publishers.json")
 
@@ -81,8 +80,8 @@ def populate(jsonld_location=None, oxigraph_url=None, write_to_db=True):
     # ------------------
 
     # Load json file from disk
-    with open(datasets_source_path) as f:
-        datasets_source_dict = json.load(f)
+    datasets_source_dict = combine_datasets()
+    # _confirm_resource_count(datasets_source_dict, "datasets")
 
     # Add datasets to graph
     graph_length = len(g)

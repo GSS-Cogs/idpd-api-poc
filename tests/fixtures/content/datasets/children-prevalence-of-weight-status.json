@@ -1,0 +1,60 @@
+{
+    "@context": "https://staging.idpd.uk/ns#",
+    "@type": [
+      "dcat:Catalog",
+      "hydra:Collection"
+    ],
+    "@id": "https://staging.idpd.uk/datasets",
+    "datasets": [
+      {
+        "@id": "https://staging.idpd.uk/datasets/children-prevalence-of-weight-status",
+        "@type": "dcat:DatasetSeries",
+        "identifier": "children-prevalence-of-weight-status",
+        "title": "Children prevalence of weight status",
+        "summary": "Proportion of children aged 4-5 years (reception age) and 10-11 years (Year 6 age) classified as underweight, healthy weight, overweight or obese (including severe obesity), England, academic years 2006/07 to 2022/23.",
+        "description": "This dataset shows the proportion of children aged 4-5 years (reception age) and 10-11 years (Year 6 age) classified as underweight, healthy weight, overweight or obese (including severe obesity), in England, for academic years 2006/07 to 2022/23.",
+        "issued": "2023-11-06T11:20:33Z",
+        "modified": "2023-11-23T11:00:00Z",
+        "next_release": "2024-11-01T09:30:00Z",
+        "publisher": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+        "creator": "https://staging.idpd.uk/publishers/office-for-national-statistics",
+        "contact_point": {
+          "name": "Office for health improvement and disparities",
+          "email": "mailto:dhsc.publicenquiries@dhsc.gov.uk"
+        },
+        "topics": [
+          "https://staging.idpd.uk/topics/health-and-social-care"
+        ],
+        "frequency": "annual",
+        "keywords": [
+          "obesity",
+          "schools",
+          "national-programme",
+          "child-measurement",
+          "state-funded",
+          "subnational",
+          "local-authority",
+          "county",
+          "region"
+        ],
+        "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+        "spatial_resolution":["E06", "E07", "E08", "E09", "E11"],
+        "spatial_coverage": "E92000001",
+        "temporal_resolution": ["P1Y"],
+        "temporal_coverage": {
+          "start": "2006-01-01T09:00:00Z",
+          "end": "2022-12-31T12:00:00Z"
+        },
+        "editions_url": "https://staging.idpd.uk/datasets/children-prevalence-of-weight-status/editions",
+        "editions": [
+          {
+            "@id": "https://staging.idpd.uk/datasets/children-prevalence-of-weight-status/editions/2023-11",
+            "issued": "2023-11-06T11:20:33Z",
+            "modified": "2023-11-23T11:00:00Z"
+          }
+        ]
+      }
+    ],
+    "offset": 0,
+    "count": 1
+  }
